@@ -1,0 +1,58 @@
+h1 {
+    text-align: center; /* Centraliza horizontalmente */
+    margin-top: 0; /* Remove margem superior padrão */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    color: #fff; /* Cor do texto */
+    font-size: 23px; /* Tamanho da fonte */
+    align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+}
+h2 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter; /* Adiciona negrito */
+
+
+}
+h3 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+
+}
+h4 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+   
+
+}
+h5 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+
+}

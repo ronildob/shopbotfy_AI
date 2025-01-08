@@ -1,0 +1,521 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ template.titulo }}</title>  
+        <link rel="icon" href="/static/home/img/site/calangofavi.svg" />
+        <link rel="stylesheet" href="/static/home/css/spin.css">
+
+        <link rel="stylesheet" href="/static/testes/css/animacao.css" />
+        <link rel="stylesheet" href="/static/testes/css/beneficios.css" />
+
+        <link rel="stylesheet" href="/static/land/css/main.css" />
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
+        <link rel="stylesheet" href="/static/testes/css/beneficios.css" />
+
+
+
+
+
+<style>
+
+    :root {
+        --main-bg-image: url("{% if template.bg_image %}{{ template.bg_image.url }}{% else %}{% static 'default-image.png' %}{% endif %}");
+        --main-bg-width: {{ template.bg_width|default:'300px' }};
+        --main-bg-height: {{ template.bg_height|default:'100px' }};
+        --main-bg-position: {{ template.bg_position|default:'center' }};
+        --main-text-color: {{ template.text_color|default:'white' }};
+        --header-color: {{ template.header_color|default:'white' }};
+        --main-text-position: {{ template.text_position|default:'center' }};
+        --main-text-content: "{{ template.text_content|default:'Seu Texto Aqui' }}";
+        --main-text-font-size: {{ template.font_size|default:'16px' }};
+    }
+    .explicacao {
+        width: 60%; /* Define a largura como metade do contêiner principal */
+        max-width: 100%; /* Largura máxima igual à largura da tela */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */  
+        position: relative; /* Define o posicionamento relativo */
+        padding: 20px; /* Espaçamento interno */
+        box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+        box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+        text-align: center;
+    }
+    .cont-principal {
+        width: 100%; /* Largura total */
+        max-width: 100%; /* Largura máxima igual à largura da tela */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+        margin-bottom: 1px; /* Margem inferior para separação */
+        padding: 20px; /* Espaçamento interno */
+        box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+        display: flex; /* Torna o contêiner um flex container */
+        justify-content: center; /* Alinha os itens horizontalmente ao centro */
+        align-items: center; /* Alinha os itens verticalmente ao centro */
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center;
+    }
+    
+    .btm-butt {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+        font-size: 19px; /* Tamanho da fonte */
+        color: #fff; /* Cor do texto */
+        background: #44c457;
+        display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+        margin: 0 auto; /* Centraliza horizontalmente */
+        justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+        align-items: center; /* Centraliza os itens ao longo do eixo secundário (horizontal) */
+        border-radius: 20px; /* Borda arredondada de 20px */
+        border-width: 2px; /* largura da borda */
+    } 
+    .btm-butt:hover {
+        background-color: #068b1a;
+        opacity: 0.8; 
+        
+    }
+    
+    .custom-input.form__field--text {
+        width: 100%;
+        max-width: 100%; /* Definir uma largura máxima para o campo */
+        height: 40px;
+        border-radius: 20px; /* Prioriza este border-radius sobre a regra global */
+        padding: 5px;
+        background-color: #e2dddd;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+        box-sizing: border-box;
+        text-align: center; /* Centraliza horizontalmente */
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder; /* Adiciona negrito */
+        text-transform: none;
+    }
+    /* Estilos quando o mouse está sobre os campos de entrada e seleção */
+    .form__input-wrapper--labelled:hover,
+    .form__field:hover,
+    .form__field--select:hover,
+    .form__field--text:hover {
+        background-color: #5c5959;
+
+    }
+    /* Estilos quando os campos de entrada e seleção estão focados */
+    .custom-input.form__field--text:focus {
+        outline: none;
+        background-color: #f7b3b3;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+    }
+    .custom-input.form__field--text:hover {
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px){
+        h2 {
+        
+        font-size: 12px; /* Tamanho da fonte */
+        
+        }
+        .btm-butt{
+            width: 80%;
+            font-size: 16px;
+        }
+        .explicacao{
+            width: 100%;
+        }
+        
+        }
+
+            
+    h1 {
+        text-align: center; /* Centraliza horizontalmente */
+        margin-top: 0; /* Remove margem superior padrão */
+        margin-bottom: 10px; /* Espaçamento inferior */
+        color: #fff; /* Cor do texto */
+        font-size: 40px; /* Tamanho da fonte */
+        align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder; /* Adiciona negrito */
+        text-transform: none;
+    }
+            
+            /* Estilizando o título h2 */
+    h2 {
+        text-align: center; /* Centraliza horizontalmente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff; /* Cor do texto no cabeçalho */
+        font-size: 20px; /* Tamanho da fonte */
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        text-transform: none;
+    }
+    
+
+    /* Estilo para o contêiner do ícone de olho */
+    .cont-label {
+        width: 100%; /* Largura total */
+        max-width: 100%; /* Largura máxima igual à largura da tela */
+        height: auto;
+        overflow: hidden;
+        background-color: rgba(44, 44, 44, 0.0);
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative; /* Define a posição relativa para os elementos filhos */
+
+    }
+    /* Estilo para o ícone de olho */
+    #toggleSenha {
+        position: absolute; /* Posiciona de forma absoluta em relação ao contêiner pai */
+        top: 30%; /* Posiciona no centro verticalmente */
+        right: 10px; /* Posiciona 10px da borda direita */
+        transform: translateY(-50%); /* Ajusta verticalmente para o centro */
+        cursor: pointer; /* Altera o cursor ao passar por cima */
+        color: #44c457;
+
+    }
+    /* Estilo para a mensagem de erro */
+    #msgErro {
+        color: red;
+        font-size: 18px; /* Tamanho da fonte */
+        text-align: center; /* Centraliza o texto */
+        margin-top: 5px; /* Espaçamento superior */
+    }
+
+    #bg-video {
+    position: fixed; /* Fixa o vídeo na tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+}
+
+.section-parallax {
+    position: relative;
+    z-index: 0; /* Coloca o conteúdo acima do vídeo */
+    padding: 20px; /* Adicione padding conforme necessário */
+}
+
+.full-screen {
+    min-height: 100vh; /* Garante que a seção ocupe pelo menos a altura da tela */
+}
+
+
+</style> 
+
+<style>
+   .centrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.captcha-container {
+    position: relative;
+    width: 100%; /* Ajuste conforme necessário */
+    max-width: 300px;
+    height: 80px; /* Altura do container */
+}
+
+.captcha-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Faz a imagem ocupar toda a largura */
+    height: auto;
+    z-index: 1; /* Garante que a imagem fique ao fundo */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.captcha-container input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Ajuste a largura do campo */
+    z-index: 2; /* Certifica-se de que o input fique à frente da imagem */
+    background: rgba(255, 255, 255, 0.53); /* Fundo semitransparente */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 32px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .captcha-container {
+        max-width: 200px;
+        height: 60px;
+    }
+
+    .captcha-container input {
+        font-size: 12px;
+    }
+}
+
+
+
+.reload-captcha {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;  /* Cor do ícone */
+    font-size: 1.2em;  /* Tamanho do ícone */
+}
+
+.reload-captcha:hover {
+    color: #000;  /* Cor do ícone ao passar o mouse */
+}
+
+
+</style>
+
+</head>
+<body>
+    
+      
+    
+
+    <nav class="navbar navbar-default navbar-fixed-top nav-transparent overlay-nav sticky-nav  nav-border-bottom nav-white" role="navigation">
+        <div class="container">
+            <div class="row">
+                
+                <!-- logo -->
+                
+                <div class="col-md-1 pull-left">
+                    <a class="logo-light" href="{% url 'home' %}">                        
+                        <img alt="" src="{% static 'home/img/site/Shopbotfy AI.svg'%}" class="logo" /></a>        
+                                
+                    <a class="logo-dark" href="{% url 'home' %}">
+                        <img alt="" src="{% static 'home/img/site/Shopbotfy AI.svg'%}" class="logo" /></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="parallax parallax-fix section-parallax full-screen" 
+    style="background: none; position: relative; margin-bottom: 0px;">
+    <video autoplay muted loop id="bg-video" preload="auto">
+        <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+   <div class="container position-relative" style="min-height: 844px;">
+        <div class="slider-typography">
+            <div class="slider-text-middle-main">
+                <div class="slider-text-middle slider-text-middle6 padding-left-right-px wow fadeInUp animated"
+                    style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="cont-principal"> 
+                        <br></br>
+                        <p class="subtitle-missao" style="text-align: center; color: #ff0303; font-size: 20px;"><strong>Atenção:</strong></p> 
+                        <p class="subtitle-missao" style="text-align: center; color: #ff0303;">Ao se cadastrar você estará utilizando nosso modelo padrão de Tema, banners, nichos e produtos.</p> 
+                        <p class="subtitle-missao" style="text-align: center; color: #ff0303;">Entre em contato com o suporte para projetos específicos.</p>
+
+                        <form method="POST" action="{% url 'cadastrar_agencia' %}" id="{{ custom_input_id }}" class="form custom-input__form">
+                            {% csrf_token %}
+                            {% if errors %}
+                                <div class="alert alert--error">
+                                    {% for error in errors %}
+                                    <h2>{{ error }}</h2>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {% if success %}
+                                <div class="alert alert--success">
+                                    <h2>Conta criada com Sucesso!</h2>
+                                </div>
+                            {% endif %}                          
+                            <!-- Campo nome -->
+                            <div class="form__input-row">  
+                                <input type="text" id="agencia" name="agencia" class="form__field form__field--text form__field--large custom-input" required placeholder="Agência" autocomplete="on">                                                  
+                            </div> 
+                            <!-- Campo nome -->
+                            <div class="form__input-row">  
+                                <input type="text" id="full_name" name="full_name" class="form__field form__field--text form__field--large custom-input" required placeholder="Digite aqui seu nome" autocomplete="on">                                                  
+                            </div>             
+                            <p class="subtitle-missao" style="text-align: center;">
+                                O e-mail cadastrado aqui deverá ser o mesmo que irá utilizar para adquirir seus cartões de produção.
+                            </p>  
+                            <!-- Campo email -->
+                            <div class="form__input-row">  
+                                <input type="email" id="email" name="email" class="form__field form__field--text form__field--large custom-input" required placeholder="Digite aqui o E-mail" autocomplete="on">                                                  
+                            </div> 
+                            <p class="subtitle-missao" style="text-align: center;">
+                                Digite aqui o WhatsApp de sua agência.
+                            </p> 
+                            <!-- Campo telefone -->
+                            <div class="form__input-row">  
+                                <input type="text" id="telefone" name="telefone" class="form__field form__field--text form__field--large custom-input" required placeholder="Telefone" autocomplete="on">                                                  
+                            </div>
+                            <!-- Campo de username -->
+                            <div class="form__input-row">  
+                                <input type="text" id="username" name="username" class="form__field form__field--text form__field--large custom-input" required placeholder="Escolha um Username" autocomplete="on">                                                  
+                            </div> 
+                            <!-- Campo senha -->
+                            <div class="form__input-row"> 
+                                <div class="cont-label">
+                                    <input type="password" id="password" name="password" class="form__field form__field--text form__field--large custom-input" required placeholder="Escolha uma Senha" autocomplete="on">
+                                    <span id="toggleSenha" class="toggle-senha" onclick="toggleSenhaVisibility()">
+                                        <i class="fas fa-eye" id="iconSenha"></i> <!-- Ícone de olho (aberto) -->
+                                    </span>
+                                </div>
+                            </div> 
+                            {% if form.captcha.errors %}
+                                <div class="alert alert--error">
+                                    <h2>{{ form.captcha.errors }}</h2>
+                                </div>
+                            {% endif %}
+                            
+                            
+                            
+                            
+                           <div class="form__input-row">
+                                <div class="centrar">
+                                    <div class="captcha-container">
+                                        {{ form.captcha }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <br></br>
+                            <br></br>
+                            
+                            <button type="submit" class="btm-butt">Cadastrar Agência</button>
+                            <br>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+
+   <div class="cont-rodape">
+        <div class="rodape-image"> 
+            <div class="imagebg">
+                <img src="/static/home/img/site/Shopbotfy AI.svg"  style="width: 200px; height: 60px;"alt="">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="cont-rodapeflex">
+
+            <div class="cont-rodapefilho2">
+                
+                <div class="text-rodape2">© 2024 Todos os direitos reservados.</div>
+            </div>
+            
+            <div class="cont-rodapefilho2">
+                
+                <p class="subtext-rodape">CNPJ:<strong><span class="text-rodape2">46.604.008/0001-68</span></strong></p>
+
+            </div>
+            
+            <div class="cont-social">
+                <a href="{{ template.link_face }}" target="_blank"><img src="/static/home/img/site/FB.svg"  width="30" height="40"></a>
+                <a href="{{ template.link_insta }}" target="_blank"><img src="/static/home/img/site/insta.svg" width="30" height="40"></i></a> 
+                <a href="{{ template.link_x }}" target="_blank"><img src="/static/home/img/site/X.svg" width="30" height="40"></i></a>                            
+                <a href="{{ template.link_youtube }}" target="_blank"><img src="/static/home/img/site/YT.svg" width="30" height="40"></i></a>              
+
+            </div>
+
+        </div>
+    
+    </div>
+</section> 
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/static/land/js/main.js"></script>
+
+<!-- Replace the variables below. -->
+
+
+
+<!-- Primeira Maiscula -->
+<script>
+    document.getElementById('full_name').addEventListener('input', function() {
+        let nomeInput = this.value;
+        let nomeFormatado = formatarNome(nomeInput);
+        this.value = nomeFormatado;
+    });
+
+    function formatarNome(nome) {
+        let palavras = nome.split(' ');
+
+        let nomeFormatado = palavras.map(function(palavra) {
+            if (palavra.trim() !== '') {
+                return palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase();
+            }
+            return '';
+        });
+
+        return nomeFormatado.join(' ');
+    }
+</script>
+
+<!-- Mostrar/Ocutar -->
+<script>
+    function toggleSenhaVisibility() {
+        var campoSenha = document.getElementById('password');
+        var toggleSenhaIcon = document.getElementById('iconSenha');
+
+        if (campoSenha.type === 'password') {
+            campoSenha.type = 'text';
+            toggleSenhaIcon.classList.remove('fa-eye');
+            toggleSenhaIcon.classList.add('fa-eye-slash');
+        } else {
+            campoSenha.type = 'password';
+            toggleSenhaIcon.classList.remove('fa-eye-slash');
+            toggleSenhaIcon.classList.add('fa-eye');
+        }
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let inputEmail = document.querySelector('input[id="email"]');
+        if (inputEmail) {
+            inputEmail.addEventListener('input', function() {
+                let emailInput = this.value;
+                let emailFormatado = emailInput.toLowerCase();
+                this.value = emailFormatado;
+            });
+        }
+    });
+</script>
+    
+
+</body>
+</html>

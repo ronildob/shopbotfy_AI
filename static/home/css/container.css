@@ -1,0 +1,206 @@
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Define a orientação dos elementos como coluna */
+    justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+    align-items: center; /* Alinha os elementos no centro horizontalmente */
+    min-height: 100vh; /* Altura mínima igual à altura da viewport */
+    background: linear-gradient(to right, #44c457, #8730bc); /* Gradiente de fundo */
+    }
+header {
+    background-color: linear-gradient(to right, #44c457, #8730bc); /* Gradiente de fundo */
+    color: #c3bebe; /* Cor do texto no cabeçalho */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Alinhamento do texto */
+    width: 100%; /* Largura total */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+
+}
+main {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    padding: 20px; /* Espaçamento interno */
+    display: flex; /* Display flex para layout flexível */
+    flex-wrap: wrap; /* Permite que os itens sejam envolvidos em várias linhas */
+    justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+    background: linear-gradient(to right, #44c457, #8730bc); /* Gradiente de fundo */
+}
+
+.apresentacao {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    position: relative; /* Define o posicionamento relativo */    
+    background:  #000000; 
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    
+}
+.explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    
+}
+
+.cont-principal {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 1px; /* Margem inferior para separação */
+    background: linear-gradient(to right, #44c457, #8730bc); /* Gradiente de fundo */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+
+}
+
+.formulariop4 {
+    margin-top: 0; /* Remove a margem superior */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+
+}  
+
+.cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px; /* Espaçamento entre os elementos */
+}
+
+.cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px; /* Espaçamento entre os elementos */
+}
+
+/* Estilo para o texto dentro dos contêineres */
+.cont-login p {
+text-align: center; /* Centraliza o texto */
+margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+
+}
+
+/* Estilizando o label específico pelo atributo 'for' */
+label[for="username"] {
+    /* Definindo a cor do texto */
+    color: #ffffff; /* Cor pode ser ajustada para sua preferência */
+    /* Definindo o tamanho da fonte */
+    font-size: 26px; /* Tamanho da fonte pode ser ajustado */
+    /* Definindo margem inferior para espaçamento */
+    margin-bottom: 10px; /* Ajuste conforme necessário */
+    /* Outros estilos opcionais */
+    font-weight: bold; /* Pode ser 'normal' ou 'bold' */
+    /* Centralizando o texto horizontalmente */
+    text-align: center; /* Centraliza o texto dentro do label */
+    /* Centralizando o texto verticalmente */
+    line-height: 1.5; /* Ajusta a altura da linha para centralizar verticalmente */
+}       
+.cont-botão {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 20px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 10px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+
+   
+}   
+
+.videoexplicacao {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    
+}
+
+/* video */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de 16:9 para vídeos responsivos */
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+    }
+.video-container iframe,
+.video-container object,
+.video-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.redirecionamento {
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background: #000000;
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #000; /* cor da borda */
+}

@@ -1,0 +1,505 @@
+{% extends 'baseopcoenichos.html' %}
+{% load static %}
+{% block content %}       
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">     
+
+
+
+
+<div class="cont-principal">
+    <main class="main-with-video-bg" >
+        <video autoplay muted loop id="bg-video" preload="auto"  %}">
+            <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+       
+        <div class="apresentacao">
+            <div class="explicacao4">{{ agencia.texto_explicacao4_agencia }}</div>
+        </div> 
+    </main> 
+
+    <div class="cont-principal">
+        <div class="initial1">  
+            <div class="initial">       
+                <!-- Carrossel de Nichos (Horizontal) -->
+                <div class="swiper-container-horizontal">
+                    <div class="swiper-wrapper">
+                        {% if agencia.show_nicho_generico_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_generico_agencia }}" target="_blank">
+                                    <img src="{% if agencia.generico_agencia %}{{ agencia.generico_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="generica">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_eletronicos_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_eletronicos_agencia }}" target="_blank">
+                                    <img src="{% if agencia.eletronicos_agencia %}{{ agencia.eletronicos_agencia }}{% else %}{% static 'home/img/eletronicos.png' %}{% endif %}" alt="eletronicos">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_casa_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_casa_agencia }}" target="_blank">
+                                    <img src="{% if agencia.casa_agencia %}{{ agencia.casa_agencia }}{% else %}{% static 'home/img/casa.png' %}{% endif %}" alt="casa">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_moda_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_moda_agencia }}" target="_blank">
+                                    <img src="{% if agencia.moda_agencia %}{{ agencia.moda_agencia }}{% else %}{% static 'home/img/MODA - PT .png' %}{% endif %}" alt="moda">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_kids_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_kids_agencia }}" target="_blank">
+                                    <img src="{% if agencia.kids_agencia %}{{ agencia.kids_agencia }}{% else %}{% static 'home/img/kids.png' %}{% endif %}" alt="kids">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_pets_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_pets_agencia }}" target="_blank">
+                                    <img src="{% if agencia.pets_agencia %}{{ agencia.pets_agencia }}{% else %}{% static 'home/img/pets.png' %}{% endif %}" alt="pets">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_fitness_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_fitness_agencia }}" target="_blank">
+                                    <img src="{% if agencia.fitness_agencia %}{{ agencia.fitness_agencia }}{% else %}{% static 'home/img/fitness.png' %}{% endif %}" alt="fitness">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_saude_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_saude_agencia }}" target="_blank">
+                                    <img src="{% if agencia.saude_agencia %}{{ agencia.saude_agencia }}{% else %}{% static 'home/img/nicho_saude.png' %}{% endif %}" alt="saude e beleza">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_masculino_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_masculino_agencia }}" target="_blank">
+                                    <img src="{% if agencia.masculino_agencia %}{{ agencia.masculino_agencia }}{% else %}{% static 'home/img/masculino.png' %}{% endif %}" alt="masculino">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_feminino_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_feminino_agencia }}" target="_blank">
+                                    <img src="{% if agencia.feminino_agencia %}{{ agencia.feminino_agencia }}{% else %}{% static 'home/img/feminino.png' %}{% endif %}" alt="feminino">
+                                </a>
+                            </div>
+                        {% endif %}
+                        <!--
+                        {% if agencia.show_nicho_oculos_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_oculos_agencia }}" target="_blank">
+                                    <img src="{% if agencia.oculos_agencia %}{{ agencia.oculos_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="oculos">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_relogio_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_relogio_agencia }}" target="_blank">
+                                    <img src="{% if agencia.relogio_agencia %}{{ agencia.relogio_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="relogios">
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if agencia.show_nicho_joias_agencia %}
+                            <div class="swiper-slide">
+                                <a href="{{ agencia.link_joias_agencia }}" target="_blank">
+                                    <img src="{% if agencia.joias_agencia %}{{ agencia.joias_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="joias">
+                                </a>
+                            </div>
+                        {% endif %}
+                        -->
+                    </div>
+                </div>                                               
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>         
+        </div>
+        
+        <div class="formulario">
+            <!-- Campo para escolher o nicho -->
+            <div class="form__input-row">
+                <div class="form__input-wrapper form__input-wrapper--labelled">
+                    <select id="nicho" name="nicho" class="form__field form__field--select form__field--large" required>
+                        <option value="">Selecione o Nicho</option>
+                        {% if agencia.show_nicho_generico_agencia %}
+                            <option value="Genérica">Genérica</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_saude_agencia %}   
+                            <option value="Saúde e Beleza">Saúde e Beleza</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_casa_agencia %}    
+                            <option value="Casa">Casa </option>
+                        {% endif %}
+                        {% if agencia.show_nicho_moda_agencia %}       
+                            <option value="Moda">Moda</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_eletronicos_agencia %}   
+                            <option value="Eletrônicos">Eletrônicos</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_kids_agencia %}   
+                            <option value="Kids">Kids</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_pets_agencia %}
+                            <option value="Pet">Pet</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_fitness_agencia %}
+                            <option value="Fitness">Fitness</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_feminino_agencia %}
+                            <option value="Feminino">Feminino</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_masculino_agencia %}
+                            <option value="Masculino">Masculino</option>
+                        {% endif %}
+                        <!--
+                        {% if agencia.show_nicho_relogio_agencia %}
+                            <option value="Relógios">Relógios</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_oculos_agencia %}
+                            <option value="Óculos">Óculos</option>
+                        {% endif %}
+                        {% if agencia.show_nicho_joias_agencia %}
+                            <option value="Jóias">Jóias</option>
+                        {% endif %}
+                        -->
+                        
+                    </select>
+                </div> 
+            </div> 
+        </div>                   
+    </div>
+    <br></br>
+
+    <!-- COR -->
+     <style>
+     .hidden {
+        display: none;
+    }
+    </style>
+
+
+    <div class="cont-principal">
+        <main class="main-with-video-bg" id="main-video-bg">
+            <video autoplay muted loop id="bg-video" preload="auto"  %}">
+                <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        
+            <div class="apresentacao">
+                <div class="explicacao5">{{ agencia.texto_explicacao5_agencia }}</div>
+            </div> 
+        </main> 
+
+        <div class="nicho nicho_generica hidden">        
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+        
+        <div class="nicho nicho_casa hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/site/CORESnicho_casa.png" alt="cores">
+                </div> 
+            </div>
+        </div>
+
+        <div class="nicho nicho_moda hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES Clean nicho MODA (1).png" alt="cores">
+                </div> 
+            </div>
+        </div>
+
+        <div class="nicho nicho_saudeebeleza hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/site/CORESnicho_saude.png" alt="cores">
+                </div>
+            </div> 
+        </div>
+
+        <div class="nicho nicho_fitness hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_eletronicos hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_kids hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_pet hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_feminino hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_masculino hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_relogios hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_oculos hidden">
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="nicho nicho_joias hidden">                    
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/CORES.png" alt="cores">
+                </div>     
+            </div>
+        </div>
+
+        <div class="formulario">           
+            <div class="form__input-row" id="input-row">
+                <div class="form__input-wrapper form__input-wrapper--labelled">
+                    <select id="cor" name="cor" class="form__field form__field--select form__field--large" required>
+                        <option value="" class="nicho nicho_generica hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_generica hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_generica hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_generica hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_generica hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_generica hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_generica hidden">Vermelho</option>
+                    
+                        <option value="" class="nicho nicho_casa hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 7" class="nicho nicho_casa hidden">Amarelo e Azul Clean</option>
+                        <option value="Paleta de Cor 8" class="nicho nicho_casa hidden">Cinza Clean</option>
+                        <option value="Paleta de Cor 9" class="nicho nicho_casa hidden">Azul e Marron Clean</option>
+                        <option value="Paleta de Cor 10" class="nicho nicho_casa hidden">Marrom e Bege Clean</option>
+                        <option value="Paleta de Cor 11" class="nicho nicho_casa hidden">Marrom e Cinza Clean</option>
+                        <option value="Paleta de Cor 12" class="nicho nicho_casa hidden">Preto e Branco Clean</option>
+
+                        <option value="" class="nicho nicho_moda hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 16" class="nicho nicho_moda hidden">Preto e Branco Clean</option>
+                        <option value="Paleta de Cor 17" class="nicho nicho_moda hidden">Azul Escuro e Cinza Clean</option>
+                        <option value="Paleta de Cor 18" class="nicho nicho_moda hidden">Bege e Marron Clean</option>
+                        <option value="Paleta de Cor 19" class="nicho nicho_moda hidden">cinza e Marrom Clean</option>
+                        <option value="Paleta de Cor 20" class="nicho nicho_moda hidden">Rosa e Cinza Clean</option>
+                        
+                        <option value="" class="nicho nicho_saudeebeleza hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 13" class="nicho nicho_saudeebeleza hidden">Verde e Azul Clean</option>
+                        <option value="Paleta de Cor 14" class="nicho nicho_saudeebeleza hidden">Verde Escuro e Bege Clean</option>
+                        <option value="Paleta de Cor 15" class="nicho nicho_saudeebeleza hidden">Verde e Amarelo Clean</option>
+
+                        <option value="" class="nicho nicho_fitness hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_fitness hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_fitness hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_fitness hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_fitness hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_fitness hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_fitness hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_eletronicos hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_eletronicos hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_eletronicos hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_eletronicos hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_eletronicos hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_eletronicos hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_eletronicos hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_kids hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_kids hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_kids hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_kids hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_kids hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_kids hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_kids hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_pet hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_pet hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_pet hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_pet hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_pet hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_pet hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_pet hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_feminino hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_feminino hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_feminino hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_feminino hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_feminino hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_feminino hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_feminino hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_masculino hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_masculino hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_masculino hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_masculino hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_masculino hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_masculino hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_masculino hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_relogios hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_relogios hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_relogios hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_relogios hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_relogios hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_relogios hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_relogios hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_oculos hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_oculos hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_oculos hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_oculos hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_oculos hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_oculos hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_oculos hidden">Vermelho</option>
+
+                        <option value="" class="nicho nicho_joias hidden">Selecione a Cor</option>
+                        <option value="Paleta de Cor 1" class="nicho nicho_joias hidden">Laranja</option>
+                        <option value="Paleta de Cor 2" class="nicho nicho_joias hidden">Verde</option>
+                        <option value="Paleta de Cor 3" class="nicho nicho_joias hidden">Roxo</option>
+                        <option value="Paleta de Cor 4" class="nicho nicho_joias hidden">Preto</option>
+                        <option value="Paleta de Cor 5" class="nicho nicho_joias hidden">Azul</option>
+                        <option value="Paleta de Cor 6" class="nicho nicho_joias hidden">Vermelho</option>
+
+
+                    </select>
+                    
+                </div>
+            </div>   
+        </div>
+    </div> 
+   
+</div>
+
+
+<script>
+    window.addEventListener("load", function () {
+    // Envia a altura do conteúdo para o pai
+    parent.postMessage({
+        type: "ajusteAlturaIframe",
+        altura: document.body.scrollHeight
+    }, "*");
+});
+
+</script>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+    const selectNicho = document.getElementById("nicho");
+    const nichoDivs = document.querySelectorAll(".nicho");
+    const corOptions = document.querySelectorAll("#cor option");
+
+    // Função para normalizar strings (remove acentos, espaços e converte para minúsculas)
+    function normalizeString(str) {
+        return str
+            .normalize("NFD") // Remove acentos
+            .replace(/[\u0300-\u036f]/g, "") // Remove diacríticos
+            .replace(/\s+/g, "") // Remove espaços
+            .toLowerCase(); // Converte para minúsculas
+    }
+
+    selectNicho.addEventListener("change", function () {
+        // Ocultar todas as divs de nicho
+        nichoDivs.forEach(div => div.classList.add("hidden"));
+        // Ocultar todas as opções de cor
+        corOptions.forEach(option => option.classList.add("hidden"));
+
+        // Capturar o valor selecionado e normalizar
+        const selectedValue = normalizeString(this.value);
+        
+        if (selectedValue) {
+            // Mostrar a div do nicho correspondente
+            const divToShow = document.querySelector(`.nicho_${selectedValue}`);
+            if (divToShow) {
+                divToShow.classList.remove("hidden");
+            }
+
+            // Mostrar as opções de cor correspondentes ao nicho selecionado
+            const corOptionsToShow = document.querySelectorAll(`.nicho_${selectedValue}`);
+            corOptionsToShow.forEach(option => option.classList.remove("hidden"));
+        }
+    });
+});
+
+</script>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Seleciona o dropdown e os elementos que deseja ocultar
+      var nichoSelect = document.getElementById("nicho");
+      var mainVideoBg = document.getElementById("main-video-bg");
+      var inputRow = document.getElementById("input-row");
+  
+      // Função para verificar a seleção e ocultar ou mostrar os elementos
+      function verificarSelecaoNicho() {
+        if (nichoSelect.value !== "") {
+          // Exibe os elementos quando um nicho for escolhido
+          mainVideoBg.style.display = "block";
+          inputRow.style.display = "block";
+        } else {
+          // Oculta os elementos quando nenhum nicho for escolhido
+          mainVideoBg.style.display = "none";
+          inputRow.style.display = "none";
+        }
+      }
+  
+      // Chama a função inicialmente para esconder os elementos
+      verificarSelecaoNicho();
+  
+      // Adiciona um event listener para detectar mudanças na seleção do nicho
+      nichoSelect.addEventListener("change", verificarSelecaoNicho);
+    });
+</script>
+  
+
+
+{% endblock %}

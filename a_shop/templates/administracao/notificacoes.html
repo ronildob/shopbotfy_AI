@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificações</title>
+
+  
+<style>
+
+    .container {
+        max-width: 70%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: Arial, sans-serif;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+
+    .form__input-wrapper--labelled {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #dropdown-container {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+        background-color: #e2dddd;
+        border-radius: 20px;
+        padding: 5px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 16px;
+        font-weight: bolder;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .dropdown-header {
+        padding: 10px;
+        background-color: #e2dddd;
+        border-radius: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .dropdown-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+    .dropdown-item {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f7b3b3;
+    }
+
+    input[type="checkbox"] {
+        cursor: pointer;
+    }
+
+
+    textarea {
+        width: 100%;
+        resize: vertical;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+</head>
+
+
+<body>
+
+
+    
+<div class="container">
+    <h2>Enviar Notificações</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="dropdown-container">Selecione as Agências</label>
+            <div class="form__input-wrapper--labelled">
+                <div id="dropdown-container" class="form__field form__field--select">
+                    <div id="dropdown-header" class="dropdown-header" onclick="toggleDropdown()">Selecione</div>
+                    <div id="dropdown-list" class="dropdown-list" style="display: none;">
+                        {% for agencia in agencias %}
+                        <div class="dropdown-item">
+                            <input type="checkbox" class="agencia-checkbox" id="agencia-{{ agencia.id }}" value="{{ agencia.id }}">
+                            <label for="agencia-{{ agencia.id }}">{{ agencia.agencia }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <input type="hidden" name="agencias" id="selected-agencias">
+            </div>
+            <br>
+            <input type="checkbox" id="select_all" onclick="toggleSelectAll()"> 
+            <label for="select_all">Selecionar todas</label>
+        </div>
+        <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea name="mensagem" id="mensagem" rows="5" placeholder="Digite sua mensagem aqui"></textarea>
+        </div>
+        <button type="submit">Enviar Notificação</button>
+    </form>
+    
+    
+    
+    
+    
+    
+</div>
+
+<script>
+   // Mostrar/ocultar a lista suspensa
+    function toggleDropdown() {
+        const dropdownList = document.getElementById('dropdown-list');
+        dropdownList.style.display = dropdownList.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Atualizar o campo oculto com os IDs das agências selecionadas
+    function updateSelectedAgencias() {
+        const checkboxes = document.querySelectorAll('.agencia-checkbox');
+        const selectedIds = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        document.getElementById('selected-agencias').value = selectedIds.join(',');
+    }
+
+    // Controlar "Selecionar todas"
+    function toggleSelectAll() {
+        const selectAllCheckbox = document.getElementById('select_all');
+        const checkboxes = document.querySelectorAll('.agencia-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+        updateSelectedAgencias();
+    }
+
+    // Adicionar evento de mudança aos checkboxes
+    document.querySelectorAll('.agencia-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateSelectedAgencias();
+            const checkboxes = document.querySelectorAll('.agencia-checkbox');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            document.getElementById('select_all').checked = allChecked;
+        });
+    });
+
+    // Atualizar a lista ao carregar a página
+    updateSelectedAgencias();
+
+    // Fechar o dropdown ao clicar fora dele
+    document.addEventListener('click', (event) => {
+        const dropdownContainer = document.getElementById('dropdown-container');
+        const dropdownList = document.getElementById('dropdown-list');
+        if (!dropdownContainer.contains(event.target)) {
+            dropdownList.style.display = 'none';
+        }
+    });
+
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,762 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar APP</title>
+  
+</head>
+<style>
+        .col {
+            width: 100%;
+            background-color: transparent; /* Tornar a coluna transparente */
+        }
+        
+        .button {
+            width: 100%;
+            margin-top: 5px; /* Remover esta margem ou ajustá-la se necessário */
+            padding: 10px 15px;
+            border: none;
+            background-color: #66ff00;
+            font-size: 18px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            border-radius: 20px;
+            border-bottom: 1px solid #ddd; /* Borda inferior */
+        }
+
+        .button:hover {
+            background-color: #00b32d;
+        }
+     
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        
+        th{
+            padding: 12px;
+            width: 30%;
+            
+            
+        }
+        td {
+            padding: 12px;
+          
+           
+        }
+        th {
+          
+            text-align: left; 
+        }
+        h1{
+            text-align: left;
+            font-size: 24px;
+            color: #fff;
+
+
+        }
+        h2{
+            text-align: left;
+            font-size: 20px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            
+
+        } 
+        h3{
+            text-align: left;
+            font-size: 18px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: lighter; /* Adiciona negrito */
+            
+
+        } 
+        h4{
+            text-align: left;
+            font-size: 16px;
+            color: #ffffff;
+
+
+        }
+  
+        h5{
+            text-align: left;
+            font-size: 18px;
+            color: #f00a0a;
+
+
+        }
+        input[type="checkbox"] {
+            transform: scale(1.5);
+            margin: 0 10px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007BFF;
+            border-radius: 50%; /* Deixar redondo */
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            align-items: center;
+            
+        }
+
+        input[type="checkbox"]:checked {
+           
+            border: 2px solid #007BFF;
+        }
+
+        input[type="checkbox"]:checked:before {
+            content: '✔';
+            display: block;
+            color: #88ff00;
+            font-size: 14px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        input[type="checkbox"]:hover {
+            border: 2px solid #0056b3;
+        }
+
+        input[type="checkbox"]:disabled {
+            background-color: #e9ecef;
+            border: 2px solid #adb5bd;
+            cursor: not-allowed;
+        }
+        .cont-ainereader {
+            height: 30px;
+            background-color: #007BFF;
+            text-align: center;
+            align-items: center;
+            font-size: 24px;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 20px;
+            border-bottom: 1px solid #ddd; /* Borda inferior */
+            position: relative; /* Necessário para o posicionamento do conteúdo */
+            z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+        }
+        .cont-ainer-content {
+            display: none; /* Inicialmente oculto */
+            padding: 10px;
+            border-top: 1px solid #ccc;
+
+            overflow-y: auto; /* Permite rolar verticalmente */
+            max-height: 300px; /* Define a altura máxima do conteúdo */
+            padding: 10px; /* Espaçamento interno */
+        }
+        .cont-ainer-content p,
+        .conainer-content p {
+            margin: 0;
+        }
+        .formulario {
+            margin-top: 0; /* Remove a margem superior */
+            margin-left: auto; /* Alinha à direita do container esquerdo */
+            margin-right: auto; /* Centraliza horizontalmente */
+            display: flex; /* Torna o contêiner um flex container */
+            flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center; /* Centraliza os itens verticalmente */
+
+        }   
+        .form {
+            margin-top: 0; /* Remove a margem superior */
+            margin-bottom: 0; /* Margem inferior de 20px */
+            margin-left: auto; /* Alinha à direita do container esquerdo */
+            margin-right: auto; /* Centraliza horizontalmente */
+            flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center; /* Centraliza os itens verticalmente */
+            padding: 20px; /* Espaçamento interno */
+            align-items: center; /* Centraliza os itens verticalmente */
+        } 
+        .form__field,  
+        .form__input-wrapper--labelled{
+            width: 100%;
+            max-width: 100%; /* Definir uma largura máxima para o campo */
+            height: 40px;
+            background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+            border-radius: 20px;
+            align-items: center; /* Centraliza os itens verticalmente */
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bolder; /* Adiciona negrito */
+            margin-bottom: 10px; /* Reduzido de 20px para 10px */
+        }
+
+        .form__field,
+        .form__field--select,
+        .form__field--text {
+        width: 100%;
+        max-width: 100%; /* Definir uma largura máxima para o campo */
+        height: 40px;
+        border-radius: 20px;
+        padding: 5px;
+        background-color: #e2dddd;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+        box-sizing: border-box;
+        text-align: center; /* Centraliza horizontalmente */
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder; /* Adiciona negrito */
+
+        }
+        /* Estilos quando o mouse está sobre os campos de entrada e seleção */
+        .form__input-wrapper--labelled:hover,
+        .form__field:hover,
+        .form__field--select:hover,
+        .form__field--text:hover {
+        background-color: #5c5959;
+
+        }
+        /* Estilos quando os campos de entrada e seleção estão focados */
+        .form__input-wrapper--labelled:focus,
+        .form__field:focus,
+        .form__field--select:focus,
+        .form__field--text:focus {
+        outline: none;
+        background-color: #f7b3b3;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+        }
+        /* Estilo para as opções do campo de seleção */
+        .form__field--select option,
+        .form__field--text option {
+        font-size: 16px;
+        color: #0f0f0f;
+
+        }
+        /* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+        .form__field--select option:hover,
+        .form__field--text option:hover {
+        color: #44c457;
+        font-size: 14px;
+        }
+
+</style>
+
+<style>
+    /* Estilo para a modal de confirmação */
+    .alert-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000; /* Coloca a modal acima de outros elementos */
+        max-width: 80%;
+        padding: 20px;
+        font-size: 20px;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid;
+        background-color: #fff;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Adiciona sombra para dar destaque */
+    }
+
+    /* Fundo escuro para sobrepor o conteúdo */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
+        z-index: 999; /* Um nível abaixo da mensagem de confirmação */
+        display: none; /* Oculto por padrão */
+    }
+</style>
+
+
+
+<body>
+
+<div class="col">
+    {% if formulario_user %}
+    <h1>Formulário de {{ formulario_user.nome }} </h1>
+    <h1>Loja: {{ formulario_user.empresa }} </h1>
+    <h2>ID: {{ formulario_user.username }}</h2>
+    <div class="cont-ainer">
+        <div class="cont-ainereader" onclick="toggleContent(this)">
+            <span>Modificar Dados</span>
+        </div>
+        <div class="cont-ainer-content" id="containerContentStyle">
+            <h5>ATENÇÃO:</h5>
+            <h5>Para alterar os dados da loja é preciso alterar tambem no status, desmarcando as etapas que precisam ser refeitas e enviar, pois assim o programa ira executar as tarefas nescessárias.</h5>
+            <h5>Caso queira alterar a Cor e ou Nicho, será nescessário acessar a loja do cliente e excluir os baners e capas de coleção que ja tenha sido carregados anteriormente, pois somente assim o programa ira aplicar os novos banners e capas de coleção</h5>
+            <h1>Nome: {{ formulario_user.nome }} </h1>
+            <h1>E-mail: {{ formulario_user.email }} </h1>
+            <h1>Senha: {{ formulario_user.senha }} </h1>
+            <h1>Pais: {{ formulario_user.pais }} </h1>
+            <form method="POST" action="{% url 'formularioerro' %}" id="custom-form-id" class="form custom-input__form">
+                {% csrf_token %}
+                <table> 
+                       <input type="hidden" name="username" value="{{ formulario_user.username }}">                
+                        {% if form.posted_successfully %}
+                        <p class="alert alert--success">{% trans 'custom_input.success' %}</p>
+                        {% endif %}                
+                        {% if form.errors %}
+                        <p class="alert alert--error">{{ form.errors.response }}</p>
+                        {% endif %} 
+                    <tr>                 
+                        <th><h3>Url da Loja:</h3></th>
+                        <td><input type="text" id="custom_input_id[url_loja]" name="url_loja" class="form__field form__field--text form__field--large" required value="{{ formulario_user.url_loja }}" placeholder=""></td>                             
+                    </tr>
+
+                    <!-- Campo de Token de Senha -->
+                    <tr>
+                        <th><h3>Token Senha</h3></th>
+                        <td><input type="text" id="custom_input[token_senha]" name="token_senha" class="form__field form__field--text form__field--large" required value="{{ formulario_user.token_senha }}" placeholder=""></td>
+                    </tr>           
+                    <!-- Campo de Chave de API -->
+                    <tr>
+                        <th><h3>Chave de API</h3></th>
+                        <td><input type="text" id="custom_input[chave_de_api]" name="chave_de_api" class="form__field form__field--text form__field--large" required value="{{ formulario_user.chave_de_api }}" placeholder=""></td>
+                    </tr>
+                    <!-- Campo de Chave Secreta da API -->
+                    <tr>
+                        <th><h3>Chave Secreta</h3></th>
+                        <td><input type="text" id="custom_input[chave_secreta]" name="chave_secreta" class="form__field form__field--text form__field--large" required value="{{ formulario_user.chave_secreta }}" placeholder=""></td>
+                    </tr>
+                    <tr>
+                        <th><h3>E-mail suporte:</3></th>
+                        <td><input type="email" id="custom_input_id[email_suporte]" name="email_suporte" class="form__field form__field--text form__field--large" required value="{{ formulario_user.email_suporte }}" placeholder="" autocomplete="on"></td>
+                    </tr>
+
+                    <tr> 
+                        <th><h3>Empresa:</3></th>
+                        <td><input type="text" id="custom_input[empresa]" name="empresa" class="form__field form__field--text form__field--large" required value="{{ formulario_user.empresa }}" placeholder=""></td>
+                    </tr>
+                    
+                    <tr> 
+                        <th><h3>Telefone:</h3></th>
+                        <td><input  type="tel" id="custom_input[telefone]" name="telefone" class="form__field form__field--text form__field--large" required value="{{ formulario_user.telefone}}" placeholder=""></td>
+                    </tr> 
+                    
+                    <!-- Campo de Horário de Atendimento -->
+                    <tr> 
+                        <th><h3>Horário de Atendimento:</h3></th>
+                        <td>
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <select id="business_hours" name="business_hours" class="form__field form__field--select form__field--large"
+                                        {% if not formulario_user.business_hours %} required {% endif %}>
+                                    <option value="">Selecione o Horário de Atendimento</option>
+                                    <option value="hora1" {% if formulario_user.business_hours == "hora1" %} selected {% endif %}>Segunda a Sexta das 9:00 as 18 Horas</option>
+                                    <option value="hora2" {% if formulario_user.business_hours == "hora2" %} selected {% endif %}>Segunda a Sexta das 9:00 as 22 Horas</option>
+                                    <option value="hora3" {% if formulario_user.business_hours == "hora3" %} selected {% endif %}>Segunda a Sábado das 9:00 as 18 Horas</option>
+                                    <option value="hora4" {% if formulario_user.business_hours == "hora4" %} selected {% endif %}>Segunda a Sábado das 9:00 as 22 Horas</option>
+                                    <option value="hora5" {% if formulario_user.business_hours == "hora5" %} selected {% endif %}>Segunda a Sexta das 9:00 as 18 Horas - Sábado das 9:00 as 12 Horas</option>
+                                    <option value="hora6" {% if formulario_user.business_hours == "hora6" %} selected {% endif %}>Segunda a Sexta das 9:00 as 22 Horas -  Sábado das 9:00 as 12 Horas</option>
+                                    <option value="hora7" {% if formulario_user.business_hours == "hora7" %} selected {% endif %}>Todos os dias das 9:00 as 18 Horas</option>
+                                    <option value="hora8" {% if formulario_user.business_hours == "hora8" %} selected {% endif %}>Todos os dias das 9:00 as 22 Horas</option>                        
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Campo de Nicho -->
+                    <tr> 
+                        <th><h3>Nicho:</h3></th>
+                        <td>
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <select id="nicho" name="nicho" class="form__field form__field--select form__field--large"
+                                        {% if not formulario_user.nicho %} required {% endif %}>
+                                    <option value="">Selecione o Nicho</option>
+                                    <option value="Genérica" {% if formulario_user.nicho == "Genérica" %} selected {% endif %}>Genérica</option>
+                                    <option value="Eletrônicos" {% if formulario_user.nicho == "Eletrônicos" %} selected {% endif %}>Nicho Eletrônicos</option>
+                                    <option value="Kids" {% if formulario_user.nicho == "Kids" %} selected {% endif %}>Nicho Kids</option>
+                                    <option value="Casa" {% if formulario_user.nicho == "Casa" %} selected {% endif %}>Nicho Casa</option>
+                                    <option value="Pet" {% if formulario_user.nicho == "Pet" %} selected {% endif %}>Nicho Pet</option>
+                                    <option value="Fitness" {% if formulario_user.nicho == "Fitness" %} selected {% endif %}>Nicho Fitness</option>
+                                    <option value="Masculino" {% if formulario_user.nicho == "Masculino" %} selected {% endif %}>Nicho Masculino</option>
+                                    <option value="Feminino" {% if formulario_user.nicho == "Feminino" %} selected {% endif %}>Nicho Feminino</option>
+                                </select>                                
+                            </div> 
+                        </td>
+                    </tr> 
+
+                    <!-- Campo de Cor da Loja -->
+                    <tr> 
+                        <th><h3>Cor da Loja:</h3></th>
+                        <td>
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <select id="cor" name="cor" class="form__field form__field--select form__field--large"
+                                        {% if not formulario_user.cor %} required {% endif %}>
+                                    <option value="">Selecione a Cor</option>
+                                    <option value="Paleta de Cor 1" {% if formulario_user.cor == "Paleta de Cor 1" %} selected {% endif %}>Laranja</option>
+                                    <option value="Paleta de Cor 2" {% if formulario_user.cor == "Paleta de Cor 2" %} selected {% endif %}>Verde</option>
+                                    <option value="Paleta de Cor 3" {% if formulario_user.cor == "Paleta de Cor 3" %} selected {% endif %}>Roxo</option>
+                                    <option value="Paleta de Cor 4" {% if formulario_user.cor == "Paleta de Cor 4" %} selected {% endif %}>Preto</option>
+                                    <option value="Paleta de Cor 5" {% if formulario_user.cor == "Paleta de Cor 5" %} selected {% endif %}>Azul</option>
+                                    <option value="Paleta de Cor 6" {% if formulario_user.cor == "Paleta de Cor 6" %} selected {% endif %}>Vermelho</option>
+                                </select>                                
+                            </div> 
+                        </td>
+                    </tr> 
+
+   
+                </table>
+                <button type="submit" class="button">Enviar</button>
+            </form>
+            <div id="confirmationMessageform" class="alert-modal" style="display: none;"></div>
+            <div id="modalOverlay" class="modal-overlay"></div>
+        </div>
+    </div>
+    <br>
+
+    <!-- ###############################################################--> 
+
+    <div class="cont-ainereader" onclick="toggleContent(this)">
+        <span>Status</span>
+    </div>
+    <div class="cont-ainer-content" id="containerContentStyle">
+        
+        <form method="post" action="{% url 'remarcar' %}" id="customForm">
+            {% csrf_token %}
+            <input type="hidden" name="username" value="{{ formulario_user.username }}">
+            <table> 
+                <!-- Produtos: ###############################################################-->      
+                <tr>
+                    <th><h3>Produtos:</h3></th>
+                    <td><input type="checkbox" name="produtos" value="true" {% if formulario_user.produtos %}checked{% endif %}></td>
+                    <!-- <td><input type="checkbox" {% if formulario_user.produtos %}checked{% endif %} disabled></td>-->
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_produtos }}</h1></span>
+                    </td>
+                    <td></td> <!-- Terceira coluna vazia para alinhar -->
+                </tr>
+                <tr>
+                    <td colspan="4" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                <!-- Tema: ###############################################################-->
+                <tr>
+                    <th><h3>Tema:</h3></th>
+                    <td><input type="checkbox" name="tema" value="true" {% if formulario_user.tema %}checked{% endif %}></td>
+
+                    <!-- <td><input type="checkbox" {% if formulario_user.tema %}checked{% endif %} disabled></td>-->
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_tema }}</h1></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                <!--  Banners: ###############################################################-->
+                <tr>
+
+                    <th><h3>Banners:</h3></th>
+                    <td><input type="checkbox" name="banners" value="true" {% if formulario_user.banners %}checked{% endif %}></td>
+
+                    <!-- <td><input type="checkbox" {% if formulario_user.banners %}checked{% endif %} disabled></td>-->
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_banners }}</h1></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                <!-- Coleções: ###############################################################-->
+                <tr>
+                    <th><h3>Coleções:</h3></th>
+                    <td><input type="checkbox" name="colecoes" value="true" {% if formulario_user.colecoes %}checked{% endif %}></td>
+                    <!-- <td><input type="checkbox" {% if formulario_user.colecoes %}checked{% endif %} disabled></td>-->
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_colecoes }}</h1></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                <!-- Paginas: ###############################################################-->
+                <tr>
+                    <th><h3>Páginas:</h3></th>
+                    <td><input type="checkbox" name="paginas" value="true" {% if formulario_user.paginas %}checked{% endif %}></td>
+
+                    <!-- <td><input type="checkbox" {% if formulario_user.paginas %}checked{% endif %} disabled></td>-->
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_paginas }}</h1></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                
+                <!-- Politicas: ###############################################################-->
+                <tr>
+                    <th><h3>Politicas:</h3></th>
+                    <td><input type="checkbox" name="politicas" value="true" {% if formulario_user.politicas %}checked{% endif %}></td>
+
+                    <!-- <td><input type="checkbox" {% if formulario_user.politicas %}checked{% endif %} disabled></td>-->
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_politicas }}</h1></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                <!-- prod_col: ###############################################################-->
+                <tr>
+                    <th><h3>Produtos em Coleções:</h3></th>
+                    <td><input type="checkbox" name="prod_col" value="true" {% if formulario_user.prod_col %}checked{% endif %}></td>
+
+                    <!-- <td><input type="checkbox" {% if formulario_user.prod_col %}checked{% endif %} disabled></td>-->
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_prod_col }}</h1></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                
+                <!-- Design: ###############################################################-->
+                <tr>
+                    <th>
+                        <h3>Design:</h3>
+                    </th>
+                   
+                        <td><input type="checkbox" name="estilizacao" value="true" {% if formulario_user.estilizacao %}checked{% endif %}></td>
+
+                        <!--  <td><input type="checkbox" {% if formulario_user.estilizacao %}checked{% endif %} disabled> </td>-->
+                    
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 100%;">
+                        <span><h1>{{ formulario_user.resposta_estilizacao }}</h1></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="width: 100%;">
+                        <span><h3>______________________________________________________</h3><span>
+                    </td>
+                </tr>
+                <!-- ###############################################################-->
+            </table>
+            <button type="submit" class="button">Enviar</button>
+        </form>
+        <div id="confirmationMessage" class="alert-modal" style="display: none;"></div>
+        <div id="modalOverlay" class="modal-overlay"></div>
+
+    </div> 
+    
+    {% else %}
+        <p>Usuário não encontrado.</p>
+    {% endif %}
+</div>
+    
+    
+       
+            
+</div>
+
+<!-- MODIFICAR DADOS -->
+<script>
+    function enviarFormularioerro(event) {
+        event.preventDefault();  // Evita o comportamento padrão do formulário
+        // Pegar o username diretamente do template e armazenar
+        var username = "{{ formulario_user.username }}";
+        
+        var formData = {
+            url_loja: document.getElementsByName('url_loja')[0]?.value,
+            email_suporte: document.getElementsByName('email_suporte')[0]?.value,
+            empresa: document.getElementsByName('empresa')[0]?.value,
+            telefone: document.getElementsByName('telefone')[0]?.value,
+
+            token_senha: document.getElementsByName('token_senha')[0]?.value,
+            chave_de_api: document.getElementsByName('chave_de_api')[0]?.value,
+            chave_secreta: document.getElementsByName('chave_secreta')[0]?.value,
+
+            business_hours: document.getElementsByName('business_hours')[0]?.value,
+            nicho: document.getElementsByName('nicho')[0]?.value,
+            cor: document.getElementsByName('cor')[0]?.value,
+
+            username: username
+        };
+        
+        
+        console.log("Dados enviados:", formData);
+        
+        fetch("{% url 'formularioerro' %}", {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro no servidor');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Configura a mensagem de confirmação
+            confirmationMessageform.style.display = "block";
+            confirmationMessageform.style.color = data.status === 'success' ? "green" : "red";
+            confirmationMessageform.style.borderColor = data.status === 'success' ? "green" : "red";
+            confirmationMessageform.innerText = data.message;
+
+            // Recarrega a página após 3 segundos em caso de sucesso
+            if (data.status === 'success') {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            } else {
+                // Oculta a mensagem e o overlay após 3 segundos em caso de erro
+                setTimeout(() => {
+                    confirmationMessageform.style.display = 'none';
+                    modalOverlay.style.display = 'none';
+                }, 3000);
+            }
+        })
+        .catch(error => {
+            // Exibe mensagem de erro e overlay
+            confirmationMessageform.innerText = "Erro ao enviar o formulário: " + error.message;
+            confirmationMessageform.style.display = "block";
+            confirmationMessageform.style.color = "red";
+            confirmationMessageform.style.borderColor = "red";
+
+            // Oculta a mensagem e o overlay após 3 segundos
+            setTimeout(() => {
+                confirmationMessageform.style.display = 'none';
+                modalOverlay.style.display = 'none';
+            }, 3000);
+        });
+    }
+
+
+    // Atualiza o listener de evento para o nome correto da função
+    document.getElementById("custom-form-id").addEventListener("submit", enviarFormularioerro);
+</script>
+
+
+<!-- toggle -->
+<script>
+    function toggleContent(element) {
+        var content = element.nextElementSibling;
+        var allContents = document.querySelectorAll('.container-content');
+        
+        // Fecha todos os containers, exceto o que foi clicado
+        allContents.forEach(function(item) {
+            if (item !== content) {
+                item.style.display = 'none';
+            }
+        });
+    
+        // Alterna a visibilidade do conteúdo do container clicado
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
+        }
+    }
+</script>
+
+
+<!-- REMARCAR CAMPOS -->
+<script>
+    document.getElementById("customForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evita o envio normal do formulário
+
+        const formData = new FormData(this); // Captura os dados do formulário
+        const confirmationMessage = document.getElementById("confirmationMessage"); // Seleciona a modal de confirmação
+        const modalOverlay = document.getElementById("modalOverlay"); // Seleciona o fundo escuro
+
+        // Exibe o fundo escuro
+        modalOverlay.style.display = 'block';
+
+        fetch("{% url 'remarcar' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro no servidor');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Configura a mensagem de confirmação
+            confirmationMessage.style.display = "block";
+            confirmationMessage.style.color = data.status === 'success' ? "green" : "red";
+            confirmationMessage.style.borderColor = data.status === 'success' ? "green" : "red";
+            confirmationMessage.innerText = data.message;
+
+            // Recarrega a página após 3 segundos em caso de sucesso
+            if (data.status === 'success') {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            } else {
+                // Oculta a mensagem e o overlay após 3 segundos em caso de erro
+                setTimeout(() => {
+                    confirmationMessage.style.display = 'none';
+                    modalOverlay.style.display = 'none';
+                }, 3000);
+            }
+        })
+        .catch(error => {
+            // Exibe mensagem de erro e overlay
+            confirmationMessage.innerText = "Erro ao enviar o formulário: " + error.message;
+            confirmationMessage.style.display = "block";
+            confirmationMessage.style.color = "red";
+            confirmationMessage.style.borderColor = "red";
+
+            // Oculta a mensagem e o overlay após 3 segundos
+            setTimeout(() => {
+                confirmationMessage.style.display = 'none';
+                modalOverlay.style.display = 'none';
+            }, 3000);
+        });
+    });
+</script>
+
+
+</body>
+</html>

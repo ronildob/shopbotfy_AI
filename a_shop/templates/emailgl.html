@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ template.titulo }}</title>
+    
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: #000; display: flex; justify-content: center; align-items: center; text-align: center;">
+    
+    <div class="cont-principal" style="width: 100%; margin: 0 auto; padding: 20px; background-color: #000; box-sizing: border-box; text-align: center;">
+        
+        <br>
+        
+        <!-- Text Header and Content -->
+        <h2 style="font-size: 5vw; color: #fff; margin: 10px 0;">Parabéns seu pedido foi aprovado!</h2>
+        <h1 style="font-size: 4vw; color: #fff; margin: 10px 0;">Olá {{ nome }}!</h1>
+        <p style="font-size: 4vw; color: #fff; margin: 10px 0;">Agora falta apenas preencher o Briefing e nos dizer como deseja sua loja</p>
+
+        <!-- Centralized Image -->
+        <div style="width: 70%; height: auto; overflow: hidden; margin: 20px auto;">
+            <img src="https://www.shopbotfy.com/static/home/img/gl/IMG_8621.PNG" alt="" style="width: 100%; height: auto; object-fit: cover;">
+        </div>
+
+        <!-- Acessar Button -->
+        <a href="https://www.shopbotfy.com/agencia/agencia0002/" 
+           target="_blank" 
+           class="botao-externo" 
+           style="font-size: 4vw; font-weight: 500; padding: 10px 20px; text-align: center; text-decoration: none; background: #1cd403; color: #000; border-radius: 10px; display: inline-block;">
+            Responder Briefing
+        </a>
+        
+        <!-- Footer Content -->
+    </div>
+    
+</body>
+
+
+</html>

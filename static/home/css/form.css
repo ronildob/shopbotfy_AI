@@ -1,0 +1,92 @@
+.form {
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 0; /* Margem inferior de 20px */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 20px; /* Espaçamento interno */
+
+} 
+.form__field,
+.form__input-wrapper--labelled1{
+width: 100%;
+max-width: 100%; /* Definir uma largura máxima para o campo */
+height: 40px;
+background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+border-radius: 1px;
+}
+.form__field,
+.form__field--select {
+width: 100%;
+max-width: 100%; /* Definir uma largura máxima para o campo */
+height: 40px;
+border-radius: 1px;
+padding: 5px;
+font-size: 18px;
+background-color: #f9f9f9;
+transition: background-color 0.3s ease;
+margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+box-sizing: border-box;
+text-align: center; /* Centraliza horizontalmente */
+
+}
+
+.form__input-wrapper--labelled{
+width: 100%;
+max-width: 100%; /* Definir uma largura máxima para o campo */
+height: 40px;
+background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+border-radius: 20px;
+}
+
+
+.form__field--text  {
+width: 100%;
+max-width: 100%; /* Definir uma largura máxima para o campo */
+height: 40px;
+border-radius: 20px;
+padding: 5px;
+font-size: 18px;
+background-color: #f9f9f9;
+transition: background-color 0.3s ease;
+margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+box-sizing: border-box;
+text-align: center; /* Centraliza horizontalmente */
+
+}
+/* Estilos quando o mouse está sobre os campos de entrada e seleção */
+.form__input-wrapper--labelled:hover,
+.form__field:hover,
+.form__field--select:hover,
+.form__field--text:hover {
+background-color: #5c5959;
+font-size: 20px;
+color: #f5ebeb;
+
+}
+/* Estilos quando os campos de entrada e seleção estão focados */
+.form__input-wrapper--labelled:focus,
+.form__field:focus,
+.form__field--select:focus,
+.form__field--text:focus {
+outline: none;
+background-color: #f7b3b3;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+font-size: 18px;
+
+}
+/* Estilo para as opções do campo de seleção */
+.form__field--select option,
+.form__field--text option {
+font-size: 18px;
+color: #333;
+
+}
+/* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+.form__field--select option:hover
+.form__field--text option:hover  {
+color: #44c457;
+font-size: 18px;
+}

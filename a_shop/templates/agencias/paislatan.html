@@ -1,0 +1,46 @@
+ 
+{% extends 'baseopcoenichos.html' %}
+{% load static %}
+{% block content %}       
+
+
+<input type="hidden" id="nicho" name="nicho" value="Genérica">
+
+<!-- COR -->
+<div class="cont-principal">
+    <main class="main-with-video-bg">
+        <video autoplay muted loop id="bg-video" preload="auto"  %}">
+            <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+       
+        <div class="apresentacao">
+            <div class="explicacao5">{{ agencia.texto_explicacao5_agencia }}</div>
+        </div> 
+    </main> 
+                    
+    <div class="initial1"> 
+        <div class="paleta">
+            <img src="/static/home/img/CORES.png" alt="cores">
+        </div>     
+    </div>
+    <div class="formulario">           
+        <div class="form__input-row">
+            <div class="form__input-wrapper form__input-wrapper--labelled">
+                <select id="cor" name="cor" class="form__field form__field--select form__field--large" required>
+                    <option value="">Selecione a Cor</option>
+                    <option value="Paleta de Cor 1">Laranja</option>
+                    <option value="Paleta de Cor 2">Verde</option>
+                    <option value="Paleta de Cor 3">Roxo</option>
+                    <option value="Paleta de Cor 4">Preto</option>
+                    <option value="Paleta de Cor 5">Azul</option>
+                    <option value="Paleta de Cor 6">Vermelho</option>
+                </select>
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+
+{% endblock %}

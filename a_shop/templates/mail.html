@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ template.titulo }}</title>
+    <style>
+        /* Definindo variáveis globais CSS */
+        :root {
+            --main-bgd-image: url('{{ template.background_image }}');
+            --main-bgd-position: center;
+            --main-bgd-width: {{ template.bgd_width | default:'0px' }}
+            --main-bgd-height: {{ template.bgd_height | default:'0px' }} 
+            --background-color: {{ template.background_color|default:'black' }};
+            --header-color: {{ template.texto_header_color|default:'white' }};
+            --greeting-color: {{ template.texto_saudacao_color|default:'white' }};
+            --button-bg-color: #97be48;
+            --button-border-color: #6f9134;
+            --footer-text-color: {{ template.background_color|default:'black' }};
+        }
+
+        /* Estilos do título principal */
+        #main-title {
+            background-image: var(--main-bgd-image);
+            background-size: cover;
+            background-position: var(--main-bgd-position);
+            width: var(--main-bgd-width);
+            height: var(--main-bgd-height);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Fica atrás do texto */
+        }
+
+        /* Estilos do rodapé */
+        footer {
+            display: flex;
+            justify-content: space-between; /* Distribui os itens igualmente na linha */
+            align-items: center; /* Alinha os itens verticalmente ao centro */
+            background-color: var(--background-color);
+            color: var(--footer-text-color);
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Estilos gerais do corpo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Estilos do contêiner principal */
+        .cont-principal {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* Estilos dos textos */
+        h2 {
+            color: var(--header-color);
+        }
+
+        h1 {
+            color: var(--greeting-color);
+        }
+
+        p {
+            color: var(--greeting-color);
+        }
+
+        /* Estilos do botão */
+        .botao-externo {
+            display: block;
+            width: 50%;
+            max-width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            background: var(--button-bg-color);
+            color: #000;
+            border-radius: 20px;
+            border: 3px solid var(--button-border-color);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="cont-principal">
+        <div id="main-title"></div>
+        <br>
+        
+        <!-- Text Header and Content -->
+        <h2>{{ template.texto_header_content }}</h2>
+
+        <h1>Olá {{ nome }}!</h1>
+        <p>{{ template.texto_saudacao_content }}</p>
+
+        <!-- Acessar Button -->
+        <a href="{{ template.link_member }}" target="_blank" class="botao-externo">Acessar</a>
+        
+    </div>
+    <!-- Footer Content -->
+    <footer>
+        <p>&copy;{{ template.copy_agencia }}</p>
+        <p>
+            {% if template.show_link_face %}
+                <a href="{{ template.link_face }}" target="_blank"><img src="{% static 'home/img/facebook.png' %}" width="30" height="40" alt="Facebook"></a>
+            {% endif %}
+            {% if template.show_link_insta %}
+                <a href="{{ template.link_insta }}" target="_blank"><img src="{% static 'home/img/instagran.png' %}" width="30" height="40" alt="Instagram"></a>
+            {% endif %}
+            {% if template.show_link_youtube %}
+                <a href="{{ template.link_youtube }}" target="_blank"><img src="{% static 'home/img/youtubesimbolo.png' %}" width="30" height="40" alt="YouTube"></a>
+            {% endif %}
+        </p>
+    </footer>
+</body>
+</html>

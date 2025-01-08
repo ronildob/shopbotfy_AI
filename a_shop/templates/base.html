@@ -1,0 +1,843 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ template.titulo }}</title>
+    <link rel="icon" href="{% if template.favicon %}{{ template.favicon.url }}{% else %}{% static 'home/img/favi.png' %}{% endif %}">
+    
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">     
+    <link rel="stylesheet" href="{% static 'home/css/spiners.css'%}"> 
+    <link rel="stylesheet" href="{% static 'home/css/home.css'%}"> 
+    <link rel="stylesheet" href="{% static 'home/css/efeitos.css'%}"> 
+    <link rel="stylesheet" href="/static/home/css/spin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="{% static 'home/js/carrossel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/carrossel_vertical.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/spiner.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/sele_pais.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/indice_validar_link.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/nicho.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/tema_padrao.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/tema.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/video.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/animacao.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'home/js/bloqueio.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'home/js/acessos.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/produzir.js' %}"></script>
+
+
+
+    
+    
+
+<style> 
+:root {
+        --main-bg-image: url("{% if template.bg_image %}{{ template.bg_image.url }}{% else %}{% static 'default-image.png' %}{% endif %}");
+        --main-bg-width: {{ template.bg_width|default:'300px' }};
+        --main-bg-height: {{ template.bg_height|default:'90px' }};
+        --main-bg-position: {{ template.bg_position|default:'center' }};
+        --main-text-color: {{ template.text_color|default:'white' }};
+        --header-color: {{ template.header_color|default:'white' }};
+        --footer-color: {{ template.footer_color|default:'black' }};
+        --apresentacao-color: {{ template.apresentacao_color|default:'black' }};
+        --main-text-position: {{ template.text_position|default:'center' }};
+        --main-text-content: "{{ template.text_content|default:'Seu Texto Aqui' }}";
+        --main-text-font-size: {{ template.font_size|default:'16px' }};
+        --background_color: {{ template.background_color|default:'black' }};
+        --text_header_color: {{ template.text_header_color|default:'white' }}; 
+        --text_saudacao_color: {{ template.text_saudacao_color|default:'white' }};
+        --text_header_content: "{{ template.text_header_content|default:'Seu Texto de Cabeçalho Aqui' }}";
+        --text_saudacao_content: "{{ template.text_saudacao_content|default:'Abaixo estão seus dados para acessar a plataforma:' }}";
+    }
+header {
+    background-color: var(--header-color);  
+    padding: 20px 10px; /* Aumentado para um padding mais espaçoso */
+    text-align: center; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    position: relative;
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+}
+
+
+#main-title {
+    background-image: var(--main-bg-image);
+    background-size: cover;
+    background-position: var(--main-bg-position);
+    width: var(--main-bg-width);
+    height: var(--main-bg-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Fica atrás do texto */
+}
+#title {
+    color: var(--main-text-color);
+    font-size: var(--main-text-font-size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2; /* Fica na frente da imagem */
+    text-align: center;
+    position: relative;
+    margin: 0;
+}
+
+html, body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da viewport */
+    background: #fff;  
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Define a orientação dos elementos como coluna */
+    justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+    align-items: center; /* Alinha os elementos no centro horizontalmente */
+}
+main {
+width: 100%; /* Largura total */
+max-width: 100%; /* Largura máxima igual à largura da tela */
+padding: 20px; /* Espaçamento interno */
+display: flex; /* Display flex para layout flexível */
+flex-wrap: wrap; /* Permite que os itens sejam envolvidos em várias linhas */
+justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+background:  #fff;  
+}
+
+.cont-principal {
+width: 100%; /* Largura total */
+max-width: 100%; /* Largura máxima igual à largura da tela */
+height: auto; /* Altura automática para se ajustar ao conteúdo */
+background: #fff; /* Cor de fundo branca */
+padding: 20px; /* Espaçamento interno */
+box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+display: flex; /* Torna o contêiner um flex container */
+justify-content: center; /* Alinha os itens horizontalmente ao centro */
+align-items: center; /* Alinha os itens verticalmente ao centro */
+flex-direction: column; /* Empilha os itens verticalmente */
+}
+
+.videoexplicacao {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+            
+}
+
+
+/* video */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de 16:9 para vídeos responsivos */
+    padding-top: 5px;
+    height: 0;
+    overflow: hidden;
+    }
+.video-container iframe,
+.video-container object,
+.video-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.redirecionamento {
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #000; /* Cor de fundo transparente */
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    background-color: #000; /* Cor de fundo transparente */
+}
+.cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5px; /* Espaçamento entre os elementos */
+}
+
+
+.paleta {
+height: auto; /* Altura automática para se ajustar ao conteúdo */  
+position: relative; /* Define o posicionamento relativo */
+overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+padding: 20px; /* Espaçamento interno */
+box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+align-items: center; /* Centraliza os itens verticalmente */
+text-align: center; /* Centraliza horizontalmente */
+flex-direction: column; /* Empilha os itens verticalmente */
+display: flex; /* Torna o contêiner um flex container */
+
+
+}
+.paleta img {
+max-width: 100%; /* Garantir que a imagem não ultrapasse a largura da div */
+max-height: 100%; /* Garantir que a imagem não ultrapasse a altura da div */
+display: block; /* Permitir margens e alinhamento corretos */
+border-radius: 5px; /* Borda arredondada na imagem */
+}
+
+
+.apresentacao {
+width: 100%; /* Largura total */
+max-width: 100%; /* Largura máxima igual à largura da tela */
+height: auto; /* Altura automática para se ajustar ao conteúdo */
+position: relative; /* Define o posicionamento relativo */    
+background-color: var(--apresentacao-color); 
+padding: 20px; /* Espaçamento interno */
+box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+display: flex; /* Torna o contêiner um flex container */
+flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+justify-content: center; /* Centraliza os itens horizontalmente */
+align-items: center; /* Centraliza os itens verticalmente */
+
+}
+
+.explicacao {
+width: 80%; /* Define a largura como metade do contêiner principal */
+max-width: 100%; /* Largura máxima igual à largura da tela */
+height: auto; /* Altura automática para se ajustar ao conteúdo */  
+margin-bottom: 1px; /* Margem inferior de 20px */
+position: relative; /* Define o posicionamento relativo */
+overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+padding: 20px; /* Espaçamento interno */
+box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+
+}
+/* Estilizando o título h3 */
+
+
+.cont-botão {
+height: auto; /* Altura automática para se ajustar ao conteúdo */
+margin-bottom: 10px; /* Margem inferior de 20px */
+position: relative; /* Define o posicionamento relativo */
+overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+padding: 5px; /* Espaçamento interno */
+box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+display: flex; /* Torna o contêiner um flex container */
+flex-direction: column; /* Empilha os itens verticalmente */
+justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+
+
+}   
+
+button, input[type=submit] {
+padding: 10px; /* Espaçamento interno */
+height: 100%; /* Altura fixa para botões */
+font-size: 19px; /* Tamanho da fonte */
+color: #fff; /* Cor do texto */
+background:#000000;
+display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+margin: 0 auto; /* Centraliza horizontalmente */
+justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+align-items: center; /* Centraliza os itens ao longo do eixo secundário (horizontal) */
+border-radius: 20px; /* Borda arredondada de 20px */
+border-width: 2px; /* largura da borda */
+border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+border-color: #000000; /* cor da borda */
+}
+
+
+       
+.initial {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+}
+.initial1 {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.pais {
+    width: 70%;
+    max-width: 70%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.swiper-container-horizontal {
+width: 100%;
+height: 100%;/* Altura de 100% em relação ao contêiner pai */
+border-radius: 20px;
+}
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+.paleta{
+width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+h1 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+h6 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+.formulario {
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+width: 40%; /* Ambos ocupam metade da largura */   
+}
+.form__input-row {
+width: 100%;    
+} 
+.initial,
+.pais {
+width: 80%;
+}
+.initial1,
+.pais1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+
+}   
+@media (min-width: 1024px)and (max-width: 1440px){
+.paleta{
+width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+h1 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+h6 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+.formulario {
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+width: 40%; /* Ambos ocupam metade da largura */   
+}
+.form__input-row {
+width: 100%;    
+} 
+.initial,
+.pais {
+width: 80%;
+}
+.initial1,
+.pais1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+
+}   
+@media (min-width: 768px) and (max-width: 1024px) {
+.paleta{
+width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+h1 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+h6 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+.formulario{
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+width: 50%; /* Ambos ocupam metade da largura */   
+} 
+.form__input-row {
+width: 100%;    
+}
+.initial,
+.pais {
+width: 80%;
+}
+.initial1,
+.pais1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+} 
+}
+@media (min-width: 300px) and (max-width: 767px){
+.paleta{
+width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+}      
+h1 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+h6 { 
+font-size: 19px; /* Tamanho da fonte */   
+}
+.formulario {
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+width: 80%; /* Ambos ocupam metade da largura */   
+} 
+.form__input-row {
+width: 100%;    
+} 
+footer {
+flex-direction: column; /* Empilha os itens verticalmente */
+text-align: center; /* Alinha o texto centralmente */
+}
+
+footer h4,
+footer h5,
+footer p {
+margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+}
+.initial,
+.pais {
+width: 75%;
+}
+.initial1,
+.pais1 {
+width: 100%;
+}
+
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+}
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+}
+
+
+/* Ocultar o título em dispositivos móveis */
+@media (max-width: 767px) {
+    #title {
+        display: none; /* Oculta o elemento em telas menores */
+    }
+}
+
+/* Exibir o título em dispositivos maiores */
+@media (min-width: 768px) {
+    #title {
+        display: block; /* Garante que o elemento seja exibido em telas maiores */
+    }
+}
+
+
+/* FONTES */  
+h1 {
+text-align: center; /* Centraliza horizontalmente */
+margin-top: 0; /* Remove margem superior padrão */
+margin-bottom: 10px; /* Espaçamento inferior */
+color: #fff; /* Cor do texto */
+font-size: 23px; /* Tamanho da fonte */
+align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+font-family: 'Montserrat', sans-serif;
+font-weight: bolder; /* Adiciona negrito */
+}
+h2 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto no cabeçalho */
+font-size: 23px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: lighter; /* Adiciona negrito */
+
+}
+h3 {
+text-align: center; /* Centraliza horizontalmente */
+margin-top: 10px; /* Espaço superior para centralização vertical */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto */
+font-size: 23px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+h4 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto no cabeçalho */
+font-size: 16px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+h5 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto no cabeçalho */
+font-size: 16px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+h6 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #000; /* Cor do texto no cabeçalho */
+font-size: 23px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+
+
+#rodape {   
+    /* Definindo a altura desejada */
+    height: 90px;
+    /* Definindo a largura desejada */
+    width: 270px;
+    /* Aplicando a imagem como fundo */
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    /* Centralizando a imagem no elemento */
+    background-position: center;
+    /* Redimensionando a imagem para cobrir todo o espaço do elemento */
+    background-size: cover;
+    /* Estilizando o texto dentro do elemento */
+    color: white;
+    text-align: center;
+    line-height: 90px; /* Para centralizar verticalmente */
+}
+
+.footer-icon {
+width: 32px;
+height: 32px;
+margin-right: 10px;
+vertical-align: middle;
+}
+
+
+footer {
+display: flex;
+justify-content: space-between; /* Distribui os itens igualmente na linha */
+align-items: center; /* Alinha os itens verticalmente ao centro */
+background-color: var(--footer-color); 
+color: #fff;
+text-align: center;
+padding: 20px;
+width: 100%;
+}
+
+footer p{
+font-size: 18px; /* Tamanho da fonte */
+color: #fff; /* Cor do texto no cabeçalho */
+}
+footer p,
+footer h4,
+footer h5 {
+margin: 20; /* Remover margens padrão para evitar espaçamento extra */
+}
+footer h5 a {
+display: flex; /* Usar flexbox para alinhar os itens */
+align-items: center; /* Alinhar os itens verticalmente ao centro */
+color: #fff; /* Cor do texto do link */
+text-decoration: none; /* Remover sublinhado padrão */
+transition: color 0.3s ease; /* Transição suave da cor ao passar o mouse */
+}
+
+footer a img {
+margin-right: 0; /* Espaçamento à direita do ícone */
+}
+
+footer a:hover {
+color: #48ff00; /* Cor do texto do link ao passar o mouse */
+}
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+/* ESTILOS FORMULÁRIO */
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+.formulario {
+margin-top: 0; /* Remove a margem superior */
+margin-left: auto; /* Alinha à direita do container esquerdo */
+margin-right: auto; /* Centraliza horizontalmente */
+display: flex; /* Torna o contêiner um flex container */
+flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+justify-content: center; /* Centraliza os itens horizontalmente */
+align-items: center; /* Centraliza os itens verticalmente */
+
+}   
+.form {
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 0; /* Margem inferior de 20px */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 20px; /* Espaçamento interno */
+    align-items: center; /* Centraliza os itens verticalmente */
+} 
+.form__field,  
+.form__input-wrapper--labelled{
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    border-radius: 20px;
+    align-items: center; /* Centraliza os itens verticalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    margin-bottom: 10px; /* Reduzido de 20px para 10px */
+}
+
+.form__field,
+.form__field--select,
+.form__field--text {
+width: 100%;
+max-width: 100%; /* Definir uma largura máxima para o campo */
+height: 40px;
+border-radius: 20px;
+padding: 5px;
+background-color: #e2dddd;
+transition: background-color 0.3s ease;
+margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+box-sizing: border-box;
+text-align: center; /* Centraliza horizontalmente */
+font-size: 16px;
+font-family: 'Montserrat', sans-serif;
+font-weight: bolder; /* Adiciona negrito */
+
+}
+/* Estilos quando o mouse está sobre os campos de entrada e seleção */
+.form__input-wrapper--labelled:hover,
+.form__field:hover,
+.form__field--select:hover,
+.form__field--text:hover {
+background-color: #5c5959;
+
+}
+/* Estilos quando os campos de entrada e seleção estão focados */
+.form__input-wrapper--labelled:focus,
+.form__field:focus,
+.form__field--select:focus,
+.form__field--text:focus {
+outline: none;
+background-color: #f7b3b3;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+}
+/* Estilo para as opções do campo de seleção */
+.form__field--select option,
+.form__field--text option {
+font-size: 16px;
+color: #0f0f0f;
+
+}
+/* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+.form__field--select option:hover,
+.form__field--text option:hover {
+color: #44c457;
+font-size: 14px;
+}
+
+</style>  
+</head>
+<body>
+    <header id="header-preview" style="background-color: var(--header-color);">
+        <h2 id="main-title"></h2>
+        <h2 id="title">{{ template.text_content }}</h2>
+    </header>
+    {% block content %}
+    
+    {% endblock %}
+    <footer>
+        <p>
+            &copy;{{ template.copy }}
+            {% if template.show_contato %}
+                <a href="mailto:{{template.contato}}" class="black-text">{{ template.contato }}</a>
+            {% endif %}
+
+            {% if template.show_link_site %}
+                {% if template.link_site|slice:":5" == "https" %}
+                    <a href="{{ template.link_site }}" target="_blank">{{ template.link_site|slice:"8:" }}</a>
+                {% elif template.link_site|slice:":4" == "http" %}
+                    <a href="{{ template.link_site }}" target="_blank">{{ template.link_site|slice:"7:" }}</a>
+                {% else %}
+                    <a href="{{ template.link_site }}" target="_blank">{{ template.link_site }}</a>
+                {% endif %}
+            {% endif %}
+
+
+            {% if template.show_telefone %}
+                <a href="https://api.whatsapp.com/send?phone={{ template.telefone }}" target="_blank"><img src="{% static 'home/img/whatsapp.png' %}"width="30" height="40">{{ template.telefone }}</a>
+            {% endif %}
+            
+        </p>
+        
+        <h4 id="rodape"></h4>
+       
+        <p>
+            {% if template.show_link_face %}
+                <a href="{{ template.link_face }}" target="_blank"><img src="{% static 'home/img/facebook.png' %}" width="30" height="40"></a>
+            {% endif %}
+            {% if template.show_link_insta %}
+                <a href="{{ template.link_insta }}" target="_blank"><img src="{% static 'home/img/instagran.png' %}" width="30" height="40"></a>
+            {% endif %}
+            {% if template.show_link_youtube %}
+                <a href="{{ template.link_youtube }}" target="_blank"><img src="{% static 'home/img/youtubesimbolo.png' %}" width="30" height="40"></a>
+            {% endif %}
+        </p>
+     
+        
+        
+        
+    </footer>    
+  
+    
+</body>
+</html>

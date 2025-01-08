@@ -1,0 +1,17 @@
+.scrollToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Escondido por padrão */
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.scrollToTop:hover {
+    background-color: #555;
+}

@@ -1,0 +1,67 @@
+
+
+{% extends 'base.html' %}
+
+<style>
+    .profile-edit-container {
+    width: 60%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-edit-container h2 {
+    margin-bottom: 20px;
+}
+
+.profile-edit-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-edit-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.profile-edit-container input, .profile-edit-container textarea, .profile-edit-container button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.logout-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #d32f2f;
+}
+
+</style>
+
+{% block content %}
+<div class="profile-edit-container">
+    <h2>Editar Perfil</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="avatar">Avatar:</label>
+        <input type="file" id="avatar" name="avatar">
+        <input type="file" id="avatar" name="avatar" value="{{agencia.avatar }}" style="display: none;" onchange="updatePreview()">
+
+
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+</div>
+{% endblock content %}

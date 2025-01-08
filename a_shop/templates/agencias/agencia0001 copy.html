@@ -1,0 +1,89 @@
+
+{% extends 'agencias/baselatan.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+    <!-- <input type="hidden" name="agencia" value="atlass"> -->
+    
+    <form id="formRedirecionar" method="post" action="{% url 'formulario' %}">
+        {% csrf_token %}
+        <input type="hidden" name="agencia" value="agencia0001">
+        <!-- INDICE--> 
+        <div class="cont-principal">
+            <main class="main-with-video-bg">
+                <video autoplay muted loop id="bg-video" preload="auto" >
+                    <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video> 
+                <div class="apresentacao">
+                    <div class="explicacao">{{ agencia.texto_apresentacao_agencia }}</div>
+                </div> 
+            </main>
+
+            <div class="videoexplicacao">
+                <div class="video-container">
+                    <iframe width="100%" height="315" src="{{ agencia.link_video }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>                  
+            <div class="cont-imput">
+                <button type="submit" class="btn-submit">CRIAR CADASTRO</button>
+                <div class="redirecionamento">               
+                            
+                </div>
+            </div>                    
+        </div>
+    </form> 
+    
+    <br></br>
+
+    
+            <!--Trocar de cores  -->
+            <div class="cont-principal">
+                <div class="temashop">
+                   
+                    <div class="colortema">
+                        CORES AQUI 
+                    </div>
+
+                    <div class="temaimput">
+                        <div class=".barra1">
+                            barra 1
+                        </div>
+                        <div class="barra2">
+                            <div class="iconeesquerdo">
+                            </div>
+                            <div class="centaltema">
+                                <div class="item-esquerda">
+                                    Search...
+                                </div>
+                                 <div class="iconelupa">
+                                    <i class="fa fa-search"></i>
+                                 </div>
+
+                            </div>
+                            <div class="iconeesque">
+                                Login / Signup
+                                My account  
+                            </div>
+                            <div class="iconeesquerdo">
+                            </div>
+                           
+                            <div class="iconedireito">
+                               
+
+                            </div>
+                                  
+                        </div>
+                        <div class="barradegrade"> 
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+       
+            
+
+{% endblock %}

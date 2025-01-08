@@ -1,0 +1,37 @@
+ /* Estilo quando o cursor passa por cima do botão */
+ button:hover {
+    opacity: 0.8; /* Reduz a opacidade ao passar o cursor por cima */
+    }
+    
+button, input[type=submit] {
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    font-size: 19px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto */
+    background:#44c457;
+    display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+    align-items: center; /* Centraliza os itens ao longo do eixo secundário (horizontal) */
+    border-radius: 20px; /* Borda arredondada de 20px */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #44c457; /* cor da borda */
+    }      
+
+.botao-externo {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed;
+    opacity: 0.5;
+    animation: blink 1s infinite; /* Animar o texto com a animação 'blink' infinitamente */
+}
+.botao-externo.ativo {
+    cursor: pointer;
+    opacity: 1;
+}

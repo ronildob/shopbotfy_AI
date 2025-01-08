@@ -1,0 +1,409 @@
+.btn-home1 {
+    width: 385px;
+    height: 50px;
+    background: #084cbd;
+    border-radius: 100px;
+    font-family: open sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    outline: 1px solid #084cbd;
+    outline-offset: 3px;
+    transition: .05s
+}
+
+.btn-home1:focus {
+    outline: 1px solid #084cbd!important
+}
+
+.btn-home1:hover {
+    opacity: .9;
+    outline-offset: 5px
+}
+
+.modal-btn-esp {
+    padding-top: 25px;
+    padding-bottom: 50px
+}
+
+.modal-btn-home1 {
+    height: 50px
+}
+
+.modal-body {
+    padding-top: 2px!important
+}
+
+.modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 0 solid #dee2e6!important;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px)
+}
+
+.btn-close {
+    background: transparent url("../assets/img/icon-close.svg") center/1em auto no-repeat!important;
+    opacity: .9!important
+}
+
+.modal {
+    background-color: #f2f2f2
+}
+
+.bg-white {
+    background: #fff
+}
+
+@media(max-width: 992px) {
+    .modal {
+        padding:0!important
+    }
+
+    .modal-dialog {
+        width: 100%
+    }
+
+    .modal-content {
+        border-radius: .3rem;
+        margin: 0;
+        border: 0
+    }
+
+    .btn-home1 {
+        width: 100%
+    }
+}
+
+@media(max-width: 575.98px) {
+    .noabsolute {
+        position:relative!important
+    }
+
+    .modal-body-navmenu {
+        position: relative;
+        flex: 1 1 auto;
+        padding: 1rem
+    }
+
+    .modal-body-navmenu a {
+        text-decoration: none
+    }
+
+    .modal-dialog {
+        margin: 0
+    }
+
+    .btn-close {
+        background: transparent url("../assets/img/icon-close-white.svg") center/1em auto no-repeat;
+        opacity: .9!important
+    }
+}
+
+.close-form {
+    right: 0!important
+}
+
+.placehoud-form {
+    font-family: roboto,sans-serif;
+    font-size: 18px;
+    color: #5f6a6c
+}
+
+.form-floating>.form-control:focus,.form-floating>.form-control:not(:placeholder-shown) {
+    padding-top: 2.5rem;
+    padding-bottom: .25rem
+}
+
+.form-floating>.form-control,.form-floating>.form-select {
+    height: calc(3.5rem + 2px);
+    line-height: 1.25
+}
+
+.form-floating>.form-control:focus~label,.form-floating>.form-control:not(:placeholder-shown)~label,.form-floating>.form-select~label {
+    opacity: .65;
+    transform: scale(.72) translateY(-0.5rem) translateX(0.15rem)
+}
+
+.form-floating>.form-control {
+    padding-top: 10px!important;
+    padding-bottom: 0!important;
+    padding-left: 30px!important;
+    padding-right: 30px!important;
+    font-size: 18px
+}
+
+.form-control {
+    background-color: #f4f4f4!important;
+    border: none;
+    border-radius: 2rem
+}
+
+.form-control-2 {
+    background-color: #ebebeb!important;
+    border: none;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 0;
+    padding-bottom: 0!important;
+    padding-left: 20px!important;
+    padding-right: 20px!important;
+    height: calc(3.5rem + 2px);
+    width: 100%;
+    text-align: center
+}
+
+.form-control-3 {
+    background-color: #f4f4f4!important;
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 2rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 2rem;
+    padding-bottom: 0!important;
+    padding-left: 20px!important;
+    padding-right: 20px!important
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none
+}
+
+.form-floating>label {
+    left: 19px!important
+}
+
+.form-check-input {
+    width: 1.1em!important;
+    height: 1.1em!important;
+    margin-top: .25em;
+    vertical-align: top;
+    background-color: #f7f7f7;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: double!important;
+    border-color: #c7c7c7!important
+}
+
+.form-check-input:checked {
+    width: 1.2em!important;
+    height: 1.2em!important;
+    background-color: #084cbd
+}
+
+.form-check-input[type=checkbox] {
+    border-radius: 0!important
+}
+
+.cursor-termos {
+    cursor: pointer
+}
+
+.flex-form {
+    display: flex;
+    margin-left: 70px;
+    margin-right: 70px
+}
+
+.link-color {
+    color: #5f6a6c;
+    text-decoration: underline
+}
+
+.link-color:hover {
+    color: #084cbd;
+    text-decoration: underline
+}
+
+.link-color-2 {
+    color: #95a5a6;
+    text-decoration: underline;
+    transition: .4s
+}
+
+.link-color-2:hover {
+    transition: .3s;
+    color: #084cbd;
+    text-decoration: underline
+}
+
+@media(max-width: 575.98px) {
+    #dadosModal .container {
+        margin-top:10px;
+        margin-bottom: 10px
+    }
+
+    #dadosModal h2 {
+        font-family: roboto,sans-serif;
+        font-weight: 700;
+        font-size: 30px
+    }
+}
+
+.leadform {
+    margin-top: 40px
+}
+
+.leadform .row {
+    margin: 0!important;
+    --bs-gutter-x: none !important
+}
+
+.leadform span {
+    position: relative;
+    top: 5px;
+    text-align: center;
+    display: block;
+    font-size: 13px;
+    color: #f3705a
+}
+
+.floating-label-group {
+    position: relative
+}
+
+.floating-label-group .floating-label {
+    font-size: 18px;
+    font-family: roboto,sans-serif;
+    font-style: normal;
+    color: #828282;
+    position: absolute;
+    pointer-events: none;
+    left: 30px;
+    transition: all .1s ease
+}
+
+input:focus~.floating-label,input:not(:focus):valid~.floating-label {
+    font-size: 14px;
+    top: 5px;
+    bottom: 0;
+    left: 30px;
+    color: #828282
+}
+
+input:focus {
+    box-shadow: 0 0!important;
+    outline: 0!important
+}
+
+.floating-label-group input {
+    height: 60px!important;
+    border-radius: 100px;
+    font-size: 16px;
+    font-family: roboto,sans-serif;
+    font-style: normal;
+    color: #5f6a6c!important;
+    padding: 15px 30px 0!important;
+    background-color: #f4f4f4
+}
+
+.bg-close-modal {
+    background: #f2f2f2;
+    padding-bottom: 10px
+}
+
+.form-floating-2>.form-control:focus,.form-floating-2>.form-control:not(:placeholder-shown) {
+    padding-top: 2.5rem
+}
+
+.form-floating-2 .form-control {
+    padding-top: 9px!important;
+    padding-left: 30px!important;
+    padding-right: 30px!important;
+    font-size: 17px
+}
+
+.form-floating-2 .form-control,.form-floating-2 .form-select {
+    height: calc(3.5rem + 2px);
+    line-height: 1.25
+}
+
+@media(max-width: 991.98px) {
+    .spc-empresa {
+        margin-top:15px
+    }
+
+    .flex-form {
+        display: flex;
+        margin-left: 35px;
+        margin-right: 35px
+    }
+
+    #dadosModal h2 {
+        font-family: roboto,sans-serif;
+        font-weight: 700;
+        font-size: 36px
+    }
+}
+
+@media(max-width: 575.98px) {
+    .flex-form {
+        display:flex;
+        margin-left: 30px;
+        margin-right: 30px
+    }
+
+    .floating-label-group {
+        margin-bottom: 10px
+    }
+
+    .bg-close-modal {
+        background: #fff;
+        padding: 20px
+    }
+
+    #dadosModal h2 {
+        font-size: 30px
+    }
+}
+
+@media(min-width: 991.98px) {
+    #dadosModal .close-form {
+        position:relative;
+        top: -60px;
+        right: -30px
+    }
+
+    #dadosModal h2 {
+        font-family: roboto,sans-serif;
+        font-weight: 700;
+        font-size: 36px;
+        padding: 0 80px
+    }
+
+    #dadosModal .floating-label-group {
+        margin-bottom: 20px
+    }
+
+    #dadosModal .btn-home1 {
+        width: 320px;
+        margin-top: 10px
+    }
+
+    #dadosModal .btn-home1:hover {
+        text-decoration: none;
+        color: #fff
+    }
+
+    #dadosModal .modal-content {
+        border: 0
+    }
+
+    .padding-right-10 {
+        padding-right: 10px
+    }
+
+    .padding-left-10 {
+        padding-left: 10px
+    }
+}

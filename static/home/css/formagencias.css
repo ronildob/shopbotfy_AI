@@ -1,0 +1,1695 @@
+
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: row; /* Alinha itens horizontalmente, com o menu à esquerda e o conteúdo à direita */
+    width: 100%; /* Garante que ocupe 100% da largura disponível */
+}
+/* Cabeçalho */
+
+
+.cont-esq {
+    position: fixed;
+    left: 0;
+    width: 18%;
+    height: 100%;
+    background-color: #969696;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: visible; /* Permite que os itens excedam os limites horizontais */
+    z-index: 999;
+    transition: transform 0.3s ease; /* Animação suave */
+    text-transform: none; /* Garante que o texto não seja transformado */
+}
+
+.cont-dir {
+    width: calc(100% - 18%); /* O container ocupa o espaço restante quando o menu está aberto */
+    margin-left: calc(18% );
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Remove a rolagem */
+    min-height: 100vh;
+    transition: width 0.3s ease, margin-left 0.3s ease; /* Animação suave */
+    
+}
+
+/* Estilos para telas menores */
+@media (max-width: 768px) {
+    .cont-esq {
+        width: 40%; /* O menu ocupará 40% da tela quando aberto */
+       
+    }
+
+    .cont-dir.recued {
+        width: 60%; /* O conteúdo da direita ocupa 60% da tela quando o menu está aberto */
+        margin-left: 40%; /* Recuar o conteúdo da direita */
+    }
+
+}
+
+.remote-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.control-button.up {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.control-button.down {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.control-button.left {
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control-button.right {
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control-button:hover {
+    background-color: #0056b3;
+}
+
+
+.button-container button {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #45a049;
+}
+
+
+.cont-pri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    text-transform: none; /* Garante que o texto não seja transformado */
+}
+.contpri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    /* Remove a altura mínima fixa */
+    min-height: auto; 
+    /* Adiciona um espaçamento interno, se necessário */
+    padding: 10px; 
+    /* Garante que o conteúdo interno não ultrapasse o contêiner */
+    box-sizing: border-box; 
+}
+.cont-principal {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    background: #fff; /* Cor de fundo branca */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+}
+
+.icone_redirect {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.dropdown-button{
+    width: 100%; /* Largura relativa ao contêiner pai */
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para o botão */
+    font-size: 19px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto */
+    background: #969696;
+    display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    border-radius: 20px; /* Borda arredondada de 20px */
+    border-width: 2px; /* Largura da borda */
+    border-style: solid; /* Estilo da borda */
+    border-color: #969696; /* Cor da borda */
+    cursor: pointer; /* Adiciona o cursor pointer para indicar que o botão é clicável */
+}
+
+.dropdown-content,
+.dropdown-menu {
+    display: none; /* Oculta o dropdown por padrão */
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px; /* Borda arredondada de 20px */
+}
+
+.dropdown-content label,
+.dropdown-menu {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.dropdown-content label:hover,
+.dropdown-menu {
+    color: #44c457;
+    font-size: 18px;
+}
+
+.color-box {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-display {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff; /* Cor padrão */
+    cursor: pointer;
+}
+
+.color-input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.dropdown-menu {
+display: none; /* Oculta o dropdown por padrão */
+position: absolute;
+background-color: #ffffff;
+border: 1px solid #ddd;
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+z-index: 1000; /* Garante que o menu fique sobre outros elementos */
+}
+
+.dropdown-menu.show {
+display: block; /* Exibe o dropdown quando a classe 'show' está presente */
+}
+
+.dropdown-item {
+padding: 10px 20px;
+text-decoration: none;
+color: #333;
+display: block;
+}
+
+.dropdown-item:hover {
+background-color: #f1f1f1;
+}
+
+.dropdown-toggle::after {
+content: '\25BC'; /* Adiciona uma seta para baixo no botão */
+margin-left: 5px;
+}
+
+.contpri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    min-height: auto; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    text-transform: none; 
+}
+
+.swiper-container-horizontal {
+width: 100%;
+height: 100%; /* Altura ajustada para o contêiner pai */
+
+}   
+
+.swiper-slide img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* Estilo para os botões com FontAwesome */
+.swiper-button-prev,
+.swiper-button-next {
+width: 40px; /* Largura do botão */
+height: 40px; /* Altura do botão */
+background-color: rgba(0, 0, 0, 0.281); /* Cor de fundo com transparência */
+color: #fff; /* Cor do ícone */
+border-radius: 50%; /* Botão redondo */
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px; /* Tamanho do ícone */
+cursor: pointer; /* Muda o cursor para indicar que é clicável */
+z-index: 10; /* Garante que o botão esteja acima dos outros elementos */
+position: absolute; /* Posiciona os botões em relação ao contêiner pai */
+}
+
+/* Posicionamento dos botões */
+.swiper-button-prev {
+left: 10px; /* Distância da borda esquerda */
+}
+
+.swiper-button-next {
+right: 10px; /* Distância da borda direita */
+}
+
+/* Adicione algum efeito visual ao passar o mouse sobre os botões */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+background-color: #969696;/* Muda a cor de fundo ao passar o mouse */
+color: #fff; /* Cor do ícone */
+}
+.cont-ainer {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin: 10px;
+    width: 90%;
+
+}
+
+.cont-ainereader {
+    background-color: #fff;
+    color: #000000;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+    position: relative; /* Necessário para o posicionamento do conteúdo */
+    z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.cont-ainer-header {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+    position: relative; /* Necessário para o posicionamento do conteúdo */
+    z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.cont-ainer-content {
+    display: none; /* Inicialmente oculto */
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    overflow-y: auto; /* Permite rolar verticalmente */
+    max-height: 300px; /* Define a altura máxima do conteúdo */
+    padding: 10px; /* Espaçamento interno */
+}
+
+.conainer-header {
+    width: 100%;
+    background-color: #615f5f;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+    position: relative; /* Necessário para o posicionamento do conteúdo */
+    z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.conainer-content {
+    display: none; /* Inicialmente oculto */
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    overflow-y: auto; /* Permite rolar verticalmente */
+    max-height: 300px; /* Define a altura máxima do conteúdo */
+    padding: 10px; /* Espaçamento interno */
+}
+.cont-ainer-content p,
+.conainer-content p {
+    margin: 0;
+}
+/* Responsividade para telas menores que 768px (geralmente tablets e dispositivos móveis) */
+@media (max-width: 768px) {
+    #title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+    .swiper-container-horizontal {
+        height: 250px; /* Ajuste a altura do swiper para telas menores */
+    }
+
+    .contpri, .initial1, .initial {
+        max-width: 100%; /* Ajuste a largura máxima */
+        margin-bottom: 15px; /* Reduza a margem inferior */
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 30px; /* Reduza a largura dos botões */
+        height: 30px; /* Reduza a altura dos botões */
+        font-size: 16px; /* Reduza o tamanho do ícone */
+    }
+
+    .container-header {
+        font-size: 16px; /* Ajuste o tamanho da fonte do cabeçalho */
+        padding: 8px; /* Reduza o padding */
+    }
+
+    .container-content {
+        padding: 8px; /* Reduza o padding do conteúdo */
+    }
+    .video-container {
+        margin-top: 15px;
+    }
+
+    .video-container video {
+        border: 1px solid #ccc; /* Ajuste a borda para telas menores */
+    }
+}
+
+/* Responsividade para telas menores que 480px (geralmente smartphones) */
+@media (max-width: 480px) {
+    #title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+    .swiper-container-horizontal {
+        height: 200px; /* Ajuste a altura do swiper para smartphones */
+    }
+
+    .contpri, .initial1, .initial {
+        margin-bottom: 10px; /* Reduza a margem inferior */
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 25px; /* Reduza ainda mais a largura dos botões */
+        height: 25px; /* Reduza ainda mais a altura dos botões */
+        font-size: 14px; /* Reduza o tamanho do ícone */
+    }
+
+    .container-header {
+        font-size: 14px; /* Ajuste o tamanho da fonte do cabeçalho */
+        padding: 6px; /* Reduza o padding */
+    }
+
+    .container-content {
+        padding: 6px; /* Reduza o padding do conteúdo */
+    }
+    .video-container {
+        margin-top: 10px;
+    }
+
+    .video-container video {
+        border: 1px solid #bbb; /* Ajuste a borda para smartphones */
+        border-radius: 2px; /* Reduza o raio da borda para telas pequenas */
+    }
+}
+
+.video-container {
+    margin-top: 20px;
+}
+.videoexplicacao {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.video-container video {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.863); /* Cor branca com 50% de opacidade */
+    pointer-events: none; /* Permite que os cliques passem através da sobreposição */
+}
+
+#rodape {
+    /* Definindo a altura desejada */
+    height: 90px;
+    /* Definindo a largura desejada */
+    width: 270px;
+    /* Aplicando a imagem como fundo */
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    /* Centralizando a imagem no elemento */
+    background-position: center;
+    /* Redimensionando a imagem para cobrir todo o espaço do elemento */
+    background-size: cover;
+    /* Estilizando o texto dentro do elemento */
+    color: white;
+    text-align: center;
+    line-height: 90px; /* Para centralizar verticalmente */
+}
+
+
+.footer-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+
+footer {
+    display: flex;
+    justify-content: space-between; /* Distribui os itens igualmente na linha */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+
+footer p{
+    font-size: 18px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto no cabeçalho */
+}
+footer p,
+footer h4,
+footer h5 {
+    margin: 20; /* Remover margens padrão para evitar espaçamento extra */
+}
+footer h5 a {
+    display: flex; /* Usar flexbox para alinhar os itens */
+    align-items: center; /* Alinhar os itens verticalmente ao centro */
+    color: #fff; /* Cor do texto do link */
+    text-decoration: none; /* Remover sublinhado padrão */
+    transition: color 0.3s ease; /* Transição suave da cor ao passar o mouse */
+}
+
+footer a img {
+    margin-right: 0; /* Espaçamento à direita do ícone */
+}
+
+footer a:hover {
+color: #48ff00; /* Cor do texto do link ao passar o mouse */
+}
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+                            /* ESTILOS TEXTO */
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+h1 {
+    text-align: center; /* Centraliza horizontalmente */
+    margin-top: 0; /* Remove margem superior padrão */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    color: #fff; /* Cor do texto */
+    font-size: 23px; /* Tamanho da fonte */
+    align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    text-transform: none;
+}
+
+h2 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter; /* Adiciona negrito */
+    text-transform: none;
+
+
+}
+
+h3 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-transform: none;
+
+}
+h4 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+    text-transform: none;
+    
+
+}
+h5 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000; /* Cor do texto no cabeçalho */
+    font-size: 12px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+    text-transform: none;
+
+}
+
+
+/* Media Queries para telas menores */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 20px; /* Reduz tamanho da fonte */
+        margin-bottom: 8px; /* Ajusta espaçamento inferior */
+    }
+
+    h2 {
+        font-size: 20px; /* Reduz tamanho da fonte */
+    }
+
+    h3 {
+        font-size: 18px; /* Reduz tamanho da fonte */
+    }
+
+    h4 {
+        font-size: 14px; /* Reduz tamanho da fonte */
+    }
+
+    h5 {
+        font-size: 12px; /* Reduz tamanho da fonte */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px; /* Ajusta ainda mais o tamanho da fonte para telas pequenas */
+        margin-bottom: 6px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    h4 {
+        font-size: 13px;
+    }
+
+    h5 {
+        font-size: 10px;
+    }
+}
+/* Estilos adicionais para itens */
+.item {
+    background-color: #ddd;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-height: 100vh;
+    
+}
+
+label {
+    /* Definindo a cor do texto */
+    color: #000; /* Cor pode ser ajustada para sua preferência */
+    /* Definindo o tamanho da fonte */
+    font-size: 16px; /* Tamanho da fonte pode ser ajustado */
+    /* Definindo margem inferior para espaçamento */
+    margin-bottom: 2px; /* Ajuste conforme necessário */
+    /* Outros estilos opcionais */
+    font-weight: bold; /* Pode ser 'normal' ou 'bold' */
+    /* Centralizando o texto horizontalmente */
+    text-align: center; /* Centraliza o texto dentro do label */
+    /* Centralizando o texto verticalmente */
+    line-height: 1.5; /* Ajusta a altura da linha para centralizar verticalmente */
+    font-weight: 500;
+}
+
+
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group button {
+    background-color: #4CAF50; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    font-size: 1.5rem; /* Tamanho da fonte para o símbolo */
+    border: none; /* Remove a borda padrão */
+    border-radius: 50%; /* Forma redonda */
+    width: 20px; /* Largura e altura iguais para botões redondos */
+    height: 20px;
+    display: flex; /* Flexbox para centralizar conteúdo */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Animação de hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+/* Efeito ao passar o mouse sobre o botão */
+.input-group button:hover {
+    background-color: #45a049; /* Cor de fundo ao passar o mouse */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao hover */
+}
+
+/* Efeito de clique no botão */
+.input-group button:active {
+    transform: translateY(2px); /* Efeito de pressão */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Reduz a sombra ao clicar */
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 768px) {
+    .input-group button {
+        width: 10px; /* Reduz o tamanho para dispositivos móveis */
+        height: 10px;
+        font-size: 1.2rem;
+    }
+
+    #cabecalho_font_size, #agencia_bg_width, #agencia_bg_height{
+        width: 80%; 
+    }
+}
+
+#cabecalho_font_size, #agencia_bg_width, #agencia_bg_height, #apresentacao_font_size{
+    width: 50%; /* Define a largura do input */
+    padding: 10px; /* Espaço interno */
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 12px; /* Tamanho da fonte */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #f9f9f9; /* Cor de fundo */
+    color: #333; /* Cor do texto */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave ao focar */
+    align-items: center;
+} 
+
+
+
+#copy_agencia,#telefone_agencia,#contato_agencia,#agencia_background_color_input,#agencia_explica_color_input,#explicacao_text_color_input,#link_7,#link_8,#copy,#telefone,#contato,#link_face_agencia, #cabecalho_text_color_input,
+#link_insta_agencia,#link_youtube_agencia,#link_site_agencia,#bgd_image,#bgd_width,#bgd_height,#text_content,#agencia_header_color_input,#text_color_input, #linklogin
+,#text_header_color_input,#text_saudacao_color_input,#text_header_content_input,#text_saudacao_content_input,#agencia_footer_color_input, #link_member_agencia, #link_impact,#texto_cabecalho_agencia{
+    width: 100%; /* Define a largura do input */
+    padding: 10px; /* Espaço interno */
+    margin: 10px 0; /* Espaçamento externo */
+    font-size: 16px; /* Tamanho da fonte */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #f9f9f9; /* Cor de fundo */
+    color: #333; /* Cor do texto */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave ao focar */
+    text-transform: none;
+}
+
+#copy_agencia:focus,#telefone_agencia:focus,#contato_agencia:focus,#agencia_background_color:focus,#agencia_explica_color:focus,#explicacao_text_color:focus,
+#link_7:focus,#link_8:focus,#copy:focus,#telefone:focus,#contato:focus, #cabecalho_text_color_input:focus,
+#link_face_agencia:focus, #link_insta_agencia:focus,#link_youtube_agencia:focus,#link_site_agencia:focus,#bgd_image:focus,
+#bgd_width:focus,#bgd_height:focus,#text_content:focus,#font_size:focus,
+#agencia_header_color_input:focus,#cabecalho_font_size:focus,
+#text_color_input:focus,#linklogin:focus,  #agencia_bg_width:focus, #agencia_bg_height:focus,
+#text_header_color_input:focus,#text_saudacao_color_input:focus, #apresentacao_font_size:focus,
+#text_header_content_input:focus,#text_saudacao_content_input:focus,
+#agencia_footer_color_input:focus, #link_impact:focus, #link_member_agencia:focus,#texto_cabecalho_agencia:focus  {
+    border-color: #3e8e41; /* Cor da borda ao focar */
+    box-shadow: 0 0 5px #3e8e41; /* Sombra ao focar */
+    outline: none; /* Remove o contorno padrão */
+    font-size: 12px;
+    text-transform: none; /* Garante que o texto não seja transformado */
+}  
+#copy_agencia:hover,#telefone_agencia:hover,#contato_agencia:hover,#agencia_background_color_input:hover,#agencia_explica_color_input:hover,#explicacao_text_color_input:hover,#cabecalho_font_size:hover,
+#link_7:hover,#link_8:hover,#copy:hover,#telefone:hover,#contato:hover,#link_face_agencia:hover, #agencia_bg_width:hover, #agencia_bg_height:hover,
+#link_insta_agencia:hover,#link_youtube_agencia:hover,#link_site_agencia:hover,#bgd_image:hover,#cabecalho_text_color_input:hover, #apresentacao_font_size:hover,
+#bgd_width:hover,#bgd_height:hover:hover,#font_size:hover,#agencia_header_color_input:hover,#text_color_input:hover,#linklogin:hover, 
+#text_header_color_input:hover,#text_saudacao_color_input:hover,#text_header_content_input:hover,#text_saudacao_content_input:hover
+#agencia_footer_color_input:hover, #link_impact:hover, #link_membe_agencia:hover,#texto_cabecalho_agencia:hover{
+background-color: #818080;/* Muda a cor de fundo ao passar o mouse */
+color: #fff; /* Cor do ícone */
+}
+
+.color-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.color-input-container input[type="color"] {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 50%; /* Faz o campo de cor ficar redondo */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+   /* border: none;  Remove bordas padrão */
+    appearance: none; /* Remove estilo padrão do navegador */
+}
+
+.color-input-container input[type="color"]::-webkit-color-swatch {
+    border-radius: 50%; /* Ajusta o estilo da cor no WebKit (Chrome, Safari) */
+}
+
+.color-input-container input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    width: 70%;
+}
+
+
+iframe {
+    flex: 1; /* O iframe cresce para ocupar todo o espaço disponível no container */
+    width: 100%; /* O iframe ocupa 100% da largura do container direito */
+    height: 100%; /* O iframe ocupa 100% da altura do container */
+    border: none; /* Remove bordas do iframe */
+    margin-bottom: 0%;
+    margin-top: 8%;
+  
+  
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    flex-direction: column;
+    text-align: center; /* Centraliza horizontalmente */
+    align-items: center;
+    min-height: 50px; /* Você pode ajustar a altura mínima se necessário */
+    padding: 1rem; /* Ajustar o padding para menor */
+    box-shadow: 5px 5px 5px #00000040;
+    transition: all .3s ease-in-out;
+    border: 2px solid transparent;
+
+}
+
+.modal-content {
+    background-color: #2d2f34;
+    margin: 10% auto;
+    padding: 20px;
+    width: 70%;
+    height: 80%;
+    transform: translateY(-5px);
+    border: 2px solid #1296fc;
+    z-index: 20; /* Garante que o cabeçalho fique acima dos cartões */
+    border-radius: 32px; /* Bordas superior right */
+}
+
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    transform: translateY(-5px);
+    border: 2px solid #1296fc;
+}
+
+.detalhes-button {
+    width: 98%;
+    margin-top: 5px; /* Remover esta margem ou ajustá-la se necessário */
+    padding: 10px 15px;
+    border: none;
+    background-color: #007BFF;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.detalhes-button:hover {
+    background-color: #0056b3;
+}
+
+.copy-url-button {
+    width: 98%;
+    margin-top: 5px; /* Remover esta margem ou ajustá-la se necessário */
+    padding: 10px 15px;
+    border: none;
+    background-color: #474747;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.copy-url-button:hover {
+    background-color: #515151;
+}
+
+
+
+
+
+
+:root {
+        --agencia_bg_image: url("{% if agencia.agencia_bg_image %}{{ agencia.agencia_bg_image.url }}{% else %}{% static 'default-image.png' %}{% endif %}");
+        --agencia_bg_width: {{ agencia.agencia_bg_width|default:'300px' }};
+        --agencia_bg_height: {{ agencia.agencia_bg_height|default:'90px' }};
+        --position_bg_image: {{ agencia.position_bg_image|default:'center' }};
+
+        --texto_cabecalho_agencia: "{{ agencia.texto_cabecalho_agencia|default:'Seu Texto de cabeçalho Aqui' }}";
+        --cabecalho_font_size: {{ agencia.cabecalho_font_size|default:'16px' }};
+        --cabecalho_text_color: {{ agencia.cabecalho_text_color|default:'white' }};
+        --position_texto_cabecalho: {{ agencia.position_texto_cabecalho|default:'center' }};
+
+
+        --agencia_header_color: {{ agencia.agencia_header_color|default:'white' }};
+        --agencia_background_color: {{ agencia.agencia_background_color|default:'black' }};
+        --agencia_explica_color: {{ agencia.agencia_explica_color|default:'black' }};
+        --explicacao_text_color: {{ agencia.explicacao_text_color|default:'white' }};
+        --agencia_footer_color: {{ agencia.agencia_footer_color|default:'black' }};
+
+
+        --texto_apresentacao_agencia: "{{ agencia.texto_apresentacao_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --apresentacao_font_size: {{ agencia.apresentacao_font_size|default:'16px' }};
+
+        --texto_texto_explicacao1_agencia: "{{ agencia.texto_explicacao1_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao1_font_size: {{ agencia.explicacao1_font_size|default:'16px' }};
+        
+
+        --texto_texto_explicacao2_agencia: "{{ agencia.texto_explicacao2_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao2_font_size: {{ agencia.explicacao2_font_size|default:'16px' }};
+
+        --texto_texto_explicacao3_agencia: "{{ agencia.texto_explicacao3_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao3_font_size: {{ agencia.explicacao3_font_size|default:'16px' }};
+
+        --texto_texto_explicacao4_agencia: "{{ agencia.texto_explicacao4_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao4_font_size: {{ agencia.explicacao4_font_size|default:'16px' }};
+
+        --texto_texto_explicacao5_agencia: "{{ agencia.texto_explicacao5_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao5_font_size: {{ agencia.explicacao5_font_size|default:'16px' }};
+    }
+
+html, body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da viewport */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Define a orientação dos elementos como coluna */
+    justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+    align-items: center; /* Alinha os elementos no centro horizontalmente */
+}
+header {
+    background-image: var(--position_bg_image);
+    text-align: var(--position_texto_cabecalho);
+    background-color: var(--agencia_header_color); 
+    padding: 20px 10px;
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: row; /* Alinhando os itens em linha */
+    position: relative;
+    height: auto; 
+}
+
+#main-title {
+    background-image: var(--agencia_bg_image);
+    width: var(--agencia_bg_width);
+    height: var(--agencia_bg_height); /* Ajuste conforme necessário */
+    background-size: cover;
+    position: absolute; /* Se você quiser que isso cubra o header */
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex; /* Adicione se quiser centralizar conteúdo dentro */
+    justify-content: center; 
+    align-items: center; 
+}
+
+#title {
+    color: var(--cabecalho_text_color);
+    font-size: var(--cabecalho_font_size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2;
+    position: relative;
+    margin: 0;
+}
+
+main {
+    background-color: var(--agencia_background_color);
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    padding: 20px; /* Espaçamento interno */
+    justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+ 
+}
+.cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5px; /* Espaçamento entre os elementos */
+    margin-top: 5%;
+}
+.apresentacao {
+    background-color: var(--agencia_explica_color); 
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    position: relative; /* Define o posicionamento relativo */    
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow:
+            inset 20px 0 20px rgba(255, 255, 255, 0.521),   /* Sombra interna na borda esquerda */
+            inset -20px 0 20px rgba(255, 255, 255, 0.521);  /* Sombra interna na borda direita */
+    }
+.explicacao {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+
+}
+.explicacao1 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao2 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao3 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao4 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao5 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+
+
+.cont-principal {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    padding: 0px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+}
+
+.videoexplicacao {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+            
+}
+/* video */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de 16:9 para vídeos responsivos */
+    padding-top: 5px;
+    height: 0;
+    overflow: hidden;
+    }
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-submit {
+    width: 30%;
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #08c411; /* Cor de fundo transparente */
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #08c411;
+}
+.btn-submit:hover{
+    background-color: #028109; /* Cor de fundo transparente */
+   
+    
+
+}
+
+/* Estilizando o título h3 */
+
+.cont-botão {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 5px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+
+
+}   
+
+       
+.initial {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+}
+.initial1 {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.swiper-container-horizontal {
+    width: 100%;
+    height: 100%;/* Altura de 100% em relação ao contêiner pai */
+    border-radius: 20px;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+
+.form {
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 0; /* Margem inferior de 20px */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 0px; /* Espaçamento interno */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 100%;
+    
+
+} 
+.formulario {
+    margin-top: 0; /* Remove a margem superior */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 80%;
+}   
+
+.form__field,  
+.form__input-wrapper--labelled{
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    border-radius: 20px;
+    align-items: center; /* Centraliza os itens verticalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    margin-bottom: 10px; /* Reduzido de 20px para 10px */
+    
+}
+
+.form__field,
+.form__field--select,
+.form__field--text {
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #e2dddd;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+    box-sizing: border-box;
+    text-align: center; /* Centraliza horizontalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+
+}
+/* Estilos quando o mouse está sobre os campos de entrada e seleção */
+.form__input-wrapper--labelled:hover,
+.form__field:hover,
+.form__field--select:hover,
+.form__field--text:hover {
+    background-color: #5c5959;
+
+}
+/* Estilos quando os campos de entrada e seleção estão focados */
+.form__input-wrapper--labelled:focus,
+.form__field:focus,
+.form__field--select:focus,
+.form__field--text:focus {
+    outline: none;
+    background-color: #f7b3b3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+}
+/* Estilo para as opções do campo de seleção */
+.form__field--select option,
+.form__field--text option {
+    font-size: 16px;
+    color: #0f0f0f;
+
+}
+/* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+.form__field--select option:hover,
+.form__field--text option:hover {
+    color: #44c457;
+    font-size: 14px;
+}
+#bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.main-with-video-bg {
+    position: relative;
+    z-index: 1; 
+    background-image: url("{% static 'home/img/imag-pag1.png' %}"); /* Imagem de fundo */
+    background-size: cover;
+    background-position: center;
+}
+
+.paleta {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center; /* Centraliza horizontalmente */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+
+    
+}
+.paleta img {
+    max-width: 100%; /* Garantir que a imagem não ultrapasse a largura da div */
+    max-height: 100%; /* Garantir que a imagem não ultrapasse a altura da div */
+    display: block; /* Permitir margens e alinhamento corretos */
+    border-radius: 5px; /* Borda arredondada na imagem */
+}
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+#title {
+    display: block; /* Garante que o elemento seja exibido em telas maiores */
+}
+.explicacao{
+    width: 60%;
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 30%;
+}
+.form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+}
+.formulario {
+width: 100%; /* Ambos ocupam metade da largura */
+} 
+.form__input-row {
+width: 100%;    
+}   
+
+
+.initial{
+width: 80%;
+}
+.initial1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+  
+}
+
+}   
+@media (max-width: 1439px){
+.explicacao{
+    width: 80%;
+}
+.cont-botão {
+    width: 100%; 
+}
+button, 
+input[type=submit] {
+    width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 60%;
+}
+
+.form {
+    width: 100%;   
+}
+.formulario {
+    width: 100%; 
+} 
+.form__input-row {
+    width: 100%;    
+}   
+
+.initial {
+    width: 80%;
+}
+.initial1{
+    width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+.videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+}
+
+}   
+@media(max-width: 1024px) {
+    main {
+    
+    padding: 10px; /* Espaçamento interno */
+ 
+}
+.explicacao{
+    width: 80%;
+}
+.videoexplicacao{
+    width: 80%; 
+}
+
+.cont-botão {
+width: 100%;
+}
+button, input[type=submit] {
+width: 80%; 
+}
+.btn-submit {
+    width: 80%;
+}
+
+.formulario{
+width: 100%;
+}   
+.form {
+width: 100%;    
+} 
+.form__input-row {
+    width: 100%;    
+}
+.initial{
+    width: 80%;
+}
+.initial1 {
+    width: 100%;
+}
+
+.swiper-slide img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+} 
+}
+
+@media (max-width: 767px){
+main {
+    
+    padding: 5px; /* Espaçamento interno */
+ 
+}
+.apresentacao {
+
+    width: 100%; /* Largura total */
+}
+.explicacao1, .explicacao2, .explicacao3, .explicacao4, .explicacao5{
+    width: 100%;
+}
+.videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+
+#title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+} 
+.btn-submit {
+    width: 90%;
+}
+     
+form {
+    width: 100%;    
+}
+.formulario {
+    width: 100%; /* Ambos ocupam metade da largura */
+}
+
+.form__input-row {
+    width: 100%;    
+}
+
+footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: stretch; /* Estica os itens para ocupar a largura total */
+    background-color: var(--agencia_footer_color);
+}
+
+footer div {
+    padding: 10px 0; /* Ajusta o espaçamento entre os itens */
+}
+.footer2 {
+    flex-direction: column; /* Garante que permaneça empilhado em telas menores */
+    align-items: center; /* Centraliza os itens horizontalmente */
+
+}
+
+.initial{
+width: 100%;
+}
+.initial1{
+width: 100%;
+}
+
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+}
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+}
+
+footer {
+    display: flex;
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: var(--agencia_footer_color); 
+    padding: 20px;
+    width: 100%;
+}
+
+footer div {
+    flex-grow: 1; /* Permite que os itens cresçam para ocupar o espaço */
+    padding: 0 10px; /* Adiciona espaçamento entre os itens */
+}
+.footer-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+}
+#rodape {   
+    height: 90px;
+    width: 270px;
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    background-position: center;
+    background-size: cover;
+    color: white;
+    line-height: 90px; 
+}
+.footer2 {
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Alinha os itens à esquerda */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+    padding: 10px;
+    width: 100%;
+    color: #e2dddd;
+}
+.social {
+    display: flex;
+    justify-content: flex-start; /* Alinha os itens ao início */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    padding: 20px;
+    width: 100%;
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+}
+
+.social > * {
+    margin-right: 10px; /* Espaçamento entre os itens */
+}
+
+.social > *:last-child {
+    margin-right: 0; /* Remove a margem do último item */
+}
+.footer2 div {
+    margin: 5px 0; /* Espaçamento entre os itens */
+}
+
+
+
+
+

@@ -1,0 +1,1815 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L2FWW02HYW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L2FWW02HYW');
+</script>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+
+
+        <title>{{ template.titulo }}</title>  
+        <link rel="icon" href="/static/home/img/site/calangofavi.svg" />
+        <link rel="stylesheet" href="/static/home/css/spin.css">
+
+        <link rel="stylesheet" href="/static/testes/css/animacao.css" />
+        <link rel="stylesheet" href="/static/testes/css/beneficios.css" />
+
+        <link rel="stylesheet" href="/static/land/css/main.css" />
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+       
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+        <style id="fit-vids-style">
+            .fluid-width-video-wrapper {
+                width: 100%;
+                position: relative;
+                padding: 0;
+            }
+    
+            .fluid-width-video-wrapper iframe,
+            .fluid-width-video-wrapper object,
+            .fluid-width-video-wrapper embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+
+<!-- style whatsapp -->
+<style>
+  
+    :root {
+    
+    --imagezap-background: url({{ "/static/home/img/whatsapp.png" }});
+    
+      
+    }
+      
+    .hidden {
+      display: none;
+  }
+  
+  .sticky-button {
+    
+      position: fixed;
+      background: none var(--imagezap-background);
+      background-size: contain;
+      background-repeat: no-repeat;
+      bottom: 20px;
+      right: 20px;
+      border-radius: 50px;
+      box-shadow: 0 0px 12px 0 rgb(0 0 0 / 10%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      -webkit-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out;
+        
+  }
+  
+  .sticky-button svg {
+      margin: auto;
+      fill: #fff;
+      width: 35px;
+      height: 35px;
+  }
+  
+  .sticky-button a,.sticky-button label {
+      
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      width: 55px;
+      height: 65px;
+      -webkit-transition: all .3s ease-out;
+      transition: all .3s ease-out;
+  }
+  
+  .sticky-button label svg.close-icon {
+      display: none;
+  }
+  
+  .sticky-chat {
+      position: fixed;
+      bottom: 85px;
+      right: 20px;
+      width: 320px;
+      -webkit-transition: all .3s ease-out;
+      transition: all .3s ease-out;
+      z-index: 21;
+      opacity: 0;
+      visibility: hidden;
+  }
+  
+  .sticky-chat a {
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    color: #505050;
+    
+  }
+  
+  .sticky-chat svg {
+      width: 35px;
+      height: 35px;
+  }
+  
+  .sticky-chat .chat-content {
+      border-radius: 14px;
+      background-color: hsla(0, 0%, 97%, 0.233);
+      backdrop-filter: blur(5px);
+      overflow: hidden;
+      font-family: var(--text-font-family);
+      font-weight: 400;
+  }
+  
+  .sticky-chat .chat-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #1296fc;
+      overflow: hidden;
+  }
+  
+  .sticky-chat .chat-header:after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 80px;
+      height: 75px;
+      background: rgba(0,0,0,.040);
+      border-radius: 70px 0 5px 0;
+  }
+  
+  .sticky-chat .chat-header svg {
+      width: 35px;
+      height: 35px;
+      flex: 0 0 auto;
+      fill: #fff;
+  }
+  
+  .sticky-chat .chat-header .title {
+      padding-left: 15px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--heading-font-family);
+    color: #fff;
+  }
+  
+  .sticky-chat .chat-header .title span {
+      font-size: 11px;
+      font-weight: 400;
+      display: block;
+      line-height: 1.58em;
+      margin: 0;
+      color: #f4f4f4;
+  }
+  
+  .sticky-chat .chat-text {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 30px 20px;
+      font-size: 12px;
+  }
+  
+  .sticky-chat .chat-text span {
+      display: inline-block;
+      margin-right: auto;
+      padding: 10px;
+      height: fit-content;
+      background-color: #f0f5fb;
+      border-radius: 0px 15px 15px;
+  }
+  
+  .sticky-chat .chat-text span:after {
+      content: 'agora mesmo';
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 9px;
+      color: #989b9f;
+  }
+  
+  .sticky-chat .chat-text span.typing {
+      margin: 15px 0 0 auto;
+      padding: 4px;
+      border-radius: 15px 0px 15px 15px;
+  }
+  
+  .sticky-chat .chat-text span.typing:after {
+      display: none;
+  }
+  
+  .sticky-chat .chat-text span.typing svg {
+      height: 13px;
+      fill: #505050;
+  }
+  
+  .sticky-chat .chat-button {
+    
+      display: block;
+      align-items: center;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 14px;
+      background-color: hsla(0, 0%, 97%, 0.233);
+      backdrop-filter: blur(5px);
+      overflow: hidden;
+      font-size: 12px;
+      font-family: var(--text-font-family);
+      font-weight: 400;
+    
+  }
+  
+  .sticky-chat .chat-button svg {
+      width: 20px;
+      height: 20px;
+      fill: #505050;
+      margin-left: auto;
+      transform: rotate(40deg);
+      -webkit-transform: rotate(40deg);
+  }
+  
+  .chat-menu:checked+.sticky-button label {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+  
+  .chat-menu:checked+.sticky-button label svg.chat-icon {
+      display: none;
+  }
+  
+  .chat-menu:checked+.sticky-button label svg.close-icon {
+      display: table-cell;
+  }
+  
+  .chat-menu:checked+.sticky-button+.sticky-chat {
+    
+  bottom: 88px;
+      right: 18px;
+      opacity: 1;
+      visibility: visible;
+    
+  }
+    
+      .wa-chat-widget-send form {
+          
+        display: flex;
+        margin: 0;
+          
+      }
+  
+      .wa-chat-widget-send input {
+        
+      background: #f0f5fb;
+      border: 0;
+      border-right: 1px solid #dee6ef;
+        color: #c1c5ca;
+      padding: 0.5rem 1.2rem;
+      width: 100%;
+      border-radius: 10px 0 0 10px;
+
+      height: 45px; /* Ajuste o valor conforme necessário */
+        
+      }
+  
+      .wa-chat-widget-send button {
+            background-color: #f0f5fb;
+            padding: 0.5rem;
+            padding-top: 11px;
+            padding-right: 15px;
+            border-radius: 0 10px 10px 0;
+            border: none;
+            fill: #ffffff;
+            
+            /* Ajustando as dimensões */
+            width: 45px;  /* Ajuste o valor conforme necessário */
+            height: 45px; /* Ajuste o valor conforme necessário */
+        }
+            
+      @keyframes wa-chat-animation {
+        from {
+          opacity: 0;
+        }
+      }
+      
+      @media (max-width: 768px) {
+      
+      .sticky-button {
+        
+      bottom: 64px;
+      margin-right: 2%;
+  
+  }
+        .chat-menu:checked+.sticky-button+.sticky-chat {
+          
+      bottom: 125px;
+      right: 21px;
+  
+  }
+      
+      }
+      
+    
+</style>
+
+<style>
+
+/* $$$$$$$$$$$$$$$$$$$ */
+
+.contpri {
+width: 100%;
+display: flex;
+flex-direction: column;
+border-bottom: 1px solid #ccc;
+background-color: #f1f1f1;
+/* Remove a altura mínima fixa */
+min-height: auto; 
+/* Adiciona um espaçamento interno, se necessário */
+padding: 10px; 
+/* Garante que o conteúdo interno não ultrapasse o contêiner */
+box-sizing: border-box; 
+}
+
+
+
+
+
+
+/* Responsividade para telas menores que 768px (geralmente tablets e dispositivos móveis) */
+@media (max-width: 768px) {
+
+
+.container-header {
+font-size: 16px; /* Ajuste o tamanho da fonte do cabeçalho */
+padding: 8px; /* Reduza o padding */
+}
+
+.container-content {
+padding: 8px; /* Reduza o padding do conteúdo */
+}
+.video-container {
+margin-top: 15px;
+}
+
+.video-container video {
+border: 1px solid #ccc; /* Ajuste a borda para telas menores */
+}
+#counter {
+background-attachment: scroll; /* Ou use uma solução alternativa */
+}
+.fix-background::before {
+background-attachment: scroll; /* Alternativa ao background-attachment: fixed */
+}
+h6{
+   
+   font-size: small;
+  
+}
+h1{
+    font-size: 12px;
+}
+h5 {
+    font-size: 16px;
+}
+
+
+}
+
+/* Responsividade para telas menores que 480px (geralmente smartphones) */
+@media (max-width: 480px) {
+
+
+.contpri{
+margin-bottom: 10px; /* Reduza a margem inferior */
+}
+
+
+.container-header {
+font-size: 14px; /* Ajuste o tamanho da fonte do cabeçalho */
+padding: 6px; /* Reduza o padding */
+}
+
+.container-content {
+padding: 6px; /* Reduza o padding do conteúdo */
+}
+.video-container {
+margin-top: 10px;
+}
+
+.video-container video {
+border: 1px solid #bbb; /* Ajuste a borda para smartphones */
+border-radius: 2px; /* Reduza o raio da borda para telas pequenas */
+}
+#counter {
+background-attachment: fixed;
+}
+.fix-background::before {
+background-attachment: scroll; /* Alternativa ao background-attachment: fixed */
+}
+h6{
+   
+    font-size: small;
+   
+}
+h1{
+    font-size: 11px;
+}
+h5 {
+    font-size: 14px;
+}
+
+}
+
+
+
+.video-container {
+margin-top: 20px;
+}
+
+.video-container video {
+width: 100%;
+height: auto;
+border: 1px solid #ddd;
+border-radius: 4px;
+}
+.image-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(255, 255, 255, 0.842); /* Cor branca com 50% de opacidade */
+pointer-events: none; /* Permite que os cliques passem através da sobreposição */
+}
+
+
+.typing-text-container {
+position: relative;
+display: inline-block;
+font-family: 'Courier New', Courier, monospace;
+font-size: 1.5em;
+color: white; /* Cor do texto */
+}
+
+.typing-text {
+white-space: pre-wrap; /* Mantém quebras de linha */
+overflow: hidden;
+display: inline;
+}
+
+h1 {
+    height: 100%; /* 100% da altura da viewport para centralização vertical */
+    display: flex; 
+    justify-content: center; /* Alinha horizontalmente */
+    align-items: center; /* Alinha verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    color: #fff; /* Cor do texto */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0; /* Remove a margem padrão */
+}
+h2{
+    color:#fff;
+    font-size: medium;
+}
+h4 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #000; /* Cor do texto no cabeçalho */
+font-size: 30px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+h5 {
+  text-align: center; /* Centraliza horizontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* Cor do texto no cabeçalho */
+  font-size: 20px; /* Tamanho da fonte */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.5; /* Ajuste o valor conforme necessário */
+}
+h6{
+    color:#fff;
+    font-size: larger;
+    align-items: center;
+}
+
+
+#unic {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espaçamento entre os containers */
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background-color: #000; /* Cor de fundo opcional */
+}
+
+/* Container de texto */
+#cont-text-new {
+    flex: 1; /* Ocupa o espaço restante disponível */
+    max-width: 50%; /* Máximo de 50% do container principal */
+}
+
+/* Container de imagem */
+#cont-image-new {
+    flex: 1; /* Ocupa o espaço restante disponível */
+    max-width: 50%; /* Máximo de 50% do container principal */
+}
+
+/* Animação da esquerda para a direita */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%); /* Começa fora da tela, à esquerda */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* Fica centralizado */
+    }
+}
+
+/* Animação da direita para a esquerda */
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%); /* Começa fora da tela, à direita */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* Fica centralizado */
+    }
+}
+
+#cont-text-new h1 {
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    opacity: 0; /* Inicialmente invisível */
+    animation-duration: 1.5s; /* Duração da animação */
+    animation-fill-mode: forwards; /* Fixa no estado final após a animação */
+}
+
+/* Aplica animação da esquerda para a direita */
+#cont-text-new.slide-left h1 {
+    animation-name: slideInLeft;
+}
+
+/* Aplica animação da direita para a esquerda */
+#cont-text-new.slide-right h1 {
+    animation-name: slideInRight;
+}
+
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+    #unic {
+        flex-direction: column; /* Empilha os containers verticalmente */
+        align-items: center; /* Centraliza os containers */
+    }
+
+    #cont-text-new{
+        max-width: 100%; /* Máximo de 100% do container principal */
+    }
+
+    #cont-image-new {
+        max-width: 100%; /* Máximo de 100% do container principal */
+    }
+
+    #cont-image-new img {
+        max-width: 100%; /* Ajusta a largura da imagem ao tamanho do container */
+        height: auto; /* Mantém a proporção da imagem */
+    }
+
+}
+#blog {
+    
+  margin-top: 0; 
+  margin-bottom: 40px; /* Ajuste o valor conforme necessário */
+  padding: 0; /* Remove preenchimento interno */
+}
+
+
+
+/* Estilização do Modal de WhatsApp */
+
+/* Botão Flutuante de WhatsApp */
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.whatsapp-icon {
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-icon.rotate {
+  transform: rotate(90deg); /* Gira 1/4 para a direita */
+}
+
+/* Modal */
+.whatsapp-modal {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  bottom: 20px;
+  right: 80px; /* Modal aparece ao lado do botão */
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+/* Header */
+.whatsapp-modal-header {
+  background-color: #1296fc; /* Cor roxa */
+  color: white;
+  padding: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon {
+  width: 80px; /* Ajuste conforme necessário */
+  height: 80px; /* Ajuste conforme necessário */
+  margin-right: 10px;
+}
+
+.modal-title {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: bold; /* Altera de 200 para bold */
+    color: #fff;
+    text-align: center;
+    font-family: Open Sans, sans-serif;
+    margin: 0;
+}
+
+.modal-subtitle {
+    font-size: 14px;
+    line-height: 26px;
+    font-weight: 200;
+    color: #fff;
+    text-align: center;
+    font-family: Open Sans,sans-serif;
+    margin: 0
+}
+
+/* Corpo da Mensagem */
+.whatsapp-modal-body {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+}
+
+
+.whats-body {
+  padding: 10px;
+  background-color: #1296fc;
+  color: white;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px; /* Espaçamento entre mensagens */
+}
+
+.message-bubble {
+  background-color: #EDEDED;
+  color: #000;
+  font-size: 11px;
+  border-radius: 15px;
+  padding: 10px 15px;
+  width: fit-content;
+  max-width: 99%; /* Ajuste conforme necessário */
+  margin-bottom: 5px;
+  position: relative;
+  display: inline-block;
+}
+
+.message-bubble:before {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* Distância da ponta do balão ao texto */
+  left: 20px; /* Ajuste conforme necessário */
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #EDEDED; /* Cor do balão */
+}
+
+.message-time {
+  font-size: 10px;
+  color: #888;
+  margin-left: 5px;
+}
+
+/* Footer */
+.whatsapp-modal-footer {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 20px;
+  width: 100%;
+  
+}
+
+.input-container-whats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espaça os itens uniformemente */
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px 10px; /* Ajusta o espaçamento interno */
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box; /* Para garantir que padding e width não aumentem o tamanho total */
+}
+
+textarea {
+  width: 80%; /* Ajuste o tamanho conforme necessário */
+  height: 30px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: none;
+  background-color: transparent;
+  margin: 0 auto; /* Centraliza o textarea horizontalmente */
+  text-transform: none;
+}
+
+.send-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 40px; /* Ajuste conforme necessário */
+  height: 40px; /* Ajuste conforme necessário */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px; /* Espaçamento entre o botão e o textarea */
+}
+
+.send-button .fa-paper-plane {
+  font-size: 30px; /* Ajuste o tamanho conforme necessário */
+  color: #000; /* Cor do ícone */
+}
+
+
+.send-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.send-button:hover .send-icon {
+  filter: brightness(1.2);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 400px) {
+  .whatsapp-modal {
+    width: 95%;
+    right: 10px;
+  }
+}
+</style>
+
+ <!-- popup.html -->
+ <style>
+    .popup {
+        display: none; /* Inicialmente escondido */
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.274);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #fc0303;
+        border-radius: 32px;
+        text-align: center;
+        color: #fc0303;
+        font-size: 18px;
+    }
+    .popup:hover, .popup-close:hover{
+        color:  #1296fc;
+        border: 2px solid #1296fc;
+       
+        
+
+    }
+
+    .popup-visible {
+        display: block; /* Mostra o popup */
+    }
+
+    .popup-close {
+        background-color: #fc0303;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 32px;
+    }
+   
+</style>
+
+<style>
+    .btn-assinar{
+            background-color: #f8f8f8;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 32px;
+            width: 8%;
+            height: fit-content;
+            margin-left: 5%;  
+                  
+        }
+        @media only screen and (max-width: 768px){
+            .btn-assinar{
+                width: 90%;
+            }
+
+        }
+
+</style>
+
+<script>
+    // Função para fechar o popup de atraso
+    function fecharPopupAtraso() {
+        document.getElementById('atraso-popup').style.display = 'none';
+        // Salva no localStorage para que a mensagem não seja mostrada novamente
+        localStorage.setItem('atrasoVisto', 'true');
+    }
+
+    // Verifica se o popup de atraso deve ser mostrado
+    window.onload = function() {
+        // Checa no localStorage se o usuário já viu a mensagem de atraso
+        const atrasoVisto = localStorage.getItem('atrasoVisto');
+
+        // Se a mensagem de atraso ainda não foi vista, exibe o popup
+        if (!atrasoVisto) {
+            const atrasoPopup = document.getElementById('atraso-popup');
+            if (atrasoPopup) {
+                atrasoPopup.style.display = 'block';
+            }
+        }
+    };
+</script>
+
+
+
+</head>
+<body>
+    
+    <!-- spiner de pre carregamento -->
+    <div id="loader-wrapper">
+        <div class="preloader">
+            <div class="preloader__ring">
+            <div class="preloader__sector">S</div>
+            <div class="preloader__sector">h</div>
+            <div class="preloader__sector">o</div>
+            <div class="preloader__sector">p</div>
+            <div class="preloader__sector">B</div>
+            <div class="preloader__sector">o</div>
+            <div class="preloader__sector">t</div>
+            <div class="preloader__sector">f</div>
+            <div class="preloader__sector">y</div>
+            <div class="preloader__sector">.</div>
+            <div class="preloader__sector">.</div>
+            <div class="preloader__sector">.</div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            </div>
+            <div class="preloader__ring">
+            <div class="preloader__sector">S</div>
+            <div class="preloader__sector">h</div>
+            <div class="preloader__sector">o</div>
+            <div class="preloader__sector">p</div>
+            <div class="preloader__sector">B</div>
+            <div class="preloader__sector">o</div>
+            <div class="preloader__sector">t</div>
+            <div class="preloader__sector">f</div>
+            <div class="preloader__sector">y</div>
+            <div class="preloader__sector">.</div>
+            <div class="preloader__sector">.</div>
+            <div class="preloader__sector">.</div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            <div class="preloader__sector"></div>
+            </div>
+        </div>
+    </div>
+      
+
+    {% if request.session.atraso_mensagem %}
+    <div id="atraso-popup" class="popup">
+        <p>{{ request.session.atraso_mensagem }}</p>
+        <button class="popup-close" onclick="fecharPopupAtraso()">Fechar</button>
+    </div>
+    {% endif %}
+
+
+    <nav class="navbar navbar-default navbar-fixed-top nav-transparent overlay-nav sticky-nav  nav-border-bottom nav-white" role="navigation">
+        <div class="container">
+            <div class="row">
+                
+                <!-- logo -->
+                
+                <div class="col-md-1 pull-left">
+                    <a class="logo-light" href="{% url 'home' %}">                        
+                        <img alt="" src="{% static 'home/img/site/Shopbotfy AI.svg'%}" class="logo" /></a>        
+                                
+                    <a class="logo-dark" href="{% url 'home' %}">
+                        <img alt="" src="{% static 'home/img/site/Shopbotfy AI.svg'%}" class="logo" /></a>
+                </div>
+                <!-- end logo -->
+
+                
+
+                <!-- insta e face -->
+                
+                <!-- toggle navigation -->
+                <div class="navbar-header col-sm-8 col-xs-2 pull-right">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+                        <span class="sr-only">nav</span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                    </button>
+                </div>
+                
+
+                <!-- main menu -->
+                <div class="col-md-9menu no-padding-right accordion-menu text-right" >
+                    <div class="navbar-collapse collapse">
+                        <ul id="accordion" class="nav navbar-nav navbar-right panel-group" style="justify-content: flex-end; text-align: right; padding-right: 15px;">
+                            <!-- home-page -->
+                            <li class="dropdown panel">
+                                <i class="fa-solid fa-house-user icon-zoom"></i>
+                                <a href="{% url 'home' %}">Home</a> 
+                            </li>
+                        
+                            {% if request.user.is_authenticated %}
+                                <!-- Link para logout -->
+                                <li class="dropdown panel">
+                                    <a href="{% url 'logout' %}" style="font-size: 18px; color:#ffffff; font-family: 'Poppins', sans-serif; ">Sair</a>
+                                </li>
+                        
+                                    <!-- Verifica se o usuário é superusuário -->
+                                    {% if request.user.is_superuser %}
+                                        <li class="dropdown panel">
+                                            <p class="subtitle-missao">Administrador: {{ request.user.username }}</p>
+                                        </li>
+                                        <li class="dropdown panel">
+                                            <a href="{% url 'administrador' %}" style="font-size: 18px; color:#ffffff; font-family: 'Poppins', sans-serif; ">Painel de Administrador</a>
+                                        </li>
+                                        {% elif request.session.agencia_nome %}
+                                            {% if request.session.agencia_plano != 'vencido' %}
+                                                <!-- Link para o painel da agência, visível apenas quando o plano não está vencido -->
+                                                <li class="dropdown panel">
+                                                    <a href="{% url 'painel_agencia' %}" style="font-size: 18px; color:#ffffff; font-family: 'Poppins', sans-serif; ">Painel da Agência</a>
+                                                </li>
+                                            {% endif %}  
+                                           
+                                            <!-- Se o usuário for associado a uma agência -->
+                                            <li class="dropdown panel">
+                                                <p class="subtitle-missao">{{ request.session.agencia_nome|upper }}</p>
+                                            </li>
+
+                                            {% if request.session.agencia_plano != 'ativo' %}
+                                                <li class="dropdown panel">
+                                                    <button type="button" class="btn-menu" onclick="window.open('https://pay.kiwify.com.br/bpqrrUo', '_blank')">Assinar</button>
+                                                </li>
+                                            {% endif %}
+                                            
+                                    {% endif %}
+                                    
+
+                                    <!-- Verificar se o cliente também está logado -->
+                                    {% if request.session.cliente_username %}
+                                        <li class="dropdown panel" >
+                                            Usuário Cliente: {{ request.session.cliente_username }}
+                                        </li>
+                                    {% endif %}
+
+                               
+                            {% else %}
+                                <!-- Link para login se o usuário não estiver autenticado -->
+                                <li class="dropdown panel">
+                                    <a href="{% url 'login' %}" style="font-size: 18px; color:#ffffff; font-family: 'Poppins', sans-serif; ">Login</a>
+                                </li>
+                            {% endif %}
+
+
+                            {% if not request.user.is_authenticated %} 
+                            <li class="dropdown panel">
+                                <button type="submit" class="btn-menu"><a href="{% url 'cadastrar_agencia' %}" target="_blank" style="color:#000;">Cadastrar</a></button> 
+                            </li>
+                            {% endif %}
+
+                            
+                            
+                        </ul>
+                        
+                    </div>
+                </div>
+                <!-- end main menu -->
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-- video background --> 
+    <section class="parallax parallax-fix full-screen no-padding" 
+        style="background: none; min-height: 844px; position: relative;  margin-bottom: 0px;">
+        <video autoplay muted loop id="bg-video" preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+            <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+        <!--<div class="opacity-full bg-dark-gray"></div>-->
+        <div class="container full-screen position-relative" style="min-height: 844px;">
+           <div class="slider-typography">
+               <div class="slider-text-middle-main">
+                   <div class="slider-text-middle slider-text-middle6 padding-left-right-px wow fadeInUp animated"
+                       style="visibility: visible; animation-name: fadeInUp;">
+                       {% if request.user.is_authenticated %}
+                       <span class="slider-title-big6 white-text text-uppercase font-weight-700 letter-spacing-3">
+                            <img src="{% static 'home/img/site/Shopbotfy AI.svg'%}" style="width: 450px; height: 135px;">
+                        </span>
+                        <span
+                            class="white-text text-small text-uppercase letter-spacing-10 margin-three no-margin-bottom display-block xs-letter-spacing-6">
+                            <h2>AUTOMAÇÃO QUE POTENCIALIZA A CRIATIVIDADE</h2> 
+                        </span>
+                        {% endif %}
+                       <div class="cont-parall">
+                            {% if not request.user.is_authenticated %}
+                            <div class="parall">
+                                <div class="text-parall">
+                                    Seja o próximo
+                                    a escalar sua
+                                    operação                                
+                                </div>
+                                <br>
+                                <p class="subtext-parall">
+                                Sonhe alto, construa lojas rapidamente usando <strong><span class="subtext-parall-small">Shopbotfy AI</span>
+                                </p>
+                                
+                            </div>
+                            
+
+                            <span class="slider-title-big6 white-text text-uppercase font-weight-700 letter-spacing-3">
+                                <img src="{% static 'home/img/site/Shopbotfy AI.svg'%}" style="width: 390px; height: 117px;">
+                            </span>
+                            {% endif %}
+                        </div>
+                        <div class="cont-parall">
+                            
+                            {% if not request.user.is_authenticated %} 
+                            
+                            <button type="submit" class="btn-paralax"><a href="{% url 'cadastrar_agencia' %}" target="_blank">Cadastrar</a></button>
+                                <div class="tritext-parall">
+                                    Ganhe 2 duas lojas grátis.
+                                </div>
+                            {% endif %}
+                        </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+       <!--
+                        <span
+                            class="white-text text-small text-uppercase letter-spacing-10 margin-three no-margin-bottom display-block xs-letter-spacing-6">
+                            <a class="btn-cards" href="https://pay.kiwify.com.br/bpqrrUo" target="_blank" style="margin-top: 15px;">EU QUERO</a>
+                        </span>
+                            -->
+    </section>
+
+    
+    <div class="center">    
+        <p class="title-apresentacao">
+            Somos a AI mais poderosa em criação de lojas para Shopify, originalmente já desenvolvemos
+            <strong><span class="subtitle-apresentacao"> + de 700 lojas em todo mundo.</span></strong>
+        </p>
+    </div>    
+
+    <section>
+    
+        <br>
+        <h3 class="title-cards">Leve sua operação para o próximo nível</h3>
+        <p class="subtitle-cards"><strong>Aumente a sua produção sem aumentar a mão de obra e reduza custos significativos.</strong></p>
+        <br>
+    
+        <!-- Container do carrossel -->
+        <div class="initial1">  
+            <div class="initial">
+                <br> 
+                <div class="swiper-container-horizontal">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="cartao">
+                                <div class="slider-text-middle padding-left-right-px wow fadeInUp animated"
+                                    style="visibility: visible; animation-name: fadeInUp; text-align: center; " data-wow-duration="900ms" >
+                                    <div class="title-cards">1 Loja</div>
+                                    <p class="subtitle-cards"><strong>Tenha direito a construção de 1 loja.</strong></p>
+                                    <p class="subtitle-cards"><strong>R$ 20,00.</strong></p>
+                                    <a class="btn-cards" href="https://pay.kiwify.com.br/aO0cmKL" target="_blank" style="margin-top: 15px;">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="cartao">
+                                <div class="slider-text-middle padding-left-right-px wow fadeInUp animated"
+                                    style="visibility: visible; animation-name: fadeInUp; text-align: center;" data-wow-duration="1800ms">
+                                    <div class="title-cards">5 Lojas</div>
+                                    <p class="subtitle-cards"><strong>Tenha direito a construção de 5 lojas.</strong></p>
+                                    <p class="subtitle-cards"><strong>R$ 65,00.</strong></p>
+                                    <a class="btn-cards" href="https://pay.kiwify.com.br/YDsmdXC" target="_blank" style="margin-top: 15px;">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="cartao">
+                                <div class="slider-text-middle padding-left-right-px wow fadeInUp animated"
+                                    style="visibility: visible; animation-name: fadeInUp; text-align: center;" data-wow-duration="2700ms">
+                                    <div class="title-cards">10 Lojas</div>
+                                    <p class="subtitle-cards"><strong>Tenha direito a construção de 10 lojas.</strong></p>
+                                    <p class="subtitle-cards"><strong>R$ 130,00.</strong></p>
+                                    <a class="btn-cards" href="https://pay.kiwify.com.br/Gr1eL9t" target="_blank" style="margin-top: 15px;">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="cartao">
+                                <div class="slider-text-middle padding-left-right-px wow fadeInUp animated"
+                                    style="visibility: visible; animation-name: fadeInUp; text-align: center;" data-wow-duration="3600ms">
+                                    <div class="title-cards">30 Lojas</div>
+                                    <p class="subtitle-cards"><strong>Tenha direito a construção de 30 lojas.</strong></p>
+                                    <p class="subtitle-cards"><strong>R$ 389,00.</strong></p>
+                                    <a class="btn-cards" href="https://pay.kiwify.com.br/pdfXOvb" target="_blank" style="margin-top: 15px;">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="cartao">
+                                <div class="slider-text-middle padding-left-right-px wow fadeInUp animated"
+                                    style="visibility: visible; animation-name: fadeInUp; text-align: center;" data-wow-duration="4500ms">
+                                    <div class="title-cards">50 Lojas</div>
+                                    <p class="subtitle-cards"><strong>Tenha direito a construção de 50 lojas.</strong></p>
+                                    <p class="subtitle-cards"><strong>R$ 649,00.</strong></p>
+                                    <!--<p class="title-cards"><strong>Economia de  R$ 351,00.</strong></p>-->
+                                    <a class="btn-cards" href="https://pay.kiwify.com.br/RRJrE90" target="_blank" style="margin-top: 15px;">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="cartao">
+                                <div class="slider-text-middle padding-left-right-px wow fadeInUp animated"
+                                    style="visibility: visible; animation-name: fadeInUp; text-align: center;" data-wow-duration="5400ms">
+                                    <div class="title-cards">100 Lojas</div>
+                                    <p class="subtitle-cards"><strong>Tenha direito a construção de 100 lojas.</strong></p>
+                                    <p class="subtitle-cards"><strong>R$ 1227,00.</strong></p>
+                                    <!--<p class="title-cards"><strong>Economia de  R$ 773,00.</strong></p>-->
+                                    <a class="btn-cards" href="https://pay.kiwify.com.br/nH1EG7v" target="_blank" style="margin-top: 15px;">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <br> 
+        </div>
+
+        <br>
+        <!--<p class="title-apresentacao2"> OBS: Independente da quantidade de acessos </p>
+        <p class="title-apresentacao2">o plano único mensal é igual a R$ 150,00</p>-->
+    </section>
+  
+          
+    <div class="nossamissao">
+        <div class="missao">Nossa Missão</div>
+        <div class="missao2">
+
+            <div class="cart-img">
+                <div class="imagebg">
+                    <img src="/static/home/img/site/SITE IMAGENS .png" alt="">
+                </div>
+                <div class="title-missao">Cresça o quanto quiser</div>
+                <br>
+                <p class="subtitle-missao">Não tenha limites de crescimento, com
+                    a Shopbotfy você pode criar quantas
+                    lojas quiser, escalar suas operações e
+                    entregar um serviço de qualidade ao
+                    mesmo tempo.
+                </p>
+            </div>
+
+            <div class="cart-img">
+                <div class="imagebg">
+                    <img src="/static/home/img/site/SITE IMAGENS  (1).png" alt="">
+                </div>
+                <div class="title-missao">Comece rápido</div>
+                <br>
+                <p class="subtitle-missao"> Criamos sua conta e ajustamos a
+                    realidade da sua agência, seu tema,
+                    seus produtos e layout, preparamos
+                    tudo em menos de 7 dias e você já
+                    pode começar a usar o nosso sistema.
+                </p>
+            </div>
+
+            <div class="cart-img">
+                <div class="imagebg">
+                    <img src="/static/home/img/site/SITE IMAGENS  (4).png" alt="cores">
+                </div>
+                <div class="title-missao">Tenha tempo livre</div>
+                <br>
+                <p class="subtitle-missao">Com a tecnologia da Shopbotfy, 
+                    você pode expandir seus horizontes e focar em captar novos clientes, 
+                    deixando a produção por nossa conta.
+                </p>
+            </div>
+
+        </div>
+    </div>
+  
+           
+    <!-- imagem background --> 
+    <div class="shopbot">
+        <div class="shopbot2">
+            <div class="text-shop">
+                Vá mais longe com o Shopbotfy
+            </div>
+            <div class="total">
+                <div class="cont-left2">
+                    <a class="btn-shopbot" href="{% url 'cadastrar_agencia' %}" target="_blank" style="margin-top: 15px;">TESTAR</a>
+                </div>
+                <div class="cont-right2">
+                    <p div class="text-shopbot">Tenha acesso a tecnologia capaz de
+                        produzir centenas de lojas em um
+                        único dia.
+                    </p>  
+                </div>
+            </div>
+        </div>      
+    </div>
+
+
+    <!-- seção grafico --> 
+    <div class="cont-grafico">
+        <div class="total">
+            <div class="cont-left">
+                <div class="text-grafico">
+                    Aumente a potência
+                </div>
+                <div class="subtext-grafico">
+                    da sua agência. 
+                </div>
+                <br>
+                <div class="text-grafico2">
+                    Tenha controle de dados em
+                </div>
+                <div class="text-grafico2"> 
+                    tempo real.
+                </div>
+
+                <div class="total2">
+                    <div class="cont-left3">
+                        <div class="text-grafico3">
+                            |
+                        </div>
+                    </div>
+                    <div class="cont-right">
+                        <div class="text-grafico4">
+                            + DE 700 lojas criadas até agora
+                        </div>
+                        <div class="text-grafico5">
+                            Em menos de 3 meses
+                        </div>
+                    </div>
+                </div>
+                <div class="total2">
+                    <div class="cont-left3">
+                        <div class="text-grafico3">
+                            |
+                        </div>
+                    </div>
+                    <div class="cont-right2">
+                        <div class="text-grafico4">
+                            + DE 100 mil de faturamento gerado
+                        </div>
+                        <div class="text-grafico5">
+                            Receita gerada pelas agências
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cont-right">
+                <div class="cart-img">
+                    <div class="imagebg">
+                        <video autoplay muted loop id="bg-video" preload="auto"
+                                style= "top: 0%; margin-right: 20px; width: 100%; height: 100%; object-fit: cover; ">
+                            <source src="{% static 'home/videos/shopbotfymobile.mp4' %}" type="video/mp4">
+                            Seu navegador não suporta vídeos HTML5.
+                        </video>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+
+     <!-- seção shopbotfy--> 
+    <div class="center">
+        <div class="total">
+            <div class="cont-left">
+                <div class="title-shop">
+                    como a <img src="/static/home/img/site/calangofavi.svg" style="width: 70px; height: 70px;" alt="">
+                    shopbotfy
+                    AI iniciou?
+                </div>
+                <div class="subtitle-shop">
+                    A  mais avançada AI do
+                    mundo em criação de 
+                    e-commerce  nem sempre foi
+                    assim... 
+                </div>
+                <a class="btn-shopbotfy" href="/historia" target="_blank" style="margin-top: 15px;">VER MAIS</a>
+            </div>
+            <div class="cont-right">
+                <div class="imagebg">
+                    <img src="/static/home/img/site/SITE-IMAGENS-_3_.webp" alt="">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="parceiros">
+        <div class="text-parceiros">Parceiros oficiais</div>
+        
+        <div class="scroll-wrapper">
+            <div class="scroll-container">
+                <!-- Primeira seção de imagens -->
+                <div class="image-container">
+                    <img src="/static/home/img/site/1.svg" alt="Parceiro 1">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/2.svg" alt="Parceiro 2">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/3.svg" alt="Parceiro 3">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/4.svg" alt="Parceiro 4">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/5.svg" alt="Parceiro 5">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/gl.svg" alt="Parceiro GL">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/Leoecom.svg" alt="Parceiro Leo">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/tienda.svg" alt="Parceiro Tienda">
+                </div>
+    
+                <!-- Duplicação para rolagem contínua -->
+                <div class="image-container">
+                    <img src="/static/home/img/site/1.svg" alt="Parceiro 1">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/2.svg" alt="Parceiro 2">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/3.svg" alt="Parceiro 3">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/4.svg" alt="Parceiro 4">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/5.svg" alt="Parceiro 5">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/gl.svg" alt="Parceiro GL">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/Leoecom.svg" alt="Parceiro Leo">
+                </div>
+                <div class="image-container">
+                    <img src="/static/home/img/site/tienda.svg" alt="Parceiro Tienda">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+<!-- Botão Flutuante de WhatsApp -->
+<input class="chat-menu hidden" id="offchat-menu" type="checkbox"/>
+<div class="sticky-button" id="sticky-button">
+    <label for="offchat-menu">
+    
+        <img src="//cdn.shopify.com/s/files/1/0629/7449/2915/t/6/assets/whatsapp.svg?v=8122552569372891836" alt="WhatsApp">
+    
+        <svg class="close-icon" viewBox="0 0 512 512">
+            <path d="M278.6 256l68.2-68.2c6.2-6.2 6.2-16.4 0-22.6-6.2-6.2-16.4-6.2-22.6 0L256 233.4l-68.2-68.2c-6.2-6.2-16.4-6.2-22.6 0-3.1 3.1-4.7 7.2-4.7 11.3 0 4.1 1.6 8.2 4.7 11.3l68.2 68.2-68.2 68.2c-3.1 3.1-4.7 7.2-4.7 11.3 0 4.1 1.6 8.2 4.7 11.3 6.2 6.2 16.4 6.2 22.6 0l68.2-68.2 68.2 68.2c6.2 6.2 16.4 6.2 22.6 0 6.2-6.2 6.2-16.4 0-22.6L278.6 256z"/>
+        </svg>
+    </label>
+</div>
+<div class="sticky-chat">
+    <div class="chat-content">
+        <div class="chat-header">
+        
+            <svg viewBox="0 0 32 32">
+                <path d="M24,22a1,1,0,0,1-.64-.23L18.84,18H17A8,8,0,0,1,17,2h6a8,8,0,0,1,2,15.74V21a1,1,0,0,1-.58.91A1,1,0,0,1,24,22ZM17,4a6,6,0,0,0,0,12h2.2a1,1,0,0,1,.64.23L23,18.86V16.92a1,1,0,0,1,.86-1A6,6,0,0,0,23,4Z"/>
+                <rect height="2" width="2" x="19" y="9"></rect>
+                <rect height="2" width="2" x="14" y="9"></rect>
+                <rect height="2" width="2" x="24" y="9"></rect>
+                <path d="M8,30a1,1,0,0,1-.42-.09A1,1,0,0,1,7,29V25.74a8,8,0,0,1-1.28-15,1,1,0,1,1,.82,1.82,6,6,0,0,0,1.6,11.4,1,1,0,0,1,.86,1v1.94l3.16-2.63A1,1,0,0,1,12.8,24H15a5.94,5.94,0,0,0,4.29-1.82,1,1,0,0,1,1.44,1.4A8,8,0,0,1,15,26H13.16L8.64,29.77A1,1,0,0,1,8,30Z"/>
+            </svg>
+        
+            <div class="title">Fale Conosco</div>
+        
+        </div>
+    
+        <div class="chat-text"><span>Olá, estou aqui para te ajudar!</span>
+    <span class="typing">
+        <svg viewBox="0 0 512 512">
+        <circle cx="256" cy="256" r="48"></circle>
+        <circle cx="416" cy="256" r="48"></circle>
+        <circle cx="96" cy="256" r="48"></circle>
+        </svg>
+        </span>
+    </div>
+    </div>
+
+        <div class="chat-button wa-chat-widget-send">
+        <form autocomplete="off" target="_blank" method="get" action="https://wa.me/{{template.telefone}}">
+            <input type="text" name="text" placeholder= "Digite sua mensagem..." />
+            <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                    <path d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z" />
+                </svg>
+            </button>
+        </form>
+        </div>    
+        
+</div>
+ 
+
+
+    <div class="cont-rodape">
+        <div class="rodape-image"> 
+            <div class="imagebg">
+                <img src="/static/home/img/site/Shopbotfy AI.svg"  style="width: 200px; height: 60px;"alt="shopbotfy">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="cont-rodapeflex">
+            <div class="cont-rodapefilho">
+                <div class="title-rodape">LINKS</div>
+
+                <a href="/sobrenos"  target="_blank" class="text-rodape">Sobre Nós</a>
+
+                <a href="/politica_site"  target="_blank" class="text-rodape">Política de privacidade</a> 
+
+                <a href="/termos_de_uso"  target="_blank" class="text-rodape">Termos de uso</a>
+
+            </div>
+
+            <div class="cont-rodapefilho">
+                
+                
+                <div class="title-rodape">TRABALHE CONOSCO</div>
+                <a href="{% url 'cadastrar_agencia' %}" target="_blank" class="text-rodape">Shopbotfy Partner</a>             
+
+                <div class="text-rodape">Status do serviço</div>
+                
+            </div>
+
+            
+
+            <div class="cont-rodapefilho">
+
+                <div class="title-rodape">CENTRAL DE ATENDIMENTO</div>
+                
+                <a href="/ouvidoria" target="_blank" class="text-rodape"><i class="fas fa-comment-alt"></i>Ouvidoria</a>
+                
+                <a href="mailto:{{template.contato}}" class="text-rodape"><i class="fas fa-envelope"></i>{{ template.contato }}</a>
+                
+                <div class="text-rodape"><i class="fas fa-phone"></i>{{template.telefone}}</div>
+                
+                
+                
+            </div>                    
+        </div>
+
+        <div class="cont-rodapeflex">
+
+            <div class="cont-rodapefilho2">
+                
+                <div class="text-rodape2">© 2024 Todos os direitos reservados.</div>
+            </div>
+            
+            <div class="cont-rodapefilho2">
+                
+                <p class="subtext-rodape">CNPJ:<strong><span class="text-rodape2">46.604.008/0001-68</span></strong></p>
+
+            </div>
+            
+            <div class="cont-social">
+                <a href="{{ template.link_face }}" target="_blank"><img src="/static/home/img/site/FB.svg"  width="30" height="40" alt="facebooke"></a>
+                <a href="{{ template.link_insta }}" target="_blank"><img src="/static/home/img/site/insta.svg" width="30" height="40" alt="instagran"></i></a> 
+                <a href="{{ template.link_x }}" target="_blank"><img src="/static/home/img/site/X.svg" width="30" height="40" alt="link x"></i></a>                            
+                <a href="{{ template.link_youtube }}" target="_blank"><img src="/static/home/img/site/YT.svg" width="30" height="40" alt="youtube"></i></a>              
+
+            </div>
+
+        </div>
+    
+    </div>
+    
+
+
+
+
+
+
+   
+
+
+    
+
+
+        <!-- Barra de cookies -->
+        <style type="text/css">
+            .cookieAcceptBar {
+                display: none; /* Escondido inicialmente */
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+                background-color: rgba(100, 100, 100, 0.8); /* Cor cinza claro com 80% de opacidade */            
+                color: #fff;
+                padding: 20px 0;
+                z-index: 99999;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+
+        
+            .cookieAcceptBar a {
+                color: #fff;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        
+            .cookieAcceptBar button {
+                cursor: pointer;
+                border: none;
+                
+                color: #fff;
+                text-transform: uppercase;
+                margin-top: 10px;
+                height: 40px;
+                line-height: 40px;
+                padding: 0 20px;
+            }
+        
+            .cookieOptions {
+                margin-top: 10px;
+                display: none;
+                text-align: left;
+            }
+        
+            .cookieOptions input {
+                margin-right: 5px;
+            }
+            
+
+        </style>
+        
+        <div id="cookieAcceptBar" class="cookieAcceptBar">
+            Antes de navegar no nosso site, conheça nossa 
+            <a href="/politica_site" style="font-size: 14px;">Política de Privacidade</a> 
+            e o Uso de Cookies: O uso de cookies melhora a sua experiência em nosso site, mas você pode configurar quais cookies deseja aceitar.<br>
+            Cookies: 
+            <a href="javascript:;" onclick="$('#div-cookies-check').toggle();">Configurar Cookies 
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <br>
+            <div id="div-cookies-check" class="cookieOptions"> 
+                <p>Selecione os cookies que você deseja aceitar:</p>
+                <input type="checkbox" id="cookie1" name="cookie1" checked=""> <label for="cookie1">Cookies de sessão (PHPSESSID, JSESSIONID) - Necessários para o funcionamento do site</label><br>
+                <input type="checkbox" id="cookie2" name="cookie2" checked=""> <label for="cookie2">Cookies de análise (_ga, _gid, _gat) - Usados para melhorar o desempenho do site</label><br>
+                <input type="checkbox" id="cookie3" name="cookie3" checked=""> <label for="cookie3">Cookies de marketing (_fbp) - Usados para fornecer anúncios relevantes</label>
+            </div>
+        
+            <button id="cookieAcceptBarConfirm" class="btn btn-success">Aceitar e fechar esse alerta</button>
+            <button id="cookieRejectBarConfirm" class="btn btn-danger">Rejeitar cookies</button>
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                cookiesPolicyBar();
+            });
+
+            function cookiesPolicyBar() {
+                // Verificar se o usuário já aceitou ou rejeitou os cookies
+                if (!localStorage.getItem('cookieConsent')) {
+                    $('#cookieAcceptBar').fadeIn(); // Exibe a barra de cookies
+                }
+
+                // Ação ao clicar em "Aceitar e fechar"
+                $('#cookieAcceptBarConfirm').on('click', function () {
+                    var acceptedCookies = {
+                        session: $('#cookie1').is(':checked'),
+                        analytics: $('#cookie2').is(':checked'),
+                        marketing: $('#cookie3').is(':checked')
+                    };
+
+                    // Armazenar as escolhas do usuário no localStorage
+                    localStorage.setItem('cookieConsent', 'true');
+                    localStorage.setItem('acceptedCookies', JSON.stringify(acceptedCookies));
+
+                    $('#cookieAcceptBar').fadeOut(); // Esconde a barra de cookies
+                });
+
+                // Ação ao clicar em "Rejeitar cookies"
+                $('#cookieRejectBarConfirm').on('click', function () {
+                    // Remove qualquer cookie anteriormente aceito
+                    localStorage.removeItem('cookieConsent');
+                    localStorage.setItem('cookieConsent', 'false'); // Armazena que o usuário rejeitou os cookies
+
+                    $('#cookieAcceptBar').fadeOut(); // Esconde a barra de cookies
+                });
+            }
+        </script>
+        <!-- fim da Barra de cookies -->
+
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll('#cont-text-new');
+
+            // Configuração do IntersectionObserver
+            let observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Alterna entre as animações para as seções
+                        if (entry.target.dataset.index % 2 === 0) {
+                            entry.target.classList.add('slide-left'); // Seções pares
+                        } else {
+                            entry.target.classList.add('slide-right'); // Seções ímpares
+                        }
+                        observer.unobserve(entry.target); // Para de observar após a animação ser aplicada
+                    }
+                });
+            }, { threshold: 0.1 }); // O threshold ajusta quando a animação será ativada (0.1 significa 10% visível)
+
+            // Adiciona um índice a cada seção para alternar a animação
+            sections.forEach((section, index) => {
+                section.dataset.index = index;
+                observer.observe(section); // Observa cada seção
+            });
+        });
+
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/static/land/js/main.js"></script>
+        <script type="text/javascript" src="/static/home/js/script.js"></script>
+        <script type="text/javascript" src="/static/home/js/spinernovo.js"></script>
+        <!--<script type="text/javascript" src="/static/home/js/arrastarlateralmente.js"></script>-->
+        <script type="text/javascript" src="/static/home/js/modalwhats.js"></script>
+
+<script>
+var verticalSwiper = new Swiper('.swiper-container-horizontal', {
+    direction: 'horizontal', // Mantenha a direção horizontal
+    slidesPerView: 3, // Mostra 3 cartões na visualização desktop
+    spaceBetween: 20, // Ajuste o espaçamento entre os slides conforme desejado
+    loop: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    keyboard: {
+        enabled: true,
+    },
+    mousewheel: {
+        enabled: true,
+    },
+    effect: 'coverflow',
+    coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+        320: { // Para telas pequenas (mobile)
+            slidesPerView: 1,
+            spaceBetween: 10,
+        },
+        768: { // Para telas médias e maiores (desktop)
+            slidesPerView: 3,
+            spaceBetween: 20,
+        },
+    }
+});
+
+</script>
+
+</body>
+</html>

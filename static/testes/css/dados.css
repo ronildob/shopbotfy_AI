@@ -1,0 +1,384 @@
+.bg-dados {
+    background: #212429;
+    padding-top: 90px;
+    padding-bottom: 110px;
+    height: auto
+}
+
+.bg-dados-2 {
+    padding-top: 100px;
+    padding-bottom: 120px
+}
+
+.dados-flex-centro {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px
+}
+
+.dados-box-title {
+    width: 970px;
+    text-align: center
+}
+
+.title-dados {
+    font-style: normal;
+    font-weight: 200;
+    font-size: 40px;
+    line-height: 50px;
+    color: #fff;
+    padding-bottom: 30px
+}
+
+.span-dados {
+    font-weight: 500
+}
+
+.subtitle-dados {
+    font-family: open sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    text-align: center;
+    color: #fff
+}
+
+.grid-dados {
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    justify-content: center
+}
+
+.box-dados {
+    width: auto;
+    height: auto;
+    padding: 25px;
+    align-self: center;
+    transition: .5s
+}
+
+.box-dados:hover {
+    transform: scale(1.05)
+}
+
+.box-flex-dados {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 25px
+}
+
+.title-box-dados {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 70px;
+    text-align: center;
+    color: #1296fc;
+    margin: 0
+}
+
+.span-title-box-dados {
+    font-size: 70px
+}
+
+.contador {
+    font-size: 70px
+}
+
+.subtitle-box-dados {
+    font-family: open sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    color: #a3a3a3;
+    text-align: center;
+    margin: 0
+}
+
+.botao-inicial-dados {
+    width: 385px;
+    height: 50px;
+    background: #1296fc;
+    border-radius: 100px;
+    font-family: open sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    outline-offset: 3px;
+    transition: .05s;
+    margin-top: 65px
+}
+
+.botao-inicial-dados:focus {
+    outline: 1px solid #fff!important
+}
+
+.botao-inicial-dados:hover {
+    opacity: .9;
+    outline-offset: 5px
+}
+
+.ajuste-titulo-dados {
+    line-height: 1.1!important
+}
+
+@media(max-width: 1199px) {
+    .box-dados {
+        padding:15px
+    }
+
+    .box-flex-dados {
+        column-gap: 20px
+    }
+
+    .icone-dados-empresas-ativas {
+        width: 35px;
+        height: auto
+    }
+
+    .icone-dados-decisores {
+        width: 28px;
+        height: auto
+    }
+
+    .icone-dados-telefones {
+        width: 35px;
+        height: auto
+    }
+
+    .icone-dados-email {
+        width: 38px;
+        height: auto
+    }
+
+    .title-box-dados {
+        font-size: 40px
+    }
+
+    .subtitle-box-dados {
+        font-size: 13px;
+        color: #95a5a6;
+        margin: 0
+    }
+
+    .botao-inicial-dados {
+        width: 365px;
+        height: 45px;
+        font-size: 17px;
+        line-height: 25px
+    }
+
+    .dados-box-title {
+        width: 700px
+    }
+
+    .title-dados {
+        font-size: 37px;
+        line-height: 50px
+    }
+
+    .subtitle-dados {
+        font-size: 18px;
+        line-height: 26px;
+        margin-top: 15px;
+        margin-bottom: 15px
+    }
+
+    .bg-dados {
+        padding-bottom: 80px
+    }
+}
+
+@media(max-width: 991px) {
+    .grid-dados {
+        column-gap:10px;
+        grid-template-columns: 1fr 1fr
+    }
+
+    .box-flex-dados {
+        column-gap: 10px
+    }
+
+    .title-box-dados {
+        font-size: 70px
+    }
+
+    .subtitle-box-dados {
+        font-size: 16px
+    }
+
+    .title-dados {
+        font-size: 38px;
+        line-height: 40px;
+        padding-bottom: 0
+    }
+
+    .subtitle-dados {
+        font-size: 15px;
+        line-height: 20px
+    }
+
+    .dados-box-title {
+        width: 510px
+    }
+
+    .bg-dados {
+        padding-top: 80px;
+        padding-bottom: 70px;
+        height: auto
+    }
+
+    .botao-inicial-dados {
+        width: 300px;
+        height: 40px;
+        font-size: 15px;
+        line-height: 20px
+    }
+
+    .bg-dados-2 {
+        padding-bottom: 80px
+    }
+
+    .span-title-box-dados {
+        font-size: 50px
+    }
+}
+
+@media(max-width: 767px) {
+    .bg-dados {
+        background:#212429;
+        height: 100%
+    }
+
+    .title-dados,.subtitle-dados {
+        color: #fff
+    }
+
+    .grid-dados {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px
+    }
+
+    .icone-dados-empresas-ativas {
+        width: auto
+    }
+
+    .icone-dados-decisores {
+        width: 30px;
+        height: auto
+    }
+
+    .icone-dados-telefones {
+        width: auto
+    }
+
+    .icone-dados-email {
+        width: auto;
+        margin-top: -10px
+    }
+
+    .title-box-dados {
+        font-size: 40px
+    }
+
+    .subtitle-box-dados {
+        font-size: 16px
+    }
+
+    .box-flex-dados {
+        column-gap: 22px
+    }
+
+    .span-title-box-dados {
+        font-size: 3rem
+    }
+}
+
+@media(max-width: 575px) {
+    .dados-box-title {
+        width:100%
+    }
+
+    .quebra-40 {
+        display: block
+    }
+
+    .subtitle-dados {
+        font-size: 4vw;
+        line-height: 5vw
+    }
+
+    .box-dados {
+        padding: 2vw
+    }
+
+    .title-box-dados {
+        font-size: 10vw
+    }
+
+    .subtitle-box-dados {
+        font-size: 2.5vw
+    }
+
+    .box-flex-dados {
+        column-gap: 3vw
+    }
+
+    .icone-dados-empresas-ativas {
+        width: 9.5vw
+    }
+
+    .icone-dados-decisores {
+        width: 6.5vw
+    }
+
+    .icone-dados-telefones {
+        width: 9.2vw
+    }
+
+    .icone-dados-email {
+        width: 9.2vw;
+        margin-top: 0
+    }
+
+    .grid-dados {
+        gap: 5vw
+    }
+
+    .botao-inicial-dados {
+        width: 80%;
+        height: 40px;
+        font-size: 15px;
+        line-height: 20px;
+        padding-left: 5vw;
+        padding-right: 5vw
+    }
+
+    .bg-dados {
+        padding-top: 15vw;
+        padding-bottom: 19vw
+    }
+
+    .bg-dados-2 {
+        padding-bottom: 20vw
+    }
+
+    .teste-grid {
+        display: grid;
+        justify-self: center
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .grid-dados {
+        grid-template-columns:1fr 1fr;
+        gap: 20px
+    }
+}

@@ -1,0 +1,1919 @@
+
+/* Estilos Globais */
+
+/* Estilos gerais */
+
+/* Container principal */
+
+
+
+#toggleSenha {
+    position: absolute; /* Posiciona de forma absoluta em relação ao contêiner pai */
+    top: 30%; /* Posiciona no centro verticalmente */
+    right: 10px; /* Posiciona 10px da borda direita */
+    transform: translateY(-50%); /* Ajusta verticalmente para o centro */
+    cursor: pointer; /* Altera o cursor ao passar por cima */
+    color: #44c457;
+
+}
+/* Estilo para a mensagem de erro */
+#msgErro {
+    color: red;
+    font-size: 18px; /* Tamanho da fonte */
+    text-align: center; /* Centraliza o texto */
+    margin-top: 5px; /* Espaçamento superior */
+}
+#parallax {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-item {
+    position: relative;
+    height: 500px; /* Altura da seção */
+    overflow: hidden;
+}
+
+.parallax-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: -1;
+}
+
+
+.parallax-item img {
+    width: 100%;
+    height: auto;
+    transform: translateZ(0);
+    transition: transform 0.3s ease-out;
+}
+
+.parallax-item:hover img {
+    transform: scale(1.1);
+}
+
+.custom-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Cor do botão */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 10px 0; /* Espaço entre os botões */
+}
+
+.custom-upload:hover {
+    background-color: #45a049; /* Cor ao passar o mouse */
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+
+
+
+.cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    border-radius: 20px; /* Borda arredondada */
+    margin: 20px auto; /* Margem externa para centralizar na tela e criar espaçamento */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex;
+    flex-direction: column; /* Alinha os itens em coluna */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    overflow: hidden; /* Oculta conteúdo que ultrapassa os limites do contêiner */
+    display: flex; /* Ativa o layout flexível */
+}
+.cont-login2 {
+    width: 70%;
+    max-width: 50%;
+    border-radius: 20px;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cont-label {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px; /* Espaçamento entre os elementos */
+    position: relative; /* Define a posição relativa para os elementos filhos */
+}
+
+.cont-login p {
+text-align: center; /* Centraliza o texto */
+margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+
+}
+.custom-email-input {
+    font-size: 16px; /* Tamanho da fonte */
+    padding: 10px; /* Espaçamento interno */
+    border: 2px solid #ccc; /* Borda sólida com cor cinza */
+    border-radius: 20px; /* Borda arredondada */
+    background-color: #f7f7f7; /* Cor de fundo */
+    width: 70%; /* Largura do campo de entrada */
+    color: rgb(56, 54, 54);
+
+}
+
+.hea {
+    background:  #000;
+    color: #fff; /* Cor do texto no cabeçalho */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Alinhamento do texto */
+    width: 100%; /* Largura total */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+
+}
+/* Estilizar a mensagem de validação */
+.custom-email-input:focus {
+    outline: none; /* Remove o contorno ao focar no campo */
+    border-color: #007bff; /* Cor da borda ao focar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
+    background-color: #a9f5d1;
+
+}
+/* Estilizando o label específico pelo atributo 'for' */
+label[for="username"] {
+    /* Definindo a cor do texto */
+    color: #ffffff; /* Cor pode ser ajustada para sua preferência */
+    /* Definindo o tamanho da fonte */
+    font-size: 21px; /* Tamanho da fonte pode ser ajustado */
+    /* Definindo margem inferior para espaçamento */
+    margin-bottom: 10px; /* Ajuste conforme necessário */
+    /* Outros estilos opcionais */
+    font-weight: bold; /* Pode ser 'normal' ou 'bold' */
+    /* Centralizando o texto horizontalmente */
+    text-align: center; /* Centraliza o texto dentro do label */
+    /* Centralizando o texto verticalmente */
+    line-height: 1.5; /* Ajusta a altura da linha para centralizar verticalmente */
+    font-weight: 500;
+}       
+.apr {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    position: relative; /* Define o posicionamento relativo */    
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    
+}
+.exp {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    
+}
+
+
+
+/* Aplica a animação ao texto dentro do botão */
+a.botao-externo {
+animation: blink 1s infinite; /* Animar o texto com a animação 'blink' infinitamente */
+}
+.botao-externo {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+.redirecionamento {
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background: #000000;
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #000; /* cor da borda */
+}
+.alert {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.alert--error {
+    font-size: 24px;
+    text-decoration: none;
+    color: #f5081f;
+    
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed;
+    opacity: 0.5;
+    animation: blink 1s infinite; /* Animar o texto com a animação 'blink' infinitamente */
+}
+a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #0066cc;
+}
+a:hover {
+    text-decoration: underline;
+}
+/* Estilo para o ícone de olho */
+#toggleSenha {
+    position: absolute; /* Posiciona de forma absoluta em relação ao contêiner pai */
+    top: 30%; /* Posiciona no centro verticalmente */
+    right: 10px; /* Posiciona 10px da borda direita */
+    transform: translateY(-50%); /* Ajusta verticalmente para o centro */
+    cursor: pointer; /* Altera o cursor ao passar por cima */
+    color: #44c457;
+
+}
+/* Estilo para a mensagem de erro */
+#msgErro {
+    color: red;
+    font-size: 18px; /* Tamanho da fonte */
+    text-align: center; /* Centraliza o texto */
+    margin-top: 5px; /* Espaçamento superior */
+}    
+
+
+.cont-botão-adic{
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 20px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 10px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+
+   
+}
+.button-container {
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+}
+.button--edit, 
+.button--delete, 
+.button--cancel, 
+.button--adic {
+    width: 50%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    font-size: 19px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto */
+    background: #ed3ef3;
+    display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+    align-items: center; /* Centraliza os itens ao longo do eixo secundário (horizontal) */
+    border-radius: 20px; /* Borda arredondada de 20px */
+    border-width: 2px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #ed3ef3 /* cor da borda */
+
+}
+.custom-upload {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-upload:hover {
+    background-color: #45a049;
+}
+
+.button-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #45a049;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.button--delete {
+    color: #fff;
+    background-color: #e74c3c; /* Cor de fundo vermelho para delete */
+    border-color: #e74c3c; /* Borda vermelha */
+}
+
+.button--delete:hover,
+.button--delete:focus {
+    background-color: #c0392b; /* Cor de fundo vermelha mais escura no hover */
+    border-color: #c0392b; /* Borda vermelha mais escura no hover */
+    color: #fff; /* Garante que o texto permanece branco */
+}
+
+.button--delete:active {
+    background-color: #a93226; /* Cor de fundo vermelha ainda mais escura quando o botão está pressionado */
+    border-color: #a93226; /* Borda vermelha ainda mais escura quando o botão está pressionado */
+}
+
+
+
+
+.button--verificar {
+width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+padding: 10px; /* Espaçamento interno */
+height: 100%; /* Altura fixa para botões */
+font-size: 19px; /* Tamanho da fonte */
+color: #fff; /* Cor do texto */
+background: #44c457;
+display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+margin: 0 auto; /* Centraliza horizontalmente */
+justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+align-items: center; /* Centraliza os itens ao longo do eixo secundário (horizontal) */
+border-radius: 20px; /* Borda arredondada de 20px */
+border-width: 2px; /* largura da borda */
+border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+border-color: #44c457; /* cor da borda */
+} 
+/* Estilo quando o cursor passa por cima do botão */
+button:hover {
+    opacity: 0.8; /* Reduz a opacidade ao passar o cursor por cima */
+}
+.control {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1px;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex; /* Define o contêiner como um contêiner flexível */
+    justify-content: space-between; /* Distribui os botões com espaço entre eles */
+    align-items: center; /* Alinha os itens ao centro verticalmente */
+}
+.control button {
+    flex: 1; /* Permite que os botões cresçam para ocupar o espaço disponível */
+    margin: 0 10px; /* Espaçamento horizontal entre os botões */
+    padding: 10px 20px; /* Espaçamento interno dos botões */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total do botão */
+    border: none; /* Remove a borda padrão */
+    background-color: #4CAF50; /* Cor de fundo dos botões */
+    color: white; /* Cor do texto dos botões */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s; /* Transição suave para mudança de cor */
+}
+.controlb {
+    flex: 1; /* Permite que os botões cresçam para ocupar o espaço disponível */
+    margin: 0 10px; /* Espaçamento horizontal entre os botões */
+    padding: 10px 20px; /* Espaçamento interno dos botões */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total do botão */
+    border: none; /* Remove a borda padrão */
+    background-color: #000; /* Cor de fundo dos botões */
+    color: white; /* Cor do texto dos botões */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s; /* Transição suave para mudança de cor */
+    border-radius: 20px;
+}
+.control button:hover {
+    background-color: #2f7432; /* Cor de fundo ao passar o mouse */
+}
+
+
+/* --------------------------*//* --------------------------*//* --------------------------*/
+/* --------------------------*//* --------------------------*//* --------------------------*/
+/* Estilo da tabela */
+table {
+    width: 97%; /* Define a largura da tabela como 50% da largura disponível */
+    border-collapse: collapse;
+    margin: 20px auto; /* Centraliza a tabela com margens de 20px acima e abaixo */
+    border-radius: 20px; /* Borda arredondada de 20px */
+
+}
+
+th, td {
+    
+    border: 1px solid black;
+    padding: 6px; /* Reduz o padding interno para deixar as células mais compactas */
+    text-align: left;
+
+    margin-top: 0; /* Remove margem superior padrão */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    color: #000; /* Cor do texto */
+    font-size: 15px; /* Tamanho da fonte */
+    align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+    font-family: 'Montserrat', sans-serif;
+    
+    background-color: #fff;
+
+    
+}
+
+th {
+    background-color: #000;
+    border: 3px solid fff;
+    color: #fff; /* Cor do texto */
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-weight: bolder; /* Adiciona negrito */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+.total-registros {
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+.total-registros span {
+    background-color: #5c5959;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+
+
+ /* Estilo para o modal */
+ .modalDialog {
+    display: none; /* Oculta por padrão */
+    position: fixed; /* Posicionamento fixo */
+    z-index: 1000; /* Z-index alto para sobrepor outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Adiciona rolagem se necessário */
+    background-color: rgba(0,0,0,0.4); /* Cor de fundo semi-transparente */
+}
+/* Estilo para o conteúdo do modal */
+.modal-content {
+    background-color: #fefefe; /* Cor de fundo do conteúdo do modal */
+    margin: 15% auto; /* Margem para centralizar verticalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%; /* Largura do conteúdo do modal */
+    max-width: 600px; /* Largura máxima do conteúdo do modal */
+    text-align: center; /* Centraliza o texto */
+    
+}
+/*Estilo para o botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --------------------------*//* --------------------------*//* --------------------------*/
+/* --------------------------*//* --------------------------*//* --------------------------*/
+/* Estilo fontes */
+h6 {
+text-align: center; /* Centraliza horizontalmente */
+margin-top: 0; /* Remove margem superior padrão */
+margin-bottom: 10px; /* Espaçamento inferior */
+color: #fff; /* Cor do texto */
+font-size: 20px; /* Tamanho da fonte */
+align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+font-family: 'Montserrat', sans-serif;
+font-weight: bolder; /* Adiciona negrito */
+}
+h2 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto no cabeçalho */
+font-size: 23px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+}
+h2s{
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #ffffff; /* Cor do texto no cabeçalho */
+font-size: 25px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;    
+}
+h3 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto no cabeçalho */
+font-size: 23px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+h4 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto no cabeçalho */
+font-size: 16px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+h5 {
+text-align: center; /* Centraliza horizontalmente */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff; /* Cor do texto no cabeçalho */
+font-size: 16px; /* Tamanho da fonte */
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+
+}
+
+h5modal {
+    text-align: center; /* Centraliza horizontalmente */
+    margin-top: 10px; /* Espaço superior para centralização vertical */
+    margin-bottom: 50px; /* Espaço inferior para centralização vertical */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f50a0a; /* Cor do texto no cabeçalho */
+    font-size: 40px; /* Tamanho da fonte */
+}
+
+
+
+
+/* --------------------------*//* --------------------------*//* --------------------------*/
+/* --------------------------*//* --------------------------*//* --------------------------*/
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }
+    .form {
+    width: 50%; /* Ambos ocupam metade da largura */
+    }  
+    .cont-princ {
+    width: 100%; /* Largura total */
+    }
+    .cont-botão {
+    width: 100%; /* Largura total */
+    }
+    
+    .initial {
+    width: 80%;
+    }
+    .initial1 {
+    width: 100%;
+    }
+    
+    
+    /* Estilos para os slides dentro do carrossel */
+    .swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+    }
+    .swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+    }
+    .button--verificar {
+    width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    
+    }
+@media (min-width: 1024px)and (max-width: 1440px){
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}
+.form {
+width: 50%; /* Ambos ocupam metade da largura */
+}  
+.cont-princ {
+width: 100%; /* Largura total */
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+
+.initial {
+width: 80%;
+}
+.initial1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+.button--verificar {
+width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+
+}
+@media (min-width: 768px) and (max-width: 1024px) { 
+
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}
+.form {
+width: 50%; /* Ambos ocupam metade da largura */
+}  
+.cont-princ {
+width: 100%; /* Largura total */
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+
+.initial {
+width: 80%;
+}
+.initial1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+.button--verificar {
+width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+
+}
+@media (min-width: 300px) and (max-width: 767px){
+h2 {
+
+font-size: 16px; /* Tamanho da fonte */
+
+}
+.initial {
+width: 75%;
+}
+.initial1 {
+width: 100%;
+}
+
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+}
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+
+}
+.form {
+width: 100%; /* Ambos ocupam metade da largura */
+}  
+.cont-botão {
+width: 100%; /* Largura total */
+}
+.button--verificar {
+width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+footer {
+flex-direction: column; /* Empilha os itens verticalmente */
+text-align: center; /* Alinha o texto centralmente */
+}
+
+footer h4,
+footer h5,
+footer p {
+margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+}
+}
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1600px){
+    .apresentacao {
+        width: 100%; /* Largura total */
+    }
+    .explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    }
+    .videoexplicacao{
+    width: 60%; /* Define a largura como 100% em dispositivos menores */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    h1 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h2 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h3 { 
+        font-size: 19px; /* Tamanho da fonte */   
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 40%; /* Ambos ocupam metade da largura */   
+    }
+    .form__input-row {
+        width: 100%;    
+    } 
+    .form__field--text {
+        width: 100%; 
+    }    
+}   
+@media (min-width: 1440px){
+    .apresentacao {
+        width: 100%; /* Largura total */
+    }
+    .explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    }
+    .videoexplicacao{
+    width: 60%; /* Define a largura como 100% em dispositivos menores */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    h1 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h2 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h3 { 
+        font-size: 19px; /* Tamanho da fonte */   
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 40%; /* Ambos ocupam metade da largura */   
+    }
+    .form__input-row {
+        width: 100%;    
+    } 
+    .form__field--text {
+        width: 100%; 
+    }    
+}   
+@media (min-width: 1024px)and (max-width: 1440px){
+    .apresentacao {
+        width: 100%; /* Largura total */
+    }
+    .explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    }
+    .videoexplicacao{
+    width: 60%; /* Define a largura como 100% em dispositivos menores */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    h1 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h2 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h3 { 
+        font-size: 19px; /* Tamanho da fonte */   
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 40%; /* Ambos ocupam metade da largura */   
+    }
+    .form__input-row {
+        width: 100%;    
+    } 
+    .form__field--text {
+        width: 100%; 
+    }    
+}   
+@media (min-width: 768px) and (max-width: 1024px) {
+.apresentacao {
+    width: 100%; /* Largura total */
+}
+.explicacao {
+width: 80%; /* Define a largura como metade do contêiner principal */
+}
+.videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+h1 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+    font-size: 19px; /* Tamanho da fonte */   
+}
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+    width: 50%; /* Ambos ocupam metade da largura */   
+} 
+.form__field--text {
+    width: 100%; 
+} 
+}
+@media (min-width: 300px) and (max-width: 767px){
+.apresentacao {
+    width: 100%; /* Largura total */
+}
+.explicacao {
+width: 100%; /* Define a largura como metade do contêiner principal */
+}
+.videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+}      
+h1 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+    font-size: 19px; /* Tamanho da fonte */   
+}
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+} 
+.form__field--text {
+    width: 100%; 
+} 
+footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    text-align: center; /* Alinha o texto centralmente */
+}
+
+footer h4,
+footer h5,
+footer p {
+    margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+}
+}
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 80%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+    }
+}
+@media (min-width: 1024px)and (max-width: 1440px){
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 80%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 80%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+    }
+}
+@media (min-width: 300px) and (max-width: 767px){
+                  /* Estilos para contêiner principal (.cont-login) */
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+   
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+                }
+    footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center; /* Alinha o texto centralmente */
+    }
+
+    footer h4,
+    footer h5,
+    footer p {
+        margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+    }
+
+}
+
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+    .apresentacao {
+        width: 100%; /* Largura total */
+    }
+    .explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    }
+    .videoexplicacao{
+    width: 60%; /* Define a largura como 100% em dispositivos menores */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    h1 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h2 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h3 { 
+        font-size: 19px; /* Tamanho da fonte */   
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 50%; /* Ambos ocupam metade da largura */   
+    }
+    
+}   
+@media (min-width: 1024px)and (max-width: 1440px){
+    .apresentacao {
+        width: 100%; /* Largura total */
+    }
+    .explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    }
+    .videoexplicacao{
+    width: 60%; /* Define a largura como 100% em dispositivos menores */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    h1 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h2 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h3 { 
+        font-size: 19px; /* Tamanho da fonte */   
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 100%; /* Ambos ocupam metade da largura */   
+    }
+    
+}   
+@media (min-width: 768px) and (max-width: 1024px) {
+.apresentacao {
+    width: 100%; /* Largura total */
+}
+.explicacao {
+width: 80%; /* Define a largura como metade do contêiner principal */
+}
+.videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+h1 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+    font-size: 19px; /* Tamanho da fonte */   
+}
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+} 
+
+}
+@media (min-width: 300px) and (max-width: 767px){
+.apresentacao {
+    width: 100%; /* Largura total */
+}
+.explicacao {
+width: 100%; /* Define a largura como metade do contêiner principal */
+}
+.videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+}      
+h1 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+    font-size: 19px; /* Tamanho da fonte */   
+}
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}
+
+
+.form {
+    width: 100%; /* Ambos ocupam metade da largura */   
+} 
+footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    text-align: center; /* Alinha o texto centralmente */
+}
+
+footer h4,
+footer h5,
+footer p {
+    margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+}
+
+
+}
+
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 40%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+    
+    }
+@media (min-width: 1024px)and (max-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 40%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+    
+    }
+@media (min-width: 768px) and (max-width: 1024px){
+    .redirecionamento {
+        width: 35%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 40%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 80%; /* Define a largura como 100% em dispositivos menores */
+        }
+    }
+@media (min-width: 300px) and (max-width: 767px){
+    h1 {
+        
+        font-size: 19px; /* Tamanho da fonte */
+        
+    }
+    
+    /* Estilizando o título h2 */
+    h2 {
+       
+        font-size: 19px; /* Tamanho da fonte */
+        
+
+    
+    }
+    
+    .redirecionamento {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 80%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 100%; /* Define a largura como 100% em dispositivos menores */
+        }
+        footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center; /* Alinha o texto centralmente */
+    }
+
+    footer h4,
+    footer h5,
+    footer p {
+        margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+    }
+    }
+
+
+ /* Media query para dispositivos móveis */
+ @media (min-width: 1440px){
+    .apresentacao {
+        width: 100%; /* Largura total */
+    }
+    .explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    }
+    .videoexplicacao{
+    width: 60%; /* Define a largura como 100% em dispositivos menores */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    h1 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h2 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h3 { 
+        font-size: 19px; /* Tamanho da fonte */   
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 100%; /* Ambos ocupam metade da largura */   
+    }
+    
+}   
+@media (min-width: 1024px)and (max-width: 1440px){
+    .apresentacao {
+        width: 100%; /* Largura total */
+    }
+    .explicacao {
+    width: 80%; /* Define a largura como metade do contêiner principal */
+    }
+    .videoexplicacao{
+    width: 60%; /* Define a largura como 100% em dispositivos menores */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    h1 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h2 {
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    h3 { 
+        font-size: 19px; /* Tamanho da fonte */   
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 100%; /* Ambos ocupam metade da largura */   
+    }
+    
+}   
+@media (min-width: 768px) and (max-width: 1024px) {
+.apresentacao {
+    width: 100%; /* Largura total */
+}
+.explicacao {
+width: 80%; /* Define a largura como metade do contêiner principal */
+}
+.videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+h1 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+    font-size: 19px; /* Tamanho da fonte */   
+}
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}   
+.form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+} 
+
+}
+@media (min-width: 300px) and (max-width: 767px){
+.apresentacao {
+    width: 100%; /* Largura total */
+}
+.explicacao {
+width: 100%; /* Define a largura como metade do contêiner principal */
+}
+.videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+}      
+h1 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h2 {
+    font-size: 19px; /* Tamanho da fonte */
+}
+h3 { 
+    font-size: 19px; /* Tamanho da fonte */   
+}
+.formulariop4 {
+width: 100%; /* Ambos ocupam metade da largura */
+}
+
+ 
+.form {
+    width: 100%; /* Ambos ocupam metade da largura */   
+} 
+footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    text-align: center; /* Alinha o texto centralmente */
+}
+
+footer h4,
+footer h5,
+footer p {
+    margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+}
+
+
+}
+
+
+ /* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+            width: 100%; /* Largura total */
+        }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }   
+    .form {
+        width: 40%; /* Ambos ocupam metade da largura */   
+    }
+    .form__input-row {
+        width: 100%;    
+    } 
+    .form__field--select,
+    .form__field--text {
+        width: 100%; 
+    }    
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+    }
+
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 1024px)and (max-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+            width: 100%; /* Largura total */
+        }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }   
+        .form {
+            width: 40%; /* Ambos ocupam metade da largura */   
+        }
+        .form__input-row {
+            width: 100%;    
+        }
+        .form__field--select, 
+        .form__field--text {
+            width: 100%; 
+        }    
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+    
+   
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .redirecionamento {
+        width: 35%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 50%; /* Ambos ocupam metade da largura */   
+    }
+    .form__field--select, 
+    .form__field--text {
+        width: 100%; 
+    } 
+    .videoexplicacao{
+        width: 80%; /* Define a largura como 100% em dispositivos menores */
+        }
+   
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 300px) and (max-width: 767px){
+    h1 {
+        
+        font-size: 19px; /* Tamanho da fonte */
+        
+    }
+    
+    /* Estilizando o título h2 */
+    h2 {
+       
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    
+    .redirecionamento {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+    } 
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 80%; /* Ambos ocupam metade da largura */   
+    } 
+    .form__field--select,
+    .form__field--text {
+        width: 100%; 
+    }  
+    
+    .videoexplicacao{
+        width: 100%; /* Define a largura como 100% em dispositivos menores */
+        }
+
+   
+    footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center; /* Alinha o texto centralmente */
+    }
+
+    footer h4,
+    footer h5,
+    footer p {
+        margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+    }
+    .alert--error {
+        font-size: 16px;
+       
+    }
+    
+   
+    
+}
+
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 80%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+    }
+}
+@media (min-width: 1024px)and (max-width: 1440px){
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 80%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 80%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+    }
+}
+@media (min-width: 300px) and (max-width: 767px){
+                  /* Estilos para contêiner principal (.cont-login) */
+    .cont-login {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+   
+    }
+
+    /* Estilos para contêiner secundário (.cont-login2) */
+    .cont-login2 {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima para limitar em telas maiores */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    }
+
+    /* Estilo para o texto dentro dos contêineres */
+    .cont-login p {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+    }
+    .button--verificar {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        padding: 10px; /* Espaçamento interno */
+        height: 100%; /* Altura fixa para botões */
+                }
+    footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center; /* Alinha o texto centralmente */
+    }
+
+    footer h4,
+    footer h5,
+    footer p {
+        margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+    }
+
+}
+
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 40%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+    
+    }
+@media (min-width: 1024px)and (max-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 40%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+    
+    }
+@media (max-width: 1024px){
+    .redirecionamento {
+        width: 35%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 40%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 80%; /* Define a largura como 100% em dispositivos menores */
+        }
+    }
+@media (max-width: 767px){
+    h1 {
+        
+        font-size: 19px; /* Tamanho da fonte */
+        
+    }
+    
+    /* Estilizando o título h2 */
+    h2 {
+       
+        font-size: 19px; /* Tamanho da fonte */
+        
+
+    
+    }
+    
+    .redirecionamento {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        
+    }
+    button {
+        width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 80%; /* Largura total */
+    }
+    .videoexplicacao{
+        width: 100%; /* Define a largura como 100% em dispositivos menores */
+        }
+        footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center; /* Alinha o texto centralmente */
+    }
+
+    footer h4,
+    footer h5,
+    footer p {
+        margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+    }
+    }

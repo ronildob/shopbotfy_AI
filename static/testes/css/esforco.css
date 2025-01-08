@@ -1,0 +1,285 @@
+.bg-azul-vendas {
+    background-color: #fcfcfc
+}
+
+.padding-vendas {
+    padding-top: 80px;
+    padding-bottom: 80px
+}
+
+.titulo-vendas {
+    font-family: roboto;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 55px;
+    color: #212429
+}
+
+.subtitle-vendas {
+    display: block;
+    font-family: open sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
+    color: #212429;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px
+}
+
+.icone-check {
+    height: 25px;
+    width: 25px;
+    margin-left: 30px;
+    margin-right: 10px;
+    background-image: url(../assets/img/check-azul.svg);
+    background-repeat: no-repeat;
+    background-position: right,left;
+    align-items: center
+}
+
+.grid-vendas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px
+}
+
+.vendas-area {
+    grid-template-areas: "titulo img" "botao img"
+}
+
+.vendas-titulo-area {
+    grid-area: titulo;
+    align-self: center
+}
+
+.vendas-botao-area {
+    grid-area: botao
+}
+
+.vendas-logo-area {
+    grid-area: logo
+}
+
+.vendas-img-area {
+    grid-area: img;
+    align-self: center;
+    justify-self: end
+}
+
+.botao-vendas {
+    width: 385px;
+    height: 50px;
+    background: #1296fc;
+    border-radius: 100px;
+    font-family: open sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    outline: 1px solid #1296fc;
+    outline-offset: 3px;
+    transition: .05s
+}
+
+.botao-vendas:focus {
+    outline: 1px solid #1296fc!important
+}
+
+.botao-vendas:hover {
+    opacity: .9;
+    outline-offset: 5px
+}
+
+.padding-btn-vendas {
+    padding-top: 40px
+}
+
+.padding-subtitle-vendas {
+    padding-top: 40px
+}
+
+.vendas-logo {
+    padding-top: 55px
+}
+
+.ajute-esfoco {
+    padding: 60px;
+    border-radius: 20px;
+    background-color: #f7f7f7
+}
+
+.titulo-esfoco {
+    color: #2d2f34!important
+}
+
+@media(max-width: 1199px) {
+    .img-vendas {
+        width:380px;
+        height: auto
+    }
+
+    .titulo-vendas {
+        font-size: 45px;
+        line-height: 50px
+    }
+
+    .subtitle-vendas {
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 5px
+    }
+
+    .padding-subtitle-vendas {
+        padding-top: 20px
+    }
+
+    .padding-btn-vendas {
+        padding-top: 30px
+    }
+
+    .botao-vendas {
+        width: 365px;
+        height: 45px;
+        font-size: 17px;
+        line-height: 25px
+    }
+
+    .vendas-logo {
+        width: 180px;
+        height: auto;
+        padding-top: 50px
+    }
+}
+
+@media(max-width: 991px) {
+    .titulo-vendas {
+        font-size:38px;
+        line-height: 40px
+    }
+
+    .botao-vendas {
+        width: 300px;
+        height: 40px;
+        font-size: 15px;
+        line-height: 20px
+    }
+
+    .img-vendas {
+        width: 350px;
+        height: auto
+    }
+
+    .grid-vendas {
+        grid-template-columns: 1fr;
+        row-gap: 50px
+    }
+
+    .vendas-area {
+        grid-template-areas: "titulo" "img" "botao"
+    }
+
+    .vendas-logo-area {
+        grid-area: logo;
+        display: none
+    }
+
+    .vendas-img-area {
+        justify-self: center
+    }
+
+    .vendas-botao-area {
+        justify-self: center
+    }
+
+    .vendas-titulo-area {
+        justify-self: center
+    }
+
+    .titulo-esfoco {
+        text-align: center
+    }
+}
+
+@media(max-width: 767px) {
+    .grid-vendas {
+        row-gap:30px
+    }
+
+    .vendas-area {
+        grid-template-areas: "titulo" "img" "botao"
+    }
+
+    .ajute-esfoco {
+        padding: 40px;
+        border-radius: 20px;
+        background-color: #f7f7f7
+    }
+
+    .vendas-titulo-area {
+        justify-self: center
+    }
+
+    .vendas-botao-area {
+        justify-self: center
+    }
+
+    .titulo-vendas {
+        text-align: center
+    }
+}
+
+@media(max-width: 575px) {
+    .ajute-esfoco {
+        padding:8vw
+    }
+
+    .titulo-esfoco {
+        line-height: 8.4vw!important
+    }
+
+    .subtitle-vendas {
+        font-size: 3.5vw;
+        line-height: 5vw
+    }
+
+    .icone-check {
+        height: 6vw;
+        width: 6vw;
+        margin-left: 2vw;
+        margin-right: 2vw
+    }
+
+    .img-vendas {
+        width: 60vw;
+        height: auto
+    }
+
+    .grid-vendas {
+        row-gap: 6vw
+    }
+
+    .botao-vendas {
+        width: 100%;
+        height: 40px;
+        font-size: 15px;
+        line-height: 20px;
+        padding-left: 10vw;
+        padding-right: 10vw
+    }
+
+    .padding-vendas {
+        padding-top: 15vw;
+        padding-bottom: 15vw
+    }
+
+    .vendas-img-area {
+        padding-top: 8vw
+    }
+}

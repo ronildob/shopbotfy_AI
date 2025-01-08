@@ -1,0 +1,1691 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ agencia.titulo_agencia }}</title>
+    <link rel="icon" href="{% if agencia.favicon_agencia %}{{ agencia.favicon_agencia }}{% else %}{% static 'home/img/favi.png' %}{% endif %}">
+    
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">     
+    <link rel="stylesheet" href="{% static 'home/css/efeitos.css'%}"> 
+    <link rel="stylesheet" href="/static/home/css/spin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    
+    
+
+
+<style>
+
+:root {
+    --agencia_bg_image: url("{% if agencia.agencia_bg_image %}{{ agencia.agencia_bg_image }}{% else %}{% static 'default-image.png' %}{% endif %}");
+        --agencia_bg_width: {{ agencia.agencia_bg_width|default:'300px' }};
+        --agencia_bg_height: {{ agencia.agencia_bg_height|default:'90px' }};
+        --position_bg_image: {{ agencia.position_bg_image|default:'center' }};
+
+        --texto_cabecalho_agencia: "{{ agencia.texto_cabecalho_agencia|default:'Seu Texto de cabeçalho Aqui' }}";
+        --cabecalho_font_size: {{ agencia.cabecalho_font_size|default:'16px' }};
+        --cabecalho_text_color: {{ agencia.cabecalho_text_color|default:'white' }};
+        --position_texto_cabecalho: {{ agencia.position_texto_cabecalho|default:'center' }};
+
+
+        --agencia_header_color: {{ agencia.agencia_header_color|default:'white' }};
+        --agencia_background_color: {{ agencia.agencia_background_color|default:'black' }};
+        --agencia_explica_color: {{ agencia.agencia_explica_color|default:'black' }};
+        --explicacao_text_color: {{ agencia.explicacao_text_color|default:'white' }};
+        --agencia_footer_color: {{ agencia.agencia_footer_color|default:'black' }};
+        --agencia_footer_text_color: {{ agencia.agencia_footer_text_color|default:'white' }};
+
+
+        --texto_apresentacao_agencia: "{{ agencia.texto_apresentacao_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --apresentacao_font_size: {{ agencia.apresentacao_font_size|default:'16px' }};
+
+        --texto_texto_explicacao1_agencia: "{{ agencia.texto_explicacao1_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao1_font_size: {{ agencia.explicacao1_font_size|default:'16px' }};
+        
+
+        --texto_texto_explicacao2_agencia: "{{ agencia.texto_explicacao2_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao2_font_size: {{ agencia.explicacao2_font_size|default:'16px' }};
+
+        --texto_texto_explicacao3_agencia: "{{ agencia.texto_explicacao3_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao3_font_size: {{ agencia.explicacao3_font_size|default:'16px' }};
+
+        --texto_texto_explicacao4_agencia: "{{ agencia.texto_explicacao4_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao4_font_size: {{ agencia.explicacao4_font_size|default:'16px' }};
+
+        --texto_texto_explicacao5_agencia: "{{ agencia.texto_explicacao5_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao5_font_size: {{ agencia.explicacao5_font_size|default:'16px' }};
+    }
+
+html, body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da viewport */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Define a orientação dos elementos como coluna */
+    justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+    align-items: center; /* Alinha os elementos no centro horizontalmente */
+}
+header {
+    background-image: var(--position_bg_image);
+    text-align: var(--position_texto_cabecalho);
+    background-color: var(--agencia_header_color); 
+    padding: 20px 10px;
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: row; /* Alinhando os itens em linha */
+    position: relative;
+    height: auto; 
+}
+
+#main-title {
+    background-image: var(--agencia_bg_image);
+    width: var(--agencia_bg_width);
+    height: var(--agencia_bg_height); /* Ajuste conforme necessário */
+    background-size: cover;
+    position: absolute; /* Se você quiser que isso cubra o header */
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex; /* Adicione se quiser centralizar conteúdo dentro */
+    justify-content: center; 
+    align-items: center; 
+}
+
+#title {
+    color: var(--cabecalho_text_color);
+    font-size: var(--cabecalho_font_size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2;
+    position: relative;
+    margin: 0;
+}
+
+main {
+    background-color: var(--agencia_background_color);
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    padding: 20px; /* Espaçamento interno */
+    justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+ 
+}
+.cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5px; /* Espaçamento entre os elementos */
+    margin-top: 5%;
+}
+.apresentacao {
+    background-color: var(--agencia_explica_color); 
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    position: relative; /* Define o posicionamento relativo */    
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow:
+            inset 20px 0 20px rgba(255, 255, 255, 0.521),   /* Sombra interna na borda esquerda */
+            inset -20px 0 20px rgba(255, 255, 255, 0.521);  /* Sombra interna na borda direita */
+    }
+.explicacao {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+
+}
+.explicacao1 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao2 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao3 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao4 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao5 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+
+
+.cont-principal {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    padding: 0px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+}
+
+.videoexplicacao {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+            
+}
+/* video */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de 16:9 para vídeos responsivos */
+    padding-top: 5px;
+    height: 0;
+    overflow: hidden;
+    }
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-submit {
+    width: 30%;
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #08c411; /* Cor de fundo transparente */
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #08c411;
+}
+.btn-submit:hover{
+    background-color: #028109; /* Cor de fundo transparente */
+   
+    
+
+}
+
+/* Estilizando o título h3 */
+
+.cont-botão {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 5px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+
+
+}   
+
+       
+.initial {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+}
+.initial1 {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.swiper-container-horizontal {
+    width: 100%;
+    height: 100%;/* Altura de 100% em relação ao contêiner pai */
+    border-radius: 20px;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+
+
+.form {
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 0; /* Margem inferior de 20px */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 0px; /* Espaçamento interno */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 100%;
+    
+
+} 
+.formulario {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center;
+    width: 60%;
+}   
+
+.form__input-row {
+    text-align: center; 
+    width: 100%;    
+}  
+
+
+.form__field,  
+.form__input-wrapper--labelled{
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    border-radius: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    margin-bottom: 10px; /* Reduzido de 20px para 10px */
+    
+}
+
+.form__field,
+.form__field--select,
+.form__field--text {
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #e2dddd;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+    box-sizing: border-box;
+    text-align: center; /* Centraliza horizontalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+
+}
+/* Estilos quando o mouse está sobre os campos de entrada e seleção */
+.form__input-wrapper--labelled:hover,
+.form__field:hover,
+.form__field--select:hover,
+.form__field--text:hover {
+    background-color: #5c5959;
+
+}
+/* Estilos quando os campos de entrada e seleção estão focados */
+.form__input-wrapper--labelled:focus,
+.form__field:focus,
+.form__field--select:focus,
+.form__field--text:focus {
+    outline: none;
+    background-color: #f7b3b3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+}
+/* Estilo para as opções do campo de seleção */
+.form__field--select option,
+.form__field--text option {
+    font-size: 16px;
+    color: #0f0f0f;
+
+}
+/* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+.form__field--select option:hover,
+.form__field--text option:hover {
+    color: #44c457;
+    font-size: 14px;
+}
+#bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.main-with-video-bg {
+    position: relative;
+    z-index: 1; 
+    background-size: cover;
+    background-position: center;
+}
+
+.paleta {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center; /* Centraliza horizontalmente */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+
+    
+}
+.paleta img {
+    max-width: 100%; /* Garantir que a imagem não ultrapasse a largura da div */
+    max-height: 100%; /* Garantir que a imagem não ultrapasse a altura da div */
+    display: block; /* Permitir margens e alinhamento corretos */
+    border-radius: 5px; /* Borda arredondada na imagem */
+}
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+#title {
+    display: block; /* Garante que o elemento seja exibido em telas maiores */
+}
+.explicacao{
+    width: 60%;
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 30%;
+}
+.form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+}
+.formulario {
+width: 60%; /* Ambos ocupam metade da largura */
+} 
+.form__input-row {
+width: 100%;    
+}   
+
+
+.initial{
+width: 80%;
+}
+.initial1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+  
+}
+
+}   
+@media (max-width: 1439px){
+.explicacao{
+    width: 80%;
+}
+.cont-botão {
+    width: 100%; 
+}
+button, 
+input[type=submit] {
+    width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 60%;
+}
+
+.form {
+    width: 100%;   
+}
+.formulario {
+    width: 60%; 
+} 
+.form__input-row {
+    width: 100%;    
+}   
+
+.initial {
+    width: 80%;
+}
+.initial1{
+    width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+.videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+}
+
+}   
+@media(max-width: 1024px) {
+    main {
+    
+    padding: 10px; /* Espaçamento interno */
+ 
+}
+.explicacao{
+    width: 80%;
+}
+.videoexplicacao{
+    width: 80%; 
+}
+
+.cont-botão {
+width: 100%;
+}
+button, input[type=submit] {
+width: 80%; 
+}
+.btn-submit {
+    width: 80%;
+}
+
+.formulario{
+width: 60%;
+}   
+.form {
+width: 100%;    
+} 
+.form__input-row {
+    width: 100%;    
+}
+.initial{
+    width: 80%;
+}
+.initial1 {
+    width: 100%;
+}
+
+.swiper-slide img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+} 
+}
+
+@media (max-width: 767px){
+main {
+    
+    padding: 5px; /* Espaçamento interno */
+ 
+}
+.apresentacao {
+
+    width: 100%; /* Largura total */
+}
+.explicacao1, .explicacao2, .explicacao3, .explicacao4, .explicacao5{
+    width: 100%;
+}
+.videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+
+#title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+} 
+.btn-submit {
+    width: 90%;
+}
+     
+form {
+    width: 100%;    
+}
+.formulario {
+    width: 70%; /* Ambos ocupam metade da largura */
+}
+
+.form__input-row {
+    width: 100%;    
+}
+
+footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: stretch; /* Estica os itens para ocupar a largura total */
+    background-color: var(--agencia_footer_color);
+    color: var(--agencia_footer_text_color);
+}
+
+footer div {
+    padding: 10px 0; /* Ajusta o espaçamento entre os itens */
+}
+.footer2 {
+    flex-direction: column; /* Garante que permaneça empilhado em telas menores */
+    align-items: center; /* Centraliza os itens horizontalmente */
+
+}
+
+.initial{
+width: 100%;
+}
+.initial1{
+width: 100%;
+}
+
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+}
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+}
+
+footer {
+    display: flex;
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: var(--agencia_footer_color); 
+    color: var(--agencia_footer_text_color);
+    padding: 20px;
+    width: 100%;
+}
+
+footer div {
+    flex-grow: 1; /* Permite que os itens cresçam para ocupar o espaço */
+    padding: 0 10px; /* Adiciona espaçamento entre os itens */
+}
+.footer-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+}
+#rodape {   
+    height: 90px;
+    width: 270px;
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    background-position: center;
+    background-size: cover;
+    color: white;
+    line-height: 90px; 
+}
+.footer2 {
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Alinha os itens à esquerda */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+    padding: 10px;
+    width: 100%;
+    color: var(--agencia_footer_text_color);
+}
+
+.footer2 a {
+    color: var(--agencia_footer_text_color);
+    text-decoration: none; /* Remove o sublinhado dos links */
+    transition: color 0.3s ease; /* Suaviza a transição da cor */
+}
+
+.footer2 a:hover {
+    color: #ccc; /* Cor ao passar o mouse (opcional) */
+}
+
+
+.social {
+    display: flex;
+    justify-content: flex-start; /* Alinha os itens ao início */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    padding: 20px;
+    width: 100%;
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+}
+.social a i {
+    color: var(--agencia_footer_text_color);
+    font-size: 30px; /* Ajuste o tamanho conforme necessário */
+    transition: color 0.3s ease;
+}
+
+/* Efeito de hover (opcional) */
+.social a:hover i {
+    color: #ccc; /* Cor ao passar o mouse */
+}
+
+
+.social > * {
+    margin-right: 10px; /* Espaçamento entre os itens */
+}
+
+.social > *:last-child {
+    margin-right: 0; /* Remove a margem do último item */
+}
+.footer2 div {
+    margin: 5px 0; /* Espaçamento entre os itens */
+}
+
+
+</style>
+
+<style>
+.temashop{
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center;
+    width: 100%;
+    background-color: #fff;
+
+}
+.colortema{
+    position: fixed;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #ec1010;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: visible; /* Permite que os itens excedam os limites horizontais */
+    z-index: 999;
+    transition: transform 0.3s ease; /* Animação suave */
+    text-transform: none; /* Garante que o texto não seja transformado */
+    align-items: start;
+
+}
+.temaimput{
+    width: calc(100% - 20%); /* O container ocupa o espaço restante quando o menu está aberto */
+    margin-left: calc(20% );
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Remove a rolagem */
+    min-height: 100vh;
+    transition: width 0.3s ease, margin-left 0.3s ease; /* Animação suave */
+    background-color: #44c457;
+    color: #fff;
+
+}
+.barra1{
+    width: 100%;
+    height: 30px;
+    background-color: #574848;
+    color: #000;
+
+}
+.barra2{
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 100%;
+    height: 80px;
+    background-color: #ec1010;
+    color: #000;
+
+}
+.iconeesque{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12%;  
+    height: 60%;
+    color:#fff;
+    font-size: 14px;
+    border-right: 3px;
+    border-color: #fff;
+      
+}
+.centaltema {
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: space-between; /* Coloca os itens nos extremos do contêiner */
+    align-items: center; /* Centraliza os itens verticalmente */
+    flex-wrap: wrap; /* Permite que os itens sejam quebrados em múltiplas linhas, se necessário */
+    width: 50%;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 0 10px; /* Adiciona um preenchimento interno para o contêiner (opcional) */
+}
+
+/* Ajusta o item da esquerda */
+.centaltema .item-esquerda {
+    margin-left: 10px; /* Adiciona uma margem à esquerda */
+}
+
+/* Ajusta o item da direita (opcional) */
+.centaltema .iconelupa {
+    margin-right: 0; /* Garante que não tenha margem à direita, se necessário */
+}
+.item-esquerda{
+    width: 20%;
+    height: 80%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+
+}
+.iconelupa{
+    width: 10%;
+    height: 75%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color:#000;
+    background-color: #028109;
+    border-radius: 20px;
+
+}
+.iconeesquerdo{
+    align-items: self-start;
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    font-size: 20px;
+    color:#000;
+    background-color: #028109;
+    
+}
+
+.barradegrade{
+    width: 100%;
+    height: 7px;
+    background-color: #574848;
+
+}
+
+
+</style>
+
+
+<style>
+ 
+    .navegador {
+        display: flex;
+        align-items: center;
+        background-color: #000;
+        height: 40px;
+        padding: 0 10px;
+        color: white;
+        border-bottom: 2px solid #444;
+        width: 100%;
+        height: 50px;
+    }
+
+    .navegador .tabs {
+        display: flex;
+        flex: 1;
+    }
+
+    .navegador .tab {
+        display: flex;
+        align-items: center;
+        height: 80%;
+        cursor: pointer;
+        background-color: #555555;
+        color: white;
+        border-radius: 5px;
+        margin-right: 5px;
+        transition: background-color 0.3s;
+        font-size: 16px;
+        gap: 8px; /* Espaçamento entre o ícone e o texto */
+        padding: 8px 12px; /* Espaçamento interno */
+        border-radius: 5px; /* Borda arredondada */
+    }
+
+    .navegador .tab.active {
+        background-color: #000;
+    }
+
+    .navegador .tab:hover {
+        background-color: #555;
+    }
+
+
+   
+
+    .favicon {
+        width: 16px; /* Tamanho padrão de favicon */
+        height: 16px; /* Tamanho padrão de favicon */
+        object-fit: cover; /* Garante que a imagem não distorça */
+    }
+    .favicon2 {
+        width: 16px; /* Tamanho padrão de favicon */
+        height: 16px; /* Tamanho padrão de favicon */
+        object-fit: cover; /* Garante que a imagem não distorça */
+    }
+
+    .titulo {
+        font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+        font-weight: normal; /* Estilo da fonte */
+        color: #ffffff; /* Cor do texto */
+    }
+    .titulo2 {
+        font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+        font-weight: normal; /* Estilo da fonte */
+        color: #ffffff; /* Cor do texto */
+    }
+    .navegador .buttons {
+        display: flex;
+        align-items: center;
+        height: 80%;
+    }
+
+    .navegador .button {
+        background-color: rgba(0, 0, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 3px;
+        padding: 5px 8px;
+        margin: 0 3px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        height: 80%;
+       
+    }
+
+    .navegador .button:hover {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .navegador .button.close {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .navegador .button.close:hover {
+        background-color: rgba(0, 0, 0, 0);
+    }
+</style>
+</head>
+
+{% if request.session.agencia_nome %}
+<body>
+ 
+    <br>
+
+    
+    <div class="navegador">
+        <div class="tabs">
+            <div class="tab active"> <img src="{% static 'home/img/site/google.png' %}" alt="Favicon2" class="favicon2"> 
+                <span class="titulo2">Google</span> 
+            </div>
+
+            <div class="tab"> 
+                <img src="{{ agencia.favicon_agencia }}" alt="Favicon" class="favicon">
+                <span class="titulo">{{ agencia.titulo_agencia }}</span>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="button minimize">-</button>
+            <button class="button maximize">□</button>
+            <button class="button close">×</button>
+        </div>
+    </div>
+
+
+    <header id="header-preview" style="background-color: {{ agencia.agencia_header_color }};">
+        <div class="main-title" id="main-title" 
+             style="background-image: url({{ agencia.agencia_bg_image }}); 
+                    height: {{ agencia.agencia_bg_height }}px; 
+                    width: {{ agencia.agencia_bg_width }}px;">
+        </div>
+        
+        {% if agencia.show_texto_cabecalho_agencia %}
+        <div class="title" id="title" style="font-size: {{ agencia.cabecalho_font_size }}px; color: {{ agencia.cabecalho_text_color }};">
+            {{ agencia.texto_cabecalho_agencia }}
+        </div>
+        {% endif %}
+            
+       
+    </header>
+
+
+    <main id="body" style="background-color: {{ agencia.agencia_background_color }};">
+            
+            <!-- INDICE--> 
+            <div class="cont-principal">
+                <main class="main-with-image-bg" id="main-image-bg" style="background-image: url('{% static 'home/img/site/background.png' %}'); background-size: cover; background-position: center;">
+ 
+                    <div class="apresentacao" id="apresentacao" style="background-color: {{ agencia.agencia_explica_color }};">
+                        <div class="explicacao" id="explicacao" style="font-size: {{ agencia.apresentacao_font_size }}px; color: {{ agencia.explicacao_text_color }};">
+                            {{ agencia.texto_apresentacao_agencia }}
+                        </div>
+                    </div> 
+                </main>
+
+                <div class="videoexplicacao">
+                    <div class="video-container">
+                        <iframe width="100%" height="315" src="{{ agencia.link_video }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>                  
+                <div class="cont-imput">
+                    <button type="submit" class="btn-submit">CRIAR CADASTRO</button>
+                    <div class="redirecionamento">               
+                                
+                    </div>
+                </div>                    
+            </div>
+    
+        
+                
+            <!--******** FORMULARIO ***********-->
+            
+                <div class="cont-principal">
+                    <!-- imput http -->
+                    <div class="formulario">                        
+                        <div class="form__input-row">      
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <input type="text" id="link_store" name="link_store" class="form__field form__field--text form__field--large"  placeholder="Cole a URL da sua loja aqui">
+                            </div> 
+                        </div>
+                    </div>
+                    
+                    <br></br>
+                </div> 
+
+                <br></br>
+
+                <div class="cont-principal">  
+
+                    <!-- Campo dados conexao -->
+                    <main class="main-with-image-bg" id="main-image-bg" style="background-image: url('{% static 'home/img/site/background.png' %}'); background-size: cover; background-position: center;">
+
+                    
+                        <!-- Pais -->
+                        <div class="apresentacao" id="apresentacao" style="background-color: {{ agencia.agencia_explica_color }};">
+                            <div class="explicacao2" id="explicacao2" style="font-size: {{ agencia.apresentacao_font_size }}px; color: {{ agencia.explicacao_text_color }};">{{ agencia.texto_explicacao2_agencia }}</div>
+                        </div> 
+                    </main> 
+                    <br></br>       
+                    <div class="formulario">             
+                                
+                        <!-- Campo de Email shopify -->
+                        <div class="form__input-row">
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <input type="email" id="custom_input_id[email_shopify]" name="email_shopify" class="form__field form__field--text form__field--large"  placeholder="Digite o endereço de e-mail que da acesso a sua loja"autocomplete="on">
+                            </div> 
+                        </div>
+
+                        <!-- Campo de SENHA -->
+                        <div class="form__input-row">
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <input type="text" id="custom_input[senha]" name="senha" class="form__field form__field--text form__field--large"  placeholder="Digite corretamente a Senha de acesso a sua loja ">
+                            </div>
+                        </div> 
+                    </div>
+
+                    <br></br>
+
+                    <!-- Campo de pessoal -->
+                    <main class="main-with-image-bg" id="main-image-bg" style="background-image: url('{% static 'home/img/site/background.png' %}'); background-size: cover; background-position: center;">
+
+                    
+                        <div class="apresentacao" id="apresentacao" style="background-color: {{ agencia.agencia_explica_color }};">  
+                            <div class="explicacao3" id="explicacao3" style="font-size: {{ agencia.apresentacao_font_size }}px; color: {{ agencia.explicacao_text_color }};">{{ agencia.texto_explicacao3_agencia }}</div>
+                        </div>
+                    </main>
+                    <br></br>
+                    <div class="formulario">                                                   
+                        <!-- Campo de Nome -->
+                        <div class="form__input-row">
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <input type="text" id="custom_input[nome]" name="nome" class="form__field form__field--text form__field--large"  placeholder="Digite seu nome completo">
+                            </div>
+                        </div>          
+                        <!-- Campo de Email de Suporte -->
+                        <div class="form__input-row">
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <input type="email" id="custom_input_id[email_suporte]" name="email_suporte" class="form__field form__field--text form__field--large"  placeholder="Digite o endereço de e-mail que será o suporte da sua loja aqui"autocomplete="on">
+                            </div> 
+                        </div>
+
+                        <!-- Campo de Empresa -->
+                        <div class="form__input-row">
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <input type="text" id="custom_input[empresa]" name="empresa" class="form__field form__field--text form__field--large"  placeholder="Diga-nos o nome da sua loja">
+                            </div>
+                        </div> 
+                        
+                        <!-- Campo de Telefone -->
+                        <div class="form__input-row">
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <input  type="tel" id="custom_input[telefone]" name="telefone" class="form__field form__field--text form__field--large"  placeholder="Digite seu número de telefone (Ex: 1191234567)">
+                            </div>
+                        </div> 
+                        <!-- horario de atendimento -->
+                        <div class="form__input-row">
+                            <div class="form__input-wrapper form__input-wrapper--labelled">
+                                <select id="business_hours" name="business_hours" class="form__field form__field--select form__field--large" >
+                                <option value="">Selecione o Horário de Atendimento</option>
+                                <option value="hora1">Segunda a Sexta das 9:00 as 18 Horas</option>
+                                <option value="hora2">Segunda a Sexta das 9:00 as 22 Horas</option>
+                                <option value="hora3">Segunda a Sábado das 9:00 as 18 Horas</option>
+                                <option value="hora4">Segunda a Sábado  das 9:00 as 22 Horas</option>
+                                <option value="hora5">Segunda a Sexta das 9:00 as 18 Horas - Sábado das 9:00 as 12 Horas</option>
+                                <option value="hora6">Segunda a Sexta das 9:00 as 22 Horas -  Sábado das 9:00 as 12 Horas</option>
+                                <option value="hora7">Todos os dias das 9:00 as 18 Horas</option>
+                                <option value="hora8">Todos os dias das 9:00 as 22 Horas</option>                        
+                                </select>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+
+                <br></br>
+
+                <!-- Estilização -->
+                <div class="cont-principal">
+                    <main class="main-with-image-bg" id="main-image-bg" style="background-image: url('{% static 'home/img/site/background.png' %}'); background-size: cover; background-position: center;">
+
+                        <div class="apresentacao" id="apresentacao" style="background-color: {{ agencia.agencia_explica_color }};">
+                            <div class="explicacao1" id="explicacao1" style="font-size: {{ agencia.apresentacao_font_size }}px; color: {{ agencia.explicacao_text_color }};">Primeiro informe em qual país você deseja publicar sua loja.</div>
+                        </div> 
+                    </main>
+                    <br></br>
+                    <div class="formulario"> 
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <select id="pais" name="pais" class="form__field form__field--select form__field--large" >
+                                <option value="">Selecione o país</option>
+                                {% if agencia.show_pais_argentina_agencia %}
+                                    <option value="Argentina" data-url="{% url 'paislatan' agencia.id %}">Argentina</option>
+                                {% endif %}
+                                {% if agencia.show_pais_bolivia_agencia %}
+                                    <option value="Bolívia" data-url="{% url 'paislatan' agencia.id %}">Bolívia</option>
+                                {% endif %}
+                                {% if agencia.show_pais_brasil_agencia %}
+                                    <option value="Brasil" data-url="{% url 'paisbras' agencia.id  %}">Brasil</option>
+                                {% endif %}
+                                {% if agencia.show_pais_chile_agencia %}
+                                    <option value="Chile" data-url="{% url 'paislatan' agencia.id %}">Chile</option>
+                                {% endif %}
+                                {% if agencia.show_pais_colombia_agencia %}
+                                    <option value="Colômbia" data-url="{% url 'paislatan' agencia.id %}">Colômbia</option>
+                                {% endif %}
+                                {% if agencia.show_pais_paraguai_agencia %}
+                                    <option value="Paraguai" data-url="{% url 'paislatan' agencia.id %}">Paraguai</option>
+                                {% endif %}
+                                {% if agencia.show_pais_peru_agencia %}
+                                    <option value="Peru" data-url="{% url 'paislatan' agencia.id %}">Peru</option>                            
+                                {% endif %}
+                                {% if agencia.show_pais_uruguai_agencia %}
+                                    <option value="Uruguai" data-url="{% url 'paislatan' agencia.id %}">Uruguai</option>
+                                {% endif %}
+                                {% if agencia.show_pais_venezuela_agencia %}
+                                    <option value="Venezuela" data-url="{% url 'paislatan' agencia.id %}">Venezuela</option>
+                                {% endif %}
+                                {% if agencia.show_pais_equador_agencia %}
+                                    <option value="Equador" data-url="{% url 'paislatan' agencia.id %}">Equador</option>                             
+                                {% endif %}
+                                {% if agencia.show_pais_espanha_agencia %}
+                                    <option value="Espanha" data-url="{% url 'paislatan' agencia.id %}">Espanha</option>
+                                {% endif %}
+                                {% if agencia.show_pais_eua_agencia %}
+                                    <option value="EUA" data-url="{% url 'paislatan' agencia.id %}">EUA</option>
+                                {% endif %}
+                                {% if agencia.show_pais_portugal_agencia %}
+                                    <option value="Portugal" data-url="{% url 'paisport' agencia.id %}">Portugal</option>
+                                {% endif %}
+                            </select>
+                        </div> 
+                    </div> 
+                    <div class="cont-principal">
+                        <main class="main-with-image-bg" id="main-image-bg" style="background-image: url('{% static 'home/img/site/background.png' %}'); background-size: cover; background-position: center;">
+
+                        
+                            <div class="apresentacao" id="apresentacao" style="background-color: {{ agencia.agencia_explica_color }};">
+                                <div class="explicacao4" id="explicacao4" style="font-size: {{ agencia.apresentacao_font_size }}px; color: {{ agencia.explicacao_text_color }};">{{ agencia.texto_explicacao4_agencia }}</div>
+                            </div> 
+                        </main> 
+                    
+                        <div class="cont-principal">
+                            <div class="initial1">  
+                                <div class="initial">       
+                                    <!-- Carrossel de Nichos (Horizontal) -->
+                                    <div class="swiper-container-horizontal">
+                                        <div class="swiper-wrapper">
+                                            {% if agencia.show_nicho_generico_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_generico_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.generico_agencia %}{{ agencia.generico_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="generica">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_eletronicos_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_eletronicos_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.eletronicos_agencia %}{{ agencia.eletronicos_agencia }}{% else %}{% static 'home/img/eletronicos.png' %}{% endif %}" alt="eletronicos">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_casa_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_casa_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.casa_agencia %}{{ agencia.casa_agencia }}{% else %}{% static 'home/img/casa.png' %}{% endif %}" alt="casa">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_moda_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_moda_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.moda_agencia %}{{ agencia.moda_agencia }}{% else %}{% static 'home/img/MODA - PT .png' %}{% endif %}" alt="moda">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_kids_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_kids_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.kids_agencia %}{{ agencia.kids_agencia }}{% else %}{% static 'home/img/kids.png' %}{% endif %}" alt="kids">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_pets_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_pets_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.pets_agencia %}{{ agencia.pets_agencia }}{% else %}{% static 'home/img/pets.png' %}{% endif %}" alt="pets">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_fitness_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_fitness_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.fitness_agencia %}{{ agencia.fitness_agencia }}{% else %}{% static 'home/img/fitness.png' %}{% endif %}" alt="fitness">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_saude_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_saude_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.saude_agencia %}{{ agencia.saude_agencia }}{% else %}{% static 'home/img/nicho_saude.png' %}{% endif %}" alt="saude e beleza">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_masculino_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_masculino_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.masculino_agencia %}{{ agencia.masculino_agencia }}{% else %}{% static 'home/img/masculino.png' %}{% endif %}" alt="masculino">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_feminino_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_feminino_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.feminino_agencia %}{{ agencia.feminino_agencia }}{% else %}{% static 'home/img/feminino.png' %}{% endif %}" alt="feminino">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            <!--
+                                            {% if agencia.show_nicho_oculos_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_oculos_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.oculos_agencia %}{{ agencia.oculos_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="oculos">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_relogio_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_relogio_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.relogio_agencia %}{{ agencia.relogio_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="relogios">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_joias_agencia %}
+                                                <div class="swiper-slide">
+                                                    <a href="{{ agencia.link_joias_agencia }}" target="_blank">
+                                                        <img src="{% if agencia.joias_agencia %}{{ agencia.joias_agencia }}{% else %}{% static 'home/img/generica.png' %}{% endif %}" alt="joias">
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            -->
+                                        </div>
+                                    </div>                                               
+                                </div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>         
+                            </div>
+                            
+                            <div class="formulario">
+                                <!-- Campo para escolher o nicho -->
+                                <div class="form__input-row">
+                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                        <select id="nicho" name="nicho" class="form__field form__field--select form__field--large" >
+                                            <option value="">Selecione o Nicho</option>
+                                            {% if agencia.show_nicho_generico_agencia %}
+                                                <option value="Genérica">Genérica</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_saude_agencia %}   
+                                                <option value="Saúde e Beleza">Saúde e Beleza</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_casa_agencia %}    
+                                                <option value="Casa">Casa </option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_moda_agencia %}       
+                                                <option value="Moda">Moda</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_eletronicos_agencia %}   
+                                                <option value="Eletrônicos">Eletrônicos</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_kids_agencia %}   
+                                                <option value="Kids">Kids</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_pets_agencia %}
+                                                <option value="Pet">Pet</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_fitness_agencia %}
+                                                <option value="Fitness">Fitness</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_feminino_agencia %}
+                                                <option value="Feminino">Feminino</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_masculino_agencia %}
+                                                <option value="Masculino">Masculino</option>
+                                            {% endif %}
+                                            <!--
+                                            {% if agencia.show_nicho_relogio_agencia %}
+                                                <option value="Relógios">Relógios</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_oculos_agencia %}
+                                                <option value="Óculos">Óculos</option>
+                                            {% endif %}
+                                            {% if agencia.show_nicho_joias_agencia %}
+                                                <option value="Jóias">Jóias</option>
+                                            {% endif %}
+                                            -->
+                                            
+                                        </select>
+                                    </div> 
+                                </div> 
+                            </div>                   
+                        </div>
+                        <br></br>
+                    
+                        <!-- COR -->
+                        <style>
+                        .hidden {
+                            display: none;
+                        }
+                        </style>
+                    
+                    
+                        <div class="cont-principal">
+
+                            <main class="main-with-image-bg" id="main-image-bg" style="background-image: url('{% static 'home/img/site/background.png' %}'); background-size: cover; background-position: center;">
+                                <div class="apresentacao" id="apresentacao" style="background-color: {{ agencia.agencia_explica_color }};">
+                                    <div class="explicacao5" id="explicacao5" style="font-size: {{ agencia.apresentacao_font_size }}px; color: {{ agencia.explicacao_text_color }};">
+                                        {{ agencia.texto_explicacao5_agencia }}
+                                    </div>
+                                </div>
+                            </main>
+
+                            
+                            <div class="initial1"> 
+                                <div class="paleta">
+                                    <img src="/static/home/img/CORES.png" alt="cores">
+                                </div>     
+                            </div>
+                            
+                            
+                    
+                            <div class="formulario">           
+                                <div class="form__input-row" id="input-row">
+                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                        <select id="cor" name="cor" class="form__field form__field--select form__field--large" >
+                                            <option value="">Selecione a Cor</option>
+                                            <option value="Paleta de Cor 1">Laranja</option>
+                                            <option value="Paleta de Cor 2">Verde</option>
+                                            <option value="Paleta de Cor 3">Roxo</option>
+                                            <option value="Paleta de Cor 4">Preto</option>
+                                            <option value="Paleta de Cor 5">Azul</option>
+                                            <option value="Paleta de Cor 6">Vermelho</option>
+                                        </select>
+                                        
+                                    </div>
+                                </div>   
+                            </div>
+                        </div> 
+                    
+                    </div>
+                    
+                    
+                                                
+                </div>
+            
+
+
+
+
+
+                
+                <!-- BOTÃO -->  
+                <div class="cont-botão">                
+                    <button type="submit" class="btn-submit">Enviar</button>        
+                </div>
+
+    
+            
+
+    </main>
+
+
+
+    <footer id="footer" style="background-color: {{ agencia.agencia_footer_color }}; color: {{ agencia.agencia_footer_text_color }};">
+        <div class="footer2" id="copy">
+            &copy;{{ agencia.copy_agencia }}
+        </div>
+        <div class="footer2">
+            <div id="contato">
+                {% if agencia.show_contato_agencia %}
+                    <a href="mailto:{{agencia.contato_agencia}}">{{ agencia.contato_agencia }}</a>
+                {% endif %}
+        
+                {% if agencia.show_link_site %}
+                    {% if agencia.link_site|slice:":5" == "https" %}
+                        <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia|slice:"8:" }}</a>
+                    {% elif agencia.link_site|slice:":4" == "http" %}
+                        <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia|slice:"7:" }}</a>
+                    {% else %}
+                        <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia }}</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="footer2">
+            <div id="contato1">
+                {% if agencia.show_telefone_agencia %}
+                    <a href="https://api.whatsapp.com/send?phone={{ agencia.telefone_agencia }}" target="_blank">
+                        <img src="{% static 'home/img/whatsapp.png' %}" width="30" height="40">{{ agencia.telefone_agencia }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        
+        
+        <div class="social"> 
+            {% if agencia.show_link_face_agencia %}
+                <a href="{{ agencia.link_face_agencia }}" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            {% endif %}
+            
+            {% if agencia.show_link_insta_agencia %}
+                <a href="{{ agencia.link_insta_agencia }}" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            {% endif %}
+            
+            {% if agencia.show_link_youtube_agencia %}
+                <a href="{{ agencia.link_youtube_agencia }}" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            {% endif %}
+        </div>
+       
+        
+    </footer>
+{% endif %}  
+    
+    <br></br>
+    <br></br>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/static/home/js/bgvideoforms.js"></script>
+    <script src="/static/home/js/spinernovo.js"></script>
+
+
+    
+ 
+<script>
+        window.addEventListener("message", (event) => {
+            const { field, value, isChecked } = event.data;
+        
+            if (!field) return; // Garantir que há dados para processar
+        
+            // Lidar com as atualizações no preview
+            switch (field) {
+                case "agencia_bg_image":
+                    document.getElementById("main-title").style.backgroundImage = `url(${value})`;
+                    break;
+                case "agencia_bg_width":
+                    document.getElementById("main-title").style.width = value + "px";
+                    break;
+                case "agencia_bg_height":
+                    document.getElementById("main-title").style.height = value + "px";
+                    break;
+                case "cabecalho_text_color":
+                    document.getElementById("title").style.color = value;
+                    break;
+                case "cabecalho_font_size":
+                    document.getElementById("title").style.fontSize = value + "px";
+                    break;
+                case "agencia_header_color":
+                    document.getElementById("header-preview").style.backgroundColor = value;
+                    break;
+                case "texto_cabecalho_agencia":
+                    document.getElementById("title").innerText = value;
+                    break;
+                case "favicon_agencia":
+                    const favicon = document.querySelector(".favicon");
+                    favicon.src = value;
+                    break;
+                case "titulo_agencia":
+                    const titulo = document.querySelector(".titulo");
+                    titulo.innerText = value;
+                    break;
+
+                case "agencia_background_color":
+                    document.getElementById("body").style.backgroundColor = value;
+                    break;
+
+                case "agencia_footer_color":
+                    document.getElementById("footer").style.backgroundColor = value;
+                    break;
+
+                case "agencia_footer_text_color":
+                    // Atualiza a variável CSS global
+                    document.documentElement.style.setProperty('--agencia_footer_text_color', value);
+                    break;
+               
+
+                // Atualização para todas as divs com a classe 'apresentacao'
+                case "agencia_explica_color":
+                    document.querySelectorAll(".apresentacao").forEach((element) => {
+                        element.style.backgroundColor = value;
+                    });
+                    break;
+
+                // Atualização para divs com IDs numerados (explicacao1, explicacao2, ...)
+                case "explicacao_text_color":
+                    Array.from(document.querySelectorAll("[id^='explicacao']")).forEach((element) => {
+                        element.style.color = value;
+                    });
+                    break;
+
+                case "apresentacao_font_size":
+                    Array.from(document.querySelectorAll("[id^='explicacao']")).forEach((element) => {
+                        element.style.fontSize = value + "px";
+                    });
+                    break;
+                
+                case "copy_agencia":
+                    document.getElementById("copy").innerText = value;
+                    break;
+
+                case "contato_agencia":
+                    document.getElementById("contato").innerText = value;
+                    break;
+
+                case "telefone_agencia":
+                    document.getElementById("contato1").innerText = value;
+                    break;
+
+
+
+                default:
+                    console.warn(`Campo não tratado: ${field}`);
+            }
+        });
+</script>
+        
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,359 @@
+@media (min-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+            width: 100%; /* Largura total */
+        }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }   
+    .form {
+        width: 40%; /* Ambos ocupam metade da largura */   
+    }
+    .form__input-row {
+        width: 100%;    
+    } 
+    .form__field--select,
+    .form__field--text {
+        width: 100%; 
+    }    
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+    }
+
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 1024px)and (max-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+            width: 100%; /* Largura total */
+        }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }   
+        .form {
+            width: 40%; /* Ambos ocupam metade da largura */   
+        }
+        .form__input-row {
+            width: 100%;    
+        }
+        .form__field--select, 
+        .form__field--text {
+            width: 100%; 
+        }    
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+    
+   
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .redirecionamento {
+        width: 35%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 50%; /* Ambos ocupam metade da largura */   
+    }
+    .form__field--select, 
+    .form__field--text {
+        width: 100%; 
+    } 
+    .videoexplicacao{
+        width: 80%; /* Define a largura como 100% em dispositivos menores */
+        }
+   
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 300px) and (max-width: 767px){
+    h1 {
+        
+        font-size: 19px; /* Tamanho da fonte */
+        
+    }
+    
+    /* Estilizando o título h2 */
+    h2 {
+       
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    
+    .redirecionamento {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+    } 
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 80%; /* Ambos ocupam metade da largura */   
+    } 
+    .form__field--select,
+    .form__field--text {
+        width: 100%; 
+    }  
+    
+    .videoexplicacao{
+        width: 100%; /* Define a largura como 100% em dispositivos menores */
+        }
+
+   
+    footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center; /* Alinha o texto centralmente */
+    }
+
+    footer h4,
+    footer h5,
+    footer p {
+        margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+    }
+    .alert--error {
+        font-size: 16px;
+       
+    }
+    
+   
+    
+}
+
+@media (min-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+            width: 100%; /* Largura total */
+        }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }   
+    .form {
+        width: 40%; /* Ambos ocupam metade da largura */   
+    }
+    .form__input-row {
+        width: 100%;    
+    } 
+    .form__field--select,
+    .form__field--text {
+        width: 100%; 
+    }    
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+    }
+
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 1024px)and (max-width: 1440px){
+    h3 {
+        font-size: 19px; /* Tamanho da fonte */
+       
+    }
+    
+    .redirecionamento {
+        width: 37%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+            width: 100%; /* Largura total */
+        }
+    button, input[type=submit] {
+        width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }   
+        .form {
+            width: 40%; /* Ambos ocupam metade da largura */   
+        }
+        .form__input-row {
+            width: 100%;    
+        }
+        .form__field--select, 
+        .form__field--text {
+            width: 100%; 
+        }    
+    .videoexplicacao{
+        width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+    
+   
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .redirecionamento {
+        width: 35%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 50%; /* Ambos ocupam metade da largura */   
+    }
+    .form__field--select, 
+    .form__field--text {
+        width: 100%; 
+    } 
+    .videoexplicacao{
+        width: 80%; /* Define a largura como 100% em dispositivos menores */
+        }
+   
+    footer {
+        width: 100%;
+    }
+    h4 {            
+        font-size: 16px; /* Tamanho da fonte */           
+    }
+    h5 {
+        font-size: 16px; /* Tamanho da fonte */           
+
+    }
+}
+@media (min-width: 300px) and (max-width: 767px){
+    h1 {
+        
+        font-size: 19px; /* Tamanho da fonte */
+        
+    }
+    
+    /* Estilizando o título h2 */
+    h2 {
+       
+        font-size: 19px; /* Tamanho da fonte */
+    }
+    
+    .redirecionamento {
+        width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        
+    }
+    .cont-botão {
+        width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+        width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+    } 
+    .formulariop4 {
+    width: 100%; /* Ambos ocupam metade da largura */
+    }   
+    .form {
+        width: 80%; /* Ambos ocupam metade da largura */   
+    } 
+    .form__field--select,
+    .form__field--text {
+        width: 100%; 
+    }  
+    
+    .videoexplicacao{
+        width: 100%; /* Define a largura como 100% em dispositivos menores */
+        }
+
+   
+    footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center; /* Alinha o texto centralmente */
+    }
+
+    footer h4,
+    footer h5,
+    footer p {
+        margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+    }
+    .alert--error {
+        font-size: 16px;
+       
+    }
+    
+   
+    
+}

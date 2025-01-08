@@ -1,0 +1,46 @@
+.dropdown-button{
+    width: 100%; /* Largura relativa ao contêiner pai */
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para o botão */
+    font-size: 19px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto */
+    background: #161616;
+    display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    border-radius: 20px; /* Borda arredondada de 20px */
+    border-width: 2px; /* Largura da borda */
+    border-style: solid; /* Estilo da borda */
+    border-color: #131212; /* Cor da borda */
+    cursor: pointer; /* Adiciona o cursor pointer para indicar que o botão é clicável */
+}
+
+
+.dropdown-content,
+.dropdown-menu {
+    display: none; /* Oculta o dropdown por padrão */
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px; /* Borda arredondada de 20px */
+}
+
+.dropdown-content label,
+.dropdown-menu {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.dropdown-content label:hover,
+.dropdown-menu {
+    color: #44c457;
+    font-size: 18px;
+}

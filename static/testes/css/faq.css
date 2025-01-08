@@ -1,0 +1,129 @@
+.bg-faq {
+    background-color: #28292a;
+    padding: 80px 0
+}
+
+.flex-faq {
+    display: flex;
+    gap: 40px
+}
+
+.area-flex {
+    flex: 1
+}
+
+.question {
+    display: flex
+}
+
+.ajuste-faq {
+    display: block;
+    align-items: center!important
+}
+
+.accordion {
+    border-radius: 15px;
+    background-color: #505050;
+    position: relative;
+    margin: 20px 0;
+    border-left: 0 solid transparent;
+    transition: border-left-width .2s ease-in-out;
+    border-left: 6px solid #1296fc
+}
+
+.accordion h3 {
+    display: flex;
+    font-size: 1.1rem;
+    color: #d8d8d8;
+    font-family: Roboto;
+    font-weight: 500;
+    padding: 0 48px 0 20px;
+    cursor: pointer;
+    margin: 0;
+    height: 80px;
+    width: 100%
+}
+
+.accordion::before,.accordion::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 34px;
+    content: "";
+    position: absolute;
+    background-color: #1296fc;
+    width: 3px;
+    height: 9px;
+    transition: transform .3s ease,background-color .3s ease
+}
+
+.accordion::after {
+    transform: translate(-2px,0) rotate(-45deg)
+}
+
+.accordion::before {
+    transform: translate(2px,0) rotate(45deg)
+}
+
+.accordion.active::after {
+    transform: translate(-2px,0) rotate(45deg);
+    background-color: #1296fc
+}
+
+.accordion.active::before {
+    transform: translate(2px,0) rotate(-45deg);
+    background-color: #1296fc
+}
+
+.accordion p {
+    font-family: open sans,sans-serif;
+    font-size: .9rem;
+    color: #d8d8d8;
+    padding: 10px 20px 20px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px
+}
+
+.answer {
+    overflow: hidden;
+    height: 0;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s
+}
+
+.area-title-faq {
+    padding-bottom: 60px
+}
+
+@media(max-width: 991.98px) {
+    .flex-faq {
+        gap:0;
+        flex-direction: column
+    }
+
+    .aux-faq-m {
+        margin: 0
+    }
+}
+
+@media(max-width: 575.98px) {
+    .accordion h3 {
+        font-size:1rem
+    }
+
+    .accordion p {
+        font-size: .8rem
+    }
+
+    .bg-faq {
+        padding: 12vw 0
+    }
+
+    .area-title-faq {
+        padding-bottom: 7vw
+    }
+}

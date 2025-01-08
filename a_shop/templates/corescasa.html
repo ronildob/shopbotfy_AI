@@ -1,0 +1,39 @@
+{% extends 'baseopcoes.html' %}
+{% load static %}
+{% block content %}
+     <!-- casa-->
+        <div class="cont-principal">
+            <main class="main-with-video-bg">
+                <video autoplay muted loop id="bg-video" preload="auto"  %}">
+                    <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+               
+                <div class="apresentacao">
+                    <div class="explicacao5">{{ agencia.texto_explicacao5_agencia }}</div>
+                </div> 
+            </main>      
+                            
+            <div class="initial1"> 
+                <div class="paleta">
+                    <img src="/static/home/img/site/CORESnicho_casa.png" alt="cores">
+                </div> 
+            </div>
+            <div class="formulario">           
+                <div class="form__input-row">
+                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                        <select id="cor" name="cor" class="form__field form__field--select form__field--large" required>
+                            <option value="">Selecione a Cor</option>
+                            <option value="Paleta de Cor 7">Amarelo e Azul Clean</option>
+                            <option value="Paleta de Cor 8">Cinza Clean</option>
+                            <option value="Paleta de Cor 9">Azul e Marron Clean</option>
+                            <option value="Paleta de Cor 10">Marrom e Bege Clean</option>
+                            <option value="Paleta de Cor 11">Marrom e Cinza Clean</option>
+                            <option value="Paleta de Cor 12">Preto e Branco Clean</option>
+                        </select>
+                    </div>
+                </div>   
+            </div>
+        </div>
+ 
+{% endblock %}

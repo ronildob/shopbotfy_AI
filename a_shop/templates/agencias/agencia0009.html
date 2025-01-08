@@ -1,0 +1,38 @@
+{% extends 'agencias/baselatan.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <!-- <input type="hidden" name="agencia" value="atlass"> -->
+    
+    <form id="formRedirecionar" method="post" action="{% url 'formulario' %}">
+        {% csrf_token %}
+        <input type="hidden" name="agencia" value="agencia0009">
+        <!-- INDICE--> 
+        <div class="cont-principal">
+            <main class="main-with-video-bg">
+                <video autoplay muted loop id="bg-video" preload="auto" >
+                    <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video> 
+                <div class="apresentacao">
+                    <div class="explicacao">{{ agencia.texto_apresentacao_agencia }}</div>
+                </div> 
+            </main>
+
+            <div class="videoexplicacao">
+                <div class="video-container">
+                    <iframe width="100%" height="315" src="{{ agencia.link_video }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>                  
+            <div class="cont-imput">
+                <button type="submit" class="btn-submit">CRIAR CADASTRO</button>
+                <div class="redirecionamento">               
+                            
+                </div>
+            </div>                    
+        </div>
+    </form> 
+    <br></br>
+
+{% endblock %}

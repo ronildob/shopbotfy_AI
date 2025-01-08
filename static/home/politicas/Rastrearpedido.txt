@@ -1,0 +1,50 @@
+
+<style> 
+.textorastreio {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  box-shadow: none;
+  border-radius: .375rem;
+  border: 1px solid;
+}
+
+.botaorastreio {
+  color: #fff;
+  background-color: #335eea;
+  border-color: #335eea;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  box-shadow: none;
+  border-radius: .375rem;
+  border: 1px solid transparent;
+}
+
+</style>
+
+<p style="font-weight: bold; text-align: center;">Insira seu número de rastreamento abaixo.</p>
+<div style="text-align: center;">
+ <input class="textorastreio" type="text" id="YQNum" maxlength="50" placeholder="LO235569205CN" />
+ <input class="botaorastreio" type="button" value="Buscar" onclick="doTrack()" />
+<br>
+<br>
+<div id="YQContainer"></div>
+
+<script type="text/javascript" src="//www.17track.net/externalcall.js"></script>
+<script type="text/javascript">// <![CDATA[
+function doTrack() {
+var num = document.getElementById("YQNum").value;
+if(num===""){
+alert("Digite o seu código de rastreio.");
+Retorna;
+}
+YQV5.trackSingle({
+YQ_ContainerId:"YQContainer",
+YQ_Height:800,
+YQ_Fc:"0",
+YQ_Lang:"pt-br",
+YQ_Num:num
+});
+}
+// ]]></script>

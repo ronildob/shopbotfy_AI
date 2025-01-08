@@ -1,0 +1,60 @@
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Aplica o efeito de pulsar à classe 'pulsate' */
+.pulsate {
+    animation: pulsate 1s infinite; /* Animar com o efeito 'pulsate' por tempo indefinido */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Adicionar um brilho ao texto */
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.texto-piscante {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    animation: blink 1s infinite; /* Aplica a animação 'blink' infinitamente */
+}
+.alert {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.alert--error {
+    font-size: 24px;
+    text-decoration: none;
+    color: #f5081f;
+    
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed;
+    opacity: 0.5;
+    animation: blink 1s infinite; /* Animar o texto com a animação 'blink' infinitamente */
+}
+
+.animar-texto {
+    font-size: 60px; /* Tamanho inicial do texto */
+    animation: diminuir 2s ease-in-out; /* Aplicando a animação 'diminuir' por 2 segundos com efeito in-out */
+}
+
+/* Definindo a animação 'diminuir' */
+@keyframes diminuir {
+    0% { font-size: 180px; } /* Tamanho inicial do texto */
+    100% { font-size: 60px; } /* Tamanho final do texto */
+}

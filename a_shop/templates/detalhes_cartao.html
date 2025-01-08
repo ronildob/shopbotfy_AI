@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Cartão</title>
+    
+    <!-- Adicione a linha abaixo para incluir o token CSRF -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<style>
+        .redirecionamento {
+            padding: 10px; /* Espaçamento interno */
+            height: 100%; /* Altura fixa para botões */
+            border-radius: 20px; /* Borda arredondada */
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto; /* Centraliza horizontalmente */
+            background-color: #000; /* Cor de fundo transparente */
+            display: flex; /* Torna o elemento um flex container */
+            justify-content: center; /* Centraliza o conteúdo horizontalmente */
+            align-items: center; /* Centraliza o conteúdo verticalmente */
+            text-align: center; /* Centraliza o texto dentro do elemento */
+            border-width: 3px; /* largura da borda */
+            border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+            background-color: #000; /* Cor de fundo transparente */
+        }
+        /* Aplica a animação ao texto dentro do botão */
+            a.botao-externo {
+            animation: blink 1s infinite; /* Animar o texto com a animação 'blink' infinitamente */
+            }
+            .botao-externo {
+                color: white;
+                font-size: 18px;
+                text-decoration: none;
+            }
+        .col {
+            width: 100%;
+            background-color: transparent; /* Tornar a coluna transparente */
+        }
+        
+        .button {
+            width: 100%;
+            margin-top: 5px; /* Remover esta margem ou ajustá-la se necessário */
+            padding: 10px 15px;
+            border: none;
+            background-color: #66ff00;
+            font-size: 18px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            border-radius: 20px;
+            border-bottom: 1px solid #ddd; /* Borda inferior */
+        }
+
+        .button:hover {
+            background-color: #00b32d;
+        }
+     
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        
+        th{
+            padding: 12px;
+            width: 30%;
+            
+            
+        }
+        td {
+            padding: 12px;
+          
+           
+        }
+        th {
+          
+            text-align: left; 
+        }
+        h1{
+            text-align: left;
+            font-size: 24px;
+            color: #fff;
+
+
+        }
+        h2{
+            text-align: left;
+            font-size: 20px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            
+
+        } 
+        h3{
+            text-align: left;
+            font-size: 18px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: lighter; /* Adiciona negrito */
+            
+
+        } 
+        input[type="checkbox"] {
+            transform: scale(1.5);
+            margin: 0 10px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007BFF;
+            border-radius: 50%; /* Deixar redondo */
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #007BFF;
+            border: 2px solid #007BFF;
+        }
+
+        input[type="checkbox"]:checked:before {
+            content: '✔';
+            display: block;
+            color: #007BFF;
+            font-size: 14px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        input[type="checkbox"]:hover {
+            border: 2px solid #0056b3;
+        }
+
+        input[type="checkbox"]:disabled {
+            background-color: #e9ecef;
+            border: 2px solid #adb5bd;
+            cursor: not-allowed;
+        }
+        .cont-ainereader {
+            height: 30px;
+            background-color: #007BFF;
+            text-align: center;
+            align-items: center;
+            font-size: 24px;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 20px;
+            border-bottom: 1px solid #ddd; /* Borda inferior */
+            position: relative; /* Necessário para o posicionamento do conteúdo */
+            z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+        }
+        .cont-ainer-content {
+            display: none; /* Inicialmente oculto */
+            padding: 10px;
+            border-top: 1px solid #ccc;
+
+            overflow-y: auto; /* Permite rolar verticalmente */
+            max-height: 300px; /* Define a altura máxima do conteúdo */
+            padding: 10px; /* Espaçamento interno */
+        }
+        .cont-ainer-content p,
+        .conainer-content p {
+            margin: 0;
+        }
+        .formulario {
+            margin-top: 0; /* Remove a margem superior */
+            margin-left: auto; /* Alinha à direita do container esquerdo */
+            margin-right: auto; /* Centraliza horizontalmente */
+            display: flex; /* Torna o contêiner um flex container */
+            flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center; /* Centraliza os itens verticalmente */
+
+        }   
+        .form {
+            margin-top: 0; /* Remove a margem superior */
+            margin-bottom: 0; /* Margem inferior de 20px */
+            margin-left: auto; /* Alinha à direita do container esquerdo */
+            margin-right: auto; /* Centraliza horizontalmente */
+            flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center; /* Centraliza os itens verticalmente */
+            padding: 20px; /* Espaçamento interno */
+            align-items: center; /* Centraliza os itens verticalmente */
+        } 
+        .form__field,  
+        .form__input-wrapper--labelled{
+            width: 100%;
+            max-width: 100%; /* Definir uma largura máxima para o campo */
+            height: 40px;
+            background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+            border-radius: 20px;
+            align-items: center; /* Centraliza os itens verticalmente */
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bolder; /* Adiciona negrito */
+            margin-bottom: 10px; /* Reduzido de 20px para 10px */
+        }
+
+        .form__field,
+        .form__field--select,
+        .form__field--text {
+        width: 100%;
+        max-width: 100%; /* Definir uma largura máxima para o campo */
+        height: 40px;
+        border-radius: 20px;
+        padding: 5px;
+        background-color: #e2dddd;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+        box-sizing: border-box;
+        text-align: center; /* Centraliza horizontalmente */
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder; /* Adiciona negrito */
+
+        }
+        /* Estilos quando o mouse está sobre os campos de entrada e seleção */
+        .form__input-wrapper--labelled:hover,
+        .form__field:hover,
+        .form__field--select:hover,
+        .form__field--text:hover {
+        background-color: #5c5959;
+
+        }
+        /* Estilos quando os campos de entrada e seleção estão focados */
+        .form__input-wrapper--labelled:focus,
+        .form__field:focus,
+        .form__field--select:focus,
+        .form__field--text:focus {
+        outline: none;
+        background-color: #f7b3b3;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+        }
+        /* Estilo para as opções do campo de seleção */
+        .form__field--select option,
+        .form__field--text option {
+        font-size: 16px;
+        color: #0f0f0f;
+
+        }
+        /* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+        .form__field--select option:hover,
+        .form__field--text option:hover {
+        color: #44c457;
+        font-size: 14px;
+        }
+</style>
+
+
+<style>
+    /* Estilo para a modal de confirmação */
+    .alert-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000; /* Coloca a modal acima de outros elementos */
+        max-width: 80%;
+        padding: 20px;
+        font-size: 20px;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid;
+        background-color: #fff;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Adiciona sombra para dar destaque */
+    }
+
+    /* Fundo escuro para sobrepor o conteúdo */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
+        z-index: 999; /* Um nível abaixo da mensagem de confirmação */
+        display: none; /* Oculto por padrão */
+    }
+</style>
+<body>
+
+<div class="col">
+        
+
+        {% if formulario_user %}
+        <h1>Formulário de {{ formulario_user.nome }} </h1>
+        <h1>Loja: {{ formulario_user.empresa }} </h1>
+        <h2>ID: {{ formulario_user.username }}</h2>
+         <!-- Detalhes-->
+        <div class="cont-ainereader" onclick="toggleContent(this)">
+            <span>Detalhes</span>
+        </div>
+        <div class="cont-ainer-content" id="containerContentStyle">
+            <table>
+                <tr>
+                    <th><h3>País:</h3></th>
+                    <td><h2>{{ formulario_user.pais }}</h2></td>
+                </tr>
+                <tr>
+                    <th><h3>Cor:</h3> </th>
+                    <td><h2>{{ formulario_user.cor }}</h2></td>
+                </tr>
+                <tr>
+                    <th><h3>Nicho:</h3></th>
+                    <td><h2>{{ formulario_user.nicho }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Tema Base:</h3></th>
+                    <td><h2>{{ formulario_user.tema_base }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>URL da Loja:</h3></th>
+                    <td><h2>{{ formulario_user.url_loja }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Token Senha:</h3></th>
+                    <td><h2>{{ formulario_user.token_senha }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Chave de API:</h3></th>
+                    <td><h2>{{ formulario_user.chave_de_api }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Chave Secreta:</h3></th>
+                    <td><h2>{{ formulario_user.chave_secreta }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Empresa:</h3></th>
+                    <td><h2>{{ formulario_user.empresa }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Telefone:</h3></th>
+                    <td><h2>{{ formulario_user.telefone }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Email de Suporte:</h3></th>
+                    <td><h2>{{ formulario_user.email_suporte }}</h2></td>
+                </tr>
+                <tr>
+                     
+                    <th><h3>Horario:</h3></th>
+                    <td><h2>{{ formulario_user.business_hours }}</h2></td>
+                </tr>
+                <tr>
+                    <th><h3>Ultima Atualização em:</h3></th>
+                    <td><h2>{{ formulario_user.data_atualizacao }}</h2></td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+            </table>
+        </div>
+        <!-- Detalhes Fim-->
+        <br>
+
+        <!-- Trocar Tema -->
+        <div class="cont-ainereader" onclick="toggleContent(this)">
+            <span>Trocar Tema</span>
+        </div>
+        <div class="cont-ainer-content" id="containerContentStyle">
+            <div class="formulario"> 
+                    
+                <table>
+                    <form method="POST" action="{% url 'edtema' %}" onsubmit="edtema(); return false;">
+                            
+                        {% csrf_token %}                   
+                            
+        
+                        <input type="hidden" name="username" value="{{ formulario_user.username }}">
+                                        
+                        <tr>
+                     
+                            <th><h3>Tema Atual:</h3></th>
+                            <td><h2>{{ formulario_user.tema_base }}</h2></td>
+                        </tr>
+
+                        <div id="confirmationMessagetema" class="alert-modal" style="display: none;"></div>
+                        <div id="modalOverlay" class="modal-overlay"></div>
+
+                        <tr>
+                            
+                            <th><h3></h3></th>
+                            <td><div class="form__input-wrapper form__input-wrapper--labelled">
+                                <select id="tema_base" name="tema_base" class="form__field form__field--select form__field--large" required>
+                                    <option value="">Escolha o Tema</option>
+                                    <option value="Dropmeta">Dropmeta</option>
+                                    <option value="Evolution">Evolution</option>
+                                    
+                                </select>
+                            </div> </td>
+                        </tr>
+                        
+                        <tr>
+                            <th><div class="cont-botão">                      
+                                <button type="submit" class ="button">Enviar</button>
+                            </div></th>                            
+                            <td><h3></h3></td>
+                        </tr>          
+                        
+                    </form>
+                </table>
+                
+                
+                <br>
+            </div>            
+
+        </div>
+        <!-- Trocar Tema Fim-->
+
+        <br>
+        <!-- Status -->
+        <div class="cont-ainereader" onclick="toggleContent(this)">
+            <span>Status</span>
+        </div>
+        <div class="cont-ainer-content" id="containerContentStyle">
+            <table>
+                <tr>
+                    <th><h3>Produtos:</h3></th>
+                    <td><input type="checkbox" {% if formulario_user.produtos %}checked{% endif %} disabled></td>
+                </tr>
+                <tr>
+                    <th><h3>Tema:</h3></th>
+                    <td><input type="checkbox" {% if formulario_user.tema %}checked{% endif %} disabled></td>
+                </tr>
+                <tr>
+                    <th><h3>Politicas:</h3></th>
+                    <td><input type="checkbox" {% if formulario_user.politicas %}checked{% endif %} disabled></td>
+                </tr>
+                <tr>
+                    <th><h3>Banners:</h3></th>
+                    <td><input type="checkbox" {% if formulario_user.banners %}checked{% endif %} disabled></td>
+                </tr>
+                <tr>
+                    <th><h3>Coleções:</h3></th>
+                    <td><input type="checkbox" {% if formulario_user.colecoes %}checked{% endif %} disabled></td>
+                </tr>
+                <tr>
+                    <th><h3>Design:</h3></th>
+                    <td><input type="checkbox" {% if formulario_user.estilizacao %}checked{% endif %} disabled></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Status Fim-->
+        <br>
+
+        <button id="execute-api" class="button" onclick="executeApi()">Produzir Loja</button>
+
+        <div id="confirmationMessage" class="alert-modal" style="display: none;"></div>
+        <div id="modalOverlay" class="modal-overlay"></div>
+
+        <!--<div id="confirmationMessage" style="display: none;"></div>-->
+
+            <div id="status-message"><h3></h3></div>
+            {% else %}
+                <h3>Usuário não encontrado.</h3>
+            {% endif %}
+        </div>
+            
+</div>
+
+<!-- editar o tema--> 
+<script>
+    function edtema() {
+        // Coletar os dados do formulário
+        var tema_base = document.getElementsByName('tema_base')[0].value;
+        var username = "{{ formulario_user.username }}";
+        // Construir o objeto de dados para enviar ao backend
+        var dados = {
+            tema_base: tema_base,
+            username: username
+        };
+        // Enviar os dados para o backend
+        fetch("{% url 'edtema' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(dados)
+        })
+        .then(response => response.json())
+        .then(data => {
+            var confirmationMessagetema = document.getElementById("confirmationMessagetema");
+            if (data.success) {
+                confirmationMessagetema.innerText = "Tema Atualizado!";
+                confirmationMessagetema.style.color = "green";
+                confirmationMessagetema.style.display = "block";
+                confirmationMessagetema.style.fontSize = "20px";
+                confirmationMessagetema.style.padding = "10px";
+                confirmationMessagetema.style.border = "2px solid green";
+                confirmationMessagetema.style.backgroundColor = "#e6ffe6";
+                confirmationMessagetema.style.borderRadius = "20px";
+                // Recarregar a página após alguns segundos
+                setTimeout(function() {
+                    location.reload();
+                }, 500);
+            } else {
+                confirmationMessagetema.innerText = "Erro ao criar o app: " + data.error;
+                confirmationMessagetema.style.color = "red";
+                confirmationMessagetema.style.display = "block";
+                confirmationMessagetema.style.fontSize = "20px";
+                confirmationMessagetema.style.padding = "10px";
+                confirmationMessagetema.style.border = "2px solid red";
+                confirmationMessagetema.style.backgroundColor = "#ffe6e6";
+                confirmationMessagetema.style.borderRadius = "20px";
+            }
+        })
+        .catch(error => {
+            var confirmationMessagetema = document.getElementById("confirmationMessagetema");
+            confirmationMessagetema.innerText = "Erro ao processar a requisição: " + error.message;
+            confirmationMessagetema.style.color = "red";
+            confirmationMessagetema.style.display = "block";
+            confirmationMessagetema.style.fontSize = "20px";
+            confirmationMessagetema.style.padding = "10px";
+            confirmationMessagetema.style.border = "2px solid red";
+            confirmationMessagetema.style.backgroundColor = "#ffe6e6";
+            confirmationMessagetema.style.borderRadius = "20px";
+            console.error('Erro ao processar requisição:', error);
+        });
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Verifica se esse cookie começa com o nome que procuramos
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+
+<!-- Produzir -->
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function executeApi() {
+        // Apenas passe o username
+        let payload = {
+            username: '{{ formulario_user.username }}'
+        };
+        // Obter o token CSRF
+        const csrfToken = getCookie('csrftoken');
+
+        // Limpar mensagem anterior e exibir mensagem de início
+        let statusMessage = document.getElementById('status-message');
+        statusMessage.innerText = "Iniciando a tarefa...";
+        statusMessage.style.color = "blue";
+        statusMessage.style.display = "block";
+        statusMessage.style.fontSize = "20px";
+        statusMessage.style.padding = "10px";
+        statusMessage.style.border = "2px solid blue";
+        statusMessage.style.backgroundColor = "#e6f0ff";
+        statusMessage.style.borderRadius = "20px";
+
+        // Enviar os dados para o backend
+        fetch('/produz/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify(payload)
+        }).catch(error => {
+            console.error('Erro:', error);
+        });
+
+        // Recarregar a página após exibir a mensagem
+        setTimeout(function() {
+            top.location.reload();
+        }, 2000);
+    }
+</script>
+
+
+
+<!-- toggle -->
+<script>
+    function toggleContent(element) {
+        var content = element.nextElementSibling;
+        var allContents = document.querySelectorAll('.container-content');
+        
+        // Fecha todos os containers, exceto o que foi clicado
+        allContents.forEach(function(item) {
+            if (item !== content) {
+                item.style.display = 'none';
+            }
+        });
+    
+        // Alterna a visibilidade do conteúdo do container clicado
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
+        }
+    }
+</script>
+
+
+</body>
+</html>

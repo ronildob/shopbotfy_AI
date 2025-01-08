@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ template.titulo }}</title>
+    <style>
+         #main-title {
+            background-position: center;
+            background-size: cover;
+            text-align: left;
+        }
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; min-height: 100vh; background-color: #fff; display: flex; justify-content: center; align-items: center; text-align: center;">
+    
+    <div class="cont-principal" style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #fff; box-sizing: border-box; text-align: center;">
+        <div header style="background-color: #000; width: 100%; text-align: center; border-radius: 32px; min-height: auto; display: flex; flex-direction: column;">
+            <h2 style="color: #fff; font-size 16px;">ShopBotfy! Automação e Criatividade</h2> 
+        </div>
+
+        <br></br>
+        <h1 style="color: #000;">Olá, {{ agencia }}!</h1>
+        <p style="color: #000; text-align: left">Seja bem-vindo à <strong>ShopBotfy</strong>, a plataforma que vai transformar a forma como sua agência cria e entrega lojas virtuais.</p>
+        <p style="color: #000; text-align: left">Aqui, você não precisa mais se preocupar com a produção de lojas. Enquanto a ShopBotfy cuida de toda a automação, sua agência pode focar no que realmente importa: <strong>vendas e relacionamento com seus clientes.</strong></p>
+        <p style="color: #000; text-align: left">Para começar, você já tem <strong>2 lojas gratuitas</strong> à sua disposição. Explore, teste e veja como nossa tecnologia pode impulsionar o seu negócio.</p>
+
+        <p style="color: #000; text-align: left">Estamos aqui para ser o parceiro que sua agência precisa. <strong>Conte conosco para crescer e inovar!</strong></p>
+        <br></br>
+        <p style="color: #000; text-align: left">Abraços,</p>
+        <p style="color: #000; text-align: left">Equipe ShopBotfy</p>
+        
+        <a href="https://www.shopbotfy.com/" target="_blank" class="botao-externo" style="display: block; width: 100%; max-width: 200px; margin: 20px auto; padding: 10px; text-align: center; text-decoration: none; background: #97be48; color: #000; border-radius: 20px; border: 3px solid #6f9134;">
+            Acessar
+        </a>
+        
+        <footer style="background-color: #000; width: 100%; text-align: center; border-radius: 32px; min-height: auto;">
+        <p style="color: #fff; ">&copy;2024 Shopbotfy. Todos os direitos reservados</p>
+        </footer>
+    </div>
+</body>
+</html>

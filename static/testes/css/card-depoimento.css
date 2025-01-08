@@ -1,0 +1,164 @@
+.spc {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center
+}
+
+.card-container-dep {
+    position: relative;
+    width: 800px;
+    height: 330px
+}
+
+.background-dep {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #1296fc;
+    z-index: -1;
+    border-radius: 16px;
+    box-shadow: 10px -10px 16px -12px rgba(0,0,0,.2)
+}
+
+.card-dep {
+    position: relative;
+    z-index: 1;
+    top: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: -10px 10px 16px -12px rgba(0,0,0,.1)
+}
+
+.title-cards-dep {
+    font-size: 24px;
+    font-weight: 600;
+    color: #212429;
+    margin: 0;
+    font-family: Roboto,sans-serif
+}
+
+.subtitle-cards-dep {
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 100;
+    color: #212429;
+    text-align: left;
+    font-family: Open Sans,sans-serif;
+    margin: 0
+}
+
+.line-div {
+    width: 10%;
+    height: 4px;
+    border-radius: 10px;
+    background-color: #1296fc;
+    margin: 18px 0
+}
+
+.flex-card-dep {
+    display: flex;
+    flex-direction: column
+}
+
+.embaixo {
+    position: absolute;
+    bottom: 30px
+}
+
+.flex-influencer {
+    display: flex;
+    column-gap: 20px
+}
+
+.info-influencer {
+    align-self: center
+}
+
+.img-influencer {
+    width: 100px;
+    height: auto
+}
+
+.nome-influencer {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1296fc;
+    margin: 0;
+    font-family: Roboto,sans-serif
+}
+
+.emp-influencer {
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 100;
+    color: #212429;
+    text-align: left;
+    font-family: Open Sans,sans-serif;
+    margin: 0;
+    font-style: italic
+}
+
+@media(max-width: 1199.98px) {
+    .card-container-dep {
+        width:700px
+    }
+}
+
+@media(max-width: 991.98px) {
+    .card-container-dep {
+        height:350px
+    }
+}
+
+@media(max-width: 767.98px) {
+    .card-container-dep {
+        width:100%;
+        height: 380px;
+        margin-left: 20px;
+        margin-right: 40px
+    }
+}
+
+@media(max-width: 575.98px) {
+    .card-container-dep {
+        width:100%;
+        height: 110vw
+    }
+
+    .card-dep {
+        padding: 6vw
+    }
+
+    .title-cards-dep {
+        font-size: 6vw
+    }
+
+    .line-div {
+        width: 28%;
+        height: 1vw;
+        margin: 5vw 0
+    }
+
+    .subtitle-cards-dep {
+        font-size: 3.8vw;
+        line-height: 5.5vw
+    }
+
+    .img-influencer {
+        width: 24vw
+    }
+
+    .nome-influencer {
+        font-size: 5vw
+    }
+
+    .emp-influencer {
+        font-size: 4vw;
+        line-height: 26px
+    }
+}

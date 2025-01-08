@@ -1,0 +1,2404 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopBotfy</title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="{% static 'home/css/spiners.css' %}">
+    <script type="text/javascript" src="{% static 'home/js/carrossel_vertical.js' %}"></script>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">     
+    <link rel="stylesheet" href="{% static 'home/css/efeitos.css'%}"> 
+    <link rel="stylesheet" href="/static/home/css/spin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="{% static 'home/js/carrossel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/spiner.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/video.js' %}"></script>
+    <script type="text/javascript" src="{% static 'home/js/animacao.js' %}"></script>
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--Font Awesome CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!--jquery-confirm css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="/static/home/js/painelagencias/Scriptdropdown.js"></script>
+    <script src="/static/home/js/painelagencias/togglemenu.js"></script>
+
+    <script src="/static/home/js/agencias/previewform.js"></script>
+    <script type="text/javascript" src="/static/home/js/spinernovo.js"></script>
+
+
+
+<style>
+
+:root {
+    --agencia_bg_image: url("{% if agencia.agencia_bg_image %}{{ agencia.agencia_bg_image.url }}{% else %}{% static 'default-image.png' %}{% endif %}");
+    --agencia_bg_width: {{ agencia.agencia_bg_width|default:'300px' }};
+    --agencia_bg_height: {{ agencia.agencia_bg_height|default:'90px' }};
+    --position_bg_image: {{ agencia.position_bg_image|default:'center' }};
+
+    --texto_cabecalho_agencia: "{{ agencia.texto_cabecalho_agencia|default:'Seu Texto de cabeçalho Aqui' }}";
+    --cabecalho_font_size: {{ agencia.cabecalho_font_size|default:'16px' }};
+    --cabecalho_text_color: {{ agencia.cabecalho_text_color|default:'white' }};
+    --position_texto_cabecalho: {{ agencia.position_texto_cabecalho|default:'center' }};
+
+
+    --agencia_header_color: {{ agencia.agencia_header_color|default:'white' }};
+    --agencia_background_color: {{ agencia.agencia_background_color|default:'black' }};
+    --agencia_explica_color: {{ agencia.agencia_explica_color|default:'black' }};
+    --explicacao_text_color: {{ agencia.explicacao_text_color|default:'white' }};
+    --agencia_footer_color: {{ agencia.agencia_footer_color|default:'black' }};
+
+
+    --texto_apresentacao_agencia: "{{ agencia.texto_apresentacao_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+    --apresentacao_font_size: {{ agencia.apresentacao_font_size|default:'16px' }};
+
+    --texto_texto_explicacao1_agencia: "{{ agencia.texto_explicacao1_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+    --explicacao1_font_size: {{ agencia.explicacao1_font_size|default:'16px' }};
+    
+
+    --texto_texto_explicacao2_agencia: "{{ agencia.texto_explicacao2_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+    --explicacao2_font_size: {{ agencia.explicacao2_font_size|default:'16px' }};
+
+    --texto_texto_explicacao3_agencia: "{{ agencia.texto_explicacao3_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+    --explicacao3_font_size: {{ agencia.explicacao3_font_size|default:'16px' }};
+
+    --texto_texto_explicacao4_agencia: "{{ agencia.texto_explicacao4_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+    --explicacao4_font_size: {{ agencia.explicacao4_font_size|default:'16px' }};
+
+    --texto_texto_explicacao5_agencia: "{{ agencia.texto_explicacao5_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+    --explicacao5_font_size: {{ agencia.explicacao5_font_size|default:'16px' }};
+}
+
+html, body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da viewport */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Define a orientação dos elementos como coluna */
+    justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+    align-items: center; /* Alinha os elementos no centro horizontalmente */
+}
+header {
+    background-image: var(--position_bg_image);
+    text-align: var(--position_texto_cabecalho);
+    background-color: var(--agencia_header_color); 
+    padding: 20px 10px;
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: row; /* Alinhando os itens em linha */
+    position: relative;
+    height: auto; 
+}
+
+#main-title {
+    background-image: var(--agencia_bg_image);
+    width: var(--agencia_bg_width);
+    height: var(--agencia_bg_height); /* Ajuste conforme necessário */
+    background-size: cover;
+    position: absolute; /* Se você quiser que isso cubra o header */
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex; /* Adicione se quiser centralizar conteúdo dentro */
+    justify-content: center; 
+    align-items: center; 
+}
+
+#title {
+    color: var(--cabecalho_text_color);
+    font-size: var(--cabecalho_font_size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2;
+    position: relative;
+    margin: 0;
+}
+
+main {
+    background-color: var(--agencia_background_color);
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    padding: 20px; /* Espaçamento interno */
+    justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+ 
+}
+.cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5px; /* Espaçamento entre os elementos */
+    margin-top: 5%;
+}
+.apresentacao {
+    background-color: var(--agencia_explica_color); 
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    position: relative; /* Define o posicionamento relativo */    
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow:
+            inset 20px 0 20px rgba(255, 255, 255, 0.521),   /* Sombra interna na borda esquerda */
+            inset -20px 0 20px rgba(255, 255, 255, 0.521);  /* Sombra interna na borda direita */
+    }
+.explicacao {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+
+}
+.explicacao1 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao2 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao3 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao4 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao5 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+
+
+.cont-principal {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    padding: 0px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+}
+.videoexplicacao {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+            
+}
+/* video */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de 16:9 para vídeos responsivos */
+    padding-top: 5px;
+    height: 0;
+    overflow: hidden;
+    }
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-submit {
+    width: 30%;
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #08c411; /* Cor de fundo transparente */
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #08c411;
+}
+.btn-submit:hover{
+    background-color: #028109; /* Cor de fundo transparente */
+   
+    
+
+}
+
+/* Estilizando o título h3 */
+
+.cont-botão {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 5px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+
+
+}   
+
+       
+.initial {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+}
+.initial1 {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.swiper-container-horizontal {
+    width: 100%;
+    height: 100%;/* Altura de 100% em relação ao contêiner pai */
+    border-radius: 20px;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+
+.form {
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 0; /* Margem inferior de 20px */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 0px; /* Espaçamento interno */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 100%;
+    
+
+} 
+.formulario {
+    margin-top: 0; /* Remove a margem superior */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 80%;
+}   
+
+.form__field,  
+.form__input-wrapper--labelled{
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    border-radius: 20px;
+    align-items: center; /* Centraliza os itens verticalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    margin-bottom: 10px; /* Reduzido de 20px para 10px */
+    
+}
+
+.form__field,
+.form__field--select,
+.form__field--text {
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #e2dddd;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+    box-sizing: border-box;
+    text-align: center; /* Centraliza horizontalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+
+}
+/* Estilos quando o mouse está sobre os campos de entrada e seleção */
+.form__input-wrapper--labelled:hover,
+.form__field:hover,
+.form__field--select:hover,
+.form__field--text:hover {
+    background-color: #5c5959;
+
+}
+/* Estilos quando os campos de entrada e seleção estão focados */
+.form__input-wrapper--labelled:focus,
+.form__field:focus,
+.form__field--select:focus,
+.form__field--text:focus {
+    outline: none;
+    background-color: #f7b3b3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+}
+/* Estilo para as opções do campo de seleção */
+.form__field--select option,
+.form__field--text option {
+    font-size: 16px;
+    color: #0f0f0f;
+
+}
+/* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+.form__field--select option:hover,
+.form__field--text option:hover {
+    color: #44c457;
+    font-size: 14px;
+}
+#bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.main-with-video-bg {
+    position: relative;
+    z-index: 1; 
+    background-image: url("{% static 'home/img/imag-pag1.png' %}"); /* Imagem de fundo */
+    background-size: cover;
+    background-position: center;
+}
+
+.paleta {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center; /* Centraliza horizontalmente */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+
+    
+}
+.paleta img {
+    max-width: 100%; /* Garantir que a imagem não ultrapasse a largura da div */
+    max-height: 100%; /* Garantir que a imagem não ultrapasse a altura da div */
+    display: block; /* Permitir margens e alinhamento corretos */
+    border-radius: 5px; /* Borda arredondada na imagem */
+}
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+#title {
+    display: block; /* Garante que o elemento seja exibido em telas maiores */
+}
+.explicacao{
+    width: 60%;
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 30%;
+}
+.form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+}
+.formulario {
+width: 100%; /* Ambos ocupam metade da largura */
+} 
+.form__input-row {
+width: 100%;    
+}   
+
+
+.initial{
+width: 80%;
+}
+.initial1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+  
+}
+
+}   
+@media (max-width: 1439px){
+.explicacao{
+    width: 80%;
+}
+.cont-botão {
+    width: 100%; 
+}
+button, 
+input[type=submit] {
+    width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 60%;
+}
+
+.form {
+    width: 100%;   
+}
+.formulario {
+    width: 100%; 
+} 
+.form__input-row {
+    width: 100%;    
+}   
+
+.initial {
+    width: 80%;
+}
+.initial1{
+    width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+.videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+}
+
+}   
+@media(max-width: 1024px) {
+    main {
+    
+    padding: 10px; /* Espaçamento interno */
+ 
+}
+.explicacao{
+    width: 80%;
+}
+.videoexplicacao{
+    width: 80%; 
+}
+
+.cont-botão {
+width: 100%;
+}
+button, input[type=submit] {
+width: 80%; 
+}
+.btn-submit {
+    width: 80%;
+}
+
+.formulario{
+width: 100%;
+}   
+.form {
+width: 100%;    
+} 
+.form__input-row {
+    width: 100%;    
+}
+.initial{
+    width: 80%;
+}
+.initial1 {
+    width: 100%;
+}
+
+.swiper-slide img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+} 
+}
+
+@media (max-width: 767px){
+main {
+    
+    padding: 5px; /* Espaçamento interno */
+ 
+}
+.apresentacao {
+
+    width: 100%; /* Largura total */
+}
+.explicacao1, .explicacao2, .explicacao3, .explicacao4, .explicacao5{
+    width: 100%;
+}
+.videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+
+#title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+} 
+.btn-submit {
+    width: 90%;
+}
+     
+form {
+    width: 100%;    
+}
+.formulario {
+    width: 100%; /* Ambos ocupam metade da largura */
+}
+
+.form__input-row {
+    width: 100%;    
+}
+
+footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: stretch; /* Estica os itens para ocupar a largura total */
+    background-color: var(--agencia_footer_color);
+}
+
+footer div {
+    padding: 10px 0; /* Ajusta o espaçamento entre os itens */
+}
+.footer2 {
+    flex-direction: column; /* Garante que permaneça empilhado em telas menores */
+    align-items: center; /* Centraliza os itens horizontalmente */
+
+}
+
+.initial{
+width: 100%;
+}
+.initial1{
+width: 100%;
+}
+
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+}
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+}
+
+footer {
+    display: flex;
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: var(--agencia_footer_color); 
+    padding: 20px;
+    width: 100%;
+}
+
+footer div {
+    flex-grow: 1; /* Permite que os itens cresçam para ocupar o espaço */
+    padding: 0 10px; /* Adiciona espaçamento entre os itens */
+}
+.footer-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+}
+#rodape {   
+    height: 60px;
+    width: 240px;
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    background-position: center;
+    background-size: cover;
+    color: white;
+    line-height: 90px; 
+}
+.footer2 {
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Alinha os itens à esquerda */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+    padding: 10px;
+    width: 100%;
+    color: #e2dddd;
+}
+.social {
+    display: flex;
+    justify-content: flex-start; /* Alinha os itens ao início */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    padding: 20px;
+    width: 100%;
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+}
+
+.social > * {
+    margin-right: 10px; /* Espaçamento entre os itens */
+}
+
+.social > *:last-child {
+    margin-right: 0; /* Remove a margem do último item */
+}
+.footer2 div {
+    margin: 5px 0; /* Espaçamento entre os itens */
+}
+    
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: row; /* Alinha itens horizontalmente, com o menu à esquerda e o conteúdo à direita */
+    width: 100%; /* Garante que ocupe 100% da largura disponível */
+}
+/* Cabeçalho */
+
+
+.cont-esq {
+    position: fixed;
+    left: 0;
+    width: 18%;
+    height: 100%;
+    background-color: #969696;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: visible; /* Permite que os itens excedam os limites horizontais */
+    z-index: 999;
+    transition: transform 0.3s ease; /* Animação suave */
+    text-transform: none; /* Garante que o texto não seja transformado */
+}
+
+.cont-dir {
+    width: calc(100% - 18%); /* O container ocupa o espaço restante quando o menu está aberto */
+    margin-left: calc(18% );
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Remove a rolagem */
+    min-height: 100vh;
+    transition: width 0.3s ease, margin-left 0.3s ease; /* Animação suave */
+    
+}
+
+/* Estilos para telas menores */
+@media (max-width: 768px) {
+    .cont-esq {
+        width: 40%; /* O menu ocupará 40% da tela quando aberto */
+       
+    }
+
+    .cont-dir.recued {
+        width: 60%; /* O conteúdo da direita ocupa 60% da tela quando o menu está aberto */
+        margin-left: 40%; /* Recuar o conteúdo da direita */
+    }
+
+}
+
+.remote-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.control-button.up {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.control-button.down {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.control-button.left {
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control-button.right {
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control-button:hover {
+    background-color: #0056b3;
+}
+
+
+.button-container button {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #45a049;
+}
+
+
+.cont-pri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    text-transform: none; /* Garante que o texto não seja transformado */
+}
+.contpri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    /* Remove a altura mínima fixa */
+    min-height: auto; 
+    /* Adiciona um espaçamento interno, se necessário */
+    padding: 10px; 
+    /* Garante que o conteúdo interno não ultrapasse o contêiner */
+    box-sizing: border-box; 
+}
+
+
+.icone_redirect {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.dropdown-button{
+    width: 100%; /* Largura relativa ao contêiner pai */
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para o botão */
+    font-size: 19px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto */
+    background: #969696;
+    display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    border-radius: 20px; /* Borda arredondada de 20px */
+    border-width: 2px; /* Largura da borda */
+    border-style: solid; /* Estilo da borda */
+    border-color: #969696; /* Cor da borda */
+    cursor: pointer; /* Adiciona o cursor pointer para indicar que o botão é clicável */
+}
+
+.dropdown-content,
+.dropdown-menu {
+    display: none; /* Oculta o dropdown por padrão */
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px; /* Borda arredondada de 20px */
+}
+
+.dropdown-content label,
+.dropdown-menu {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.dropdown-content label:hover,
+.dropdown-menu {
+    color: #44c457;
+    font-size: 18px;
+}
+
+.color-box {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-display {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff; /* Cor padrão */
+    cursor: pointer;
+}
+
+.color-input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.dropdown-menu {
+display: none; /* Oculta o dropdown por padrão */
+position: absolute;
+background-color: #ffffff;
+border: 1px solid #ddd;
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+z-index: 1000; /* Garante que o menu fique sobre outros elementos */
+}
+
+.dropdown-menu.show {
+display: block; /* Exibe o dropdown quando a classe 'show' está presente */
+}
+
+.dropdown-item {
+padding: 10px 20px;
+text-decoration: none;
+color: #333;
+display: block;
+}
+
+.dropdown-item:hover {
+background-color: #f1f1f1;
+}
+
+.dropdown-toggle::after {
+content: '\25BC'; /* Adiciona uma seta para baixo no botão */
+margin-left: 5px;
+}
+
+.contpri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    min-height: auto; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    text-transform: none; 
+}
+
+.swiper-container-horizontal {
+width: 100%;
+height: 100%; /* Altura ajustada para o contêiner pai */
+
+}   
+
+.swiper-slide img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* Estilo para os botões com FontAwesome */
+.swiper-button-prev,
+.swiper-button-next {
+width: 40px; /* Largura do botão */
+height: 40px; /* Altura do botão */
+background-color: rgba(0, 0, 0, 0.281); /* Cor de fundo com transparência */
+color: #fff; /* Cor do ícone */
+border-radius: 50%; /* Botão redondo */
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px; /* Tamanho do ícone */
+cursor: pointer; /* Muda o cursor para indicar que é clicável */
+z-index: 10; /* Garante que o botão esteja acima dos outros elementos */
+position: absolute; /* Posiciona os botões em relação ao contêiner pai */
+}
+
+/* Posicionamento dos botões */
+.swiper-button-prev {
+left: 10px; /* Distância da borda esquerda */
+}
+
+.swiper-button-next {
+right: 10px; /* Distância da borda direita */
+}
+
+/* Adicione algum efeito visual ao passar o mouse sobre os botões */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+background-color: #969696;/* Muda a cor de fundo ao passar o mouse */
+color: #fff; /* Cor do ícone */
+}
+.cont-ainer {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin: 10px;
+    width: 90%;
+
+}
+
+.cont-ainereader {
+    background-color: #fff;
+    color: #000000;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+    position: relative; /* Necessário para o posicionamento do conteúdo */
+    z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.cont-ainer-header {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+    position: relative; /* Necessário para o posicionamento do conteúdo */
+    z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.cont-ainer-content {
+    display: none; /* Inicialmente oculto */
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    overflow-y: auto; /* Permite rolar verticalmente */
+    max-height: 300px; /* Define a altura máxima do conteúdo */
+    padding: 10px; /* Espaçamento interno */
+}
+
+.conainer-header {
+    width: 100%;
+    background-color: #615f5f;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+    position: relative; /* Necessário para o posicionamento do conteúdo */
+    z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.conainer-content {
+    display: none; /* Inicialmente oculto */
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    overflow-y: auto; /* Permite rolar verticalmente */
+    max-height: 300px; /* Define a altura máxima do conteúdo */
+    padding: 10px; /* Espaçamento interno */
+}
+.cont-ainer-content p,
+.conainer-content p {
+    margin: 0;
+}
+/* Responsividade para telas menores que 768px (geralmente tablets e dispositivos móveis) */
+@media (max-width: 768px) {
+    #title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+    .swiper-container-horizontal {
+        height: 250px; /* Ajuste a altura do swiper para telas menores */
+    }
+
+    .contpri, .initial1, .initial {
+        max-width: 100%; /* Ajuste a largura máxima */
+        margin-bottom: 15px; /* Reduza a margem inferior */
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 30px; /* Reduza a largura dos botões */
+        height: 30px; /* Reduza a altura dos botões */
+        font-size: 16px; /* Reduza o tamanho do ícone */
+    }
+
+    .container-header {
+        font-size: 16px; /* Ajuste o tamanho da fonte do cabeçalho */
+        padding: 8px; /* Reduza o padding */
+    }
+
+    .container-content {
+        padding: 8px; /* Reduza o padding do conteúdo */
+    }
+    .video-container {
+        margin-top: 15px;
+    }
+
+    .video-container video {
+        border: 1px solid #ccc; /* Ajuste a borda para telas menores */
+    }
+}
+
+/* Responsividade para telas menores que 480px (geralmente smartphones) */
+@media (max-width: 480px) {
+    #title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+    .swiper-container-horizontal {
+        height: 200px; /* Ajuste a altura do swiper para smartphones */
+    }
+
+    .contpri, .initial1, .initial {
+        margin-bottom: 10px; /* Reduza a margem inferior */
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 25px; /* Reduza ainda mais a largura dos botões */
+        height: 25px; /* Reduza ainda mais a altura dos botões */
+        font-size: 14px; /* Reduza o tamanho do ícone */
+    }
+
+    .container-header {
+        font-size: 14px; /* Ajuste o tamanho da fonte do cabeçalho */
+        padding: 6px; /* Reduza o padding */
+    }
+
+    .container-content {
+        padding: 6px; /* Reduza o padding do conteúdo */
+    }
+    .video-container {
+        margin-top: 10px;
+    }
+
+    .video-container video {
+        border: 1px solid #bbb; /* Ajuste a borda para smartphones */
+        border-radius: 2px; /* Reduza o raio da borda para telas pequenas */
+    }
+}
+
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.863); /* Cor branca com 50% de opacidade */
+    pointer-events: none; /* Permite que os cliques passem através da sobreposição */
+}
+
+
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+                            /* ESTILOS TEXTO */
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+h1 {
+    text-align: center; /* Centraliza horizontalmente */
+    margin-top: 0; /* Remove margem superior padrão */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    color: #fff; /* Cor do texto */
+    font-size: 23px; /* Tamanho da fonte */
+    align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    text-transform: none;
+}
+
+h2 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter; /* Adiciona negrito */
+    text-transform: none;
+
+
+}
+
+h3 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-transform: none;
+
+}
+h4 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+    text-transform: none;
+    
+
+}
+h5 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000; /* Cor do texto no cabeçalho */
+    font-size: 12px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+    text-transform: none;
+
+}
+
+
+/* Media Queries para telas menores */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 20px; /* Reduz tamanho da fonte */
+        margin-bottom: 8px; /* Ajusta espaçamento inferior */
+    }
+
+    h2 {
+        font-size: 20px; /* Reduz tamanho da fonte */
+    }
+
+    h3 {
+        font-size: 18px; /* Reduz tamanho da fonte */
+    }
+
+    h4 {
+        font-size: 14px; /* Reduz tamanho da fonte */
+    }
+
+    h5 {
+        font-size: 12px; /* Reduz tamanho da fonte */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px; /* Ajusta ainda mais o tamanho da fonte para telas pequenas */
+        margin-bottom: 6px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    h4 {
+        font-size: 13px;
+    }
+
+    h5 {
+        font-size: 10px;
+    }
+}
+/* Estilos adicionais para itens */
+.item {
+    background-color: #ddd;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-height: 100vh;
+    
+}
+
+label {
+    /* Definindo a cor do texto */
+    color: #000; /* Cor pode ser ajustada para sua preferência */
+    /* Definindo o tamanho da fonte */
+    font-size: 16px; /* Tamanho da fonte pode ser ajustado */
+    /* Definindo margem inferior para espaçamento */
+    margin-bottom: 2px; /* Ajuste conforme necessário */
+    /* Outros estilos opcionais */
+    font-weight: bold; /* Pode ser 'normal' ou 'bold' */
+    /* Centralizando o texto horizontalmente */
+    text-align: center; /* Centraliza o texto dentro do label */
+    /* Centralizando o texto verticalmente */
+    line-height: 1.5; /* Ajusta a altura da linha para centralizar verticalmente */
+    font-weight: 500;
+}
+
+
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group button {
+    background-color: #4CAF50; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    font-size: 1.5rem; /* Tamanho da fonte para o símbolo */
+    border: none; /* Remove a borda padrão */
+    border-radius: 50%; /* Forma redonda */
+    width: 20px; /* Largura e altura iguais para botões redondos */
+    height: 20px;
+    display: flex; /* Flexbox para centralizar conteúdo */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Animação de hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+/* Efeito ao passar o mouse sobre o botão */
+.input-group button:hover {
+    background-color: #45a049; /* Cor de fundo ao passar o mouse */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao hover */
+}
+
+/* Efeito de clique no botão */
+.input-group button:active {
+    transform: translateY(2px); /* Efeito de pressão */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Reduz a sombra ao clicar */
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 768px) {
+    .input-group button {
+        width: 10px; /* Reduz o tamanho para dispositivos móveis */
+        height: 10px;
+        font-size: 1.2rem;
+    }
+
+    #cabecalho_font_size, #agencia_bg_width, #agencia_bg_height{
+        width: 80%; 
+    }
+}
+
+#cabecalho_font_size, #agencia_bg_width, #agencia_bg_height, #apresentacao_font_size{
+    width: 50%; /* Define a largura do input */
+    padding: 10px; /* Espaço interno */
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 12px; /* Tamanho da fonte */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #f9f9f9; /* Cor de fundo */
+    color: #333; /* Cor do texto */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave ao focar */
+    align-items: center;
+} 
+
+
+
+#copy_agencia,#telefone_agencia,#contato_agencia,#agencia_background_color_input,#agencia_explica_color_input,#explicacao_text_color_input,#link_7,#link_8,#copy,#telefone,#contato,#link_face_agencia, #cabecalho_text_color_input,
+#link_insta_agencia,#link_youtube_agencia,#link_site_agencia,#bgd_image,#bgd_width,#bgd_height,#text_content,#agencia_header_color_input,#text_color_input, #linklogin
+,#text_header_color_input,#text_saudacao_color_input,#text_header_content_input,#text_saudacao_content_input,#agencia_footer_color_input, #link_member_agencia, #link_impact,#texto_cabecalho_agencia{
+    width: 100%; /* Define a largura do input */
+    padding: 10px; /* Espaço interno */
+    margin: 10px 0; /* Espaçamento externo */
+    font-size: 16px; /* Tamanho da fonte */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #f9f9f9; /* Cor de fundo */
+    color: #333; /* Cor do texto */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave ao focar */
+    text-transform: none;
+}
+
+#copy_agencia:focus,#telefone_agencia:focus,#contato_agencia:focus,#agencia_background_color:focus,#agencia_explica_color:focus,#explicacao_text_color:focus,
+#link_7:focus,#link_8:focus,#copy:focus,#telefone:focus,#contato:focus, #cabecalho_text_color_input:focus,
+#link_face_agencia:focus, #link_insta_agencia:focus,#link_youtube_agencia:focus,#link_site_agencia:focus,#bgd_image:focus,
+#bgd_width:focus,#bgd_height:focus,#text_content:focus,#font_size:focus,
+#agencia_header_color_input:focus,#cabecalho_font_size:focus,
+#text_color_input:focus,#linklogin:focus,  #agencia_bg_width:focus, #agencia_bg_height:focus,
+#text_header_color_input:focus,#text_saudacao_color_input:focus, #apresentacao_font_size:focus,
+#text_header_content_input:focus,#text_saudacao_content_input:focus,
+#agencia_footer_color_input:focus, #link_impact:focus, #link_member_agencia:focus,#texto_cabecalho_agencia:focus  {
+    border-color: #3e8e41; /* Cor da borda ao focar */
+    box-shadow: 0 0 5px #3e8e41; /* Sombra ao focar */
+    outline: none; /* Remove o contorno padrão */
+    font-size: 12px;
+    text-transform: none; /* Garante que o texto não seja transformado */
+}  
+#copy_agencia:hover,#telefone_agencia:hover,#contato_agencia:hover,#agencia_background_color_input:hover,#agencia_explica_color_input:hover,#explicacao_text_color_input:hover,#cabecalho_font_size:hover,
+#link_7:hover,#link_8:hover,#copy:hover,#telefone:hover,#contato:hover,#link_face_agencia:hover, #agencia_bg_width:hover, #agencia_bg_height:hover,
+#link_insta_agencia:hover,#link_youtube_agencia:hover,#link_site_agencia:hover,#bgd_image:hover,#cabecalho_text_color_input:hover, #apresentacao_font_size:hover,
+#bgd_width:hover,#bgd_height:hover:hover,#font_size:hover,#agencia_header_color_input:hover,#text_color_input:hover,#linklogin:hover, 
+#text_header_color_input:hover,#text_saudacao_color_input:hover,#text_header_content_input:hover,#text_saudacao_content_input:hover
+#agencia_footer_color_input:hover, #link_impact:hover, #link_membe_agencia:hover,#texto_cabecalho_agencia:hover{
+background-color: #818080;/* Muda a cor de fundo ao passar o mouse */
+color: #fff; /* Cor do ícone */
+}
+
+.color-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.color-input-container input[type="color"] {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 50%; /* Faz o campo de cor ficar redondo */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+   /* border: none;  Remove bordas padrão */
+    appearance: none; /* Remove estilo padrão do navegador */
+}
+
+.color-input-container input[type="color"]::-webkit-color-swatch {
+    border-radius: 50%; /* Ajusta o estilo da cor no WebKit (Chrome, Safari) */
+}
+
+.color-input-container input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    width: 70%;
+}
+
+.detalhes-button {
+    width: 98%;
+    margin-top: 5px; /* Remover esta margem ou ajustá-la se necessário */
+    padding: 10px 15px;
+    border: none;
+    background-color: #007BFF;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.detalhes-button:hover {
+    background-color: #0056b3;
+}
+
+.copy-url-button {
+    width: 98%;
+    margin-top: 5px; /* Remover esta margem ou ajustá-la se necessário */
+    padding: 10px 15px;
+    border: none;
+    background-color: #474747;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.copy-url-button:hover {
+    background-color: #515151;
+}
+
+
+
+
+
+
+
+
+</style>
+
+</head>
+
+<body>
+    <div class="content"> 
+        <div class="cont-esq" id="menuLateral">
+         
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if request.session.agencia_nome %}
+
+                <!-- links --> 
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h5><span>LINK FILIADO:</span></h5>
+                    </div>  
+                    <div class="cont-ainer-content" id="containerContentStyle">                        
+                        <div class="contpri">
+                            <label for="link_impact">Link Filiado Shopify</label>
+                            <input type="text" id="link_impact" name="link_impact" value="{{ agencia.link_impact }}" required oninput="updatePreview(agencia.link_impact)">
+                        </div>
+                        <br>
+                        <div class="button-container">
+                            <button type="submit" id="apply-style" name="update">Salvar</button> 
+                        </div> 
+                        <br></br>                         
+                    </div>                         
+                </div>
+
+
+                <!-- cabeçalho --> 
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h5><span>CABEÇALHO:</span></h5>
+                    </div>  
+                    <div class="cont-ainer-content" id="containerContentStyle">  
+                        
+                        <div class="contpri">
+                            <label for="agencia_header_color">Cor do Fundo:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="agencia_header_color" name="agencia_header_color" value="{{ agencia.agencia_header_color }}" oninput="updateHeaderColor(this.value)">
+                                <input type="text" id="agencia_header_color_input" name="agencia_header_color_input" value="{{ agencia.agencia_header_color }}" oninput="updateHeaderColorInput(this.value)">
+                            </div>
+                        </div>
+
+                        <div class="contpri">
+                            <label for="agencia_bg_image">Imagem:</label>
+                            <label for="agencia_bg_image" class="custom-upload">Escolher</label>
+                            <input type="file" id="agencia_bg_image" name="agencia_bg_image" value="{{agencia.agencia_bg_image }}" style="display: none;" onchange="updatePreview()">
+                        
+                            <div class="contpri">
+                                <label for="agencia_bg_width">Largura:</label>
+                                <div class="input-group">
+                                    <button class="btn-adjust" type="button" onclick="changeValue('agencia_bg_width', -10)">-</button>
+                                    <input type="text" id="agencia_bg_width" name="agencia_bg_width" value="{{agencia.agencia_bg_width}}" oninput="updatePreview()" readonly>
+                                    <button class="btn-adjust" type="button" onclick="changeValue('agencia_bg_width', 10)">+</button>
+                                </div>
+                            </div>
+                        
+                            <div class="contpri">
+                                <label for="agencia_bg_height">Altura:</label>
+                                <div class="input-group">
+                                    <button class="btn-adjust" type="button" onclick="changeValue('agencia_bg_height', -10)">-</button>
+                                    <input type="text" id="agencia_bg_height" name="agencia_bg_height" value="{{agencia.agencia_bg_height}}" oninput="updatePreview(this.value)">
+                                    <button class="btn-adjust" type="button" onclick="changeValue('agencia_bg_height', 10)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       <!-- <div class="contpri">
+                            <label for="agencia_bg_image">Imagem:</label>
+                            <label for="agencia_bg_image" class="custom-upload">Escolher</label>
+                            <input type="file" id="agencia_bg_image" name="agencia_bg_image" style="display: none;" onchange="updatePreview()">
+        
+                            <div class="contpri">
+                                <label for="agencia_bg_width">Largura:</label>
+                                <div class="input-group">
+                                    <button class="btn-adjust" type="button" onclick="changeValue('agencia_bg_width', -10)">-</button>
+                                    <input type="text" id="agencia_bg_width" name="agencia_bg_width" value="{{ agencia.agencia_bg_width | default:'50px' }}" oninput="updatePreview()" readonly>
+                                    <button class="btn-adjust"type="button" onclick="changeValue('agencia_bg_width', 10)">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="contpri">
+                                <label for="agencia_bg_height">Altura:</label>
+                                <div class="input-group">
+                                    <button class="btn-adjust" type="button" onclick="changeValue('agencia_bg_height', -10)">-</button>
+                                    <input type="text" id="agencia_bg_height" name="agencia_bg_height" value="{{ agencia.agencia_bg_height | default:'50px' }}" oninput="updatePreview()" readonly>
+                                    <button class="btn-adjust" type="button" onclick="changeValue('agencia_bg_height', 10)">+</button>
+                                </div>
+                            </div>
+                        </div> -->
+                                
+                        <div class="contpri">
+                            <label for="texto_cabecalho_agencia">Slogan:</label>
+                            <input type="text" id="texto_cabecalho_agencia" name="texto_cabecalho_agencia" value="{{ agencia.texto_cabecalho_agencia }}" oninput="updatePreview(this.value)" >
+                        </div> 
+                        <div class="contpri">
+                            <label for="cabecalho_font_size">Tamanho da fonte:</label>
+                            <div class="input-group">
+                                <button class="btn-adjust" type="button" onclick="changeValue('cabecalho_font_size', -1)">-</button>
+                                <input type="text" id="cabecalho_font_size" name="cabecalho_font_size" value="{{ agencia.cabecalho_font_size | default:'0px' }}" oninput="updatePreview()" readonly>
+                                <button class="btn-adjust"type="button" onclick="changeValue('cabecalho_font_size', 1)">+</button>
+                            </div>
+                        </div> 
+                        <div class="contpri">
+                            <label for="cabecalho_text_color">Cor do texto:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="cabecalho_text_color" name="cabecalho_text_color" value="{{ agencia.cabecalho_text_color }}" oninput="updateTextColor(this.value)">
+                                <input type="text" id="cabecalho_text_color_input" name="cabecalho_text_color_input" value="{{ agencia.cabecalho_text_color }}" oninput="updateTextColorInput(this.value)">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="button-container">
+                            <button type="submit" id="apply-style" name="update">Salvar</button>                            
+                        </div> 
+                        <br></br>
+                    </div>                                                    
+                </div>
+
+                <!-- links --> 
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h5><span>CORPO DA PAGINA:</span></h5>
+                    </div>  
+                    <div class="cont-ainer-content" id="containerContentStyle"> 
+                        <div class="contpri">
+                            <label for="agencia_background_color">Cor do Fundo:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="agencia_background_color" name="agencia_background_color" value="{{ agencia.agencia_background_color }}" oninput="updateBackgroudColor(this.value)">
+                                <input type="text" id="agencia_background_color_input" name="agencia_background_color_input" value="{{ agencia.agencia_background_color }}" oninput="updateBackgroudColorInput(this.value)">
+                            </div>
+                        </div> 
+                        
+                        <div class="contpri">
+                            <label for="agencia_explica_color">Background Textos:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="agencia_explica_color" name="agencia_explica_color" value="{{ agencia.agencia_explica_color }}" oninput="updateExplicaColor(this.value)">
+                                <input type="text" id="agencia_explica_color_input" name="agencia_explica_color_input" value="{{ agencia.agencia_explica_color }}" oninput="updateExplicaColorInput(this.value)">
+                            </div>
+
+                            <div class="contpri">
+                                <label for="apresentacao_font_size">Tamanho da fonte:</label>
+                                <div class="input-group">
+                                    <button class="btn-adjust" type="button" onclick="changeValue('apresentacao_font_size', -1)">-</button>
+                                    <input type="text" id="apresentacao_font_size" name="apresentacao_font_size" value="{{ agencia.apresentacao_font_size | default:'0px' }}" oninput="updatePreview()" readonly>
+                                    <button class="btn-adjust"type="button" onclick="changeValue('apresentacao_font_size', 1)">+</button>
+                                </div>
+                            </div> 
+                        
+                            <label for="explicacao_text_color">Cor do texto:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="explicacao_text_color" name="explicacao_text_color" value="{{ agencia.explicacao_text_color }}" oninput="updateTextColor(this.value)">
+                                <input type="text" id="explicacao_text_color_input" name="explicacao_text_color_input" value="{{ agencia.explicacao_text_color }}" oninput="updateTextColorInput(this.value)">
+                            </div>
+                        </div> 
+                        
+                        
+                        
+                        <br>
+                        <div class="button-container">
+                            <button type="submit" id="apply-style" name="update">Salvar</button> 
+                        </div> 
+                        <br></br>                         
+                    </div>                         
+                </div>
+
+                <!-- rodapé --> 
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h5><span>RODAPÉ:</span></h5>
+                    </div>  
+                    <div class="cont-ainer-content" id="containerContentStyle">
+                                                   
+                        <div class="contpri">
+                            <label for="agencia_footer_color">Cor do Fundo:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="agencia_footer_color" name="agencia_footer_color" value="{{ agencia.agencia_footer_color }}" oninput="updateFooterColor(this.value)">
+                                <input type="text" id="agencia_footer_color_input" name="agencia_footer_color_input" value="{{ agencia.agencia_footer_color }}" oninput="updateFooterColorInput(this.value)">
+                            </div>
+                        </div>
+
+                
+                        <br>
+                        <div class="contpri">
+                            <div class="contpri">
+                                <label for="copy_agencia">Copyright</label>
+                                <input type="text" id="copy_agencia" name="copy_agencia" value="{{ agencia.copy_agencia }}" oninput="updatePreview(this.value)" >
+                            </div>
+
+                            <br>
+                            <div class="contpri">
+                                <label for="telefone_agencia">Telefone</label>
+                                <label for="telefone_agencia"><input type="checkbox" name="show_telefone_agencia" {% if agencia.show_telefone_agencia %}checked{% endif %}> Exibir Telefone</label>
+                                <input type="tel" id="telefone_agencia" name="telefone_agencia" value="{{ agencia.telefone_agencia }}" oninput="updatePreview(this.value)" >
+                            </div>
+
+                            <br>
+                            <div class="contpri">
+                                <label for="contato_agencia">Contato</label>
+                                <label for="contato_agencia"><input type="checkbox" name="show_contato_agencia" {% if agencia.show_contato_agencia %}checked{% endif %}> Exibir Contato</label>
+                                <input type="text" id="contato_agencia" name="contato_agencia" value="{{ agencia.contato_agencia }}" oninput="updatePreview(this.value)" >
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="contpri">
+                            
+                            <label for="link_site_agencia"><input type="checkbox" name="show_link_site_agencia" {% if agencia.show_link_site_agencia %}checked{% endif %}> Exibir Link do Site</label>
+                            <input type="text" id="link_site_agencia" name="link_site_agencia" value="{{ agencia.link_site_agencia }}" oninput="updatePreview()">
+
+                            <label for="link_face_agencia"><input type="checkbox" name="show_link_face_agencia" {% if agencia.show_link_face_agencia %}checked{% endif %}> Exibir Link Facebook</label>
+                            <input type="text" id="link_face_agencia" name="link_face_agencia" value="{{ agencia.link_face_agencia }}" oninput="updatePreview()">
+                            
+                            <label for="link_insta_agencia"><input type="checkbox" name="show_link_insta_agencia" {% if agencia.show_link_insta_agencia %}checked{% endif %}> Exibir Link Instagram</label>
+                            <input type="text" id="link_insta_agencia" name="link_insta_agencia" value="{{ agencia.link_insta_agencia }}" oninput="updatePreview()">
+                        
+                            <label for="link_youtube_agencia"><input type="checkbox" name="show_link_youtube_agencia" {% if agencia.show_link_youtube_agencia %}checked{% endif %}> Exibir Link Youtube</label>
+                            <input type="text" id="link_youtube_agencia" name="link_youtube_agencia" value="{{ agencia.link_youtube_agencia }}" oninput="updatePreview()">
+                        
+                           
+                        
+                        </div>
+                        <br>
+                        
+                        <div class="button-container">
+                            <button type="submit" id="apply-style" name="update">Salvar</button>                           
+                         </div>
+                         <br></br>  
+                    </div>                        
+                </div>
+
+
+                <!-- e-mail -->
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h5><span>E-MAIL:</span></h5>
+                    </div>
+                    <div class="cont-ainer-content" id="containerContentStyle">
+                
+                        <div class="contpri">
+                            <button class="detalhes-button" onclick="loadPage(event, '{% url 'mail' %}')">VER</button>
+                        </div>
+
+                        <!-- Campo para título -->
+                        <div class="contpri">
+                            <label for="background_color">Cor do Background:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="background_color" name="background_color" value="{{ template.background_color }}" oninput="updateBackgroundColor(this.value)">
+                                <input type="text" id="background_color_input" name="background_color_input" value="{{ template.background_color }}" oninput="updateBackgroudColorInput(this.value)">
+                            </div>
+                        </div>
+
+                        <div class="contpri">
+                            <label for="text_header_content">Texto cabeçalho:</label>
+                            <input type="text" id="text_header_content" name="text_header_content" value="{{ template.text_header_content }}" oninput="updateTextHeaderContent(this.value)">
+                        </div>             
+                        <div class="contpri">
+                            <label for="text_header_color">Cor do texto:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="text_header_color" name="text_header_color" value="{{ template.text_header_color }}" oninput="updateTextHeaderColor(this.value)">
+                                <input type="text" id="text_header_color_input" name="text_header_color_input" value="{{ template.text_header_color }}" oninput="updateTextHeaderColorInput(this.value)">
+                            </div>
+                        </div> 
+
+                        <div class="contpri">
+                            <label for="text_saudacao_content">Mensagem ao Usuário:</label>
+                            <input type="text" id="text_saudacao_content" name="text_saudacao_content" value="{{ template.text_saudacao_content }}" oninput="updateTextSaudacaoContent(this.value)">
+                        </div>             
+                        <div class="contpri">
+                            <label for="text_saudacao_color">Cor da mensagem:</label>
+                            <div class="color-input-container">
+                                <input type="color" id="text_saudacao_color" name="text_saudacao_color" value="{{ template.text_saudacao_color }}" oninput="updateTextSaudacaoColor(this.value)">
+                                <input type="text" id="text_saudacao_color_input" name="text_saudacao_color_input" value="{{ template.text_saudacao_color }}" oninput="updateTextSaudacaoColorInput(this.value)">
+                            </div>
+                        </div> 
+
+                        <div class="contpri">
+                            <label for="bgd_height">Imagem:</label>
+                            <label for="bgd_image" class="custom-upload">Escolher</label>
+                            <input type="file" id="bgd_image" name="bgd_image" style="display: none;" onchange="updatePreview()">
+        
+                            <div class="contpri">
+                                <label for="bgd_width">Largura:</label>
+                                <div class="input-group">
+                                    <button type="button" onclick="changeValue('bgd_width', -10)">-</button>
+                                    <input type="text" id="bgd_width" name="bgd_width" value="{{ template.bgd_width | default:'0px' }}" oninput="updatePreview()" readonly>
+                                    <button type="button" onclick="changeValue('bgd_width', 10)">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="contpri">
+                                <label for="bgd_height">Altura:</label>
+                                <div class="input-group">
+                                    <button type="button" onclick="changeValue('bgd_height', -10)">-</button>
+                                    <input type="text" id="bgd_height" name="bgd_height" value="{{ template.bgd_height | default:'0px' }}" oninput="updatePreview()" readonly>
+                                    <button type="button" onclick="changeValue('bgd_height', 10)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+
+                        <div class="button-container">
+                            <button type="submit" id="apply-style" name="update">Salvar</button>                            
+                        </div> 
+                        <br></br>
+                    </div>   
+                </div>
+
+                {% endif %}
+                    
+            </form>  
+        </div>
+
+<!--  DIREITA  -->  <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  -->     
+<!--  DIREITA  -->  <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  -->
+<!--  DIREITA  -->  <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  --> <!--  DIREITA  -->
+       
+
+        <div class="cont-dir"> 
+
+            <header id="header-preview" style="background-color: {{ agencia.agencia_header_color }};">
+                <div class="main-title" id="main-title"></div>
+                {% if agencia.show_texto_cabecalho_agencia %}
+                    <div class="title" id="title">{{ agencia.texto_cabecalho_agencia }}</div>
+                {% endif %}
+            </header>
+
+            <main>
+                <form>
+
+                    <!-- INDICE--> 
+                    <div class="cont-principal"> 
+                        <div class="apresentacao">
+                            <div class="explicacao">{{ agencia.texto_apresentacao_agencia }}</div>
+                        </div>          
+                        <div class="videoexplicacao">
+                            <div class="video-container">
+                                <iframe width="100%" height="315" src="{{ agencia.link_video }}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>                  
+                        <div class="cont-imput">
+                            <button  class="btn-submit">CRIAR CADASTRO</button>
+                            <div class="redirecionamento">               
+                                        
+                            </div>
+                        </div>                    
+                    </div>
+                </form> 
+                
+                <form>
+                    {% csrf_token %}
+                    {% if form.posted_successfully %}
+                    <p class="alert alert--success">{% trans 'custom_input.success' %}</p>
+                    {% endif %}                
+                    {% if form.errors %}
+                    <p class="alert alert--error">{{ form.errors.response }}</p>
+                    {% endif %} 
+                        <div class="cont-principal">
+                            <div class="formulario">                        
+                                <div class="form__input-row">      
+                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                        <input type="text" id="link_store" name="link_store" class="form__field form__field--text form__field--large" disabled  placeholder="Cole a URL da sua loja aqui">
+                                    </div> 
+                                </div>
+                            </div>
+                            
+                            <!-- FORMULARIO --> 
+                            <main class="main-with-video-bg">
+                                <!-- Pais -->
+                                <div class="apresentacao">
+                                    <div class="explicacao2">{{ agencia.texto_explicacao2_agencia }}</div>
+                                </div> 
+                                <video autoplay muted loop id="bg-video" preload="auto" poster="{% static 'home/img/imag-pag1.png' %}">
+                                    <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                                    Seu navegador não suporta vídeos HTML5.
+                                </video>         
+                                <div class="formulario">             
+                                            
+                                    <!-- Campo de Email shopify -->
+                                    <div class="form__input-row">
+                                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                                            <input type="email" id="custom_input_id[email_shopify]" name="email_shopify" class="form__field form__field--text form__field--large" disabled placeholder="Digite o endereço de e-mail que da acesso a sua loja"autocomplete="on">
+                                        </div> 
+                                    </div>
+
+                                    <!-- Campo de SENHA -->
+                                    <div class="form__input-row">
+                                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                                            <input type="text" id="custom_input[senha]" name="senha" class="form__field form__field--text form__field--large" disabled placeholder="Digite corretamente a Senha de acesso a sua loja ">
+                                        </div>
+                                    </div> 
+                                </div>
+                            
+                                <div class="apresentacao">  
+                                    <div class="explicacao3">{{ agencia.texto_explicacao3_agencia }}</div>
+                                </div>
+                                <div class="formulario">                                                   
+                                    <!-- Campo de Nome -->
+                                    <div class="form__input-row">
+                                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                                            <input type="text" id="custom_input[nome]" name="nome" class="form__field form__field--text form__field--large" disabled placeholder="Digite seu nome completo">
+                                        </div>
+                                    </div>          
+                                    <!-- Campo de Email de Suporte -->
+                                    <div class="form__input-row">
+                                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                                            <input type="email" id="custom_input_id[email_suporte]" name="email_suporte" class="form__field form__field--text form__field--large" disabled placeholder="Digite o endereço de e-mail que será o suporte da sua loja aqui"autocomplete="on">
+                                        </div> 
+                                    </div>
+
+                                    <!-- Campo de Empresa -->
+                                    <div class="form__input-row">
+                                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                                            <input type="text" id="custom_input[empresa]" name="empresa" class="form__field form__field--text form__field--large" disabled placeholder="Diga-nos o nome da sua loja">
+                                        </div>
+                                    </div> 
+                                    
+                                    <!-- Campo de Telefone -->
+                                    <div class="form__input-row">
+                                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                                            <input  type="tel" id="custom_input[telefone]" name="telefone" class="form__field form__field--text form__field--large" disabled placeholder="Digite seu número de telefone (Ex: 1191234567)">
+                                        </div>
+                                    </div> 
+                                    <!-- horario de atendimento -->
+                                    <div class="form__input-row">
+                                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                                            <select id="business_hours" name="business_hours" class="form__field form__field--select form__field--large" disabled>
+                                            <option value="">Selecione o Horário de Atendimento</option>
+                                            <option value="hora1">Segunda a Sexta das 9:00 as 18 Horas</option>
+                                            <option value="hora2">Segunda a Sexta das 9:00 as 22 Horas</option>
+                                            <option value="hora3">Segunda a Sábado das 9:00 as 18 Horas</option>
+                                            <option value="hora4">Segunda a Sábado  das 9:00 as 22 Horas</option>
+                                            <option value="hora5">Segunda a Sexta das 9:00 as 18 Horas - Sábado das 9:00 as 12 Horas</option>
+                                            <option value="hora6">Segunda a Sexta das 9:00 as 22 Horas -  Sábado das 9:00 as 12 Horas</option>
+                                            <option value="hora7">Todos os dias das 9:00 as 18 Horas</option>
+                                            <option value="hora8">Todos os dias das 9:00 as 22 Horas</option>                        
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div> 
+                            
+                            </main>  
+                            <!-- NICHOS --> 
+                        </div>
+
+                        <div class="cont-principal">
+                            <div class="apresentacao">
+                                <div class="explicacao4">{{ agencia.texto_explicacao4_agencia }}</div>
+                            </div>   
+                            <div class="initial1">  
+                                <div class="initial">       
+                                    <!-- Carrossel de Nichos (Horizontal) -->
+                                    <div class="swiper-container-horizontal">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <a href="https://shopbotfy-generica.myshopify.com" target="_blank"><img src="/static/home/img/generica.png" alt="generica"></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <a href="http://gl-solucoes-eletronicos.myshopify.com" target="_blank"><img src="/static/home/img/eletronicos.png" alt="eletronico"></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <a href="http://gl-solucoes-casa.myshopify.com/" target="_blank"><img src="/static/home/img/casa.png" alt="casa"></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <a href="http://gl-solucoes-kids.myshopify.com" target="_blank"><img src="/static/home/img/kids.png" alt="kids"></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <a href="http://gl-solucoes-pets.myshopify.com/" target="_blank"><img src="/static/home/img/pets.png" alt="pets"></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <a href="http://gl-solucoes-digitais-fitness.myshopify.com/" target="_blank"><img src="/static/home/img/fitness.png" alt="fitness"></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <a href="https://nicho-feminino-gl.myshopify.com/" target="_blank"><img src="/static/home/img/feminino.png" alt="feminino"></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <a href="http://gl-solucoes-moda-masculina.myshopify.com/" target="_blank"><img src="/static/home/img/masculino.png" alt="masculino"></a>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>                                               
+                                </div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>         
+                            </div>
+                            <div class="formulario">
+                                <!-- Campo para escolher o nicho -->
+                                <div class="form__input-row">
+                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                        <select id="nicho" name="nicho" class="form__field form__field--select form__field--large" disabled>
+                                            <option value="">Selecione o Nicho</option>
+                                            <option value="Genérica">Genérica</option>
+                                            <option value="Eletrônicos">Nicho Eletrônicos</option>
+                                            <option value="Kids">Nicho Kids</option>
+                                            <option value="Casa">Nicho Casa</option>
+                                            <option value="Pet">Nicho Pet</option>
+                                            <option value="Fitness">Nicho Fitness</option>
+                                            <option value="Masculino">Nicho Masculino</option>
+                                            <option value="Feminino">Nicho Feminino</option>
+
+                                        <!-- <option value="Moda">Nicho Moda</option>
+                                            <option value="Saúde e Beleza">Nicho Saúde e Beleza</option>
+                                            <option value="Óculos">Nicho Óculos</option>
+                                            <option value="Relógios">Nicho Relógios</option> -->
+                                        </select>
+                                        
+                                    </div> 
+                                </div> 
+                            </div>
+
+                            <!-- COR -->
+                            <div class="apresentacao">
+                                <div class="explicacao5">{{ agencia.texto_explicacao5_agencia }}</div>
+                            </div>                      
+                            <div class="initial1"> 
+                                <div class="paleta">
+                                    <img src="/static/home/img/CORES.png" alt="cores">
+                                </div>
+                                <!-- <div class="initial">       
+                                    <div class="swiper-container-horizontal">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <img src="/static/home/img/Laranja.png" alt="Laranja">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="/static/home/img/Verde.png" alt="Verde">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="/static/home/img/Roxo.png" alt="Roxo">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="/static/home/img/Preto.png" alt="Preto">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="/static/home/img/Azul.png" alt="Azul">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="/static/home/img/Vermelho.png" alt="Vermelho">
+                                            </div>
+                                        </div>
+                                    </div>                                                     
+                                </div> 
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div> -->     
+                            </div>
+                            <div class="formulario">           
+                                <div class="form__input-row">
+                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                        <select id="cor" name="cor" class="form__field form__field--select form__field--large" disabled>
+                                            <option value="">Selecione a Cor</option>
+                                            <option value="Paleta de Cor 1">Laranja</option>
+                                            <option value="Paleta de Cor 2">Verde</option>
+                                            <option value="Paleta de Cor 3">Roxo</option>
+                                            <option value="Paleta de Cor 4">Preto</option>
+                                            <option value="Paleta de Cor 5">Azul</option>
+                                            <option value="Paleta de Cor 6">Vermelho</option>
+                                        </select>
+                                    </div>
+                                </div>   
+                            </div>                                      
+                        </div>
+                        
+                        <!-- BOTÃO -->  
+                        <div class="cont-botão">                
+                            <button  class="btn-submit">Enviar</button>        
+                        </div>
+
+                </form>
+            </main>
+            
+    
+            <footer>
+                <div class="footer2">
+                    &copy;{{ agencia.copy_agencia }}
+                </div>
+                <div class="footer2">
+                    {% if agencia.show_contato_agencia %}
+                        <a href="mailto:{{agencia.contato_agencia}}" class="black-text">{{ agencia.contato_agencia }}</a>
+                    {% endif %}
+
+                    {% if agencia.show_link_site %}
+                        {% if agencia.link_site|slice:":5" == "https" %}
+                            <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia|slice:"8:" }}</a>
+                        {% elif agencia.link_site|slice:":4" == "http" %}
+                            <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia|slice:"7:" }}</a>
+                        {% else %}
+                            <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia }}</a>
+                        {% endif %}
+                    {% endif %}
+
+
+                    {% if agencia.show_telefone_agencia %}
+                        <a href="https://api.whatsapp.com/send?phone={{ agencia.telefone_agencia }}" target="_blank"><img src="{% static 'home/img/whatsapp.png' %}"width="30" height="40">{{ agencia.telefone_agencia }}</a>
+                    {% endif %}
+                    
+                </div>
+                
+                <div class="social">
+                    {% if agencia.show_link_face_agencia %}
+                        <a href="{{ agencia.link_face_agencia }}" target="_blank"><img src="{% static 'home/img/facebook.png' %}" width="30" height="40"></a>
+                    {% endif %}
+                    {% if agencia.show_link_insta_agencia %}
+                        <a href="{{ agencia.link_insta_agencia }}" target="_blank"><img src="{% static 'home/img/instagran.png' %}" width="30" height="40"></a>
+                    {% endif %}
+                    {% if agencia.show_link_youtube_agencia %}
+                        <a href="{{ agencia.link_youtube_agencia }}" target="_blank"><img src="{% static 'home/img/youtubesimbolo.png' %}" width="30" height="40"></a>
+                    {% endif %}
+                </div>
+                
+                <div class="footer2">
+                    <div id="rodape"></div>
+                </div>
+                
+            </footer>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="/static/home/js/agencias/previewform.js"></script>
+    <script src="/static/home/js/agencias/sincroniacores.js"></script>  
+    
+    <!--    ----scrips js------      -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('formRedirecionar').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir o envio normal do formulário
+
+        // Capturando o valor da agência
+        const agencia = document.querySelector('input[name="agencia"]').value;
+
+        if (agencia) {
+            // Submeter o formulário via JavaScript
+            fetch(this.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(this)),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.link_impact) {
+                    // Abrir o link em uma nova aba
+                    window.open(data.link_impact, '_blank');
+                } else {
+                    alert("Agência ou link não disponíveis.");
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao processar requisição:', error);
+            });
+        } else {
+            alert("Agência ou link não disponíveis.");
+        }
+    });
+});
+
+</script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var video = document.getElementById("bg-video");
+
+        // Quando o vídeo começar a ser carregado, esconder a imagem de fundo
+        video.oncanplay = function() {
+            document.querySelector('.main-with-video-bg').style.backgroundImage = 'none';
+            video.play();
+        };
+    });
+</script>
+
+
+
+<!-- imagem tempo real -->
+
+
+<script>
+    function updatePreview() {
+        const fileInput = document.getElementById("agencia_bg_image");
+        const previewImage = document.getElementById("preview-image");
+        
+        // Carregar imagem selecionada pelo usuário
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = "block"; // Exibir a imagem
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        // Atualizar largura e altura da imagem
+        const width = document.getElementById("agencia_bg_width").value;
+        const height = document.getElementById("agencia_bg_height").value;
+        previewImage.style.width = width;
+        previewImage.style.height = height;
+    }
+
+    function changeValue(elementId, increment) {
+        const input = document.getElementById(elementId);
+        let currentValue = parseInt(input.value.replace("px", "")) || 0;
+        currentValue += increment;
+        input.value = currentValue + "px";
+        updatePreview(); // Atualizar pré-visualização após ajuste de tamanho
+    }
+</script>
+        
+
+<!-- update -->
+<script>
+   // Função principal para atualizar a visualização em tempo real
+function updatePreview() {
+    // Atualizar links de pré-visualização
+    document.getElementById('copy_agencia-preview').textContent = document.getElementById('copy_agencia').value;
+    document.getElementById('telefone_agencia-preview').textContent = document.getElementById('telefone_agencia').value;
+    document.getElementById('link_site_agencia-preview').href = document.getElementById('link_site_agencia').value;
+
+    // Atualizar links sociais de pré-visualização
+    document.getElementById('link_face_agencia-preview').href = document.getElementById('link_face_agencia').value;
+    document.getElementById('link_insta_agencia-preview').href = document.getElementById('link_insta_agencia').value;
+    document.getElementById('link_youtube_agencia-preview').href = document.getElementById('link_youtube_agencia').value;
+
+
+    // Atualizar cor e tamanho do texto
+    const fontSize = document.getElementById('cabecalho_font_size').value || '16px';
+    document.getElementById('texto_cabecalho_agencia-preview').style.fontSize = fontSize;
+}
+
+// Função para atualizar cor do cabeçalho
+function updateHeaderColor(color) {
+    document.getElementById('main-title-preview').style.backgroundColor = color;
+}
+
+
+
+// Função para alterar largura, altura e tamanho da fonte
+function changeValue(inputId, increment) {
+    const inputElement = document.getElementById(inputId);
+    let currentValue = parseInt(inputElement.value, 10);
+
+    if (isNaN(currentValue)) currentValue = 0;
+    currentValue += increment;
+    if (inputId !== 'cabecalho_font_size' && currentValue < 1) currentValue = 1;
+
+    inputElement.value = currentValue + 'px';
+    updatePreview();
+}
+
+// Funções auxiliares para textos e cores
+function updateTextContent(value) {
+    document.getElementById('texto_cabecalho_agencia-preview').textContent = value;
+}
+
+function updateTextColor(value) {
+    document.getElementById('texto_cabecalho_agencia-preview').style.color = value;
+}
+
+function updateHeaderColorInput(value) {
+    document.getElementById('header_color-preview').style.backgroundColor = value;
+}
+
+function updateFooterColorInput(value) {
+    document.getElementById('agencia_footer_color-preview').style.backgroundColor = value;
+}
+
+    
+
+</script>
+
+<!-- Script JS Universal -->
+<script>
+    // Função para alternar a visibilidade de um elemento com base no ID
+    function toggleElement(elementId) {
+        var element = document.getElementById(elementId);
+        
+        // Se o elemento está oculto, mostra-o, caso contrário, oculta-o
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+
+    // Função para atualizar a visibilidade dos ícones sociais com base no estado dos links
+    function updateSocialLinksVisibility() {
+        var facebookLink = document.getElementById('facebookLink');
+        var instagramLink = document.getElementById('instagramLink');
+        var youtubeLink = document.getElementById('youtubeLink');
+
+        // Oculta os ícones se o link não estiver presente
+        if (!facebookLink.href || facebookLink.href === '') {
+            facebookLink.style.display = 'none';
+        }
+
+        if (!instagramLink.href || instagramLink.href === '') {
+            instagramLink.style.display = 'none';
+        }
+
+        if (!youtubeLink.href || youtubeLink.href === '') {
+            youtubeLink.style.display = 'none';
+        }
+    }
+
+    // Chama a função para garantir que os ícones corretos estejam visíveis ao carregar a página
+    window.onload = updateSocialLinksVisibility;
+</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,17 @@
+/* Estilizando o título h3 */
+:root {
+    --main-title-height: 100px; /* Valor padrão, será sobrescrito pelo Django */
+    --main-title-width: 200px; /* Valor padrão, será sobrescrito pelo Django */
+    --main-title-line-height: 100px; /* Valor padrão, será sobrescrito pelo Django */
+}
+
+#main-title {
+    background-image: url('{% static settings.image.url %}');
+    height: var(--main-title-height);
+    width: var(--main-title-width);
+    line-height: var(--main-title-line-height);
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+}

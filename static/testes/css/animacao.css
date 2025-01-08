@@ -1,0 +1,86 @@
+.hero {
+    height: 720px;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    overflow-clip-margin: content-box!important;
+    overflow: hidden!important
+}
+
+.hero-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-100%,-30%) scale(1.6) rotate(3deg);
+    z-index: 0;
+    opacity: .5;
+    animation: flow 15s infinite
+}
+
+@keyframes flow {
+    0% {
+        transform: translate(-100%,-30%) scale(4) rotate(3deg);
+        transition: all .3s ease-in-out
+    }
+
+    50% {
+        transform: translate(-100%,-30%) scale(2.5) rotate(4deg);
+        opacity: .8;
+        transition: all .3s ease-in-out
+    }
+
+    100% {
+        transform: translate(-100%,-30%) scale(4) rotate(3deg);
+        transition: all .3s ease-in-out
+    }
+}
+
+.arrow-down {
+    position: relative;
+    margin-top: 90px;
+    transform: translate(-80%);
+    width: 50px;
+    height: 50px;
+    color: #1296fc;
+    animation: glow 2s infinite;
+    cursor: pointer
+}
+
+@keyframes glow {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        transition: all .3s ease-in-out
+    }
+
+    50% {
+        opacity: .6;
+        transform: scale(1.1);
+        transition: all .3s ease-in-out
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        transition: all .3s ease-in-out
+    }
+}
+
+@media(max-width: 991.98px) {
+    .hero {
+        height:auto;
+        padding: 0
+    }
+
+    .hero-bg {
+        display: none
+    }
+
+    .arrow-down {
+        margin-top: 40px
+    }
+}

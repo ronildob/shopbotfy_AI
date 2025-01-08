@@ -1,0 +1,769 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">     
+    <link rel="stylesheet" href="{% static 'home/css/efeitos.css'%}"> 
+    <link rel="stylesheet" href="/static/home/css/spin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+    
+  
+    
+
+
+
+
+
+<style>
+    
+    :root {
+        --agencia_bg_image: url("{% if agencia.agencia_bg_image %}{{ agencia.agencia_bg_image }}{% else %}{% static 'default-image.png' %}{% endif %}");
+        --agencia_bg_width: {{ agencia.agencia_bg_width|default:'300px' }};
+        --agencia_bg_height: {{ agencia.agencia_bg_height|default:'90px' }};
+        --position_bg_image: {{ agencia.position_bg_image|default:'center' }};
+    
+        --texto_cabecalho_agencia: "{{ agencia.texto_cabecalho_agencia|default:'Seu Texto de cabeçalho Aqui' }}";
+        --cabecalho_font_size: {{ agencia.cabecalho_font_size|default:'16px' }};
+        --cabecalho_text_color: {{ agencia.cabecalho_text_color|default:'white' }};
+        --position_texto_cabecalho: {{ agencia.position_texto_cabecalho|default:'center' }};
+    
+    
+        --agencia_header_color: {{ agencia.agencia_header_color|default:'white' }};
+        --agencia_background_color: {{ agencia.agencia_background_color|default:'black' }};
+        --agencia_explica_color: {{ agencia.agencia_explica_color|default:'black' }};
+        --explicacao_text_color: {{ agencia.explicacao_text_color|default:'white' }};
+        --agencia_footer_color: {{ agencia.agencia_footer_color|default:'black' }};
+    
+    
+        --texto_apresentacao_agencia: "{{ agencia.texto_apresentacao_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --apresentacao_font_size: {{ agencia.apresentacao_font_size|default:'16px' }};
+    
+        --texto_texto_explicacao1_agencia: "{{ agencia.texto_explicacao1_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao1_font_size: {{ agencia.explicacao1_font_size|default:'16px' }};
+        
+    
+        --texto_texto_explicacao2_agencia: "{{ agencia.texto_explicacao2_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao2_font_size: {{ agencia.explicacao2_font_size|default:'16px' }};
+    
+        --texto_texto_explicacao3_agencia: "{{ agencia.texto_explicacao3_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao3_font_size: {{ agencia.explicacao3_font_size|default:'16px' }};
+    
+        --texto_texto_explicacao4_agencia: "{{ agencia.texto_explicacao4_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao4_font_size: {{ agencia.explicacao4_font_size|default:'16px' }};
+    
+        --texto_texto_explicacao5_agencia: "{{ agencia.texto_explicacao5_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao5_font_size: {{ agencia.explicacao5_font_size|default:'16px' }};
+    }
+    
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden !important;
+    width: 100% !important;
+    height: auto !important; /* Altura automática para se ajustar ao conteúdo */
+}
+    
+main {
+    background-color: var(--agencia_background_color);
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    padding: 20px; /* Espaçamento interno */
+    justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+    }
+    .cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5px; /* Espaçamento entre os elementos */
+    margin-top: 5%;
+    }
+    .apresentacao {
+    background-color: var(--agencia_explica_color); 
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    position: relative; /* Define o posicionamento relativo */    
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow:
+            inset 20px 0 20px rgba(255, 255, 255, 0.521),   /* Sombra interna na borda esquerda */
+            inset -20px 0 20px rgba(255, 255, 255, 0.521);  /* Sombra interna na borda direita */
+    }
+    .explicacao {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+    }
+    .explicacao1 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+    }
+    .explicacao2 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+    }
+    .explicacao3 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+    }
+    .explicacao4 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+    }
+    .explicacao5 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+    }
+    
+    
+    .cont-principal {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    padding: 0px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    }
+    
+    .videoexplicacao {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+            
+    }
+    /* video */
+    .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de 16:9 para vídeos responsivos */
+    padding-top: 5px;
+    height: 0;
+    overflow: hidden;
+    }
+    .video-container iframe,
+    .video-container object,
+    .video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    }
+    
+    .btn-submit {
+    width: 30%;
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #08c411; /* Cor de fundo transparente */
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #08c411;
+    }
+    .btn-submit:hover{
+    background-color: #028109; /* Cor de fundo transparente */
+    
+    
+    
+    }
+    
+    /* Estilizando o título h3 */
+    
+    .cont-botão {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 5px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+    
+    
+    }   
+    
+       
+    .initial {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    }
+    .initial1 {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+    }
+    
+    .swiper-container-horizontal {
+    width: 100%;
+    height: 100%;/* Altura de 100% em relação ao contêiner pai */
+    border-radius: 20px;
+    }
+    .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+    .swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+    }
+    
+    
+    .form {
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 0; /* Margem inferior de 20px */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 0px; /* Espaçamento interno */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 100%;
+    
+    
+    } 
+    .formulario {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center;
+    width: 60%;
+    }   
+    
+    .form__input-row {
+    text-align: center; 
+    width: 100%;    
+    }  
+    
+    
+    .form__field,  
+    .form__input-wrapper--labelled{
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    border-radius: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    margin-bottom: 10px; /* Reduzido de 20px para 10px */
+    
+    }
+    
+    .form__field,
+    .form__field--select,
+    .form__field--text {
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #e2dddd;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+    box-sizing: border-box;
+    text-align: center; /* Centraliza horizontalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    
+    }
+    /* Estilos quando o mouse está sobre os campos de entrada e seleção */
+    .form__input-wrapper--labelled:hover,
+    .form__field:hover,
+    .form__field--select:hover,
+    .form__field--text:hover {
+    background-color: #5c5959;
+    
+    }
+    /* Estilos quando os campos de entrada e seleção estão focados */
+    .form__input-wrapper--labelled:focus,
+    .form__field:focus,
+    .form__field--select:focus,
+    .form__field--text:focus {
+    outline: none;
+    background-color: #f7b3b3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    
+    }
+    /* Estilo para as opções do campo de seleção */
+    .form__field--select option,
+    .form__field--text option {
+    font-size: 16px;
+    color: #0f0f0f;
+    
+    }
+    /* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+    .form__field--select option:hover,
+    .form__field--text option:hover {
+    color: #44c457;
+    font-size: 14px;
+    }
+    #bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    }
+    
+    .main-with-video-bg {
+    position: relative;
+    z-index: 1; 
+    background-size: cover;
+    background-position: center;
+    }
+    
+    .paleta {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center; /* Centraliza horizontalmente */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    
+    
+    }
+    .paleta img {
+    max-width: 100%; /* Garantir que a imagem não ultrapasse a largura da div */
+    max-height: 100%; /* Garantir que a imagem não ultrapasse a altura da div */
+    display: block; /* Permitir margens e alinhamento corretos */
+    border-radius: 5px; /* Borda arredondada na imagem */
+    }
+    
+    /* Media query para dispositivos móveis */
+    @media (min-width: 1440px){
+    #title {
+    display: block; /* Garante que o elemento seja exibido em telas maiores */
+    }
+    .explicacao{
+    width: 60%;
+    }
+    .cont-botão {
+    width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+    width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .btn-submit {
+    width: 30%;
+    }
+    .form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+    }
+    .formulario {
+    width: 60%; /* Ambos ocupam metade da largura */
+    } 
+    .form__input-row {
+    width: 100%;    
+    }   
+    
+    
+    .initial{
+    width: 80%;
+    }
+    .initial1 {
+    width: 100%;
+    }
+    
+    
+    /* Estilos para os slides dentro do carrossel */
+    .swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+    
+    }
+    .swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+    
+    }
+    
+    }   
+    @media (max-width: 1439px){
+    .explicacao{
+    width: 80%;
+    }
+    .cont-botão {
+    width: 100%; 
+    }
+    button, 
+    input[type=submit] {
+    width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+    }
+    .btn-submit {
+    width: 60%;
+    }
+    
+    .form {
+    width: 100%;   
+    }
+    .formulario {
+    width: 60%; 
+    } 
+    .form__input-row {
+    width: 100%;    
+    }   
+    
+    .initial {
+    width: 80%;
+    }
+    .initial1{
+    width: 100%;
+    }
+    
+    
+    /* Estilos para os slides dentro do carrossel */
+    .swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+    }
+    .swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+    }
+    .videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+    }
+    
+    }   
+    @media(max-width: 1024px) {
+    main {
+    
+    padding: 10px; /* Espaçamento interno */
+    
+    }
+    .explicacao{
+    width: 80%;
+    }
+    .videoexplicacao{
+    width: 80%; 
+    }
+    
+    .cont-botão {
+    width: 100%;
+    }
+    button, input[type=submit] {
+    width: 80%; 
+    }
+    .btn-submit {
+    width: 80%;
+    }
+    
+    .formulario{
+    width: 60%;
+    }   
+    .form {
+    width: 100%;    
+    } 
+    .form__input-row {
+    width: 100%;    
+    }
+    .initial{
+    width: 80%;
+    }
+    .initial1 {
+    width: 100%;
+    }
+    
+    .swiper-slide img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+    }
+    .swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+    } 
+    }
+    
+    @media (max-width: 767px){
+    main {
+    
+    padding: 5px; /* Espaçamento interno */
+    
+    }
+    .apresentacao {
+    
+    width: 100%; /* Largura total */
+    }
+    .explicacao1, .explicacao2, .explicacao3, .explicacao4, .explicacao5{
+    width: 100%;
+    }
+    .videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+    }
+    
+    #title {
+    display: none; /* Oculta o elemento em telas menores */
+    }
+    
+    .cont-botão {
+    width: 100%; /* Largura total */
+    }
+    button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+    } 
+    .btn-submit {
+    width: 90%;
+    }
+     
+    form {
+    width: 100%;    
+    }
+    .formulario {
+    width: 70%; /* Ambos ocupam metade da largura */
+    }
+    
+    .form__input-row {
+    width: 100%;    
+    }
+    
+    footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: stretch; /* Estica os itens para ocupar a largura total */
+    background-color: var(--agencia_footer_color);
+    }
+    
+    footer div {
+    padding: 10px 0; /* Ajusta o espaçamento entre os itens */
+    }
+    .footer2 {
+    flex-direction: column; /* Garante que permaneça empilhado em telas menores */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    
+    }
+    
+    .initial{
+    width: 100%;
+    }
+    .initial1{
+    width: 100%;
+    }
+    
+    .swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    }
+    .swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+    
+    }
+    }
+    
+    footer {
+    display: flex;
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: var(--agencia_footer_color); 
+    padding: 20px;
+    width: 100%;
+    }
+    
+    footer div {
+    flex-grow: 1; /* Permite que os itens cresçam para ocupar o espaço */
+    padding: 0 10px; /* Adiciona espaçamento entre os itens */
+    }
+    .footer-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    }
+    #rodape {   
+    height: 90px;
+    width: 270px;
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    background-position: center;
+    background-size: cover;
+    color: white;
+    line-height: 90px; 
+    }
+    .footer2 {
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Alinha os itens à esquerda */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+    padding: 10px;
+    width: 100%;
+    color: #e2dddd;
+    }
+    .social {
+    display: flex;
+    justify-content: flex-start; /* Alinha os itens ao início */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    padding: 20px;
+    width: 100%;
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+    }
+    
+    .social > * {
+    margin-right: 10px; /* Espaçamento entre os itens */
+    }
+    
+    .social > *:last-child {
+    margin-right: 0; /* Remove a margem do último item */
+    }
+    .footer2 div {
+    margin: 5px 0; /* Espaçamento entre os itens */
+    }
+    
+    
+    </style>
+  
+
+
+
+</head>
+
+
+<body>
+    {% block content %}
+    
+   
+   
+    {% endblock %}
+</body>
+
+
+
+
+</html>
+
+

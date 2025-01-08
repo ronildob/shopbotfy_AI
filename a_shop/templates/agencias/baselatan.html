@@ -1,0 +1,1616 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Google tag (gtag.js) -->
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L2FWW02HYW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L2FWW02HYW');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ agencia.titulo_agencia }}</title>
+    <link rel="icon" href="{% if agencia.favicon_agencia %}{{ agencia.favicon_agencia }}{% else %}{% static 'home/img/favi.png' %}{% endif %}">
+    
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">     
+    <link rel="stylesheet" href="{% static 'home/css/efeitos.css'%}"> 
+    <link rel="stylesheet" href="/static/home/css/spin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    
+    
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    
+    <script src="{% static 'home/js/spiner.js' %}"></script>
+    <script src="/static/home/js/bgvideoforms.js"></script>
+    <script src="/static/home/js/scripstsformsagencia.js"></script>
+    <script src="/static/home/js/spinernovo.js"></script>
+
+
+<style>
+
+:root {
+        --agencia_bg_image: url("{% if agencia.agencia_bg_image %}{{ agencia.agencia_bg_image }}{% else %}{% static 'default-image.png' %}{% endif %}");
+        --agencia_bg_width: {{ agencia.agencia_bg_width|default:'300px' }};
+        --agencia_bg_height: {{ agencia.agencia_bg_height|default:'90px' }};
+        --position_bg_image: {{ agencia.position_bg_image|default:'center' }};
+
+        --texto_cabecalho_agencia: "{{ agencia.texto_cabecalho_agencia|default:'Seu Texto de cabeçalho Aqui' }}";
+        --cabecalho_font_size: {{ agencia.cabecalho_font_size|default:'16px' }};
+        --cabecalho_text_color: {{ agencia.cabecalho_text_color|default:'white' }};
+        --position_texto_cabecalho: {{ agencia.position_texto_cabecalho|default:'center' }};
+
+
+        --agencia_header_color: {{ agencia.agencia_header_color|default:'white' }};
+        --agencia_background_color: {{ agencia.agencia_background_color|default:'black' }};
+        --agencia_explica_color: {{ agencia.agencia_explica_color|default:'black' }};
+        --explicacao_text_color: {{ agencia.explicacao_text_color|default:'white' }};
+        --agencia_footer_color: {{ agencia.agencia_footer_color|default:'black' }};
+        --agencia_footer_text_color: {{ agencia.agencia_footer_text_color|default:'white' }};
+
+
+        --texto_apresentacao_agencia: "{{ agencia.texto_apresentacao_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --apresentacao_font_size: {{ agencia.apresentacao_font_size|default:'16px' }};
+
+        --texto_texto_explicacao1_agencia: "{{ agencia.texto_explicacao1_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao1_font_size: {{ agencia.explicacao1_font_size|default:'16px' }};
+        
+
+        --texto_texto_explicacao2_agencia: "{{ agencia.texto_explicacao2_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao2_font_size: {{ agencia.explicacao2_font_size|default:'16px' }};
+
+        --texto_texto_explicacao3_agencia: "{{ agencia.texto_explicacao3_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao3_font_size: {{ agencia.explicacao3_font_size|default:'16px' }};
+
+        --texto_texto_explicacao4_agencia: "{{ agencia.texto_explicacao4_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao4_font_size: {{ agencia.explicacao4_font_size|default:'16px' }};
+
+        --texto_texto_explicacao5_agencia: "{{ agencia.texto_explicacao5_agencia|default:'Seu Texto de Apresentação Aqui' }}";
+        --explicacao5_font_size: {{ agencia.explicacao5_font_size|default:'16px' }};
+    }
+
+html, body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da viewport */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Define a orientação dos elementos como coluna */
+    justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+    align-items: center; /* Alinha os elementos no centro horizontalmente */
+}
+header {
+    background-image: var(--position_bg_image);
+    text-align: var(--position_texto_cabecalho);
+    background-color: var(--agencia_header_color); 
+    padding: 20px 10px;
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: row; /* Alinhando os itens em linha */
+    position: relative;
+    height: auto; 
+}
+
+#main-title {
+    background-image: var(--agencia_bg_image);
+    width: var(--agencia_bg_width);
+    height: var(--agencia_bg_height); /* Ajuste conforme necessário */
+    background-size: cover;
+    position: absolute; /* Se você quiser que isso cubra o header */
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex; /* Adicione se quiser centralizar conteúdo dentro */
+    justify-content: center; 
+    align-items: center; 
+}
+
+#title {
+    color: var(--cabecalho_text_color);
+    font-size: var(--cabecalho_font_size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2;
+    position: relative;
+    margin: 0;
+}
+
+main {
+    background-color: var(--agencia_background_color);
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    padding: 20px; /* Espaçamento interno */
+    justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+ 
+}
+.cont-imput{
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(44, 44, 44, 0.0);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5px; /* Espaçamento entre os elementos */
+    margin-top: 5%;
+}
+.apresentacao {
+    background-color: var(--agencia_explica_color); 
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    position: relative; /* Define o posicionamento relativo */    
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow:
+            inset 20px 0 20px rgba(255, 255, 255, 0.521),   /* Sombra interna na borda esquerda */
+            inset -20px 0 20px rgba(255, 255, 255, 0.521);  /* Sombra interna na borda direita */
+    }
+.explicacao {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+
+}
+.explicacao1 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao2 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao3 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao4 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+.explicacao5 {
+    font-size: var(--apresentacao_font_size);
+    color: var(--explicacao_text_color);
+    width: 60%; /* Define a largura como metade do contêiner principal */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    margin-bottom: 1px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    text-align: center;
+    
+}
+
+
+.cont-principal {
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    padding: 0px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+}
+
+.videoexplicacao {
+    max-width: 100%; /* Largura máxima igual à largura da tela */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+            
+}
+/* video */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção de 16:9 para vídeos responsivos */
+    padding-top: 5px;
+    height: 0;
+    overflow: hidden;
+    }
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-submit {
+    width: 30%;
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para botões */
+    border-radius: 20px; /* Borda arredondada */
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #08c411; /* Cor de fundo transparente */
+    display: flex; /* Torna o elemento um flex container */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    border-width: 3px; /* largura da borda */
+    border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+    border-color: #08c411;
+}
+.btn-submit:hover{
+    background-color: #028109; /* Cor de fundo transparente */
+   
+    
+
+}
+
+/* Estilizando o título h3 */
+
+.cont-botão {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    margin-bottom: 10px; /* Margem inferior de 20px */
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 5px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+
+
+}   
+
+       
+.initial {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+}
+.initial1 {
+    max-width: 100%;
+    margin-bottom: 1px; /* Reduzido de 20px para 10px */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.swiper-container-horizontal {
+    width: 100%;
+    height: 100%;/* Altura de 100% em relação ao contêiner pai */
+    border-radius: 20px;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+
+
+.form {
+    margin-top: 0; /* Remove a margem superior */
+    margin-bottom: 0; /* Margem inferior de 20px */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 0px; /* Espaçamento interno */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 100%;
+    
+
+} 
+.formulario {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center;
+    width: 60%;
+}   
+
+.form__input-row {
+    text-align: center; 
+    width: 100%;    
+}  
+
+
+.form__field,  
+.form__input-wrapper--labelled{
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    border-radius: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    margin-bottom: 10px; /* Reduzido de 20px para 10px */
+    
+}
+
+.form__field,
+.form__field--select,
+.form__field--text {
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #e2dddd;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+    box-sizing: border-box;
+    text-align: center; /* Centraliza horizontalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+
+}
+/* Estilos quando o mouse está sobre os campos de entrada e seleção */
+.form__input-wrapper--labelled:hover,
+.form__field:hover,
+.form__field--select:hover,
+.form__field--text:hover {
+    background-color: #5c5959;
+
+}
+/* Estilos quando os campos de entrada e seleção estão focados */
+.form__input-wrapper--labelled:focus,
+.form__field:focus,
+.form__field--select:focus,
+.form__field--text:focus {
+    outline: none;
+    background-color: #f7b3b3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+}
+/* Estilo para as opções do campo de seleção */
+.form__field--select option,
+.form__field--text option {
+    font-size: 16px;
+    color: #0f0f0f;
+
+}
+/* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+.form__field--select option:hover,
+.form__field--text option:hover {
+    color: #44c457;
+    font-size: 14px;
+}
+#bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.main-with-video-bg {
+    position: relative;
+    z-index: 1; 
+    background-size: cover;
+    background-position: center;
+}
+
+.paleta {
+    height: auto; /* Altura automática para se ajustar ao conteúdo */  
+    position: relative; /* Define o posicionamento relativo */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+    box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center; /* Centraliza horizontalmente */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    display: flex; /* Torna o contêiner um flex container */
+
+    
+}
+.paleta img {
+    max-width: 100%; /* Garantir que a imagem não ultrapasse a largura da div */
+    max-height: 100%; /* Garantir que a imagem não ultrapasse a altura da div */
+    display: block; /* Permitir margens e alinhamento corretos */
+    border-radius: 5px; /* Borda arredondada na imagem */
+}
+
+/* Media query para dispositivos móveis */
+@media (min-width: 1440px){
+#title {
+    display: block; /* Garante que o elemento seja exibido em telas maiores */
+}
+.explicacao{
+    width: 60%;
+}
+.cont-botão {
+width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 30%;
+}
+.form {
+    width: 80%; /* Ambos ocupam metade da largura */   
+}
+.formulario {
+width: 60%; /* Ambos ocupam metade da largura */
+} 
+.form__input-row {
+width: 100%;    
+}   
+
+
+.initial{
+width: 80%;
+}
+.initial1 {
+width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+  
+}
+
+}   
+@media (max-width: 1439px){
+.explicacao{
+    width: 80%;
+}
+.cont-botão {
+    width: 100%; 
+}
+button, 
+input[type=submit] {
+    width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+}
+.btn-submit {
+    width: 60%;
+}
+
+.form {
+    width: 100%;   
+}
+.formulario {
+    width: 60%; 
+} 
+.form__input-row {
+    width: 100%;    
+}   
+
+.initial {
+    width: 80%;
+}
+.initial1{
+    width: 100%;
+}
+
+
+/* Estilos para os slides dentro do carrossel */
+.swiper-slide img {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+}
+.videoexplicacao{
+    width: 70%; /* Define a largura como 100% em dispositivos menores */
+}
+
+}   
+@media(max-width: 1024px) {
+    main {
+    
+    padding: 10px; /* Espaçamento interno */
+ 
+}
+.explicacao{
+    width: 80%;
+}
+.videoexplicacao{
+    width: 80%; 
+}
+
+.cont-botão {
+width: 100%;
+}
+button, input[type=submit] {
+width: 80%; 
+}
+.btn-submit {
+    width: 80%;
+}
+
+.formulario{
+width: 60%;
+}   
+.form {
+width: 100%;    
+} 
+.form__input-row {
+    width: 100%;    
+}
+.initial{
+    width: 80%;
+}
+.initial1 {
+    width: 100%;
+}
+
+.swiper-slide img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+}
+.swiper-wrapper{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem mantendo a proporção */  
+} 
+}
+
+@media (max-width: 767px){
+main {
+    
+    padding: 5px; /* Espaçamento interno */
+ 
+}
+.apresentacao {
+
+    width: 100%; /* Largura total */
+}
+.explicacao1, .explicacao2, .explicacao3, .explicacao4, .explicacao5{
+    width: 100%;
+}
+.videoexplicacao{
+    width: 100%; /* Define a largura como 100% em dispositivos menores */
+}
+
+#title {
+    display: none; /* Oculta o elemento em telas menores */
+}
+
+.cont-botão {
+    width: 100%; /* Largura total */
+}
+button, input[type=submit] {
+    width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+} 
+.btn-submit {
+    width: 90%;
+}
+     
+form {
+    width: 100%;    
+}
+.formulario {
+    width: 70%; /* Ambos ocupam metade da largura */
+}
+
+.form__input-row {
+    width: 100%;    
+}
+
+footer {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: stretch; /* Estica os itens para ocupar a largura total */
+    background-color: var(--agencia_footer_color);
+    color: var(--agencia_footer_text_color);
+}
+
+footer div {
+    padding: 10px 0; /* Ajusta o espaçamento entre os itens */
+}
+.footer2 {
+    flex-direction: column; /* Garante que permaneça empilhado em telas menores */
+    align-items: center; /* Centraliza os itens horizontalmente */
+
+}
+
+.initial{
+width: 100%;
+}
+.initial1{
+width: 100%;
+}
+
+.swiper-wrapper{
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+}
+.swiper-slide img {
+width: 100%; /* Largura total */
+height: 100%; /* Altura total */
+object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+
+}
+}
+
+footer {
+    display: flex;
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: var(--agencia_footer_color); 
+    color: var(--agencia_footer_text_color);
+    padding: 20px;
+    width: 100%;
+}
+
+footer div {
+    flex-grow: 1; /* Permite que os itens cresçam para ocupar o espaço */
+    padding: 0 10px; /* Adiciona espaçamento entre os itens */
+}
+.footer-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+}
+#rodape {   
+    height: 90px;
+    width: 270px;
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    background-position: center;
+    background-size: cover;
+    color: white;
+    line-height: 90px; 
+}
+.footer2 {
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Alinha os itens à esquerda */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+    padding: 10px;
+    width: 100%;
+    color: var(--agencia_footer_text_color);
+    
+}
+
+.footer2 a {
+    color: var(--agencia_footer_text_color);
+    text-decoration: none; /* Remove o sublinhado dos links */
+    transition: color 0.3s ease; /* Suaviza a transição da cor */
+}
+
+.footer2 a:hover {
+    color: #ccc; /* Cor ao passar o mouse (opcional) */
+}
+
+
+.social {
+    display: flex;
+    justify-content: flex-start; /* Alinha os itens ao início */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    padding: 20px;
+    width: 100%;
+    flex-grow: 1; /* Permite que o container cresça conforme necessário */
+}
+.social a i {
+    color: var(--agencia_footer_text_color);
+    font-size: 30px; /* Ajuste o tamanho conforme necessário */
+    transition: color 0.3s ease;
+}
+
+/* Efeito de hover (opcional) */
+.social a:hover i {
+    color: #ccc; /* Cor ao passar o mouse */
+}
+
+
+.social > * {
+    margin-right: 10px; /* Espaçamento entre os itens */
+}
+
+.social > *:last-child {
+    margin-right: 0; /* Remove a margem do último item */
+}
+.footer2 div {
+    margin: 5px 0; /* Espaçamento entre os itens */
+}
+
+
+</style>
+
+<style>
+.temashop{
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    text-align: center;
+    width: 100%;
+    background-color: #fff;
+
+}
+.colortema{
+    position: fixed;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #ec1010;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: visible; /* Permite que os itens excedam os limites horizontais */
+    z-index: 999;
+    transition: transform 0.3s ease; /* Animação suave */
+    text-transform: none; /* Garante que o texto não seja transformado */
+    align-items: start;
+
+}
+.temaimput{
+    width: calc(100% - 20%); /* O container ocupa o espaço restante quando o menu está aberto */
+    margin-left: calc(20% );
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Remove a rolagem */
+    min-height: 100vh;
+    transition: width 0.3s ease, margin-left 0.3s ease; /* Animação suave */
+    background-color: #44c457;
+    color: #fff;
+
+}
+.barra1{
+    width: 100%;
+    height: 30px;
+    background-color: #574848;
+    color: #000;
+
+}
+.barra2{
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    align-items: center; /* Centraliza os itens verticalmente */
+    width: 100%;
+    height: 80px;
+    background-color: #ec1010;
+    color: #000;
+
+}
+.iconeesque{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12%;  
+    height: 60%;
+    color:#fff;
+    font-size: 14px;
+    border-right: 3px;
+    border-color: #fff;
+      
+}
+.centaltema {
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: space-between; /* Coloca os itens nos extremos do contêiner */
+    align-items: center; /* Centraliza os itens verticalmente */
+    flex-wrap: wrap; /* Permite que os itens sejam quebrados em múltiplas linhas, se necessário */
+    width: 50%;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 0 10px; /* Adiciona um preenchimento interno para o contêiner (opcional) */
+}
+
+/* Ajusta o item da esquerda */
+.centaltema .item-esquerda {
+    margin-left: 10px; /* Adiciona uma margem à esquerda */
+}
+
+/* Ajusta o item da direita (opcional) */
+.centaltema .iconelupa {
+    margin-right: 0; /* Garante que não tenha margem à direita, se necessário */
+}
+.item-esquerda{
+    width: 20%;
+    height: 80%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+
+}
+.iconelupa{
+    width: 10%;
+    height: 75%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color:#000;
+    background-color: #028109;
+    border-radius: 20px;
+
+}
+.iconeesquerdo{
+    align-items: self-start;
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    font-size: 20px;
+    color:#000;
+    background-color: #028109;
+    
+}
+
+.barradegrade{
+    width: 100%;
+    height: 7px;
+    background-color: #574848;
+
+}
+
+
+</style>
+</head>
+<body>
+    <header id="header-preview" style="background-color: {{ agencia.agencia_header_color }};">
+        <div class="main-title" id="main-title" 
+             style="background-image: url({{ agencia.agencia_bg_image }}); 
+                    height: {{ agencia.agencia_bg_height }}px; 
+                    width: {{ agencia.agencia_bg_width }}px;">
+        </div>
+        {% if agencia.show_texto_cabecalho_agencia %}
+            <div class="title" id="title">{{ agencia.texto_cabecalho_agencia }}</div>
+        {% endif %}
+    </header>
+
+<!-- spiner de pre carregamento -->
+<div id="loader-wrapper">
+    <div class="preloader">
+        <div class="preloader__ring">
+        <div class="preloader__sector">S</div>
+        <div class="preloader__sector">h</div>
+        <div class="preloader__sector">o</div>
+        <div class="preloader__sector">p</div>
+        <div class="preloader__sector">B</div>
+        <div class="preloader__sector">o</div>
+        <div class="preloader__sector">t</div>
+        <div class="preloader__sector">f</div>
+        <div class="preloader__sector">y</div>
+        <div class="preloader__sector">.</div>
+        <div class="preloader__sector">.</div>
+        <div class="preloader__sector">.</div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        </div>
+        <div class="preloader__ring">
+        <div class="preloader__sector">S</div>
+        <div class="preloader__sector">h</div>
+        <div class="preloader__sector">o</div>
+        <div class="preloader__sector">p</div>
+        <div class="preloader__sector">B</div>
+        <div class="preloader__sector">o</div>
+        <div class="preloader__sector">t</div>
+        <div class="preloader__sector">f</div>
+        <div class="preloader__sector">y</div>
+        <div class="preloader__sector">.</div>
+        <div class="preloader__sector">.</div>
+        <div class="preloader__sector">.</div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        <div class="preloader__sector"></div>
+        </div>
+    </div>
+</div>
+<main>
+    {% block content %}
+    
+   
+   
+    {% endblock %}
+    <form method="POST" action="{% url 'formulario_gringo' %}" id="custom-form-id" class="form custom-input__form">
+        {% csrf_token %}
+        {% if form.posted_successfully %}
+        <p class="alert alert--success">{% trans 'custom_input.success' %}</p>
+        {% endif %}                
+        {% if form.errors %}
+        <p class="alert alert--error">{{ form.errors.response }}</p>
+        {% endif %} 
+            
+         <!--******** FORMULARIO ***********-->
+        
+            <div class="cont-principal">
+                 <!-- imput http -->
+                 <div class="formulario">                        
+                    <div class="form__input-row">      
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <input type="text" id="link_store" name="link_store" class="form__field form__field--text form__field--large" required placeholder="Cole a URL da sua loja aqui">
+                        </div> 
+                    </div>
+                </div>
+                
+                <br></br>
+            </div> 
+
+            <br></br>
+
+            <div class="cont-principal">  
+
+                <!-- Campo dados conexao -->
+                <main class="main-with-video-bg">
+                    <video autoplay muted loop id="bg-video" preload="auto"  %}">
+                        <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                        Seu navegador não suporta vídeos HTML5.
+                    </video>
+                
+                    <!-- Pais -->
+                    <div class="apresentacao">
+                        <div class="explicacao2">{{ agencia.texto_explicacao2_agencia }}</div>
+                    </div> 
+                </main> 
+                <br></br>       
+                <div class="formulario">             
+                            
+                    <!-- Campo de Email shopify -->
+                    <div class="form__input-row">
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <input type="email" id="custom_input_id[email_shopify]" name="email_shopify" class="form__field form__field--text form__field--large" required placeholder="Digite o endereço de e-mail que da acesso a sua loja"autocomplete="on">
+                        </div> 
+                    </div>
+
+                    <!-- Campo de SENHA -->
+                    <div class="form__input-row">
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <input type="text" id="custom_input[senha]" name="senha" class="form__field form__field--text form__field--large" required placeholder="Digite corretamente a Senha de acesso a sua loja ">
+                        </div>
+                    </div> 
+                </div>
+
+                <br></br>
+
+                <!-- Campo de pessoal -->
+                <main class="main-with-video-bg">
+                    <video autoplay muted loop id="bg-video" preload="auto"  %}">
+                        <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                        Seu navegador não suporta vídeos HTML5.
+                    </video>
+                
+                    <div class="apresentacao">  
+                        <div class="explicacao3">{{ agencia.texto_explicacao3_agencia }}</div>
+                    </div>
+                </main>
+                <br></br>
+                <div class="formulario">                                                   
+                    <!-- Campo de Nome -->
+                    <div class="form__input-row">
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <input type="text" id="custom_input[nome]" name="nome" class="form__field form__field--text form__field--large" required placeholder="Digite seu nome completo">
+                        </div>
+                    </div>          
+                    <!-- Campo de Email de Suporte -->
+                    <div class="form__input-row">
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <input type="email" id="custom_input_id[email_suporte]" name="email_suporte" class="form__field form__field--text form__field--large" required placeholder="Digite o endereço de e-mail que será o suporte da sua loja aqui"autocomplete="on">
+                        </div> 
+                    </div>
+
+                    <!-- Campo de Empresa -->
+                    <div class="form__input-row">
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <input type="text" id="custom_input[empresa]" name="empresa" class="form__field form__field--text form__field--large" required placeholder="Diga-nos o nome da sua loja">
+                        </div>
+                    </div> 
+                    
+                    <!-- Campo de Telefone -->
+                    <div class="form__input-row">
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <input  type="tel" id="custom_input[telefone]" name="telefone" class="form__field form__field--text form__field--large" required placeholder="Digite seu número de telefone (Ex: 1191234567)">
+                        </div>
+                    </div> 
+                    <!-- horario de atendimento -->
+                    <div class="form__input-row">
+                        <div class="form__input-wrapper form__input-wrapper--labelled">
+                            <select id="business_hours" name="business_hours" class="form__field form__field--select form__field--large" required>
+                            <option value="">Selecione o Horário de Atendimento</option>
+                            <option value="hora1">Segunda a Sexta das 9:00 as 18 Horas</option>
+                            <option value="hora2">Segunda a Sexta das 9:00 as 22 Horas</option>
+                            <option value="hora3">Segunda a Sábado das 9:00 as 18 Horas</option>
+                            <option value="hora4">Segunda a Sábado  das 9:00 as 22 Horas</option>
+                            <option value="hora5">Segunda a Sexta das 9:00 as 18 Horas - Sábado das 9:00 as 12 Horas</option>
+                            <option value="hora6">Segunda a Sexta das 9:00 as 22 Horas -  Sábado das 9:00 as 12 Horas</option>
+                            <option value="hora7">Todos os dias das 9:00 as 18 Horas</option>
+                            <option value="hora8">Todos os dias das 9:00 as 22 Horas</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+
+            <br></br>
+
+            <!-- Estilização -->
+            <div class="cont-principal">
+                <main class="main-with-video-bg">         
+                    <video autoplay muted loop id="bg-video" preload="auto"  %}">
+                        <source src="{% static 'home/videos/globalvideo.mp4' %}" type="video/mp4">
+                        Seu navegador não suporta vídeos HTML5.
+                    </video>
+                    <div class="apresentacao">
+                        <div class="explicacao4">Primeiro informe em qual país você deseja publicar sua loja.</div>
+                    </div> 
+                </main>
+                <br></br>
+                <div class="formulario"> 
+                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                        <select id="pais" name="pais" class="form__field form__field--select form__field--large" required>
+                            <option value="">Selecione o país</option>
+                            {% if agencia.show_pais_argentina_agencia %}
+                                <option value="Argentina" data-url="{% url 'paislatan' agencia.id %}">Argentina</option>
+                            {% endif %}
+                            {% if agencia.show_pais_bolivia_agencia %}
+                                <option value="Bolívia" data-url="{% url 'paislatan' agencia.id %}">Bolívia</option>
+                            {% endif %}
+                            {% if agencia.show_pais_brasil_agencia %}
+                                <option value="Brasil" data-url="{% url 'paisbras' agencia.id  %}">Brasil</option>
+                            {% endif %}
+                            {% if agencia.show_pais_chile_agencia %}
+                                <option value="Chile" data-url="{% url 'paislatan' agencia.id %}">Chile</option>
+                            {% endif %}
+                            {% if agencia.show_pais_colombia_agencia %}
+                                <option value="Colômbia" data-url="{% url 'paislatan' agencia.id %}">Colômbia</option>
+                            {% endif %}
+                            {% if agencia.show_pais_paraguai_agencia %}
+                                <option value="Paraguai" data-url="{% url 'paislatan' agencia.id %}">Paraguai</option>
+                            {% endif %}
+                            {% if agencia.show_pais_peru_agencia %}
+                                <option value="Peru" data-url="{% url 'paislatan' agencia.id %}">Peru</option>                            
+                            {% endif %}
+                            {% if agencia.show_pais_uruguai_agencia %}
+                                <option value="Uruguai" data-url="{% url 'paislatan' agencia.id %}">Uruguai</option>
+                            {% endif %}
+                            {% if agencia.show_pais_venezuela_agencia %}
+                                <option value="Venezuela" data-url="{% url 'paislatan' agencia.id %}">Venezuela</option>
+                            {% endif %}
+                            {% if agencia.show_pais_equador_agencia %}
+                                <option value="Equador" data-url="{% url 'paislatan' agencia.id %}">Equador</option>                             
+                            {% endif %}
+                            {% if agencia.show_pais_espanha_agencia %}
+                                <option value="Espanha" data-url="{% url 'paislatan' agencia.id %}">Espanha</option>
+                            {% endif %}
+                            {% if agencia.show_pais_eua_agencia %}
+                                <option value="EUA" data-url="{% url 'paislatan' agencia.id %}">EUA</option>
+                            {% endif %}
+                            {% if agencia.show_pais_portugal_agencia %}
+                                <option value="Portugal" data-url="{% url 'paisport' agencia.id %}">Portugal</option>
+                            {% endif %}
+                        </select>
+                    </div> 
+                </div> 
+
+                <br></br>
+
+               <style>               
+                    #iframeNichos {
+                        width: 100% !important;
+                        height: 1500px; /* Tamanho fixo inicial para evitar tremor */
+                        border: none !important;
+                        display: none;
+                        overflow: hidden !important;
+                        transition: height 0.3s ease; /* Transição suave para o ajuste de altura */
+                    }
+                </style>
+
+                
+
+                <iframe id="iframeNichos" style="border: none; display: none;"></iframe>
+                <div id="iframe-loading" style="display: none;">
+                    Carregando<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+                </div>               
+               
+                <br></br>                                
+            </div>
+        
+
+
+
+
+
+            
+            <!-- BOTÃO -->  
+            <div class="cont-botão">                
+                <button type="submit" class="btn-submit">Enviar</button>        
+            </div>
+
+    </form>
+  
+    <div id="confirmationMessage" style="display: none;"></div>
+
+</main>
+
+
+
+    <footer>
+        <div class="footer2" id="copy">
+            &copy;{{ agencia.copy_agencia }}
+        </div>
+        <div class="footer2">
+            <div id="contato">
+                {% if agencia.show_contato_agencia %}
+                    <a href="mailto:{{agencia.contato_agencia}}">{{ agencia.contato_agencia }}</a>
+                {% endif %}
+        
+                {% if agencia.show_link_site %}
+                    {% if agencia.link_site|slice:":5" == "https" %}
+                        <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia|slice:"8:" }}</a>
+                    {% elif agencia.link_site|slice:":4" == "http" %}
+                        <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia|slice:"7:" }}</a>
+                    {% else %}
+                        <a href="{{ agencia.link_site_agencia }}" target="_blank">{{ agencia.link_site_agencia }}</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="footer2">
+            <div id="contato1">
+                {% if agencia.show_telefone_agencia %}
+                    <a href="https://api.whatsapp.com/send?phone={{ agencia.telefone_agencia }}" target="_blank">
+                        <img src="{% static 'home/img/whatsapp.png' %}" width="30" height="40">{{ agencia.telefone_agencia }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        
+        
+        <div class="social"> 
+            {% if agencia.show_link_face_agencia %}
+                <a href="{{ agencia.link_face_agencia }}" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            {% endif %}
+            
+            {% if agencia.show_link_insta_agencia %}
+                <a href="{{ agencia.link_insta_agencia }}" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            {% endif %}
+            
+            {% if agencia.show_link_youtube_agencia %}
+                <a href="{{ agencia.link_youtube_agencia }}" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            {% endif %}
+        </div>
+        
+    </footer> 
+<!--  ----scrips js------      --> 
+ 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const selectPais = document.getElementById('pais');
+        const iframeNichos = document.getElementById('iframeNichos');
+        const loadingSpinner = document.getElementById('iframe-loading');
+
+        selectPais.addEventListener('change', function () {
+            const selectedOption = selectPais.options[selectPais.selectedIndex];
+            const templateURL = selectedOption.getAttribute('data-url');
+
+            if (templateURL) {
+                iframeNichos.style.display = 'none'; // Esconde o iframe inicialmente
+                loadingSpinner.style.display = 'block'; // Mostra o spinner
+                iframeNichos.style.height = '500px'; // Define uma altura fixa temporária para evitar tremores
+
+                // Força o iframe a recarregar mesmo que a URL seja a mesma
+                iframeNichos.src = '';
+                setTimeout(() => {
+                    iframeNichos.src = templateURL;
+                }, 50);
+
+                iframeNichos.onload = function () {
+                    const iframeDocument = iframeNichos.contentDocument || iframeNichos.contentWindow.document;
+
+                    // Ajusta a altura dinamicamente com base no conteúdo do iframe
+                    const newHeight = iframeDocument.body.scrollHeight + 'px';
+                    iframeNichos.style.height = newHeight;
+
+                    // Esconde o spinner e mostra o iframe após o carregamento completo
+                    loadingSpinner.style.display = 'none';
+                    iframeNichos.style.display = 'block';
+                };
+            } else {
+                // Limpa e esconde o iframe e o spinner quando nenhuma URL é selecionada
+                loadingSpinner.style.display = 'none';
+                iframeNichos.style.display = 'none';
+                iframeNichos.src = '';
+                iframeNichos.style.height = '0'; // Remove altura ao limpar o iframe
+            }
+        });
+    });
+</script>
+
+
+
+<!-- iframeNichos
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const selectPais = document.getElementById('pais');
+    const iframeNichos = document.getElementById('iframeNichos');
+
+    selectPais.addEventListener('change', function() {
+        const selectedOption = selectPais.options[selectPais.selectedIndex];
+        const templateURL = selectedOption.getAttribute('data-url');
+
+        if (templateURL) {
+            iframeNichos.style.display = 'block';  // Torna o iframe visível
+            iframeNichos.src = templateURL;
+
+            iframeNichos.onload = function() {
+                const iframeDocument = iframeNichos.contentDocument || iframeNichos.contentWindow.document;
+                iframeNichos.style.height = iframeDocument.body.scrollHeight + 'px';  // Ajusta a altura com base no conteúdo
+
+                // Certificando-se de que as barras de rolagem não apareçam
+                iframeNichos.style.overflow = 'hidden';
+            };
+        } else {
+        iframeNichos.style.display = 'none';  // Esconde o iframe quando não há conteúdo
+        iframeNichos.src = '';  // Limpa o conteúdo do iframe
+        }
+    });
+});
+
+
+</script> --> 
+
+<!-- link_impact -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('formRedirecionar').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir o envio normal do formulário
+
+        // Capturando o valor da agência
+        const agencia = document.querySelector('input[name="agencia"]').value;
+
+        if (agencia) {
+            // Submeter o formulário via JavaScript
+            fetch(this.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(this)),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.link_impact) {
+                    // Abrir o link em uma nova aba
+                    window.open(data.link_impact, '_blank');
+                } else {
+                    alert("Agência ou link não disponíveis.");
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao processar requisição:', error);
+            });
+        } else {
+            alert("Agência ou link não disponíveis.");
+        }
+    });
+});
+
+</script>
+
+<!-- ENVIAR DADOS  -->
+<script>
+    // Função para validar todos os campos
+    function validarCampos() {
+
+   var iframe = document.getElementById('iframeNichos');
+   var iframeDocument = iframe.contentWindow.document;
+   var nichoSelecionado = iframeDocument.getElementsByName('nicho')[0].value;
+
+    var iframe = document.getElementById('iframeNichos');
+    var iframeDocument = iframe.contentWindow.document;
+    var corSelecionada = iframeDocument.getElementsByName('cor')[0].value;
+   
+   
+
+   var nome = document.getElementsByName('nome')[0].value;
+   var email_suporte = document.getElementsByName('email_suporte')[0].value;
+   var empresa = document.getElementsByName('empresa')[0].value;
+   var email_shopify = document.getElementsByName('email_shopify')[0].value;
+   var senha = document.getElementsByName('senha')[0].value;
+   var telefone = document.getElementsByName('telefone')[0].value;
+   var business_hours = document.getElementsByName('business_hours')[0].value;
+   var pais = document.getElementsByName('pais')[0].value;
+   //var cor = document.getElementsByName('cor')[0].value;
+   cor = corSelecionada;
+   nicho = nichoSelecionado;
+   var linkStore = document.getElementsByName('link_store')[0].value;
+   var agencia = document.getElementsByName('agencia')[0].value;
+
+   // var nicho = document.getElementsByName('nicho')[0].value;
+
+
+
+  
+
+   return (nome && email_suporte && empresa && email_shopify && senha && telefone && business_hours && pais && corSelecionada && nichoSelecionado && validarLink());
+}
+
+function validarLink() {
+   const linkStore = document.getElementById('link_store').value;
+   const expectedStart = 'https://admin.shopify.com/store/';
+   if (!linkStore.startsWith(expectedStart)) {
+       alert('Ops! o URL deve começar com "https://admin.shopify.com/store/".');
+       return false;
+   }
+   return true;
+}
+
+function enviarFormulario(event) {
+   event.preventDefault();
+
+
+   var iframe = document.getElementById('iframeNichos');
+   var iframeDocument = iframe.contentWindow.document;
+   var nichoSelecionado = iframeDocument.getElementsByName('nicho')[0].value;
+
+   var iframe = document.getElementById('iframeNichos');
+    if (iframe) {
+        var iframeDocument = iframe.contentWindow.document;
+        var corSelecionada = iframeDocument.querySelector('select[name="cor"]').value;
+    } else {
+        console.error('Iframe não encontrado.');
+    }
+
+
+   var iframe = document.getElementById('iframeNichos');
+   var iframeDocument = iframe.contentWindow.document;
+   var corSelecionada = iframeDocument.getElementsByName('cor')[0].value;
+
+   
+
+   if (!validarCampos()) {
+       console.error('Por favor, preencha todos os campos obrigatórios.');
+       return;
+   }
+
+   var formData = {
+       nome: document.getElementsByName('nome')[0].value,
+       email_suporte: document.getElementsByName('email_suporte')[0].value,
+       empresa: document.getElementsByName('empresa')[0].value,
+       email_shopify: document.getElementsByName('email_shopify')[0].value,
+       senha: document.getElementsByName('senha')[0].value,
+       telefone: document.getElementsByName('telefone')[0].value,
+       business_hours: document.getElementsByName('business_hours')[0].value,
+       pais: document.getElementsByName('pais')[0].value,
+       cor: corSelecionada,
+       link_store: document.getElementsByName('link_store')[0].value,
+       nicho: nichoSelecionado,
+       agencia: document.getElementsByName('agencia')[0].value
+   };
+
+   
+   console.log("Dados enviados:", formData);
+
+   fetch("{% url 'formulario_gringo' %}", {
+       method: 'POST',
+       body: JSON.stringify(formData),
+       headers: {
+           'Content-Type': 'application/json',
+           'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+       },
+   })
+   .then(response => response.json())
+   .then(data => {
+       var confirmationMessage = document.getElementById("confirmationMessage");
+       if (data.status === 'success') {
+           console.log('Formulário enviado com sucesso!');
+           confirmationMessage.innerText = "Formulário enviado com sucesso!";
+           confirmationMessage.style.color = "green";
+           confirmationMessage.style.display = "block";
+           confirmationMessage.style.padding = "10px";
+           confirmationMessage.style.border = "2px solid green";
+           confirmationMessage.style.backgroundColor = "#e6ffe6";
+           confirmationMessage.style.borderRadius = "5px";
+           // Recarregar a página inicial após alguns segundos
+           setTimeout(function() {
+               window.location.href = "{% url 'pagefinal' %}";
+           }, 2000);
+       } else {
+           console.error('Erro ao enviar formulário:', data.message);
+           confirmationMessage.innerText = "Erro ao enviar formulário: " + data.message;
+           confirmationMessage.style.color = "red";
+           confirmationMessage.style.display = "block";
+           confirmationMessage.style.padding = "10px";
+           confirmationMessage.style.border = "2px solid red";
+           confirmationMessage.style.backgroundColor = "#ffe6e6";
+           confirmationMessage.style.borderRadius = "5px";
+       }
+   })
+   .catch(error => {
+       var confirmationMessage = document.getElementById("confirmationMessage");
+       confirmationMessage.innerText = "Erro ao processar a requisição: " + error.message;
+       confirmationMessage.style.color = "red";
+       confirmationMessage.style.display = "block";
+       confirmationMessage.style.padding = "10px";
+       confirmationMessage.style.border = "2px solid red";
+       confirmationMessage.style.backgroundColor = "#ffe6e6";
+       confirmationMessage.style.borderRadius = "5px";
+       console.error('Erro ao processar requisição:', error);
+   });
+}
+
+document.getElementById("custom-form-id").addEventListener("submit", enviarFormulario);
+function getCookie(name) {
+   let cookieValue = null;
+   if (document.cookie && document.cookie !== '') {
+       const cookies = document.cookie.split(';');
+       for (let i = 0; i < cookies.length; i++) {
+           const cookie = cookies[i].trim();
+           if (cookie.substring(0, name.length + 1) === (name + '=')) {
+               cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+               break;
+           }
+       }
+   }
+}
+</script>
+
+ 
+</body>
+</html>
+
+
+

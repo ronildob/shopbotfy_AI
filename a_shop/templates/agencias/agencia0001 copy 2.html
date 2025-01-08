@@ -1,0 +1,954 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Announcement Bar</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+<style>
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: row; /* Alinha itens horizontalmente */
+    width: 100%; /* Ocupa 100% da largura disponível */
+    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+}
+.cont-esq {
+    position: fixed;
+    left: 0;
+    width: 18%;
+    height: 100%;
+    background-color: #F0E4E4;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: visible; /* Permite que os itens excedam os limites horizontais */
+    z-index: 999;
+    transition: transform 0.3s ease; /* Animação suave */
+    text-transform: none; /* Garante que o texto não seja transformado */
+    align-items: start;   
+    border: 5px solid #f80606;
+}
+.cont-dir {
+    width: calc(100% - 18%); /* O container ocupa o espaço restante quando o menu está aberto */
+    margin-left: calc(18% );
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Remove a rolagem */
+    min-height: 100vh;
+    transition: width 0.3s ease, margin-left 0.3s ease; /* Animação suave */
+    border: 5px solid #f80606; 
+}
+.color-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.color-input-container input[type="color"] {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin-right: 2px;
+    cursor: pointer;
+    border-radius: 50%; /* Faz o campo de cor ficar redondo */
+   /* border: none;  Remove bordas padrão */
+    appearance: none; /* Remove estilo padrão do navegador */
+}
+
+.color-input-container input[type="color"]::-webkit-color-swatch {
+    border-radius: 50%; /* Ajusta o estilo da cor no WebKit (Chrome, Safari) */
+}
+
+.color-input-container input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    width: 70%;
+}
+
+.cont-ainer {
+    width: 100%;
+
+}
+
+.cont-ainer-header {
+    position: relative;
+    padding: 10px 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-size: 16px; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #000;
+    display: flex;
+    align-items: flex-end;
+    border-left: 1px solid transparent; /* Linha lateral padrão transparente */
+    transition: all 0.3s ease;
+}
+/* 
+.cont-ainer-header {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    position: relative; 
+    z-index: 1; 
+    width: 100%;
+} */
+
+/* Linha lateral esquerda */
+.cont-ainer-header:hover {
+    border-left: 1px solid #000; /* Cria a linha lateral */
+}
+
+/* Pseudo-elemento para a borda inferior */
+.cont-ainer-header::after {
+    content: ""; /* Necessário para exibir o pseudo-elemento */
+    position: absolute;
+    bottom: 0; /* Alinha na parte inferior */
+    left: 0; /* Começa no canto inferior esquerdo */
+    width: 7%; /* Largura da borda inferior, apenas 5% */
+    height: 1px; /* Espessura da borda inferior */
+    background-color: transparent; /* Invisível inicialmente */
+    transition: all 0.3s ease;
+}
+
+/* Exibição da borda inferior no hover */
+.cont-ainer-header:hover::after {
+    background-color: #000; /* Cor da borda inferior no hover */
+}
+
+.cont-ainer-content {
+    display: none; /* Inicialmente oculto */
+    overflow-y: auto; /* Permite rolar verticalmente */
+    max-height: 300px; /* Define a altura máxima do conteúdo */
+}
+.contpri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    min-height: auto; 
+    padding: 5px; 
+    box-sizing: border-box; 
+    text-transform: none; 
+}
+  </style>
+
+  <style>
+
+  body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.top-bar {
+ 
+  width: 100%;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 15px;
+  height: 150px;
+  background: #140136;
+  color: white;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+.nav-center {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    
+}
+.brand {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.search-bar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.search-bar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.search-bar button {
+  background: #00d67e;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  flex: none;
+
+    width: 60px;
+    height: 37px;
+    border-radius: 100px;
+    color: white;
+    margin-right: 4px;
+}
+
+.nav-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 1px solid #ccc; /* Borda fina na lateral esquerda */
+  padding-left: 10px; /* Opcional: Adiciona um espaçamento interno */
+}
+
+.right1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+.serch1
+{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: 40%;
+  margin-left: 20px;
+}
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 14px;
+}
+
+.track-order, .cart {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  
+}
+
+.cart-count {
+  background: #00d67e;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+svg {
+  fill: white;
+}
+
+.announcement-bar {
+    background: linear-gradient(to right, #c198df, #8550e7);
+    color: white;
+}
+
+
+
+.announcement-bar{
+  align-items: center;
+  padding: 5px 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.announcement-bar svg {
+  margin-right: 5px;
+}
+
+.header__cart-count {
+  display: inline-flex;
+  position: absolute;
+  right: -1px;
+  top: 3px;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  min-width: 20px;
+  padding: 4px;
+  font-size: calc(var(--base-text-font-size) - (var(--default-text-font-size) - 12px));
+  font-weight: var(--text-font-bolder-weight);
+  text-align: center;
+  background: var(--header-accent-color);
+  color: var(--secondary-background);
+  border-radius: 1.75em;
+  transition: transform 0.35s ease-in-out;
+  will-change: transform;
+  transform: scale(1.01);
+  z-index: 1;
+}
+
+.color-bar {
+      background: linear-gradient(to right, #c198df, #8550e7, #c198df, #8550e7);
+      width: 100%;
+      height: 7px;
+    }
+.color-footer-bar {
+    background: linear-gradient(to right, #c198df, #8550e7, #c198df, #8550e7);
+    width: 100%;
+    height: 7px;
+}
+    .color-inputs {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .color-inputs label {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+.cortextobar{
+        color: #e9f72c;
+    }
+    .cortextoheader{
+        color: #f13737;
+    }
+  </style>
+
+  <!-- colection list -->
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    .colection-list {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto; /* Centraliza o container horizontalmente */
+        margin-top: 2%;
+        margin-bottom: 2%;
+        
+
+    }
+
+    .item {
+        position: relative; /* Define o contexto de posicionamento para os elementos filhos */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end; /* Mantém o triângulo na base */
+    }
+
+    .triangle {
+        width: 100px;
+        height: 100px;
+        background: blue;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .item img {
+        position: absolute;
+        top: 60%; /* Centraliza verticalmente em relação ao triângulo */
+        left: 50%; /* Centraliza horizontalmente em relação ao triângulo */
+        transform: translate(-50%, -50%); /* Ajusta o ponto de origem para o centro */
+        width: 90px;
+        height: auto;
+    }
+</style>
+
+<style>
+    .roda-footer{
+        background-color: #30db4f; 
+        padding: 40px 20px; 
+        color: #fff; 
+        font-family: Arial, sans-serif;
+    }
+    .cont-footer{
+        max-width: 1200px; 
+        margin: 0 auto; 
+        display: flex; 
+        justify-content: space-between; 
+        flex-wrap: wrap;
+    }
+
+    .cortexto{
+        color: #c6bfd3;
+    }
+</style>
+
+<!-- responsivos -->
+<style>
+    @media (max-width: 768px) {
+
+  .nav-left,
+  .nav-right, 
+  .nav-center{
+    display: none; 
+  }
+  .serch1{
+    width: 80%;
+  }
+}
+
+</style>
+
+
+</head>
+
+<body>
+    <div class="content">
+        <div class="cont-esq">
+
+             <!-- barra de anuncios-->
+            <div class="cont-ainer">
+                <div class="cont-ainer-header" onclick="toggleContent(this)">
+                    Barra de Anuncios:
+                </div>  
+                <div class="cont-ainer-content" id="containerContentStyle">
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 1:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="color1" name="color1" value="#a95fdd" data-css-variable="color1">
+                            <input type="text" id="color1_input" name="color1_input" value="#a95fdd" data-css-variable="color1">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 2:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="color2" name="color2" value="#c198df" data-css-variable="color2">
+                            <input type="text" id="color2_input" name="color2_input" value="#8550e7"data-css-variable="color2">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor Texto:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="color_text_bar" name="color_text_bar" value="#ffffff" data-css-variable="color_text_bar">
+                            <input type="text" id="color_text_bar_input" name="color_text_bar_input" value="#ffffff" data-css-variable="color_text_bar">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+             <!-- navegador -->
+            <div class="cont-ainer">
+                <div class="cont-ainer-header" onclick="toggleContent(this)">
+                    Header:
+                </div>  
+                <div class="cont-ainer-content" id="containerContentStyle">
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor background:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="header_color" name="header_color" value="#f7f7f7" data-css-variable="header_color">
+                            <input type="text" id="header_color_input" name="header_color_input" value="#f7f7f7" data-css-variable="header_color">
+                        </div>
+                    </div>
+                    
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor Texto:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="header_text_color" name="header_text_color" value="#000000" data-css-variable="header_text_color">
+                            <input type="text" id="header_text_color_input" name="header_text_color_input" value="#000000" data-css-variable="header_text_color">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor Button:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="acent_color" name="acent_color" value="#abd694" data-css-variable="acent_color">
+                            <input type="text" id="acent_color_input" name="acent_color_input" value="#abd694" data-css-variable="acent_color">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- barra colorida cabeçalho-->
+            <div class="cont-ainer">
+                <div class="cont-ainer-header" onclick="toggleContent(this)">
+                    Barra Colorida Header:
+                </div>  
+                <div class="cont-ainer-content" id="containerContentStyle">
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 1:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_header_color1" name="bar_header_color1" value="#72dbe9" data-css-variable="bar_header_color1">
+                            <input type="text" id="bar_header_color1_input" name="bar_header_color1_input" value="#72dbe9" data-css-variable="bar_header_color1">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 2:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_header_color2" name="bar_header_color2" value="#d6b6ec" data-css-variable="bar_header_color2">
+                            <input type="text" id="bar_header_color2_input" name="bar_header_color2_input" value="#d6b6ec"data-css-variable="bar_header_color2">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 3:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_header_color3" name="bar_header_color3" value="#72dbe9" data-css-variable="bar_header_color3">
+                            <input type="text" id="bar_header_color3_input" name="bar_header_color3_input" value="#72dbe9" data-css-variable="bar_header_color3">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 4:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_header_color4" name="bar_header_color4" value="#d6b6ec" data-css-variable="bar_header_color4">
+                            <input type="text" id="bar_header_color4_input" name="bar_header_color4_input" value="#d6b6ec"data-css-variable="bar_header_color4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- barra colorida footer-->
+            <div class="cont-ainer">
+                <div class="cont-ainer-header" onclick="toggleContent(this)">
+                    Barra Colorida Footer:
+                </div>  
+                <div class="cont-ainer-content" id="containerContentStyle">
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 1:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_footer_color1" name="bar_footer_color1" value="#d6b6ec" data-css-variable="bar_footer_color1">
+                            <input type="text" id="bar_footer_color1_input" name="bar_footer_color1_input" value="#d6b6ec" data-css-variable="bar_footer_color1">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 2:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_footer_color2" name="bar_footer_color2" value="#72dbe9" data-css-variable="bar_footer_color2">
+                            <input type="text" id="bar_footer_color2_input" name="bar_footer_color2_input" value="#72dbe9"data-css-variable="bar_footer_color2">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 3:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_footer_color3" name="bar_footer_color3" value="#d6b6ec" data-css-variable="bar_footer_color3">
+                            <input type="text" id="bar_footer_color3_input" name="bar_footer_color3_input" value="#d6b6ec" data-css-variable="bar_footer_color3">
+                        </div>
+                    </div>
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor 4:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="bar_footer_color4" name="bar_footerr_color4" value="#72dbe9" data-css-variable="bar_footer_color4">
+                            <input type="text" id="bar_footer_color4_input" name="bar_footer_color4_input" value="#72dbe9"data-css-variable="bar_footer_color4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div class="cont-ainer">
+                <div class="cont-ainer-header" onclick="toggleContent(this)">
+                    Rodapé:
+                </div>  
+                <div class="cont-ainer-content" id="containerContentStyle">
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor background:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="footer_color" name="footer_color" value="#f7f7f7" data-css-variable="footer_color">
+                            <input type="text" id="footer_color_input" name="footer_color_input" value="#f7f7f7" data-css-variable="footer_color">
+                        </div>
+                    </div>
+                    
+                    <div class="contpri">
+                        <label for="cabecalho_text_color">Cor Texto:</label>
+                        <div class="color-input-container">
+                            <input type="color" id="footer_text_color" name="footer_text_color" value="#000000" data-css-variable="footer_text_color">
+                            <input type="text" id="footer_text_color_input" name="footer_text_color_input" value="#000000" data-css-variable="footer_text_color">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+
+       
+       
+        </div>
+
+
+
+
+        <div class="cont-dir">
+            <div class="top-bar">
+                
+                <div class="announcement-bar" id="colorAnuncio">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                        xmlns:xlink="http://www.w3.org/1999/xlink" 
+                        version="1.1" 
+                        id="Capa_1" 
+                        x="0px" 
+                        y="0px" 
+                        fill="var(--header-text-color)" 
+                        viewbox="0 0 512 264" 
+                        style="margin-top: -6px; margin-bottom: -6px; margin-right: 12px;" 
+                        width="18" 
+                        height="37"
+                        color="c6bfd3">
+                        <g>
+                    <path d="M490.727,21.379C473.083,3.489,447.355-3.846,422.93,2.051L96.786,70.595C34.85,79.76-7.929,137.399,1.236,199.334   c3.563,24.079,14.782,46.372,31.997,63.581l34.965,34.987c1.637,1.615,2.552,3.823,2.539,6.123v64.512   c0.047,40.134,32.57,72.657,72.704,72.704h64.512c2.303,0,4.513,0.913,6.144,2.539l34.965,34.965   c21.142,21.282,49.895,33.259,79.893,33.28c12.383-0.01,24.683-2.035,36.416-5.995c40.491-13.447,69.914-48.61,76.011-90.837   l68.544-325.12C516.084,65.391,508.789,39.291,490.727,21.379z M66.599,167c5.798-17.913,21.444-30.848,40.128-33.173   c0.754-0.1,1.5-0.228,2.24-0.384L393.17,73.71L134.738,331.992v-27.968c0.047-19.294-7.637-37.803-21.333-51.392l-34.923-34.965   C65.031,204.511,60.399,184.765,66.599,167z M378.535,403.118c-0.171,0.747-0.277,1.493-0.384,2.24   c-3.705,27.023-28.614,45.926-55.637,42.221c-10.676-1.464-20.581-6.379-28.203-13.997l-34.944-34.944   c-13.596-13.7-32.112-21.383-51.413-21.333h-27.968l258.368-258.432L378.535,403.118z"></path></g>
+                    </svg>
+                    <span class="cortextobar">Frete para todo Portugal</span>
+                </div>
+        
+                <nav class="main-nav" id="colorNav">
+
+                    <div class="nav-left">
+                        <div class="cortextoheader"><span class="brand">Sua Loja</span></div>
+                    </div>
+
+                    <div class="serch1">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search...">
+                            <button>
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+
+                    <div class="nav-center">
+                        <div class="right1">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                width="32" 
+                                height="32" 
+                                fill="var(--header-text-color)" 
+                                class="icon-user" 
+                                viewBox="0 0 24 24">
+                                <path d="M10 13c2.82 0 5.33.64 6.98 1.2A3 3 0 0 1 19 17.02V21H1v-3.97a3 3 0 0 1 2.03-2.84A22.35 22.35 0 0 1 10 13zm0 0c-2.76 0-5-3.24-5-6V6a5 5 0 0 1 10 0v1c0 2.76-2.24 6-5 6z" stroke="currentColor" stroke-width="2" fill="none"></path>
+                            </svg>
+                            
+                            <div class="account">
+                                <span class="cortextoheader">Login / Signup</span>
+                                <span class="cortextoheader">My account ▼</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-right">
+                        <div class="right1">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                id="Layer_1" 
+                                data-name="Layer 1" 
+                                viewBox="0 0 32 38" 
+                                width="32" 
+                                fill="var(--header-text-color)" 
+                                style="margin-right: -8px;">
+                            <path d="M19,5H17V4a3,3,0,0,0-3-3H3A3,3,0,0,0,0,4V19H2.041A3.465,3.465,0,0,0,2,19.5a3.5,3.5,0,0,0,7,0,3.465,3.465,0,0,0-.041-.5h6.082a3.465,3.465,0,0,0-.041.5,3.5,3.5,0,0,0,7,0,3.465,3.465,0,0,0-.041-.5H24V10A5.006,5.006,0,0,0,19,5Zm0,2a3,3,0,0,1,3,3v1H17V7ZM7,19.5a1.5,1.5,0,0,1-3,0,1.418,1.418,0,0,1,.093-.5H6.907A1.418,1.418,0,0,1,7,19.5ZM15,17H2V4A1,1,0,0,1,3,3H14a1,1,0,0,1,1,1Zm5,2.5a1.5,1.5,0,0,1-3,0,1.41,1.41,0,0,1,.093-.5h2.814A1.41,1.41,0,0,1,20,19.5ZM17,17V13h5v4Z"/>
+                            </svg>
+                            <div class="track-order">
+                                <span class="cortextoheader"> Rastrear Pedido</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-right">
+                        <div class="right1">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                style="margin-top: 10px;" 
+                                id="Outline" 
+                                viewBox="0 0 36 24" 
+                                width="37" 
+                                fill="var(--header-text-color)">
+                                <path d="M22.713,4.077A2.993,2.993,0,0,0,20.41,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H1A1,1,0,0,0,1,2h.222a1,1,0,0,1,.993.883l1.376,11.7A5,5,0,0,0,8.557,19H19a1,1,0,0,0,0-2H8.557a3,3,0,0,1-2.82-2h11.92a5,5,0,0,0,4.921-4.113l.785-4.354A2.994,2.994,0,0,0,22.713,4.077ZM21.4,6.178l-.786,4.354A3,3,0,0,1,17.657,13H5.419L4.478,5H20.41A1,1,0,0,1,21.4,6.178Z"/><circle cx="7" cy="22" r="2"/><circle cx="17" cy="22" r="2"/>
+                            </svg>
+                            <span class="cart-count">0</span>
+                            <div class="cortextoheader">Cart</div>
+                        </div>   
+                    </div>
+                    
+                </nav>
+                
+                <div class="color-bar" id="colorBar"></div>
+
+                
+              
+
+            
+                <div class="colection-list" id="colorColect">
+                    <div class="item">
+                        <div class="triangle"></div>
+                        <img src="/static/home/img/site/calangofavi.svg" alt="Item 1">
+                    </div>
+                    <div class="item">
+                        <div class="triangle"></div>
+                        <img src="/static/home/img/site/calangofavi.svg" alt="Item 2">
+                    </div>
+                    <div class="item">
+                        <div class="triangle"></div>
+                        <img src="/static/home/img/site/calangofavi.svg" alt="Item 3">
+                    </div>
+                    <div class="item">
+                        <div class="triangle"></div>
+                        <img src="/static/home/img/site/calangofavi.svg" alt="Item 3">
+                    </div>
+                    <div class="item">
+                        <div class="triangle"></div>
+                        <img src="/static/home/img/site/calangofavi.svg" alt="Item 3">
+                    </div>
+                    <div class="item">
+                        <div class="triangle"></div>
+                        <img src="/static/home/img/site/calangofavi.svg" alt="Item 3">
+                    </div>
+                </div>
+
+
+                <div class="color-footer-bar" id="colorBarra"></div>
+
+                <div class="roda-footer" id="colorFooter">
+                    <div class="cont-footer">
+                        <!-- Footer Menu -->
+                        <div style="flex: 1; margin-bottom: 20px;">
+                        <div class="cortexto"><span style="font-weight: bold; margin-bottom: 10px;">FOOTER MENU</span></div>
+                        <br>
+                        <div class="cortexto"><span style="text-decoration: none;">Search</span></div>
+                        </div>
+                        <!-- Atendimento ao Cliente -->
+                        <div style="flex: 1; margin-bottom: 20px;">
+                            <div class="cortexto"><span style="font-weight: bold; margin-bottom: 10px;">ATENDIMENTO AO CLIENTE</span></div>
+                            <br>
+                            <div class="cortexto"><p><strong>E-mail:</strong> xxxxxxx@xxxxx.xxx</p></div>
+                            <div class="cortexto"><p><strong>WhatsApp:</strong> +xx xxxxxxxxxxx</p></div>
+                            <div class="cortexto"><p><strong>Horário de atendimento:</strong> xxxxxx xxxxxx xxxxxx</p></div>
+                        </div>
+                        <!-- Newsletter -->
+                        <div style="flex: 1; margin-bottom: 20px;">
+                            <div class="cortexto"><span style="font-weight: bold; margin-bottom: 10px;">NEWSLETTER</span></div>
+                            <br>
+                            <div class="cortexto"><p>Receba ofertas incríveis toda semana em seu e-mail e fique sempre por dentro.</p></div>
+                            <br>
+                        
+                            <input type="email" placeholder="Your email" style="padding: 10px; border-radius: 25px; border: none; width: 80%; max-width: 300px; margin-bottom: 10px;">
+                            <button type="submit" style="padding: 10px 20px; border: 2px solid #fff; border-radius: 25px; background: none; color: #fff; cursor: pointer;">Subscribe</button>
+                            
+                        </div>
+                    </div>
+                </div>
+        </div>
+</div>
+
+
+<script src="/static/home/js/painelagencias/togglemenu.js"></script>
+<script>
+    // Função para atualizar o gradiente e a cor do texto da barra de anúncios
+    function updateAnnouncementBar() {
+        // Recupera os valores das cores
+        const color1 = document.getElementById("color1").value;
+        const color2 = document.getElementById("color2").value;
+        const textColor = document.getElementById("color_text_bar").value;
+
+        // Atualiza o gradiente de fundo
+        const gradient = `linear-gradient(to right, ${color1}, ${color2})`;
+        document.getElementById("colorAnuncio").style.background = gradient;
+
+        // Atualiza a cor do texto
+        document.querySelector(".cortextobar").style.color = textColor;
+    }
+
+    // IDs dos campos de entrada
+    const announcementFields = ["color1", "color2", "color_text_bar"];
+
+    // Adiciona os eventos para atualizar a barra em tempo real
+    announcementFields.forEach((fieldId) => {
+        document.getElementById(fieldId).addEventListener("input", updateAnnouncementBar);
+    });
+
+    // Atualiza a barra ao carregar a página para aplicar os valores iniciais
+    document.addEventListener("DOMContentLoaded", updateAnnouncementBar);
+</script>
+
+<script>
+    // Função para atualizar as cores do header, texto e botões
+    function updateHeaderStyles() {
+        // Recupera os valores das cores
+        const headerColor = document.getElementById("header_color").value;
+        const textColor = document.getElementById("header_text_color").value;
+        const buttonColor = document.getElementById("acent_color").value;
+
+        // Atualiza o background do header
+        document.getElementById("colorNav").style.background = headerColor;
+
+        // Atualiza a cor do texto no header
+        const textElements = document.querySelectorAll(".cortextoheader");
+        textElements.forEach((element) => {
+            element.style.color = textColor;
+        });
+
+        // Atualiza a cor dos botões
+        const buttons = document.querySelectorAll(".search-bar button, .cart-count");
+        buttons.forEach((button) => {
+            button.style.background = buttonColor;
+        });
+    }
+
+    // IDs dos campos de entrada
+    const headerFields = ["header_color", "header_text_color", "acent_color"];
+
+    // Adiciona os eventos para atualizar o header em tempo real
+    headerFields.forEach((fieldId) => {
+        document.getElementById(fieldId).addEventListener("input", updateHeaderStyles);
+    });
+
+    // Atualiza o header ao carregar a página para aplicar os valores iniciais
+    document.addEventListener("DOMContentLoaded", updateHeaderStyles);
+</script>
+
+<script>
+    // Função para atualizar o gradiente
+    function updateGradient() {
+        const color1 = document.getElementById("bar_header_color1").value;
+        const color2 = document.getElementById("bar_header_color2").value;
+        const color3 = document.getElementById("bar_header_color3").value;
+        const color4 = document.getElementById("bar_header_color4").value;
+
+        const gradient = `linear-gradient(to right, ${color1}, ${color2}, ${color3}, ${color4})`;
+        document.getElementById("colorBar").style.background = gradient;
+    }
+
+    // Adiciona eventos para atualizar a barra em tempo real
+    const colorFields = ["bar_header_color1", "bar_header_color2", "bar_header_color3", "bar_header_color4"];
+    colorFields.forEach((fieldId) => {
+        document.getElementById(fieldId).addEventListener("input", updateGradient);
+    });
+</script>
+
+<script>
+    // Função para atualizar a cor do triângulo
+    function updateTriangles() {
+        const color1 = document.getElementById("color1").value;
+        const triangles = document.querySelectorAll(".triangle");
+
+        // Atualiza o fundo de cada triângulo
+        triangles.forEach(triangle => {
+            triangle.style.background = color1;
+        });
+    }
+
+    // Adiciona a função ao evento de alteração de cor 1
+    document.getElementById("color1").addEventListener("input", () => {
+        updateGradient(); // Atualiza o gradiente da barra
+        updateTriangles(); // Atualiza a cor dos triângulos
+    });
+
+    // Atualiza inicialmente ao carregar a página
+    document.addEventListener("DOMContentLoaded", () => {
+        updateGradient();
+        updateTriangles();
+    });
+</script>
+
+<script>
+    // Função para atualizar o gradiente do Footer
+    function updateGradientFooter() {
+        const cor1 = document.getElementById("bar_footer_color1").value;
+        const cor2 = document.getElementById("bar_footer_color2").value;
+        const cor3 = document.getElementById("bar_footer_color3").value;
+        const cor4 = document.getElementById("bar_footer_color4").value;
+
+        const gradient = `linear-gradient(to right, ${cor1}, ${cor2}, ${cor3}, ${cor4})`;
+        document.getElementById("colorBarra").style.background = gradient;
+    }
+
+    // IDs dos campos de entrada para o Footer
+    const colorFooterFields = ["bar_footer_color1", "bar_footer_color2", "bar_footer_color3", "bar_footer_color4"];
+
+    // Eventos para atualizar o gradiente do Footer em tempo real
+    colorFooterFields.forEach((fieldId) => {
+        document.getElementById(fieldId).addEventListener("input", updateGradientFooter);
+    });
+
+    // Atualiza a barra do Footer ao carregar a página
+    document.addEventListener("DOMContentLoaded", updateGradientFooter);
+</script>
+
+<script>
+    // Função para atualizar as cores do rodapé
+    function updateFooterColors() {
+        // Recupera os valores dos campos
+        const backgroundColor = document.getElementById("footer_color").value;
+        const textColor = document.getElementById("footer_text_color").value;
+
+        // Atualiza o background e a cor do texto do rodapé
+        const footer = document.getElementById("colorFooter");
+        footer.style.backgroundColor = backgroundColor;
+        footer.style.color = textColor;
+
+        // Atualiza a cor do texto dos elementos internos
+        const footerTexts = footer.querySelectorAll(".cortexto");
+        footerTexts.forEach((text) => {
+            text.style.color = textColor;
+        });
+    }
+
+    // IDs dos campos de entrada
+    const footerColorFields = ["footer_color", "footer_text_color"];
+
+    // Adiciona eventos para atualizar as cores em tempo real
+    footerColorFields.forEach((fieldId) => {
+        document.getElementById(fieldId).addEventListener("input", updateFooterColors);
+    });
+
+    // Atualiza o rodapé ao carregar a página
+    document.addEventListener("DOMContentLoaded", updateFooterColors);
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Função genérica para sincronizar inputs
+    function syncColorAndText(colorInput, textInput, cssVariableName) {
+        // Atualiza o campo de texto e a variável CSS ao mudar a cor
+        colorInput.addEventListener("input", function () {
+        const colorValue = this.value;
+        textInput.value = colorValue;
+        document.documentElement.style.setProperty(`--${cssVariableName}`, colorValue);
+        });
+
+        // Atualiza o campo de cor ao mudar o texto
+        textInput.addEventListener("input", function () {
+        const colorValue = this.value;
+        if (/^#[0-9A-Fa-f]{6}$/.test(colorValue)) { // Validação básica para hexadecimal
+            colorInput.value = colorValue;
+            document.documentElement.style.setProperty(`--${cssVariableName}`, colorValue);
+        }
+        });
+    }
+
+    // Seleciona todos os inputs relacionados
+    const colorInputs = document.querySelectorAll('input[type="color"][data-css-variable]');
+    colorInputs.forEach((colorInput) => {
+        const cssVariableName = colorInput.getAttribute("data-css-variable");
+        const textInput = document.querySelector(`input[type="text"][data-css-variable="${cssVariableName}"]`);
+
+        if (textInput) {
+        syncColorAndText(colorInput, textInput, cssVariableName);
+        }
+    });
+    });
+
+</script>
+  </body>
+</html>

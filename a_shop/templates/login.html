@@ -1,0 +1,678 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+      <meta charset="UTF-8">
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{{ template.titulo }}</title>
+      <link rel="icon" href="/static/home/img/site/calangofavi.svg" />
+    
+      <link rel="stylesheet" href="{% static 'home/css/spiners.css'%}"> 
+
+      
+
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+       body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Define a orientação dos elementos como coluna */
+            justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+            align-items: center; /* Alinha os elementos no centro horizontalmente */
+            min-height: 100vh; /* Altura mínima igual à altura da viewport */
+            background-color: #969696; /* Gradiente de fundo */
+
+        }
+        :root {
+        --main-bg-image: url("{% if template.bg_image %}{{ template.bg_image.url }}{% else %}{% static 'default-image.jpg' %}{% endif %}");
+        --main-bg-width: {{ template.bg_width|default:'300px' }};
+        --main-bg-height: {{ template.bg_height|default:'100px' }};
+        --main-bg-position: {{ template.bg_position|default:'center' }};
+        --main-text-color: {{ template.text_color|default:'white' }};
+        --header-color: {{ template.header_color|default:'white' }};
+        --main-text-position: {{ template.text_position|default:'center' }};
+        --main-text-content: "{{ template.text_content|default:'Seu Texto Aqui' }}";
+        --main-text-font-size: {{ template.font_size|default:'16px' }};
+    }
+header {
+    background-color: var(--header-color); 
+    color: #c3bebe; 
+    padding: 20px 10px; /* Aumentado para um padding mais espaçoso */
+    text-align: center; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    position: relative;
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+}
+
+
+#main-title {
+    background-image: url('https://res.cloudinary.com/hnrqudfke/image/upload/v1732556510/jkqgtavcyvrnpryhp6ju.svg');
+    background-size: cover;
+    background-position: var(--main-bg-position);
+    height: 90px;
+    width: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Fica atrás do texto */
+}
+#title {
+    color: var(--main-text-color);
+    font-size: var(--main-text-font-size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2; /* Fica na frente da imagem */
+    text-align: center;
+    position: relative;
+    margin: 0;
+}
+.headere{
+    background-color: #969696; /* Gradiente de fundo */
+    color: #c3bebe; /* Cor do texto no cabeçalho */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Alinhamento do texto */
+    width: 100%; /* Largura total */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+
+}
+        
+        /* Estilizando o título h3 */
+       
+        #rodape {
+    /* Definindo a altura desejada */
+    height: 90px;
+    /* Definindo a largura desejada */
+    width: 270px;
+    /* Aplicando a imagem como fundo */
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    /* Centralizando a imagem no elemento */
+    background-position: center;
+    /* Redimensionando a imagem para cobrir todo o espaço do elemento */
+    background-size: cover;
+    /* Estilizando o texto dentro do elemento */
+    color: white;
+    text-align: center;
+    line-height: 90px; /* Para centralizar verticalmente */
+}
+        /* Estilos para contêiner principal (.cont-login) */
+        .cont-login {
+            width: 100%; /* Largura total */
+            max-width: 100%; /* Largura máxima para limitar em telas maiores */
+            height: auto; /* Altura automática para se ajustar ao conteúdo */
+            border-radius: 20px; /* Borda arredondada */
+            margin: 20px auto; /* Margem externa para centralizar na tela e criar espaçamento */
+            padding: 20px; /* Espaçamento interno */
+            box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+            display: flex;
+            flex-direction: column; /* Alinha os itens em coluna */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            overflow: hidden; /* Oculta conteúdo que ultrapassa os limites do contêiner */
+            display: flex; /* Ativa o layout flexível */
+        }
+        .cont-login2 {
+            width: 70%;
+            max-width: 50%;
+            border-radius: 20px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cont-label, .cont-imput, .cont-botão {
+            width: 100%; /* Largura total */
+            max-width: 100%; /* Largura máxima igual à largura da tela */
+            height: auto;
+            overflow: hidden;
+            background-color: rgba(44, 44, 44, 0.0);
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 20px; /* Espaçamento entre os elementos */
+        }
+        .cont-imput{
+            width: 100%; /* Largura total */
+            max-width: 100%; /* Largura máxima igual à largura da tela */
+            height: auto;
+            overflow: hidden;
+            background-color: rgba(44, 44, 44, 0.0);
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 20px; /* Espaçamento entre os elementos */
+        }
+
+        /* Estilo para o texto dentro dos contêineres */
+        .cont-login p {
+        text-align: center; /* Centraliza o texto */
+        margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+        
+        }
+
+            
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Aplica o efeito de pulsar à classe 'pulsate' */
+        .pulsate {
+            animation: pulsate 1s infinite; /* Animar com o efeito 'pulsate' por tempo indefinido */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Adicionar um brilho ao texto */
+        }
+        
+        .btn-login {
+            width: 40%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+            padding: 10px; /* Espaçamento interno */
+            height: 100%; /* Altura fixa para botões */
+            font-size: 19px; /* Tamanho da fonte */
+            color: #fff; /* Cor do texto */
+            background: #000000;
+            display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+            margin: 0 auto; /* Centraliza horizontalmente */
+            justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+            align-items: center; /* Centraliza os itens ao longo do eixo secundário (horizontal) */
+            border-radius: 10px; /* Borda arredondada de 20px */
+            border-width: 2px; /* largura da borda */
+            border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+            border-color: #000000; /* cor da borda */
+        }
+
+        /* Estilo quando o cursor passa por cima do botão */
+        button:hover {
+        opacity: 0.8; /* Reduz a opacidade ao passar o cursor por cima */
+        }
+
+        /* Estilizando o label específico pelo atributo 'for' */
+        label[for="username"] {
+            /* Definindo a cor do texto */
+            color: #ffffff; /* Cor pode ser ajustada para sua preferência */
+            /* Definindo o tamanho da fonte */
+            font-size: 21px; /* Tamanho da fonte pode ser ajustado */
+            /* Definindo margem inferior para espaçamento */
+            margin-bottom: 10px; /* Ajuste conforme necessário */
+            /* Outros estilos opcionais */
+            font-weight: bold; /* Pode ser 'normal' ou 'bold' */
+            /* Centralizando o texto horizontalmente */
+            text-align: center; /* Centraliza o texto dentro do label */
+            /* Centralizando o texto verticalmente */
+            line-height: 1.5; /* Ajusta a altura da linha para centralizar verticalmente */
+            font-weight: 500;
+        } 
+        
+         /* Estilo personalizado para o campo de e-mail */
+    .custom-email-input {
+        font-size: 16px; /* Tamanho da fonte */
+        padding: 10px; /* Espaçamento interno */
+        border: 2px solid #ccc; /* Borda sólida com cor cinza */
+        border-radius: 20px; /* Borda arredondada */
+        background-color: #f7f7f7; /* Cor de fundo */
+        width: 70%; /* Largura do campo de entrada */
+        color: rgb(56, 54, 54);
+
+    }
+
+    /* Estilizar a mensagem de validação */
+
+
+    .custom-email-input:focus {
+        outline: none; /* Remove o contorno ao focar no campo */
+        border-color: #007bff; /* Cor da borda ao focar */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
+        background-color: #a9f5d1;
+
+    }
+
+
+    h4 {
+        text-align: center; /* Centraliza horizontalmente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff; /* Cor do texto no cabeçalho */
+        font-size: 16px; /* Tamanho da fonte */
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+
+    }
+    h5 {
+        text-align: center; /* Centraliza horizontalmente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff; /* Cor do texto no cabeçalho */
+        font-size: 16px; /* Tamanho da fonte */
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+
+    }        
+   
+
+
+
+
+/* Estilo para melhorar a aparência do conteúdo dentro do header e footer */
+     
+    @media (min-width: 1440px){
+        .cont-login {
+        width: 100%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+        
+        }
+
+        /* Estilos para contêiner secundário (.cont-login2) */
+        .cont-login2 {
+        width: 80%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+        }
+
+        /* Estilo para o texto dentro dos contêineres */
+        .cont-login p {
+        text-align: center; /* Centraliza o texto */
+        margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+        }
+        .button--verificar {
+            width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+            padding: 10px; /* Espaçamento interno */
+            height: 100%; /* Altura fixa para botões */
+        }
+    }
+    @media (min-width: 1024px)and (max-width: 1440px){
+        .cont-login {
+        width: 100%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+        
+        }
+
+        /* Estilos para contêiner secundário (.cont-login2) */
+        .cont-login2 {
+        width: 80%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+        }
+
+        /* Estilo para o texto dentro dos contêineres */
+        .cont-login p {
+        text-align: center; /* Centraliza o texto */
+        margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+        }
+        .button--verificar {
+            width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+            padding: 10px; /* Espaçamento interno */
+            height: 100%; /* Altura fixa para botões */
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1024px){
+        .cont-login {
+        width: 100%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+        
+        }
+
+        /* Estilos para contêiner secundário (.cont-login2) */
+        .cont-login2 {
+        width: 80%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+        }
+
+        /* Estilo para o texto dentro dos contêineres */
+        .cont-login p {
+        text-align: center; /* Centraliza o texto */
+        margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+        }
+        .button--verificar {
+            width: 70%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+            padding: 10px; /* Espaçamento interno */
+            height: 100%; /* Altura fixa para botões */
+        }
+    }
+    @media (min-width: 300px) and (max-width: 767px){
+        /* Estilos para contêiner principal (.cont-login) */
+        .cont-login {
+        width: 100%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+       
+        }
+
+        /* Estilos para contêiner secundário (.cont-login2) */
+        .cont-login2 {
+        width: 100%; /* Largura total */
+        max-width: 100%; /* Largura máxima para limitar em telas maiores */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+        }
+
+        /* Estilo para o texto dentro dos contêineres */
+        .cont-login p {
+        text-align: center; /* Centraliza o texto */
+        margin-bottom: 10px; /* Espaçamento inferior entre parágrafos */
+        }
+        .button--verificar {
+            width: 100%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+            padding: 10px; /* Espaçamento interno */
+            height: 100%; /* Altura fixa para botões */
+                    }
+                    
+        footer {
+            flex-direction: column; /* Empilha os itens verticalmente */
+            text-align: center; /* Alinha o texto centralmente */
+        }
+
+        footer h4,
+        footer h5,
+        footer p {
+            margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+        }
+
+        }
+        
+     /* Ocultar o título em dispositivos móveis */
+@media (max-width: 767px) {
+    #title {
+        display: none; /* Oculta o elemento em telas menores */
+    }
+}
+
+/* Exibir o título em dispositivos maiores */
+@media (min-width: 768px) {
+    #title {
+        display: block; /* Garante que o elemento seja exibido em telas maiores */
+    }
+}
+   
+
+      </style>
+      
+      
+      <style>
+        /*display: none;*/
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    background-color: #ff000065;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+    text-align: center;
+    width: 60%;
+    height: fit-content;
+    gap: 20px;
+    justify-content: space-between; /* Distribui os itens com espaço entre eles */
+}
+
+/* Itens padrão */
+.popup .item {
+    width: 100px; /* Largura mínima dos itens */
+}
+
+/* Itens específicos */
+.popup .left-item {
+    flex: 1; /* Este item ocupa mais espaço */
+    text-align: left; /* Alinha o texto à esquerda */
+    
+}
+
+.popup .right-item {
+    flex: 1; /* Este item ocupa mais espaço */
+    text-align: right; /* Alinha o texto à direita */
+   
+}
+
+        .popup-close:hover{
+            border: 2px solid #099939a4;
+            
+    
+        }
+    
+        .popup-visible {
+            display: block; /* Mostra o popup */
+        }
+    
+        .popup-close {
+            background-color: #ff0000;
+            color:#000000;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 32px;
+        }
+        .text-popup{
+            font-size: 22px;
+            color:#2c2c2c;
+            align-items: center;
+            text-align: center;
+            margin-left: 5px;
+            
+
+
+        }
+        .subtext-popup{
+            font-size: 12px;
+            color:#2c2c2c;
+            align-items: center;
+            text-align: center;
+            margin-left: 5px;
+            padding: 5px;
+            top: 0%;
+            right: 0%;
+        }
+        /* Estilo para o pop-up */
+       
+
+        /* Ajusta a exibição em telas menores */
+        @media (max-width: 768px) {
+            .popup {
+                flex-direction: column; /* Itens empilhados */
+                width: 90%;
+                top: 15%; /* Alinha o pop-up mais para baixo */
+            }
+        }
+
+        /* Estilo para o deslocamento do main */
+        .main-shifted {
+            margin-top: 80px; /* Ajuste para telas grandes */
+            transition: margin-top 0.3s ease;
+        }
+
+        /* Ajusta o deslocamento em telas menores */
+        @media (max-width: 768px) {
+            .main-shifted {
+                margin-top: 150px; /* Ajuste para telas pequenas */
+            }
+        }
+
+        /* Estilo do main */
+       
+        main {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: #969696;
+            transition: margin-top 0.3s ease;
+        }
+        .btn-assinar{
+            background-color: #161515;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 32px;
+            width: 8%;
+            height: fit-content;
+            margin-left: 5%;  
+                  
+        }
+
+        @media only screen and (max-width: 768px){
+            .popup{
+                width: 90%;
+
+            }
+            .text-popup{
+                font-size: 12px;
+
+            }
+            .subtext-popup{
+                font-size: 10px;
+                
+            }
+            .btn-assinar{
+                width: 90%;
+            }
+
+        }
+
+    </style>
+   
+   
+   <!--<script>
+        function fecharPopup() {
+            document.getElementById('popup').style.display = 'none';
+            // localStorage.setItem('escassezVisto', 'true'); // Temporariamente comentado para testar
+        }
+    </script>-->
+    
+    
+    
+
+
+       
+</head>
+
+<body>
+
+        
+
+        <header id="header-preview" style="background-color: var(--header-color);">
+            <h2 id="main-title"></h2>
+            <h2 id="title">{{ template.text_content }}</h2>
+        </header>
+
+        {% if mensagens %}
+        <div id="popup" class="popup" data-redirect-url="{% url redirect_url %}">
+            <button class="popup-close" onclick="fecharPopup()">X</button>
+            {% for mensagem in mensagens %}
+            <div class="text-popup"><strong>Atenção:</strong> {{ mensagem }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        
+
+    
+
+        <main id="mainContent">
+                <div class="cont-login">
+                    <div class="cont-login2">
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <div class="cont-label">
+                                <label for="username">Entre utilizando o username e senha do cadastro</label>
+                            </div>
+                            <div class="cont-imput">
+                                <input type="text" id="username" name="username" class="form__field form__field--text form__field--large custom-email-input" required placeholder="Username" autocomplete="on">
+                            </div>  
+                            <div class="cont-imput">
+                                <input type="password" id="password" name="senha" class="form__field form__field--text form__field--large custom-email-input" required placeholder="Senha" autocomplete="on">
+                            </div>
+                            {% if error %}
+                                <div class="cont-error">
+                                    <p style="color: red;">{{ error }}</p>
+                                </div>
+                            {% endif %}
+                            <div class="cont-botão">
+                                <button type="submit" class="btn-login" >ACESSAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </main>
+        
+            <footer style="background-color: #000; width: 100%; text-align: center;  min-height: auto; display: flex; flex-direction: column;">
+                <p style="color: #fff; ">&copy;2024 Shopbotfy. Todos os direitos reservados</p>
+            </footer>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const popup = document.getElementById('popup');
+                    const mainContent = document.getElementById('mainContent');
+        
+                    if (popup) {
+                        popup.style.display = 'flex';
+                        if (mainContent) {
+                            mainContent.classList.add('main-shifted');
+                        }
+                    }
+                });
+        
+                function fecharPopup() {
+                    const popup = document.getElementById('popup');
+                    const mainContent = document.getElementById('mainContent');
+        
+                    if (popup) {
+                        popup.style.display = 'none';
+                        if (mainContent) {
+                            mainContent.classList.remove('main-shifted');
+                        }
+        
+                        // Redirecionar se houver URL de redirecionamento
+                        const redirectUrl = popup.getAttribute('data-redirect-url');
+                        if (redirectUrl) {
+                            window.location.href = redirectUrl;
+                        }
+                    }
+                }
+            </script>
+</body>
+
+</html>
+

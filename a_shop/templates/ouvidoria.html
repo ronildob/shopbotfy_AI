@@ -1,0 +1,77 @@
+{% extends 'basepoliticas.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container padding-beneficios">
+    <div class="ben-card">
+        <div class="ben-card">
+            <div class="ben-card">
+                <div class="text-center">
+                    <h3 class="title-cards"><span class="fine-title">Ouvidoria</span></h3>
+                </div>
+                <div class="beneficios-card">
+                    <br></br>
+                    <h3 class="title-cards">Bem-vindo à Ouvidoria da ShopBotfy.com.</h3>
+                    <p class="subtitle-cards"><h2>Estamos aqui para ouvir suas sugestões, elogios, reclamações e dúvidas.</h2></p>
+                    <br></br>
+
+                    <h3 class="title-cards">Como Funciona</h3>
+                    <p class="subtitle-cards"><h2>Você pode preencher o formulário abaixo para enviar sua mensagem diretamente à nossa equipe de ouvidoria.</h2></p>
+                    <p class="subtitle-cards"><h2>Nosso objetivo é responder todas as mensagens no menor tempo possível.</h2></p>
+                    <br></br>
+
+                    <h3 class="title-cards">Formulário de Ouvidoria</h3>
+                    <form action="/enviar-ouvidoria/" method="post" class="form">
+                        {% csrf_token %}
+                        <div class="formulario">
+                             <!-- Campo de Nome -->
+                            <div class="form__input-row">
+                                <div class="form__input-wrapper form__input-wrapper--labelled">
+                                    <input type="text" id="custom_input[nome]" name="nome" class="form__field form__field--text form__field--large" required placeholder="Digite seu nome completo">
+                                </div>
+                            </div> 
+                                <!-- Campo de Email -->
+                            <div class="form__input-row">
+                                <div class="form__input-wrapper form__input-wrapper--labelled">
+                                    <input type="email" id="custom_input_id[email]" name="email" class="form__field form__field--text form__field--large" required placeholder="Digite aqui o seu endereço de e-mail"autocomplete="on">
+                                </div> 
+                            </div>
+
+
+                                <!-- Campo de Telefone -->
+                            <div class="form__input-row">
+                                <div class="form__input-wrapper form__input-wrapper--labelled">
+                                    <input  type="tel" id="custom_input[telefone]" name="telefone" class="form__field form__field--text form__field--large" required placeholder="Digite seu número de telefone (Ex: 1191234567)">
+                                </div>
+                            </div> 
+
+                            <!-- Campo de Mensagem -->
+                            <div class="form__input-row">
+                                <div class="form__input-wrapper form__input-wrapper--labelled">
+                                    <textarea id="custom_input[mensagem]" name="mensagem" class="form__field form__field--textarea" required placeholder="Digite aqui suas sugestões, elogios, reclamações e ou dúvidas."></textarea>
+                                </div>
+                            </div>
+                            <br></br>
+                            <br></br>
+                            
+                            <button type="submit" class="btn-submit">Enviar</button>
+
+
+                        </div>
+                        
+                    </form>
+
+                    <br></br>
+                    <h3 class="title-cards">Contato</h3>
+                    <p class="subtitle-cards"><h2>Se você preferir, pode entrar em contato conosco diretamente através do e-mail <a href="mailto:shopbotfy@shopbotfy.com" class="red-text">shopbotfy@shopbotfy.com</a>.</h2></p>
+                    <br></br>
+                    <p class="subtitle-cards">&copy;ShopBotfy <br></br> 01 de junho de 2024.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

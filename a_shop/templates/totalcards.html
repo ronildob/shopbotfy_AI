@@ -1,0 +1,721 @@
+{% load static %}
+{% load i18n %}
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{{ template.titulo }}</title>
+      <link rel="icon" href="{% if template.favicon %}{{ template.favicon.url }}{% else %}{% static 'home/img/favi.png' %}{% endif %}">
+    
+      <link rel="stylesheet" href="{% static 'home/css/spiners.css'%}">   
+      <style> 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Define a orientação dos elementos como coluna */
+            justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+            align-items: center; /* Alinha os elementos no centro horizontalmente */
+            min-height: 100vh; /* Altura mínima igual à altura da viewport */
+            background: #c3bebe;
+        }
+        /* Estilos do conteúdo principal */
+        main {
+            width: 100%; /* Largura total */
+            max-width: 100%; /* Largura máxima igual à largura da tela */
+            padding: 20px; /* Espaçamento interno */
+            display: flex; /* Display flex para layout flexível */
+            flex-wrap: wrap; /* Permite que os itens sejam envolvidos em várias linhas */
+            justify-content: space-between; /* Distribui uniformemente os itens ao longo do eixo principal */
+        }
+        
+        /* Estilos do contêiner principal */
+        .cont-principal {
+            width: 100%; /* Largura total */
+            max-width: 100%; /* Largura máxima igual à largura da tela */
+            height: auto; /* Altura automática para se ajustar ao conteúdo */
+            margin-bottom: 1px; /* Margem inferior para separação */
+            padding: 20px; /* Espaçamento interno */
+            box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+            display: flex; /* Torna o contêiner um flex container */
+            justify-content: center; /* Alinha os itens horizontalmente ao centro */
+            align-items: center; /* Alinha os itens verticalmente ao centro */
+            flex-direction: column; /* Empilha os itens verticalmente */
+
+        }
+        :root {
+            --main-bg-image: url("{% if template.bg_image %}{{ template.bg_image.url }}{% else %}{% static 'default-image.jpg' %}{% endif %}");
+            --main-bg-width: {{ template.bg_width|default:'300px' }};
+            --main-bg-height: {{ template.bg_height|default:'100px' }};
+            --main-bg-position: {{ template.bg_position|default:'center' }};
+            --main-text-color: {{ template.text_color|default:'white' }};
+            --header-color: {{ template.header_color|default:'white' }};
+            --main-text-position: {{ template.text_position|default:'center' }};
+            --main-text-content: "{{ template.text_content|default:'Seu Texto Aqui' }}";
+            --main-text-font-size: {{ template.font_size|default:'16px' }};
+            }
+header {
+    background-color: var(--header-color); 
+    color: #c3bebe; 
+    padding: 20px 10px; /* Aumentado para um padding mais espaçoso */
+    text-align: center; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    position: relative;
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+
+}
+
+
+#main-title {
+    background-image: var(--main-bg-image);
+    background-size: cover;
+    background-position: var(--main-bg-position);
+    width: var(--main-bg-width);
+    height: var(--main-bg-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Fica atrás do texto */
+}
+#title {
+    color: var(--main-text-color);
+    font-size: var(--main-text-font-size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2; /* Fica na frente da imagem */
+    text-align: center;
+    position: relative;
+    margin: 0;
+}
+.headere {
+    color: #c3bebe; /* Cor do texto no cabeçalho */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Alinhamento do texto */
+    width: 100%; /* Largura total */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    display: flex; /* Torna o contêiner um flex container */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-direction: column; /* Empilha os itens verticalmente */
+
+}
+        #rodape {
+             /* Definindo a altura desejada */
+             height: 40px;
+            /* Definindo a largura desejada */
+            width: 120px;
+            /* Aplicando a imagem como fundo */
+            background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+            /* Centralizando a imagem no elemento */
+            background-position: center;
+            /* Redimensionando a imagem para cobrir todo o espaço do elemento */
+            background-size: cover;
+            /* Estilizando o texto dentro do elemento */
+            color: #000;
+            text-align: center;
+            line-height: 90px; /* Para centralizar verticalmente */
+        }
+        .apresentacao {
+            max-width: 100%; /* Largura máxima igual à largura da tela */
+            height: auto; /* Altura automática para se ajustar ao conteúdo */
+            margin-bottom: 1px; /* Margem inferior para separação */
+            position: relative; /* Define o posicionamento relativo */    
+            padding: 20px; /* Espaçamento interno */
+            box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+            display: flex; /* Torna o contêiner um flex container */
+            flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center; /* Centraliza os itens verticalmente */
+            
+        }
+ 
+        .explicacao {
+            max-width: 100%; /* Largura máxima igual à largura da tela */
+            height: auto; /* Altura automática para se ajustar ao conteúdo */  
+            margin-bottom: 1px; /* Margem inferior de 20px */
+            position: relative; /* Define o posicionamento relativo */
+            overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse os limites do contêiner */
+            padding: 20px; /* Espaçamento interno */
+            box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+            box-flex: 1; /* Permite que o item flexível cresça e encolha conforme necessário */
+            
+        }
+        .control {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1px;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex; /* Define o contêiner como um contêiner flexível */
+    justify-content: space-between; /* Distribui os botões com espaço entre eles */
+    align-items: center; /* Alinha os itens ao centro verticalmente */
+}
+
+.control button {
+    flex: 1; /* Permite que os botões cresçam para ocupar o espaço disponível */
+    margin: 0 10px; /* Espaçamento horizontal entre os botões */
+    padding: 10px 20px; /* Espaçamento interno dos botões */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total do botão */
+    border: none; /* Remove a borda padrão */
+    background-color: #4CAF50; /* Cor de fundo dos botões */
+    color: white; /* Cor do texto dos botões */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s; /* Transição suave para mudança de cor */
+}
+
+.control button:hover {
+    background-color: #2f7432; /* Cor de fundo ao passar o mouse */
+}
+        button, input[type=submit] {
+            padding: 10px; /* Espaçamento interno */
+            height: 100%; /* Altura fixa para botões */
+            font-size: 19px; /* Tamanho da fonte */
+            color: #fff; /* Cor do texto */
+            background:#000000;
+            display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+            margin: 0 auto; /* Centraliza horizontalmente */
+            justify-content: center; /* Centraliza os itens ao longo do eixo principal (vertical) */
+            align-items: center; /* Centraliza os itens ao longo do eixo secundário (horizontal) */
+            border-radius: 20px; /* Borda arredondada de 20px */
+            border-width: 2px; /* largura da borda */
+            border-style: solid; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+            border-color: #000000; /* cor da borda */
+        }
+
+    /* Media query para dispositivos móveis */
+    @media (min-width: 1440px){
+            .apresentacao {
+                width: 100%; /* Largura total */
+            }
+            .explicacao {
+            width: 80%; /* Define a largura como metade do contêiner principal */
+            }
+            .videoexplicacao{
+            width: 60%; /* Define a largura como 100% em dispositivos menores */
+            }
+            .cont-botão {
+                width: 100%; /* Largura total */
+            }
+            button, input[type=submit] {
+                width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+            }
+            h1 {
+                font-size: 19px; /* Tamanho da fonte */
+            }
+            h2 {
+                font-size: 19px; /* Tamanho da fonte */
+            }
+            h3 { 
+                font-size: 19px; /* Tamanho da fonte */   
+            }
+            .formulariop4 {
+            width: 100%; /* Ambos ocupam metade da largura */
+            }   
+            .form {
+                width: 100%; /* Ambos ocupam metade da largura */   
+            }
+            
+        }   
+    @media (min-width: 1024px)and (max-width: 1440px){
+            .apresentacao {
+                width: 100%; /* Largura total */
+            }
+            .explicacao {
+            width: 80%; /* Define a largura como metade do contêiner principal */
+            }
+            .videoexplicacao{
+            width: 60%; /* Define a largura como 100% em dispositivos menores */
+            }
+            .cont-botão {
+                width: 100%; /* Largura total */
+            }
+            button, input[type=submit] {
+                width: 60%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+            }
+            h1 {
+                font-size: 19px; /* Tamanho da fonte */
+            }
+            h2 {
+                font-size: 19px; /* Tamanho da fonte */
+            }
+            h3 { 
+                font-size: 19px; /* Tamanho da fonte */   
+            }
+            .formulariop4 {
+            width: 100%; /* Ambos ocupam metade da largura */
+            }   
+            .form {
+                width: 100%; /* Ambos ocupam metade da largura */   
+            }
+            
+        }   
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .apresentacao {
+            width: 100%; /* Largura total */
+        }
+        .explicacao {
+        width: 80%; /* Define a largura como metade do contêiner principal */
+        }
+        .videoexplicacao{
+            width: 70%; /* Define a largura como 100% em dispositivos menores */
+        }
+        .cont-botão {
+            width: 100%; /* Largura total */
+        }
+        button, input[type=submit] {
+            width: 80%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */
+        }
+        h1 {
+            font-size: 19px; /* Tamanho da fonte */
+        }
+        h2 {
+            font-size: 19px; /* Tamanho da fonte */
+        }
+        h3 { 
+            font-size: 19px; /* Tamanho da fonte */   
+        }
+        .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }   
+        .form {
+            width: 80%; /* Ambos ocupam metade da largura */   
+        } 
+        
+        }
+    @media (min-width: 300px) and (max-width: 767px){
+        .apresentacao {
+            width: 100%; /* Largura total */
+        }
+        .explicacao {
+        width: 100%; /* Define a largura como metade do contêiner principal */
+        }
+        .videoexplicacao{
+            width: 100%; /* Define a largura como 100% em dispositivos menores */
+        }
+        .cont-botão {
+            width: 100%; /* Largura total */
+        }
+        button, input[type=submit] {
+            width: 90%; /* Largura relativa ao contêiner pai (80% do contêiner pai) */   
+        }      
+        h1 {
+            font-size: 19px; /* Tamanho da fonte */
+        }
+        h2 {
+            font-size: 19px; /* Tamanho da fonte */
+        }
+        h3 { 
+            font-size: 19px; /* Tamanho da fonte */   
+        }
+        .formulariop4 {
+        width: 100%; /* Ambos ocupam metade da largura */
+        }
+       
+         
+        .form {
+            width: 100%; /* Ambos ocupam metade da largura */   
+        } 
+        footer {
+            flex-direction: column; /* Empilha os itens verticalmente */
+            text-align: center; /* Alinha o texto centralmente */
+        }
+
+        footer h4,
+        footer h5,
+        footer p {
+            margin-bottom: 10px; /* Espaçamento entre os itens empilhados */
+        }
+    
+       
+        }
+
+
+    /* FONTES */  
+        h1 {
+            text-align: center; /* Centraliza horizontalmente */
+            margin-top: 0; /* Remove margem superior padrão */
+            margin-bottom: 10px; /* Espaçamento inferior */
+            color: #000; /* Cor do texto */
+            font-size: 23px; /* Tamanho da fonte */
+            align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bolder; /* Adiciona negrito */
+        }
+        h2 {
+            text-align: center; /* Centraliza horizontalmente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000; /* Cor do texto no cabeçalho */
+            font-size: 23px; /* Tamanho da fonte */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: lighter; /* Adiciona negrito */
+
+        }
+        h3 {
+            text-align: center; /* Centraliza horizontalmente */
+            margin-top: 10px; /* Espaço superior para centralização vertical */
+            margin-bottom: 50px; /* Espaço inferior para centralização vertical */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000; /* Cor do texto no cabeçalho */
+            font-size: 30px; /* Tamanho da fonte */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+
+        }
+        h4 {
+            text-align: center; /* Centraliza horizontalmente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000; /* Cor do texto no cabeçalho */
+            font-size: 16px; /* Tamanho da fonte */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+
+        }
+        h5 {
+            text-align: center; /* Centraliza horizontalmente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000; /* Cor do texto no cabeçalho */
+            font-size: 16px; /* Tamanho da fonte */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+
+        }
+        footer {
+            display: flex;
+            justify-content: space-between; /* Distribui os itens igualmente na linha */
+            align-items: center; /* Alinha os itens verticalmente ao centro */
+            color: #000;
+            text-align: center;
+            padding: 20px;
+            width: 70%;
+            
+        }
+
+        footer p{
+            font-size: 18px; /* Tamanho da fonte */
+            color: #000; /* Cor do texto no cabeçalho */
+        }
+        footer p,
+        footer h4,
+        footer h5 {
+            margin: 20; /* Remover margens padrão para evitar espaçamento extra */
+        }
+        footer h5 a {
+            display: flex; /* Usar flexbox para alinhar os itens */
+            align-items: center; /* Alinhar os itens verticalmente ao centro */
+            color: #000; /* Cor do texto do link */
+            text-decoration: none; /* Remover sublinhado padrão */
+            transition: color 0.3s ease; /* Transição suave da cor ao passar o mouse */
+        }
+
+        footer h5 a img {
+            width: 60px; /* Ajustar a largura do ícone do WhatsApp */
+            margin-right: 0; /* Espaçamento à direita do ícone */
+        }
+
+        footer h5 a:hover {
+            color: #48ff00; /* Cor do texto do link ao passar o mouse */
+        }
+
+.formulariop4 {
+    margin-top: 0; /* Remove a margem superior */
+    margin-left: auto; /* Alinha à direita do container esquerdo */
+    margin-right: auto; /* Centraliza horizontalmente */
+    display: flex; /* Torna o contêiner um flex container */
+    flex-wrap: wrap; /* Permite que os itens flexíveis sejam quebrados em múltiplas linhas conforme necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    background: #757575;
+    border-radius: 20px; /* Borda arredondada de 20px */
+    padding: 20px; /* Adiciona espaçamento interno para evitar que a tabela encoste nas bordas do container */
+    width: 100%; /* Garante que o container ocupe 100% da largura disponível */
+    box-sizing: border-box; /* Inclui padding e borda no cálculo da largura total */
+    overflow-x: auto; /* Adiciona scroll horizontal se o conteúdo exceder a largura */
+}
+
+table {
+    width: 100%; /* Define a largura da tabela como 100% do container pai */
+    border-collapse: collapse;
+    margin: 0; /* Remove margens externas */
+    border-radius: 20px; /* Borda arredondada de 20px */
+    overflow: hidden; /* Garante que a borda arredondada funcione corretamente */
+    table-layout: fixed; /* Garante que todas as colunas tenham largura fixa e igual */
+}
+
+
+
+th, td {
+    border: 1px solid black;
+    padding: 6px; /* Reduz o padding interno para deixar as células mais compactas */
+    text-align: left;
+    color: #000; /* Cor do texto */
+    font-size: 15px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    word-wrap: break-word; /* Garante que o texto quebre dentro da célula */
+}
+
+th {
+    background-color: #000;
+    border: 3px solid #fff;
+    color: #fff; /* Cor do texto */
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-weight: bolder; /* Adiciona negrito */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.form__field,
+    .form__field--select {
+        width: 100%;
+        max-width: 100%; /* Definir uma largura máxima para o campo */
+        height: 40px;
+        border-radius: 20px;
+        padding: 5px;
+        font-size: 16px;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+        box-sizing: border-box;
+        
+    }
+    /* Estilos quando o mouse está sobre os campos de entrada e seleção */
+    .form__field:hover,
+    .form__field--select:hover {
+        background-color: #5c5959;
+    }
+    /* Estilos quando os campos de entrada e seleção estão focados */
+    .form__field:focus,
+    .form__field--select:focus {
+        outline: none;
+        background-color: #f7b3b3;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    /* Estilo para as opções do campo de seleção */
+    .form__field--select option {
+        font-size: 14px;
+        color: #333;
+    }
+    /* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+    .form__field--select option:hover {
+        color: #44c457;
+        font-size: 14px;
+    }
+
+    .inputcontainer {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px; /* Espaçamento entre os inputs */
+}
+
+.date-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.date-input {
+    width: 150px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.date-label {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    pointer-events: none;
+    color: #252525;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    transition: all 0.2s ease;
+}
+
+.date-input:focus + .date-label,
+.date-input:not(:placeholder-shown) + .date-label {
+    top: -10px;
+    left: 12px;
+    font-size: 12px;
+    color: #333;
+    background-color: #fff;
+    padding: 0 5px;
+}
+
+      </style>    
+  </head>
+  <body>
+    <header id="header-preview" style="background-color: var(--header-color);">
+        <h2 id="main-title"></h2>
+        <h2 id="title">{{ template.text_content }}</h2>
+    </header>
+    <div class="headere">
+        <div class="explicacao">
+            <h3>Lista de Registros</h3>
+        </div>
+        <div class="control">            
+            <form  action="{% url 'download_formu' %}" method="get">
+                <div class="formulariop4"> 
+
+                    <div class="date-container">
+                        <label for="data_inicio" class="date-label">Data Início:</label>
+                        <input type="date" id="data_inicio" name="data_inicio" class="date-input" placeholder="Data Início">
+                    </div>
+                    
+                    <div class="date-container">
+                        <label for="data_fim" class="date-label">Data Fim:</label>
+                        <input type="date" id="data_fim" name="data_fim" class="date-input" placeholder="Data Fim">
+                    </div>
+    
+                    <br></br>
+    
+                    <div class="inputcontainer">
+                        <button type="submit">Download </button>
+                    </div>
+                
+                </div> 
+            </form>
+            <form method="post" action="{%  url 'administrador' %}">
+                {% csrf_token %}
+                <div class="control button">
+                    <button type="submit" class="form__submit button button--primary">Pagina Principal</button>
+                </div>
+            </form>
+
+            <form method="get" action="{% url 'list_formu' %}">
+                <div class="form__input-row">
+                    <input type="text" id="custom_input[Pesquisar]" name="q" class="form__field form__field--text form__field--large" required placeholder="Search...">
+                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                        <select id="nicho" name="nicho" class="form__field form__field--select form__field--large" required>
+                            <option value="">Filtar por</option>
+                            <option value="">Genérica</option>
+                            <option value="Eletrônicos">Nicho Eletrônicos</option>
+                            <option value="Kids">Nicho Kids</option>
+                            <option value="Casa">Nicho Casa</option>
+                            <option value="Pet">Nicho Pet</option>
+                            <option value="Fitness">Nicho Fitness</option>
+                            <option value="Masculino">Nicho Masculino</option>
+                            <option value="Feminino">Nicho Feminino</option>
+                        </select>
+                     
+                    </div>
+                    <button type="submit" class="form__submit button button--primary">Pesquisar</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <main>
+        <div class="cont-principal">
+            <div class="formulariop4">
+                <table>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Senha</th>
+                        <th>Data de Criação</th>
+                    </tr>
+                    {% for formulario in formularios %}
+                    <tr>
+                        <td>{{ formulario.nome }}</td>
+                        <td>{{ formulario.email }}</td>
+                        <td>{{ formulario.email }}</td>
+                        <td>{{ formulario.senha }}</td>
+                        <td>{{ formulario.data_criacao_formatada }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                <div class="pagination">
+                    {% if formularios.has_previous %}
+                    <a href="?page={{ formularios.previous_page_number }}">Anterior</a>
+                    {% endif %}
+
+                    {% for num in formularios.paginator.page_range %}
+                    {% if formularios.number == num %}
+                    <a class="active" href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > formularios.number|add:'-3' and num < formularios.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if formularios.has_next %}
+                    <a href="?page={{ formularios.next_page_number }}">Próximo</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    var inputs = document.querySelectorAll('.date-input');
+    
+    inputs.forEach(function(input) {
+        input.addEventListener('focus', function() {
+            this.setAttribute('type', 'date');
+        });
+    
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.setAttribute('type', 'text');
+            } else {
+                // Garantir que o valor da data esteja formatado corretamente como YYYY-MM-DD
+                var dateValue = new Date(this.value);
+                this.value = dateValue.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+            }
+        });
+    });
+    });
+    
+    
+    </script>
+</body>
+</html>

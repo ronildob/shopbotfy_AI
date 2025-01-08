@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Shopify</title>
+</head>
+<body>
+    <h1>Teste de Upload de Banner e Edição de Tema</h1>
+
+    <!-- Exibição de mensagens de sucesso ou erro -->
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+
+    <!-- Formulário para acionar a view 'testar' -->
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Executar Ações</button>
+    </form>
+</body>
+</html>

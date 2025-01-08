@@ -1,0 +1,1837 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopBotfy</title>
+    
+    <link rel="icon" href="/static/home/img/site/calangofavi.svg">
+    <link rel="stylesheet" href="{% static 'home/css/spiners.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}"> 
+
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--Font Awesome CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!--jquery-confirm css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+<style>
+.message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    background-color: #4CAF50; /* Verde para sucesso */
+    color: white;
+    border-radius: 5px;
+    z-index: 1000;
+    font-size: 16px;
+}
+
+.message.error {
+    background-color: #f44336; /* Vermelho para erro */
+}
+
+html, body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da viewport */
+    background: #fff;  
+}
+/*body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}*/
+body {
+    display: flex;
+    flex-direction: column; /* Define a orientação dos elementos como coluna */
+    justify-content: flex-start; /* Alinha os elementos no início (no topo) verticalmente */
+    align-items: center; /* Alinha os elementos no centro horizontalmente */
+}
+:root {
+        --main-bg-image: url("{% if template.bg_image %}{{ template.bg_image.url }}{% else %}{% static 'default-image.jpg' %}{% endif %}");
+        --main-bg-width: {{ template.bg_width|default:'300px' }};
+        --main-bg-height: {{ template.bg_height|default:'90px' }};
+        --main-bg-position: {{ template.bg_position|default:'center' }};
+        --main-text-color: {{ template.text_color|default:'white' }};
+        --header-color: {{ template.header_color|default:'white' }};
+        --footer-color: {{ template.footer_color|default:'black' }};
+        --main-text-position: {{ template.text_position|default:'center' }};
+        --main-text-content: "{{ template.text_content|default:'Seu Texto Aqui' }}";
+        --main-text-font-size: {{ template.font_size|default:'16px' }};
+        --background_color: {{ template.background_color|default:'black' }};
+        --text_header_color: {{ template.text_header_color|default:'white' }}; 
+        --text_saudacao_color: {{ template.text_saudacao_color|default:'white' }};
+        --text_header_content: "{{ template.text_header_content|default:'Seu Texto de Cabeçalho Aqui' }}";
+        --text_saudacao_content: "{{ template.text_saudacao_content|default:'Abaixo estão seus dados para acessar a plataforma:' }}";
+    }
+header {
+    background-color: var(--header-color); 
+    color: var(--main-text-color); 
+    padding: 20px 10px; /* Aumentado para um padding mais espaçoso */
+    text-align: center; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    position: relative;
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    
+
+}
+
+#main-title {
+    background-image: var(--main-bg-image);
+    background-size: cover;
+    background-position: var(--main-bg-position);
+    width: var(--main-bg-width);
+    height: var(--main-bg-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Fica atrás do texto */
+}
+#title {
+    color: var(--main-text-color);
+    font-size: var(--main-text-font-size);
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2; /* Fica na frente da imagem */
+    text-align: center;
+    position: relative;
+    margin: 0;
+}
+
+.remote-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.control-button.up {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.control-button.down {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.control-button.left {
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control-button.right {
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control-button:hover {
+    background-color: #0056b3;
+}
+
+
+.button-container button {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #45a049;
+}
+
+
+.cont-pri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+.contpri {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+    /* Remove a altura mínima fixa */
+    min-height: auto; 
+    /* Adiciona um espaçamento interno, se necessário */
+    padding: 10px; 
+    /* Garante que o conteúdo interno não ultrapasse o contêiner */
+    box-sizing: border-box; 
+}
+.cont-principal {
+width: 100%; /* Largura total */
+max-width: 100%; /* Largura máxima igual à largura da tela */
+height: auto; /* Altura automática para se ajustar ao conteúdo */
+background: #fff; /* Cor de fundo branca */
+padding: 20px; /* Espaçamento interno */
+box-sizing: border-box; /* Mantém o padding dentro do tamanho total do contêiner */
+display: flex; /* Torna o contêiner um flex container */
+justify-content: center; /* Alinha os itens horizontalmente ao centro */
+align-items: center; /* Alinha os itens verticalmente ao centro */
+flex-direction: column; /* Empilha os itens verticalmente */
+}
+/* Cabeçalho */
+.cont-cab {
+    width: 100%; /* Largura total */
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    z-index: 1; /* Fica atrás do texto */
+
+}
+
+/* Área de conteúdo */
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: column; /* Alinha itens verticalmente */
+    margin-top: 0px; /* Adaptação em vez de 'top' */
+}
+
+/* Container esquerdo (15% da largura) */
+.cont-esq {
+    position: fixed;
+    top: 0px; /* Altura do cabeçalho */
+    left: 0;
+    width: 30%;
+    height: 100%; /* Ocupa toda a altura do container pai */
+    background-color: #969696;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+/* Container direito (restante da largura) */
+.cont-dir {
+    top: 0px; /* Altura do cabeçalho */
+    margin-left: 30%;
+    width: 70%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-height: 100vh;
+    
+}
+
+/* Rodapé */
+.cont-rod {
+    margin-left: 20%;
+    width: 70%;
+    background-color: #969696;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    position: relative;
+    z-index: 1000;
+}
+
+
+
+
+.navbar-hidden {
+    top: -100px; /* Esconde o navbar fora da tela */
+}
+.navbar {
+    transition: top 0.3s;
+    width: 100%;
+    background-color: #969696;
+    width: 100%; /* Largura total */
+
+}
+.navbar-nav .nav-item {
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    width: 100%; /* Ocupar toda a largura disponível */
+    display: flex; /* Usar flexbox para distribuição */
+    justify-content: space-between; /* Distribuir os itens ao longo da largura */
+    padding: 0; /* Remover padding padrão */
+    margin: 0; /* Remover margens padrão */
+    list-style: none; /* Remover estilo de lista padrão */
+
+}
+.navbar-nav .nav-item img {
+    height: 32px;
+    cursor: pointer;
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    width: 100%; /* Ocupar toda a largura disponível */
+    display: flex; /* Usar flexbox para distribuição */
+    justify-content: space-between; /* Distribuir os itens ao longo da largura */
+    padding: 0; /* Remover padding padrão */
+    margin: 0; /* Remover margens padrão */
+    list-style: none; /* Remover estilo de lista padrão */
+}
+.icone_redirect {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.navbar-nav .nav-item a {
+    width: 100%; /* Largura total */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    width: 100%; /* Ocupar toda a largura disponível */
+    display: flex; /* Usar flexbox para distribuição */
+    justify-content: space-between; /* Distribuir os itens ao longo da largura */
+    padding: 0; /* Remover padding padrão */
+    margin: 0; /* Remover margens padrão */
+    list-style: none; /* Remover estilo de lista padrão */
+}
+
+.dropdown-button{
+    width: 100%; /* Largura relativa ao contêiner pai */
+    padding: 10px; /* Espaçamento interno */
+    height: 100%; /* Altura fixa para o botão */
+    font-size: 19px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto */
+    background: #969696;
+    display: block; /* Torna o botão um bloco para ocupar toda a largura disponível */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    border-radius: 20px; /* Borda arredondada de 20px */
+    border-width: 2px; /* Largura da borda */
+    border-style: solid; /* Estilo da borda */
+    border-color: #969696; /* Cor da borda */
+    cursor: pointer; /* Adiciona o cursor pointer para indicar que o botão é clicável */
+}
+
+
+.dropdown-content,
+.dropdown-menu {
+    display: none; /* Oculta o dropdown por padrão */
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px; /* Borda arredondada de 20px */
+}
+
+.dropdown-content label,
+.dropdown-menu {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.dropdown-content label:hover,
+.dropdown-menu {
+    color: #44c457;
+    font-size: 18px;
+}
+
+.color-box {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-display {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff; /* Cor padrão */
+    cursor: pointer;
+}
+
+.color-input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.dropdown-menu {
+display: none; /* Oculta o dropdown por padrão */
+position: absolute;
+background-color: #ffffff;
+border: 1px solid #ddd;
+border-radius: 4px;
+box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+z-index: 1000; /* Garante que o menu fique sobre outros elementos */
+}
+
+.dropdown-menu.show {
+display: block; /* Exibe o dropdown quando a classe 'show' está presente */
+}
+
+.dropdown-item {
+padding: 10px 20px;
+text-decoration: none;
+color: #333;
+display: block;
+}
+
+.dropdown-item:hover {
+background-color: #f1f1f1;
+}
+
+.dropdown-toggle::after {
+content: '\25BC'; /* Adiciona uma seta para baixo no botão */
+margin-left: 5px;
+}
+
+.contpri {
+width: 100%;
+display: flex;
+flex-direction: column;
+border-bottom: 1px solid #ccc;
+background-color: #f1f1f1;
+/* Remove a altura mínima fixa */
+min-height: auto; 
+/* Adiciona um espaçamento interno, se necessário */
+padding: 10px; 
+/* Garante que o conteúdo interno não ultrapasse o contêiner */
+box-sizing: border-box; 
+}
+
+
+.initial1 {
+max-width: 100%;
+margin-bottom: 20px;
+position: relative;
+overflow: hidden;
+border-radius: 20px;
+border: 1px solid #0a0a0a;
+}
+.initial {
+max-width: 60%;
+margin-bottom: 20px;
+position: relative;
+overflow: hidden;
+border-radius: 20px;
+border: 1px solid #181717;
+}
+.swiper-container-horizontal {
+width: 100%;
+height: 100%; /* Altura ajustada para o contêiner pai */
+
+}   
+
+.swiper-slide img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* Estilo para os botões com FontAwesome */
+.swiper-button-prev,
+.swiper-button-next {
+width: 40px; /* Largura do botão */
+height: 40px; /* Altura do botão */
+background-color: rgba(0, 0, 0, 0.281); /* Cor de fundo com transparência */
+color: #fff; /* Cor do ícone */
+border-radius: 50%; /* Botão redondo */
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px; /* Tamanho do ícone */
+cursor: pointer; /* Muda o cursor para indicar que é clicável */
+z-index: 10; /* Garante que o botão esteja acima dos outros elementos */
+position: absolute; /* Posiciona os botões em relação ao contêiner pai */
+}
+
+/* Posicionamento dos botões */
+.swiper-button-prev {
+left: 10px; /* Distância da borda esquerda */
+}
+
+.swiper-button-next {
+right: 10px; /* Distância da borda direita */
+}
+
+/* Adicione algum efeito visual ao passar o mouse sobre os botões */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+background-color: #969696;/* Muda a cor de fundo ao passar o mouse */
+color: #fff; /* Cor do ícone */
+}
+.cont-ainer {
+border: 1px solid #ccc;
+border-radius: 20px;
+margin: 10px;
+max-width: 400px;
+}
+
+.cont-ainereader {
+background-color: #fff;
+color: #000000;
+padding: 10px;
+cursor: pointer;
+font-weight: bold;
+border-radius: 20px;
+border-bottom: 1px solid #ddd; /* Borda inferior */
+position: relative; /* Necessário para o posicionamento do conteúdo */
+z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.cont-ainer-header {
+background-color: #000;
+color: #fff;
+padding: 10px;
+cursor: pointer;
+font-weight: bold;
+border-radius: 20px;
+border-bottom: 1px solid #ddd; /* Borda inferior */
+position: relative; /* Necessário para o posicionamento do conteúdo */
+z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.cont-ainer-content {
+display: none; /* Inicialmente oculto */
+padding: 10px;
+border-top: 1px solid #ccc;
+
+overflow-y: auto; /* Permite rolar verticalmente */
+max-height: 300px; /* Define a altura máxima do conteúdo */
+padding: 10px; /* Espaçamento interno */
+}
+
+.conainer-header {
+width: 100%;
+background-color: #615f5f;
+color: #fff;
+padding: 10px;
+cursor: pointer;
+font-weight: bold;
+border-radius: 20px;
+border-bottom: 1px solid #ddd; /* Borda inferior */
+position: relative; /* Necessário para o posicionamento do conteúdo */
+z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+.conainer-content {
+display: none; /* Inicialmente oculto */
+padding: 10px;
+border-top: 1px solid #ccc;
+width: 100%;
+overflow-y: auto; /* Permite rolar verticalmente */
+max-height: 300px; /* Define a altura máxima do conteúdo */
+padding: 10px; /* Espaçamento interno */
+}
+.cont-ainer-content p,
+.conainer-content p {
+margin: 0;
+}
+/* Responsividade para telas menores que 768px (geralmente tablets e dispositivos móveis) */
+@media (max-width: 768px) {
+    .swiper-container-horizontal {
+        height: 250px; /* Ajuste a altura do swiper para telas menores */
+    }
+
+    .contpri, .initial1, .initial {
+        max-width: 100%; /* Ajuste a largura máxima */
+        margin-bottom: 15px; /* Reduza a margem inferior */
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 30px; /* Reduza a largura dos botões */
+        height: 30px; /* Reduza a altura dos botões */
+        font-size: 16px; /* Reduza o tamanho do ícone */
+    }
+
+    .container-header {
+        font-size: 16px; /* Ajuste o tamanho da fonte do cabeçalho */
+        padding: 8px; /* Reduza o padding */
+    }
+
+    .container-content {
+        padding: 8px; /* Reduza o padding do conteúdo */
+    }
+    .video-container {
+        margin-top: 15px;
+    }
+
+    .video-container video {
+        border: 1px solid #ccc; /* Ajuste a borda para telas menores */
+    }
+}
+
+/* Responsividade para telas menores que 480px (geralmente smartphones) */
+@media (max-width: 480px) {
+    .swiper-container-horizontal {
+        height: 200px; /* Ajuste a altura do swiper para smartphones */
+    }
+
+    .contpri, .initial1, .initial {
+        margin-bottom: 10px; /* Reduza a margem inferior */
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 25px; /* Reduza ainda mais a largura dos botões */
+        height: 25px; /* Reduza ainda mais a altura dos botões */
+        font-size: 14px; /* Reduza o tamanho do ícone */
+    }
+
+    .container-header {
+        font-size: 14px; /* Ajuste o tamanho da fonte do cabeçalho */
+        padding: 6px; /* Reduza o padding */
+    }
+
+    .container-content {
+        padding: 6px; /* Reduza o padding do conteúdo */
+    }
+    .video-container {
+        margin-top: 10px;
+    }
+
+    .video-container video {
+        border: 1px solid #bbb; /* Ajuste a borda para smartphones */
+        border-radius: 2px; /* Reduza o raio da borda para telas pequenas */
+    }
+}
+
+.video-container {
+    margin-top: 20px;
+}
+.videoexplicacao {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.video-container video {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.863); /* Cor branca com 50% de opacidade */
+    pointer-events: none; /* Permite que os cliques passem através da sobreposição */
+}
+
+#rodape {
+    /* Definindo a altura desejada */
+    height: 90px;
+    /* Definindo a largura desejada */
+    width: 270px;
+    /* Aplicando a imagem como fundo */
+    background-image: url('https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true');
+    /* Centralizando a imagem no elemento */
+    background-position: center;
+    /* Redimensionando a imagem para cobrir todo o espaço do elemento */
+    background-size: cover;
+    /* Estilizando o texto dentro do elemento */
+    color: white;
+    text-align: center;
+    line-height: 90px; /* Para centralizar verticalmente */
+}
+
+
+.footer-icon {
+width: 32px;
+height: 32px;
+margin-right: 10px;
+vertical-align: middle;
+}
+
+
+footer {
+display: flex;
+justify-content: space-between; /* Distribui os itens igualmente na linha */
+align-items: center; /* Alinha os itens verticalmente ao centro */
+background-color: #000;
+color: #fff;
+text-align: center;
+padding: 20px;
+width: 100%;
+}
+
+footer p{
+font-size: 18px; /* Tamanho da fonte */
+color: #fff; /* Cor do texto no cabeçalho */
+}
+footer p,
+footer h4,
+footer h5 {
+margin: 20; /* Remover margens padrão para evitar espaçamento extra */
+}
+footer h5 a {
+display: flex; /* Usar flexbox para alinhar os itens */
+align-items: center; /* Alinhar os itens verticalmente ao centro */
+color: #fff; /* Cor do texto do link */
+text-decoration: none; /* Remover sublinhado padrão */
+transition: color 0.3s ease; /* Transição suave da cor ao passar o mouse */
+}
+
+footer a img {
+margin-right: 0; /* Espaçamento à direita do ícone */
+}
+
+footer a:hover {
+color: #48ff00; /* Cor do texto do link ao passar o mouse */
+}
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+                            /* ESTILOS TEXTO */
+/* #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$ */
+h1 {
+    text-align: center; /* Centraliza horizontalmente */
+    margin-top: 0; /* Remove margem superior padrão */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    color: #fff; /* Cor do texto */
+    font-size: 23px; /* Tamanho da fonte */
+    align-self: flex-start; /* Alinha o elemento ao início (topo) verticalmente */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+}
+
+/* Estilizando o título h2 */
+h2 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter; /* Adiciona negrito */
+
+
+}
+/* Estilizando o título h3 */
+h3 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 23px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+
+}
+h4 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+    
+
+}
+h5 {
+    text-align: center; /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-right: 0;
+
+}
+
+/* Estilos adicionais para itens */
+.item {
+    background-color: #ddd;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-height: 100vh;
+    
+}
+
+label {
+    /* Definindo a cor do texto */
+    color: #000; /* Cor pode ser ajustada para sua preferência */
+    /* Definindo o tamanho da fonte */
+    font-size: 16px; /* Tamanho da fonte pode ser ajustado */
+    /* Definindo margem inferior para espaçamento */
+    margin-bottom: 2px; /* Ajuste conforme necessário */
+    /* Outros estilos opcionais */
+    font-weight: bold; /* Pode ser 'normal' ou 'bold' */
+    /* Centralizando o texto horizontalmente */
+    text-align: center; /* Centraliza o texto dentro do label */
+    /* Centralizando o texto verticalmente */
+    line-height: 1.5; /* Ajusta a altura da linha para centralizar verticalmente */
+    font-weight: 500;
+} 
+#link_1,#link_2,#link_3,#link_4,#link_5,#link_6,#link_7,#link_8,#copy,#telefone,#contato,#link_face,
+#link_insta,#link_youtube,#link_x,#link_site,#bg_image,#bg_width,#bg_height,#text_content,#font_size,#header_color_input,#text_color_input,#linklogin
+,#text_header_color_input,#text_saudacao_color_input,#text_header_content_input,#text_saudacao_content_input,#footer_color_input{
+    width: 100%; /* Define a largura do input */
+    padding: 10px; /* Espaço interno */
+    margin: 10px 0; /* Espaçamento externo */
+    font-size: 16px; /* Tamanho da fonte */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #f9f9f9; /* Cor de fundo */
+    color: #333; /* Cor do texto */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave ao focar */
+}
+#link_1:focus,#link_2:focus,#link_3:focus,#link_4:focus,#link_5:focus,#link_6:focus,
+#link_7:focus,#link_8:focus,#copy:focus,#telefone:focus,#contato:focus,#link_face:focus,
+#link_insta:focus,#link_youtube:focus,#link_x:focus,#link_site:focus,#bg_image:focus,
+#bg_width:focus,#bg_height:focus,#text_content:focus,#font_size:focus,#header_color_input:focus,#text_color_input:focus,#linklogin:focus,
+#text_header_color_input:focus,#text_saudacao_color_input:focus,#text_header_content_input:focus,#text_saudacao_content_input:focus,
+#footer_color_input:focus {
+    border-color: #3e8e41; /* Cor da borda ao focar */
+    box-shadow: 0 0 5px #3e8e41; /* Sombra ao focar */
+    outline: none; /* Remove o contorno padrão */
+}  
+#link_1:hover,#link_2:hover,#link_3:hover,#link_4:hover,#link_5:hover,#link_6:hover,
+#link_7:hover,#link_8:hover,#copy:hover,#telefone:hover,#contato:hover,#link_face:hover,
+#link_insta:hover,#link_youtube:hover,#link_x:hover,#link_site:hover,#bg_image:hover,
+#bg_width:hover,#bg_height:hover:hover,#font_size:hover,#header_color_input:hover,#text_color_input:hover,#linklogin:hover, 
+#text_header_color_input:hover,#text_saudacao_color_input:hover,#text_header_content_input:hover,#text_saudacao_content_input:hover
+#footer_color_input:hover{
+background-color: #818080;/* Muda a cor de fundo ao passar o mouse */
+color: #fff; /* Cor do ícone */
+}
+
+.color-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.color-input-container input[type="color"] {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 50%; /* Faz o campo de cor ficar redondo */
+    border: 2px solid #4CAF50; /* Cor e espessura da borda */
+   /* border: none;  Remove bordas padrão */
+    appearance: none; /* Remove estilo padrão do navegador */
+}
+
+.color-input-container input[type="color"]::-webkit-color-swatch {
+    border-radius: 50%; /* Ajusta o estilo da cor no WebKit (Chrome, Safari) */
+}
+
+.color-input-container input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    width: 70%;
+}
+
+
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group button {
+    width: 30px;
+    height: 30px;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    line-height: 28px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.input-group input[type="text"] {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+    padding: 5px;
+}
+
+
+iframe {
+    width: 100%;
+    height: 600px; /* ajuste a altura conforme necessário */
+    border: none;
+}
+
+</style>
+  
+<style>
+
+.form__field,  
+.form__input-wrapper--labelled{
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+    border-radius: 20px;
+    align-items: center; /* Centraliza os itens verticalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    margin-bottom: 10px; /* Reduzido de 20px para 10px */
+}
+
+.form__field,
+.form__field--select,
+.form__field--text {
+width: 100%;
+max-width: 100%; /* Definir uma largura máxima para o campo */
+height: 40px;
+border-radius: 20px;
+padding: 5px;
+background-color: #e2dddd;
+transition: background-color 0.3s ease;
+margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+box-sizing: border-box;
+text-align: center; /* Centraliza horizontalmente */
+font-size: 16px;
+font-family: 'Montserrat', sans-serif;
+font-weight: bolder; /* Adiciona negrito */
+
+}
+/* Estilos quando o mouse está sobre os campos de entrada e seleção */
+.form__input-wrapper--labelled:hover,
+.form__field:hover,
+.form__field--select:hover,
+.form__field--text:hover {
+background-color: #5c5959;
+
+}
+/* Estilos quando os campos de entrada e seleção estão focados */
+.form__input-wrapper--labelled:focus,
+.form__field:focus,
+.form__field--select:focus,
+.form__field--text:focus {
+outline: none;
+background-color: #f7b3b3;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+}
+/* Estilo para as opções do campo de seleção */
+.form__field--select option,
+.form__field--text option {
+font-size: 16px;
+color: #0f0f0f;
+
+}
+/* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+.form__field--select option:hover,
+.form__field--text option:hover {
+color: #44c457;
+font-size: 14px;
+}
+
+</style>
+
+
+</head>
+<body>
+    
+    <div class="cont-pri">
+        <div class="content">
+
+            <div class="cont-esq">
+                <a class="navbar-brand" href="{% url 'administrador' %}">
+                    <img src="https://github.com/ronildob/IMAGENS/blob/main/Shopbotfy%20-%20LOGO%20%20(300%20x%2090%20px).png?raw=true" width="300" height="100" class="d-inline-block align-top" alt="">
+                </a>
+                <!--  paginas   -->
+
+                <div id="confirmationMessage" class="message" style="display:none;"></div>
+
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h6><span>Criar Acessos:</span></h6>
+                    </div>
+                    <div class="cont-ainer-content" id="containerContentStyle">
+                        <form method="post" action="{%  url 'criaracessosadmin' %}">
+                            {% csrf_token %}
+                            
+                            <div class="form__input-row">
+                                <div class="form__input-wrapper form__input-wrapper--labelled">
+                                    <select id="custom_input[agencia]" name="agencia" class="form__field form__field--select form__field--large" required>
+                                        <option value="" disabled selected>Selecione uma agência</option>
+                                        {% for agencia in agencias %}
+                                            <option value="{{ agencia.agencia }}">{{ agencia.agencia }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                
+                            <div class="control button">
+                                <button type="submit" class="form__submit button button--primary button--verificar">Criar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!--  paginas   -->
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h6><span>Paginas:</span></h6>
+                    </div>
+                    <div class="cont-ainer-content" id="containerContentStyle"> 
+
+                        <div class="contpri">
+                            <!-- Botão para redirecionar para uma URL externa -->
+                            <a href="{% url 'minhas_notificacoes' %}" onclick="loadPage(event, '{% url 'minhas_notificacoes' %}')">Notificações</a>  
+                        </div> 
+
+                        <div class="contpri">
+                            <!-- Botão para redirecionar para uma URL externa -->
+                            <a href="{% url 'email_selecao' %}" onclick="loadPage(event, '{% url 'email_selecao' %}')">E-mail</a>  
+                        </div> 
+
+
+                    </div>
+                </div>
+                
+
+              
+                <!-- Registros -->
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h6><span>Registros:</span></h6>
+                    </div>
+                    <div class="cont-ainer-content" id="containerContentStyle"> 
+                        <div class="contpri">
+                            <a href="{% url 'cadastrar_agencia' %}">Cadastrar Agência</a>
+                        </div> 
+                        <div class="contpri">
+                            <a href="{% url 'regis' %}">Novo Registro</a>
+                        </div> 
+                        <div class="contpri">
+                            <a href="{% url 'list_formu' %}">Cadastros</a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- produzidos -->
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h6><span>Produção:</span></h6>
+                    </div>
+                    <div class="cont-ainer-content" id="containerContentStyle"> 
+
+                        <div class="contpri">
+                            <a href="{% url 'total_lojas' %}" >Total</a>
+                        </div> 
+
+                        
+
+                        <div class="contpri">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- estilos e links -->              
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="cont-ainer">
+                        <div class="cont-ainereader" onclick="toggleContent(this)">
+                            <h6><span>Estilização:</span></h6>
+                        </div>
+                        
+                        <div class="cont-ainer-content" id="containerContentStyle">
+
+                            <br>
+                             
+                            
+
+                            <!-- navegador -->
+                            <div class="cont-ainer-header" onclick="toggleContent(this)">
+                                <h6><span>NAVEGADOR</span></h6>
+                            </div>
+                            <div class="container-content" id="containerContent">
+                                <!-- Campo para título -->
+                                <div class="form-group">
+                                    <label for="titulo">Título da Página:</label>
+                                    <input type="text" id="titulo" name="titulo" value="{{ template.titulo }}">
+                                </div>
+
+                                <!-- Campo para favicon -->
+                                <div class="form-group">
+                                    <label for="favicon">Favicon:</label>
+                                    <label for="favicon" class="custom-upload">Escolher Favicon</label>
+                                    <input type="file" id="favicon" name="favicon" style="display: none;">
+                                    {% if template.favicon %}
+                                        <img src="{{ template.favicon.url }}" alt="Favicon Atual" style="max-width: 50px;">
+                                    {% endif %}
+                                </div>
+
+                                <div class="button-container">
+                                    <button type="submit" name="update">Salvar</button>
+                                </div>
+                            </div>
+
+                            <br></br>
+
+                            <!-- cabeçalho -->
+                            <div class="cont-ainer-header" onclick="toggleContent(this)">
+                                <h6><span>CABEÇALHO</span></h6>
+                            </div>
+                            
+                            <div class="container-content" id="containerContent">
+                                
+                                <div class="contpri">
+                                    <label for="header_color">Cor do Fundo:</label>
+                                    <div class="color-input-container">
+                                        <input type="color" id="header_color" name="header_color" value="{{ template.header_color }}" oninput="updateHeaderColor(this.value)">
+                                        <input type="text" id="header_color_input" name="header_color_input" value="{{ template.header_color }}" oninput="updateHeaderColorInput(this.value)">
+                                    </div>
+                                </div>
+                                
+                                <div class="contpri">
+                                    <label for="bg_height">Imagem:</label>
+                                    <label for="bg_image" class="custom-upload">Escolher</label>
+                                    <input type="file" id="bg_image" name="bg_image" style="display: none;" onchange="updatePreview()">
+                
+                                    <div class="contpri">
+                                        <label for="bg_width">Largura:</label>
+                                        <div class="input-group">
+                                            <button type="button" onclick="changeValue('bg_width', -10)">-</button>
+                                            <input type="text" id="bg_width" name="bg_width" value="{{ template.bg_width | default:'0px' }}" oninput="updatePreview()" readonly>
+                                            <button type="button" onclick="changeValue('bg_width', 10)">+</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="contpri">
+                                        <label for="bg_height">Altura:</label>
+                                        <div class="input-group">
+                                            <button type="button" onclick="changeValue('bg_height', -10)">-</button>
+                                            <input type="text" id="bg_height" name="bg_height" value="{{ template.bg_height | default:'0px' }}" oninput="updatePreview()" readonly>
+                                            <button type="button" onclick="changeValue('bg_height', 10)">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="position-controls">
+                                        <label>Posição da imagem:</label>
+                                        <div class="remote-control">
+                                            <div class="circle">
+                                                <button type="button" class="control-button up" onclick="adjustPosition('main-title', 'top', -10)">&#9650;</button>
+                                                <button type="button" class="control-button down" onclick="adjustPosition('main-title', 'top', 10)">&#9660;</button>
+                                                <button type="button" class="control-button left" onclick="adjustPosition('main-title', 'left', -10)">&#9664;</button>
+                                                <button type="button" class="control-button right" onclick="adjustPosition('main-title', 'left', 10)">&#9654;</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                        
+                                <div class="contpri">
+                                    <label for="text_content">Texto:</label>
+                                    <input type="text" id="text_content" name="text_content" value="{{ template.text_content }}" oninput="updateTextContent(this.value)">
+                                </div> 
+                                <div class="contpri">
+                                    <label for="font_size">Tamanho da fonte:</label>
+                                    <div class="input-group">
+                                        <button type="button" onclick="changeValue('font_size', -1)">-</button>
+                                        <input type="text" id="font_size" name="font_size" value="{{ template.font_size | default:'0px' }}" oninput="updatePreview()" readonly>
+                                        <button type="button" onclick="changeValue('font_size', 1)">+</button>
+                                    </div>
+                                </div> 
+                                <div class="contpri">
+                                    <label for="text_color">Cor do texto:</label>
+                                    <div class="color-input-container">
+                                        <input type="color" id="text_color" name="text_color" value="{{ template.text_color }}" oninput="updateTextColor(this.value)">
+                                        <input type="text" id="text_color_input" name="text_color_input" value="{{ template.text_color }}" oninput="updateTextColorInput(this.value)">
+                                    </div>
+                                </div> 
+                                <div class="contpri">
+                                    <div class="position-controls">
+                                        <label>Posição do Texto:</label>
+                                        <div class="remote-control">
+                                            <div class="circle">                                                
+                                                <button type="button" class="control-button up" onclick="adjustPosition('title', 'top', -10)">&#9650;</button>
+                                                <button type="button" class="control-button down" onclick="adjustPosition('title', 'top', 10)">&#9660;</button>
+                                                <button type="button" class="control-button left" onclick="adjustPosition('title', 'left', -10)">&#9664;</button>
+                                                <button type="button" class="control-button right" onclick="adjustPosition('title', 'left', 10)">&#9654;</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="button-container">
+                                    <button type="submit" name="update">Salvar</button>
+                                </div>
+                            </div>
+                
+                            <br></br>
+
+                            
+
+                            <!-- links -->                        
+                            <div class="cont-ainer-header" onclick="toggleContent(this)">
+                                <h6><span>LINKS:</span></h6>
+                            </div>
+                            <div class="cont-ainer-content" id="containerContent">
+                                <div class="contpri">                                    
+                                    <label for="link_1">Vídeo Criar Conta</label>
+                                    <input type="text" id="link_1" name="link_1" value="{{ template.link_1 }}" required oninput="updatePreview(1)">
+                                </div>
+                                <div class="contpri">                                
+                                    <label for="link_2">Vídeo APP Privado</label>
+                                    <input type="text" id="link_2" name="link_2" value="{{ template.link_2 }}" required oninput="updatePreview(2)">
+                                </div>
+                                <div class="contpri">
+                                    <label for="link_3">Vídeo Plano Shopify</label>
+                                    <input type="text" id="link_3" name="link_3" value="{{ template.link_3 }}" required oninput="updatePreview(3)">
+                                </div>
+                                <div class="contpri">
+                                    <label for="link_4">Vídeo Desativar Senha</label>
+                                    <input type="text" id="link_4" name="link_4" value="{{ template.link_4 }}" required oninput="updatePreview(4)">
+                                </div>
+                                <div class="contpri">
+                                    <label for="link_5">Vídeo Instalar Dsers</label>
+                                    <input type="text" id="link_5" name="link_5" value="{{ template.link_5 }}" required oninput="updatePreview(5)">
+                                </div>
+                                <div class="contpri">
+                                    <label for="link_6">Vídeo Promocional</label>
+                                    <input type="text" id="link_6" name="link_6" value="{{ template.link_6 }}" required oninput="updatePreview(6)">
+                                </div>
+                                <div class="contpri">
+                                    <label for="link_7">Link Filiado Shopify</label>
+                                    <input type="text" id="link_7" name="link_7" value="{{ template.link_7 }}" required oninput="updatePreview(7)">
+                                </div>
+                                <div class="contpri">
+                                    <label for="link_8"><input type="checkbox" name="show_link_8" {% if template.show_link_8 %}checked{% endif %}> Exibir Link Área de Membros</label>
+                                    <input type="text" id="link_8" name="link_8" value="{{ template.link_8 }}" required oninput="updatePreview(8)">                    
+                                </div>
+                                <br>
+                                <div class="button-container">
+                                    <button type="submit" name="update">Salvar</button>
+                                </div>
+
+                            </div>
+
+                            <br></br>                           
+
+                            <!-- rodapé  -->                              
+                            <div class="cont-ainer-header" onclick="toggleContent(this)">
+                                <h6><span>RODAPÉ</span></h6>
+                            </div>
+                            <div class="cont-ainer-content" id="containerContent">
+                                <div class="contpri">
+
+                                    <div class="contpri">
+                                        <label for="footer_color">Cor do Fundo:</label>
+                                        <div class="color-input-container">
+                                            <input type="color" id="footer_color" name="footer_color" value="{{ template.footer_color }}" oninput="updateFooterColor(this.value)">
+                                            <input type="text" id="footer_color_input" name="footer_color_input" value="{{ template.footer_color }}" oninput="updateFooterColorInput(this.value)">
+                                        </div>
+                                    </div>
+
+                                    <label for="copy">Copyright:</label>
+                                    <input type="text" id="copy" name="copy" value="{{ template.copy }}" required oninput="updatePreview()">
+                                    
+
+                                    <label for="telefone"><input type="checkbox" name="show_telefone" {% if template.show_telefone %}checked{% endif %}> Exibir Telefone</label>                                    
+                                    <input type="text" id="telefone" name="telefone" value="{{ template.telefone }}" required oninput="updatePreview()">
+                                    
+                                    <label for="contato"><input type="checkbox" name="show_contato" {% if template.show_contato %}checked{% endif %}> Exibir Contato</label>                                    
+                                    <input type="text" id="contato" name="contato" value="{{ template.contato }}" required oninput="updatePreview()">
+                                    
+                                    <label for="link_site"><input type="checkbox" name="show_link_site" {% if template.show_link_site %}checked{% endif %}> Exibir Link do Site</label>
+                                    <input type="text" id="link_site" name="link_site" value="{{ template.link_site }}" oninput="updatePreview()">
+
+                                </div>
+                                <br>
+                                <div class="button-container">
+                                    <button type="submit" name="update">Salvar</button>
+                                </div>
+
+                            </div>
+
+                            <br></br>                        
+
+                            <!-- rede social -->                
+                            <div class="cont-ainer-header" onclick="toggleContent(this)">
+                                <h6><span>REDES SOCIAIS</span></h6>
+                            </div>
+                            <div class="cont-ainer-content" id="containerContent">
+                                <div class="contpri">
+                                    <label for="link_face"><input type="checkbox" name="show_link_face" {% if template.show_link_face %}checked{% endif %}> Exibir Link Facebook</label>
+                                    <input type="text" id="link_face" name="link_face" value="{{ template.link_face }}" oninput="updatePreview()">
+                                    
+                                    <label for="link_insta"><input type="checkbox" name="show_link_insta" {% if template.show_link_insta %}checked{% endif %}> Exibir Link Instagram</label>
+                                    <input type="text" id="link_insta" name="link_insta" value="{{ template.link_insta }}" oninput="updatePreview()">
+                                
+                                    <label for="link_youtube"><input type="checkbox" name="show_link_youtube" {% if template.show_link_youtube %}checked{% endif %}> Exibir Link Youtube</label>
+                                    <input type="text" id="link_youtube" name="link_youtube" value="{{ template.link_youtube }}" oninput="updatePreview()">
+                                    
+                                    <label for="link_x"><input type="checkbox" name="show_link_x" {% if template.show_link_x %}checked{% endif %}> Exibir Link do X </label>
+                                    <input type="text" id="link_x" name="link_x" value="{{ template.link_x }}" oninput="updatePreview()">
+                                
+                                </div>
+                                <br>
+                                <div class="button-container">
+                                    <button type="submit" name="update">Salvar</button>
+                                </div>
+                                
+                            </div>
+
+                            <br></br> 
+                        
+                        </div>
+                         
+                    </div>
+
+                    <!-- e-mail -->
+                    <div class="cont-ainer">
+                        <div class="cont-ainereader" onclick="toggleContent(this)">
+                            <h6><span>E-mail:</span></h6>
+                        </div>
+                        <div class="cont-ainer-content" id="containerContentStyle">
+                    
+                            <div class="contpri">
+                                <h6><span><a href="{% url 'email_agencia' %}" onclick="loadPage(event, '{% url 'email_agencia' %}')">Ver pagina de e-mail</a></span></h6>
+                            </div>
+
+                            <!-- Campo para título -->
+                            <div class="contpri">
+                                <label for="background_color">Cor do Background:</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="background_color" name="background_color" value="{{ template.background_color }}" oninput="updateBackgroundColor(this.value)">
+                                    <input type="text" id="background_color_input" name="background_color_input" value="{{ template.background_color }}" oninput="updateBackgroudColorInput(this.value)">
+                                </div>
+                            </div>
+
+                            <div class="contpri">
+                                <label for="text_header_content">Texto cabeçalho:</label>
+                                <input type="text" id="text_header_content" name="text_header_content" value="{{ template.text_header_content }}" oninput="updateTextHeaderContent(this.value)">
+                            </div>             
+                            <div class="contpri">
+                                <label for="text_header_color">Cor do texto:</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="text_header_color" name="text_header_color" value="{{ template.text_header_color }}" oninput="updateTextHeaderColor(this.value)">
+                                    <input type="text" id="text_header_color_input" name="text_header_color_input" value="{{ template.text_header_color }}" oninput="updateTextHeaderColorInput(this.value)">
+                                </div>
+                            </div> 
+
+                            <div class="contpri">
+                                <label for="text_saudacao_content">Mensagem ao Usuário:</label>
+                                <input type="text" id="text_saudacao_content" name="text_saudacao_content" value="{{ template.text_saudacao_content }}" oninput="updateTextSaudacaoContent(this.value)">
+                            </div>             
+                            <div class="contpri">
+                                <label for="text_saudacao_color">Cor da mensagem:</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="text_saudacao_color" name="text_saudacao_color" value="{{ template.text_saudacao_color }}" oninput="updateTextSaudacaoColor(this.value)">
+                                    <input type="text" id="text_saudacao_color_input" name="text_saudacao_color_input" value="{{ template.text_saudacao_color }}" oninput="updateTextSaudacaoColorInput(this.value)">
+                                </div>
+                            </div> 
+
+                            <div class="contpri">                                    
+                                <label for="link_login">Link de redirecionamento da pagina</label>
+                                <input type="text" id="link_login" name="link_login" value="{{ template.link_login }}" >
+                            </div>
+
+                            
+                            <br>
+
+                            <div class="button-container">
+                                <button type="submit" name="update">Salvar</button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+
+                       
+                        
+                </form>
+
+
+                <!-- Pré-visualização -->
+                <div class="cont-ainer">
+                    <div class="cont-ainereader" onclick="toggleContent(this)">
+                        <h6><span>Pré visualizar vídeos</span></h6>
+                    </div>
+                    <div class="conainer-content" id="conainerContent">
+                        
+                            <div class="videoexplicacao">
+                                
+                                <div class="video-container">
+                                    <iframe id="link_1" width="100%" height="315" src="{{ template.link_1 }}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        
+                            <div class="videoexplicacao">
+                                <div class="video-container">
+                                    <iframe id="link_2" width="100%" height="315" src="{{ template.link_2 }}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>                       
+                        
+                            <div class="videoexplicacao">
+                                <div class="video-container">
+                                    <iframe id="link_3" width="100%" height="315" src="{{ template.link_3 }}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        
+                            <div class="videoexplicacao">
+                                <div class="video-container">
+                                    <iframe id="link_4" width="100%" height="315" src="{{ template.link_4 }}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                    
+                            <div class="videoexplicacao">
+                                <div class="video-container">
+                                    <iframe id="link_5" width="100%" height="315" src="{{ template.link_5 }}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        
+                            <div class="videoexplicacao">
+                                <div class="video-container">
+                                    <iframe id="link_6" width="100%" height="315" src="{{ template.link_6 }}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                
+                
+            </div>
+
+ <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+   <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+     <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+       <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+         <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+           <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+             <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+            <!-- @@@@@@@@@@@@@@@@@    CONTAINER DA DIREITA       @@@@@@@@@@@@@@@        -->
+
+            <div class="cont-dir"> 
+                          
+                <div class="cont-pri">
+                    <iframe id="contentFrame" src="{% url 'cartoesadm' %}" width="100%" height="600px" style="border:none;"></iframe>
+                </div>
+            
+            </div>    
+                          
+            
+        </div>
+    </div>
+
+<!-- CRIAR ACESSOS--> 
+<script>
+   function criaracessos() {
+    if (!validarCampos()) {
+        exibirMensagem('Por favor, preencha todos os campos obrigatórios.', 'error');
+        return;
+    }
+
+    var agencia = document.getElementsByName('agencia')[0].value;
+    var dados = { agencia: agencia };
+
+    fetch("{% url 'criaracessosadmin' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            exibirMensagem(data.message, 'success');
+            setTimeout(function() {
+                window.location.href = '/admin/';
+            }, 3000);
+        } else {
+            exibirMensagem(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        exibirMensagem('Erro ao processar o pedido. Tente novamente mais tarde.', 'error');
+    });
+}
+
+function exibirMensagem(mensagem, tipo) {
+    var confirmationMessage = document.getElementById("confirmationMessage");
+    confirmationMessage.innerHTML = mensagem;
+
+    if (tipo === 'success') {
+        confirmationMessage.classList.remove('error');
+        confirmationMessage.classList.add('success');
+    } else {
+        confirmationMessage.classList.remove('success');
+        confirmationMessage.classList.add('error');
+    }
+
+    confirmationMessage.style.display = 'block';
+    setTimeout(function() {
+        confirmationMessage.style.display = 'none';
+    }, 5000);
+}
+
+</script>
+
+<!-- Script dropdown -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdownToggle = document.getElementById('dropdownMenuButton');
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+
+        dropdownToggle.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Fecha o menu dropdown se clicar fora dele
+        document.addEventListener('click', function (event) {
+            if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+</script>
+
+
+<!-- toggle -->
+<script>
+    function toggleContent(element) {
+        var content = element.nextElementSibling;
+        var allContents = document.querySelectorAll('.container-content');
+        
+        // Fecha todos os containers, exceto o que foi clicado
+        allContents.forEach(function(item) {
+            if (item !== content) {
+                item.style.display = 'none';
+            }
+        });
+    
+        // Alterna a visibilidade do conteúdo do container clicado
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
+        }
+    }
+</script>
+
+<!-- update -->
+<script>
+    // Função principal para atualizar a visualização em tempo real
+    function updatePreview() {
+        // Atualizar links de pré-visualização
+        document.getElementById('link_1-preview').href = document.getElementById('link_1').value;
+        document.getElementById('link_2-preview').href = document.getElementById('link_2').value;
+        document.getElementById('link_3-preview').href = document.getElementById('link_3').value;
+        document.getElementById('link_4-preview').href = document.getElementById('link_4').value;
+        document.getElementById('link_5-preview').href = document.getElementById('link_5').value;
+        document.getElementById('link_6-preview').href = document.getElementById('link_6').value;
+        document.getElementById('link_7-preview').href = document.getElementById('link_7').value;
+        document.getElementById('link_8-preview').href = document.getElementById('link_8').value;
+
+        document.getElementById('copy-preview').textContent = document.getElementById('copy').value;
+        document.getElementById('telefone-preview').textContent = document.getElementById('telefone').value;
+        document.getElementById('link_site-preview').href = document.getElementById('link_site').value;
+
+        // Atualizar links sociais de pré-visualização
+        document.getElementById('link_site-preview').href = document.getElementById('link_site').value;
+        document.getElementById('link_face-preview').href = document.getElementById('link_face').value;
+        document.getElementById('link_insta-preview').href = document.getElementById('link_insta').value;
+        document.getElementById('link_youtube-preview').href = document.getElementById('link_youtube').value;
+
+        // Atualizar imagem de fundo e suas propriedades
+        const bgImage = document.getElementById('bg_image').files[0];
+        if (bgImage) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('main-title-preview').style.backgroundImage = `url('${e.target.result}')`;
+            }
+            reader.readAsDataURL(bgImage);
+        } else {
+            const bgImageUrl = document.getElementById('bg_image_url').value;
+            if (bgImageUrl) {
+                document.getElementById('main-title-preview').style.backgroundImage = `url('${bgImageUrl}')`;
+            }
+        }
+
+        // Atualizar largura e altura do background
+        const bgWidth = document.getElementById('bg_width').value || '0px';
+        const bgHeight = document.getElementById('bg_height').value || '0px';
+        document.getElementById('main-title-preview').style.width = bgWidth;
+        document.getElementById('main-title-preview').style.height = bgHeight;
+
+        // Atualizar posição do background
+        document.getElementById('main-title-preview').style.backgroundPosition = document.getElementById('bg_position').value || 'center';
+
+        // Atualizar cor e tamanho do texto
+        const fontSize = document.getElementById('font_size').value || '16px';
+        document.getElementById('title-preview').style.fontSize = fontSize;
+
+        
+    }
+
+    
+    // Função para ajustar a posição dos elementos
+    function adjustPosition(elementId, direction, value) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+        // Obtenha a posição atual do elemento
+        const currentPos = parseInt(window.getComputedStyle(element).getPropertyValue(direction)) || 0;
+        // Atualize a posição
+        element.style[direction] = (currentPos + value) + 'px';
+    }
+
+    
+
+    // Funções para alterar os valores de largura, altura e tamanho da fonte
+    function changeValue(inputId, increment) {
+        const inputElement = document.getElementById(inputId);
+        let currentValue = parseInt(inputElement.value, 10);
+
+        if (isNaN(currentValue)) {
+            currentValue = 0;
+        }
+
+        currentValue += increment;
+
+        // Impedir valores negativos para largura, altura e tamanho da fonte
+        if (inputId !== 'font_size' && currentValue < 1) {
+            currentValue = 1;
+        }
+
+        // Adicionar 'px' ao final do valor
+        inputElement.value = currentValue + 'px';
+
+        // Chamar a função de atualização
+        updatePreview();
+    }
+
+    // Atualizar texto conforme mudanças no campo
+    function updateTextContent(value) {
+        document.getElementById('title-preview').textContent = value;
+    }
+
+    // Atualizar tamanho da fonte
+    function updateFontSize(value) {
+        document.getElementById('title-preview').style.fontSize = value + 'px';
+    }
+
+    
+
+</script>
+ 
+<!-- Script email-->
+<script>
+    // Atualizar cor do background
+    function updateBackgroundColor(value) {
+        document.getElementById('containerContent').style.backgroundColor = value;
+    }
+
+    // Atualizar input de cor do background (no segundo input de texto)
+    function updateBackgroudColorInput(value) {
+        document.getElementById('background_color').value = value;
+        updateBackgroundColor(value);
+    }
+
+    // Atualizar cor do texto do cabeçalho
+    function updateTextHeaderColor(value) {
+        document.getElementById('header-preview').style.color = value;
+    }
+
+    // Atualizar cor do texto do footer
+    function updateTextFooterColor(value) {
+        document.getElementById('footer-preview').style.color = value;
+    }
+
+
+    // Sincronizar a cor de input de texto com o color picker
+    function updateTextHeaderColorInput(value) {
+        document.getElementById('text_header_color').value = value;
+        updateTextHeaderColor(value);
+    }
+
+    // Atualizar o conteúdo do texto do cabeçalho
+    function updateTextHeaderContent(value) {
+        document.getElementById('header-preview').textContent = value;
+    }
+
+    // Atualizar o conteúdo do texto do footer
+    function updateTextFooterContent(value) {
+        document.getElementById('footer-preview').textContent = value;
+    }
+
+    // Atualizar a saudação e sua cor
+    function updateTextSaudacaoColor(value) {
+        document.getElementById('saudacao-preview').style.color = value;
+    }
+
+    function updateTextSaudacaoColorInput(value) {
+        document.getElementById('text_saudacao_color').value = value;
+        updateTextSaudacaoColor(value);
+    }
+
+    function updateTextSaudacaoContent(value) {
+        document.getElementById('saudacao-preview').textContent = value;
+    }
+
+    // Função de preview geral
+    function updatePreview() {
+        updateBackgroundColor(document.getElementById('background_color').value);
+        updateTextHeaderContent(document.getElementById('text_header_content').value);
+        updateTextHeaderColor(document.getElementById('text_header_color').value);
+        updateTextSaudacaoContent(document.getElementById('text_saudacao_content').value);
+        updateTextSaudacaoColor(document.getElementById('text_saudacao_color').value);
+    }
+</script>
+
+<!-- Script iframe -->
+<script>
+    function loadPage(event, url) {
+    event.preventDefault(); // Previne o comportamento padrão do link
+    var iframe = document.getElementById("contentFrame");
+    iframe.src = url; // Define o novo src para o iframe
+}
+</script>
+
+<!-- Script JS Universal -->
+<script>
+    // Função para alternar a visibilidade de um elemento com base no ID
+    function toggleElement(elementId) {
+        var element = document.getElementById(elementId);
+        
+        // Se o elemento está oculto, mostra-o, caso contrário, oculta-o
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+
+    // Função para atualizar a visibilidade dos ícones sociais com base no estado dos links
+    function updateSocialLinksVisibility() {
+        var facebookLink = document.getElementById('facebookLink');
+        var instagramLink = document.getElementById('instagramLink');
+        var youtubeLink = document.getElementById('youtubeLink');
+
+        // Oculta os ícones se o link não estiver presente
+        if (!facebookLink.href || facebookLink.href === '') {
+            facebookLink.style.display = 'none';
+        }
+
+        if (!instagramLink.href || instagramLink.href === '') {
+            instagramLink.style.display = 'none';
+        }
+
+        if (!youtubeLink.href || youtubeLink.href === '') {
+            youtubeLink.style.display = 'none';
+        }
+    }
+
+    // Chama a função para garantir que os ícones corretos estejam visíveis ao carregar a página
+    window.onload = updateSocialLinksVisibility;
+</script>
+
+<script>
+
+    // Função genérica para atualizar cor e valor do input de texto
+    function createColorHandler(colorInputId, textInputId, cssVariableName) {
+        const colorInput = document.getElementById(colorInputId);
+        const textInput = document.getElementById(textInputId);
+
+        // Atualiza a cor no campo de texto e na variável CSS correspondente
+        colorInput.addEventListener('input', function () {
+            const colorValue = this.value;
+            textInput.value = colorValue;
+            document.documentElement.style.setProperty(`--${cssVariableName}`, colorValue);
+        });
+
+        // Atualiza o campo de cor baseado no input de texto
+        textInput.addEventListener('input', function () {
+            const colorValue = this.value;
+            colorInput.value = colorValue;
+            document.documentElement.style.setProperty(`--${cssVariableName}`, colorValue);
+        });
+    }
+
+    // Quando o DOM estiver carregado, inicialize os handlers de cores
+    document.addEventListener("DOMContentLoaded", function() {
+    createColorHandler('header_color', 'header_color_input', 'header_color');
+    createColorHandler('text_color', 'text_color_input', 'text_color');
+    createColorHandler('footer_color', 'footer_color_input', 'footer_color');
+    createColorHandler('background_color', 'background_color_input', 'background_color');
+    createColorHandler('text_header_color', 'text_header_color_input', 'text_header_color');
+    createColorHandler('text_saudacao_color', 'text_saudacao_color_input', 'text_saudacao_color');
+});
+
+</script>
+
+
+
+
+</body>
+</html>
+
+

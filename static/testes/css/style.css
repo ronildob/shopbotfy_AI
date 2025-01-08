@@ -1,0 +1,27 @@
+.form-control {
+    border-radius: 8px;  /* Deixa os cantos arredondados */
+    border: 2px solid #007bff;  /* Adiciona uma borda azul */
+    padding: 10px;  /* Espaçamento interno */
+    font-size: 16px;  /* Aumenta o tamanho do texto */
+    transition: border-color 0.3s ease; /* Transição suave */
+}
+
+.form-control:focus {
+    border-color: #0056b3; /* Muda a cor da borda ao focar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
+}
+
+.btn-primary {
+    background-color: #1296fc;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.mb-3 label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+
+

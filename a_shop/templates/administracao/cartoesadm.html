@@ -1,0 +1,994 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ template.titulo }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    
+    body {
+        display: flex !important;
+        flex-direction: column !important; /* Define a orientação dos elementos como coluna */
+        justify-content: flex-start !important; /* Alinha os elementos no início (no topo) verticalmente */
+        align-items: center !important; /* Alinha os elementos no centro horizontalmente */
+        -webkit-user-select: none !important; /* Safari */
+        -moz-user-select: none !important; /* Firefox */
+        -ms-user-select: none !important; /* IE10+/Edge */
+        user-select: none !important;
+        font-family: Arial, sans-serif !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 100vh !important; /* Garante que o body ocupe pelo menos a altura da viewport */
+        background-color: #ffffff00 !important; 
+        
+    }
+
+
+    /* main {
+        width: 100%; 
+        max-width: 100%; 
+        padding: 20px; 
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: space-between; 
+        background:  #fff;  
+    }*/
+    .board {
+        display: flex;
+        justify-content: flex-start; /* Mantém os cartões alinhados à esquerda */
+        gap: 20px;
+        overflow-x: auto; /* Adiciona rolagem horizontal quando necessário */
+        white-space: nowrap; /* Evita quebra de linha */
+        padding: 10px; /* Opcional: Adiciona um espaçamento interno para o container */
+        scroll-behavior: smooth; /* Faz o scroll ser suave */
+        cursor: grab; /* Adiciona um ícone de "mão" ao passar o mouse */
+    }
+    .board:active {
+        cursor: grabbing; /* Muda o cursor enquanto está clicando */
+    }
+    
+    .board::-webkit-scrollbar {
+        display: none; /* Esconde a barra de rolagem para uma aparência mais limpa */
+    }
+
+    .boards {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .col {
+        width: 250px;
+        background-color: transparent; /* Tornar a coluna transparente */
+    }
+
+    .coluna-reservado, .coluna-respondido, .coluna-produzindo, 
+    .coluna-iniciado, .coluna-finalizado, .coluna-erro, .coluna-pendencia{
+        width: 100%;
+        max-height: 500px;
+        overflow-y: auto;
+        padding: 10px;
+        background-color: #aea4a4; /* Fundo da coluna */
+        border-bottom-left-radius: 50px; /* Bordas arredondadas na parte inferior */
+        position: relative; /* Necessário para que o sticky funcione corretamente */
+        border-width: 5px; /* largura da borda */
+        border-style: double; /* estilo da borda (pode ser solid, dashed, dotted, double, etc.) */
+        border-color: #444; /* cor da borda */
+    }
+
+    .cabecalho {
+        background-color: #444; /* Cor de fundo para o cabeçalho */
+        font-size: 18px;
+        color: #fff; /* Cor do texto do cabeçalho */
+        padding: 10px; /* Espaçamento interno */
+        position: sticky; /* Faz o cabeçalho ficar fixo */
+        top: 0; /* Fica fixo na parte superior da coluna */
+        z-index: 10; /* Garante que o cabeçalho fique acima dos cartões */
+        border-top-left-radius: -32px; /* Bordas arredondadas na parte inferior */
+        border-top-right-radius: 50px; /* Bordas arredondadas na parte superior direita */
+        
+    }
+
+    .cartao {
+        display: flex;
+        flex-direction: column;
+        text-align: center; /* Centraliza horizontalmente */
+        align-items: center;
+        width: 100%;
+        min-height: 50px; /* Você pode ajustar a altura mínima se necessário */
+        padding: 1rem; /* Ajustar o padding para menor */
+        margin-bottom: 30px; /* Mantém a margem entre os cartões */
+        background-color: #2d2f34;
+        box-shadow: 5px 5px 5px #00000040;
+        transition: all .3s ease-in-out;
+        border: 2px solid transparent;
+        border-radius: 10px;
+
+    }
+
+    .cartao:hover {
+        transform: translateY(-5px);
+        border: 2px solid #1296fc;
+    }
+
+    .status {
+        width: 100%;
+        background-color: #ffffff1a;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 12px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+        white-space: nowrap; /* Evita quebra de linha */
+        overflow: hidden; /* Esconde o conteúdo que ultrapassa o limite */
+        text-overflow: ellipsis; /* Adiciona "..." no final do texto cortado */
+    }
+    .statusfront1 {
+        width: 98%;
+        background-color: #18ac48;
+        color: #fff;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+    }
+    .statusfront2 {
+        width: 98%;
+        background-color: #20ac9c ;
+        color: #fff;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+    }
+    .statusfront3 {
+        width: 98%;
+        background-color: #70e90d;
+        color: #fff;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+    }
+    .statusfront4 {
+        width: 98%;
+        background-color: #ff7301;
+        color: #fff;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+    }
+    .statusfront5 {
+        width: 98%;
+        background-color: #cf3ef3;
+        color: #fff;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+    }
+    .statusfront6 {
+        width: 98%;
+        background-color: #0b21ec;
+        color: #fff;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+    }
+    .statusfront7 {
+        width: 98%;
+        background-color: #f10909;
+        color: #fff;
+        padding: 5px; /* Mantenha o padding para o status */
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px 0; /* Adiciona margem entre status e botão */
+    }
+
+    .detalhes-button {
+        width: 98%;
+        margin-top: 5px; /* Remover esta margem ou ajustá-la se necessário */
+        padding: 10px 15px;
+        border: none;
+        background-color: #007BFF;
+        font-size: 18px;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .detalhes-button:hover {
+        background-color: #0056b3;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 11;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+        flex-direction: column;
+        text-align: center; /* Centraliza horizontalmente */
+        align-items: center;
+        min-height: 50px; /* Você pode ajustar a altura mínima se necessário */
+        padding: 1rem; /* Ajustar o padding para menor */
+        box-shadow: 5px 5px 5px #00000040;
+        transition: all .3s ease-in-out;
+        border: 2px solid transparent;
+
+    }
+
+    .modal-content {
+        background-color: #2d2f34;
+        margin: 10% auto;
+        padding: 20px;
+        width: 70%;
+        transform: translateY(-5px);
+        border: 2px solid #1296fc;
+        z-index: 20; /* Garante que o cabeçalho fique acima dos cartões */
+        border-top-right-radius: 80px; /* Bordas superior right */
+        border-top-left-radius: 0px; /* Bordas superior esquerda */
+        border-bottom-right-radius: 0px; /* Bordas  inferior right*/ 
+        border-bottom-left-radius: 80px; /* Bordas inferior esquerda*/
+    }
+    
+
+    .close-modal {
+        color: #1296fc;
+        float: right;
+        font-size: 22px;
+        font-weight: bold;
+        left: 5%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        align-items: center;
+        text-align: center;
+        border: 2px solid #1296fc;
+
+    }
+
+    .close-modal:hover,
+    .close-modal:focus {
+        color: rgb(209, 15, 25);
+        text-decoration: none;
+        cursor: pointer;
+        transform: translateY(-5px);
+        border: 2px solid rgb(209, 15, 25);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        background-color: transparent; /* Tornar a coluna transparente */
+    }
+
+    th {
+        width: 10%;
+        background-color: transparent; /* Tornar a coluna transparente */
+        text-align: left;
+        align-items: center;
+        white-space: nowrap; /* Evita quebra de linha */
+        overflow: hidden; /* Esconde o conteúdo que ultrapassa o limite */
+        text-overflow: ellipsis; /* Adiciona "..." no final do texto cortado */
+    }
+
+    td {
+        background-color: transparent; /* Tornar a coluna transparente */
+        text-align: left; 
+        align-items: center;
+        width: 80%;
+        white-space: nowrap; /* Evita quebra de linha */
+        overflow: hidden; /* Esconde o conteúdo que ultrapassa o limite */
+        text-overflow: ellipsis; /* Adiciona "..." no final do texto cortado */
+    }
+
+            
+    h1{
+        text-align: left;
+        font-size: 24px;
+        color: #fff;
+
+
+    }
+    h2{
+        text-align: left;
+        font-size: 14px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        
+
+    } 
+    h3{
+        text-align: left;
+        font-size: 16px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: lighter; /* Adiciona negrito */
+        
+
+    } 
+
+    @media only screen and (max-width: 768px) { /* Para telas menores que 768px, como tablets e smartphones */
+
+    #title {
+        display: none; /* Oculta o elemento em telas menores */
+    }
+    /* Ajustes para a board */
+    .board {
+        gap: 10px; /* Diminui o espaço entre os cartões */
+        padding: 5px; /* Reduz o padding interno */
+    }
+
+    /* Ajustes para a coluna */
+    .col {
+        width: 100%; /* Faz a coluna ocupar 100% da largura da tela */
+        margin-top: 50px; /* Reduz a margem superior */
+    }
+
+    .coluna-reservado, .coluna-respondido, .coluna-produzindo, 
+    .coluna-iniciado, .coluna-finalizado, .coluna-erro, .coluna-pendencia {
+        max-height: 400px; /* Diminui a altura máxima das colunas para caber melhor na tela */
+        padding: 5px; /* Reduz o padding interno */
+        border-width: 3px; /* Diminui a largura da borda */
+    }
+
+    /* Ajustes para o cabeçalho */
+    .cabecalho {
+        font-size: 16px; /* Diminui o tamanho da fonte */
+        padding: 8px; /* Reduz o padding */
+    }
+
+    /* Ajustes para os cartões */
+    .cartao {
+        padding: 0.5rem; /* Diminui o padding dos cartões */
+        margin-top: 10px; /* Reduz a margem entre os cartões */
+    }
+
+    /* Ajustes para os status dentro dos cartões */
+    .status, .statusfront1, .statusfront2, .statusfront3, .statusfront4, .statusfront5, .statusfront6, .statusfront7 {
+        width: 95%; /* Reduz um pouco a largura dos status para caberem melhor */
+        font-size: 14px; /* Diminui o tamanho da fonte */
+    }
+
+    /* Ajustes para o botão de detalhes */
+    .detalhes-button {
+        font-size: 16px; /* Diminui o tamanho da fonte do botão */
+        padding: 8px 12px; /* Reduz o padding do botão */
+    }
+
+    /* Ajustes para o modal */
+    .modal-content {
+        width: 90%; /* Faz o modal ocupar mais a largura da tela em telas menores */
+        padding: 15px; /* Reduz o padding do modal */
+    }
+
+    /* Ajustes para a tabela */
+    table {
+        font-size: 14px; /* Diminui o tamanho da fonte da tabela */
+    }
+
+    th, td {
+        width: auto; /* Faz as colunas se ajustarem automaticamente à tela */
+    }
+
+    /* Ajustes para os títulos (h1, h2, h3) */
+    h1 {
+        font-size: 20px; /* Reduz o tamanho do título principal */
+    }
+
+    h2 {
+        font-size: 12px; /* Reduz o tamanho do subtítulo */
+    }
+
+    h3 {
+        font-size: 14px; /* Reduz o tamanho dos títulos menores */
+    }
+    }
+
+    @media only screen and (max-width: 480px) { /* Para telas ainda menores, como smartphones pequenos */
+    #title {
+        display: none; /* Oculta o elemento em telas menores */
+    }
+    .board {
+        gap: 5px; /* Reduz ainda mais o espaço entre os cartões */
+        padding: 2px; /* Reduz o padding interno */
+    }
+
+    .cartao {
+        padding: 0.3rem; /* Reduz ainda mais o padding dos cartões */
+        margin-top: 5px; /* Reduz a margem entre os cartões */
+    }
+
+    .status, .statusfront1, .statusfront2, .statusfront3, .statusfront4, .statusfront5,  .statusfront6, .statusfront7 {
+        font-size: 12px; /* Reduz o tamanho da fonte para caber melhor em telas pequenas */
+    }
+
+    .detalhes-button {
+        font-size: 14px; /* Diminui o tamanho da fonte do botão ainda mais */
+        padding: 6px 10px; /* Reduz o padding do botão */
+    }
+
+    .modal-content {
+        width: 95%; /* O modal ocupará praticamente toda a largura da tela */
+        padding: 10px; /* Reduz ainda mais o padding do modal */
+    }
+
+    table {
+        font-size: 12px; /* Reduz o tamanho da fonte da tabela */
+    }
+
+    h1 {
+        font-size: 18px; /* Reduz o tamanho do título principal */
+    }
+
+    h2 {
+        font-size: 10px; /* Reduz ainda mais o tamanho do subtítulo */
+    }
+
+    h3 {
+        font-size: 12px; /* Reduz o tamanho dos títulos menores */
+    }
+    }
+
+</style>
+<style>
+    /*display: none;*/
+
+.popup {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 50%;
+top: 10%;
+transform: translate(-50%, -50%);
+padding: 20px;
+background-color: #7aeb9f;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 32px;
+text-align: center;
+width: 70%;
+flex-wrap: wrap; /* Permite que os itens quebrem de linha se necessário */
+gap: 20px;
+justify-content: space-between; /* Distribui os itens com espaço entre eles */
+}
+
+/* Itens padrão */
+.popup .item {
+min-width: 100px; /* Largura mínima dos itens */
+}
+
+/* Itens específicos */
+.popup .left-item {
+flex: 1; /* Este item ocupa mais espaço */
+text-align: left; /* Alinha o texto à esquerda */
+
+}
+
+.popup .right-item {
+flex: 1; /* Este item ocupa mais espaço */
+text-align: right; /* Alinha o texto à direita */
+
+}
+
+    .popup-close:hover{
+        border: 2px solid #099939a4;
+        
+
+    }
+
+    .popup-visible {
+        display: block; /* Mostra o popup */
+    }
+
+    .popup-close {
+        background-color: #7aeb9f;
+        color:#2c2c2c;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 32px;
+    }
+    .text-popup{
+        font-size: 14px;
+        color:#2c2c2c;
+        align-items: center;
+        text-align: center;
+        margin-left: 5px;
+        
+
+
+    }
+    .subtext-popup{
+        font-size: 12px;
+        color:#2c2c2c;
+        align-items: center;
+        text-align: center;
+        margin-left: 5px;
+        padding: 5px;
+        top: 0%;
+        right: 0%;
+    }
+    /* Estilo para o pop-up */
+    
+
+    /* Ajusta a exibição em telas menores */
+    @media (max-width: 768px) {
+        .popup {
+            flex-direction: column; /* Itens empilhados */
+            width: 90%;
+            top: 15%; /* Alinha o pop-up mais para baixo */
+        }
+    }
+
+    /* Estilo para o deslocamento do main */
+    .main-shifted {
+        margin-top: 80px; /* Ajuste para telas grandes */
+        transition: margin-top 0.3s ease;
+    }
+
+    /* Ajusta o deslocamento em telas menores */
+    @media (max-width: 768px) {
+        .main-shifted {
+            margin-top: 150px; /* Ajuste para telas pequenas */
+        }
+    }
+
+    /* Estilo do main */
+    main {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        transition: margin-top 0.3s ease;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+    }
+    .btn-assinar{
+        background-color: #161515;
+        color: white;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 32px;
+        width: 8%;
+        height: fit-content;
+        margin-left: 5%;  
+                
+    }
+
+    @media only screen and (max-width: 768px){
+        .popup{
+            width: 90%;
+
+        }
+        .text-popup{
+            font-size: 12px;
+
+        }
+        .subtext-popup{
+            font-size: 10px;
+            
+        }
+        .btn-assinar{
+            width: 90%;
+        }
+
+    }
+
+</style>
+
+<style>
+
+    .form__field,  
+    .form__input-wrapper--labelled{
+        width: 100%;
+        max-width: 100%; /* Definir uma largura máxima para o campo */
+        height: 40px;
+        background-color: rgba(44, 44, 44, 0.0); /* Cor de fundo transparente */
+        border-radius: 20px;
+        align-items: center; /* Centraliza os itens verticalmente */
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder; /* Adiciona negrito */
+        margin-bottom: 10px; /* Reduzido de 20px para 10px */
+    }
+    
+    .form__field,
+    .form__field--select,
+    .form__field--text {
+    width: 100%;
+    max-width: 100%; /* Definir uma largura máxima para o campo */
+    height: 40px;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #e2dddd;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+    box-sizing: border-box;
+    text-align: center; /* Centraliza horizontalmente */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder; /* Adiciona negrito */
+    
+    }
+    /* Estilos quando o mouse está sobre os campos de entrada e seleção */
+    .form__input-wrapper--labelled:hover,
+    .form__field:hover,
+    .form__field--select:hover,
+    .form__field--text:hover {
+    background-color: #5c5959;
+    
+    }
+    /* Estilos quando os campos de entrada e seleção estão focados */
+    .form__input-wrapper--labelled:focus,
+    .form__field:focus,
+    .form__field--select:focus,
+    .form__field--text:focus {
+    outline: none;
+    background-color: #f7b3b3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    
+    }
+    /* Estilo para as opções do campo de seleção */
+    .form__field--select option,
+    .form__field--text option {
+    font-size: 16px;
+    color: #0f0f0f;
+    
+    }
+    /* Estilo para as opções do campo de seleção quando o mouse está sobre elas */
+    .form__field--select option:hover,
+    .form__field--text option:hover {
+    color: #44c457;
+    font-size: 14px;
+    }
+    
+    </style>
+    
+   
+</head>
+<body>
+
+    
+    
+
+
+
+
+<main id="mainContent">
+    <form method="GET" action="{% url 'cartoesadm' %}">
+        <div class="form__input-row">
+            <div class="form__input-wrapper form__input-wrapper--labelled">
+                <select id="agencia" name="agencia" class="form__field form__field--select form__field--large" onchange="this.form.submit()">
+                    <option value="" disabled {% if not agencia_selecionada %}selected{% endif %}>Selecione uma agência</option>
+                    {% for agencia in agencias %}
+                        <option value="{{ agencia.agencia }}" {% if agencia.agencia == agencia_selecionada %}selected{% endif %}>
+                            {{ agencia.agencia }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </form>
+    
+       
+        <div class="board">
+            <div class="boards">
+                <!-- Coluna 1: Cartões Disponiveis -->
+                <div class="col">
+                    <div class="cabecalho cabecalho-reservado">Disponíveis: {{ total_reservado }}</div>
+                        <div class="coluna-reservado">
+                            {% for cartao in cartoes %}
+                                {% if cartao.status == 'reservado' %} 
+                                    <div class="cartao" id="cartao-{{ cartao.username }}">
+                                        <div class="statusfront1">{{ cartao.status }}</div>
+                                        <button class="detalhes-button" onclick="openModal('{{ cartao.section_id }}', 'detalhes')">Ver Detalhes</button>
+                                    </div>
+                                {% endif %}
+                            
+                                {% empty %}<p>Nenhum cartão encontrado para a sua agência.</p>
+                            {% endfor %}
+                        </div>
+                </div>
+
+                <!-- Coluna 2: Cartões respondidos -->
+                <div class="col">
+                    <div class="cabecalho cabecalho-respondido">Respondidos: {{ total_respondido }}</div>
+                    <div class="coluna-respondido">
+                        {% for cartao in cartoes %}
+                            {% if cartao.status == 'respondido' %}
+                            <div class="cartao" id="cartao-{{ cartao.username }}">
+                                    <div class="statusfront2">{{ cartao.status }}</div>
+                                    <div class="status">
+                                        <table>
+                                            <tr>
+                                                <th><h3> Cliente:</h3></th>
+                                                <td><h2>{{cartao.nome}}</h2></td>
+                                            </tr>
+                                            <tr>
+                                                <th><h3> Loja:</h3></th>
+                                                <td><h2>{{cartao.empresa}}</h2></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    
+                                    <button class="detalhes-button" onclick="openModal('{{ cartao.section_id }}', 'acesapp')">Criar App</button>
+                                </div>
+                            {% endif %}
+                        {% empty %}
+                            <p>Nenhum cartão encontrado para a sua agência.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!-- Coluna 3: Cartões Produzindo -->
+                
+                <div class="col">
+                    <div class="cabecalho cabecalho-produzindo">Produzir: {{ total_produzindo }}</div>
+                    <div class="coluna-produzindo">
+                        {% for cartao in cartoes %}
+                        {% if cartao.status == 'produzindo' %}
+                            <div class="cartao" id="cartao-{{ cartao.username }}">
+                                <div class="statusfront3">{{ cartao.status }}</div>
+                                <div class="status">
+                                    <table>
+                                        <tr>
+                                            <th><h3> Cliente:</h3></th>
+                                            <td><h2> {{ cartao.nome}}</h2></td>
+                                        </tr>
+                                        <tr>
+                                            <th><h3> Loja:</h3></th>
+                                            <td><h2> {{ cartao.empresa}}</h2></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                                <button class="detalhes-button" onclick="openModal('{{ cartao.section_id }}', 'cartao')">Produzir</button>
+                            </div>
+                            {% endif %}
+                        {% empty %}
+                            <p>Nenhum cartão encontrado para a sua agência.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Coluna 4: Cartões pendencia -->
+                
+                <div class="col">
+                    <div class="cabecalho cabecalho-pendencia">Aguardando Ativação: {{ total_pendencia }}</div>
+                    <div class="coluna-pendencia">
+                        {% for cartao in cartoes %}
+                        {% if cartao.status == 'pendencia' %}
+                        <div class="cartao" id="cartao-{{ cartao.username }}">
+                                <div class="statusfront4">{{ cartao.status }}</div>
+                                <div class="status">
+                                    <table>
+                                        <tr>
+                                            <th><h3> Cliente:</h3></th>
+                                            <td><h2> {{ cartao.nome}}</h2></td>
+                                        </tr>
+                                        <tr>
+                                            <th><h3> Loja:</h3></th>
+                                            <td><h2> {{ cartao.empresa}}</h2></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                                <button class="detalhes-button" onclick="openModal('{{ cartao.section_id }}', 'pendencias')">Ver</button>
+                            </div>
+                            {% endif %}
+                        {% empty %}
+                            <p>Nenhum cartão encontrado para a sua agência.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Coluna 5: Cartões Iniciados -->
+                
+                <div class="col">
+                    <div class="cabecalho cabecalho-iniciado">Em Produção: {{ total_iniciado }}</div>
+                    <div class="coluna-iniciado">
+                        {% for cartao in cartoes %}
+                        {% if cartao.status == 'iniciado' %}
+                        <div class="cartao" id="cartao-{{ cartao.username }}">
+                                <div class="statusfront5">{{ cartao.status }}</div>
+                                <div class="status">
+                                    <table>
+                                        <tr>
+                                            <th><h3> Cliente:</h3></th>
+                                            <td><h2> {{ cartao.nome}}</h2></td>
+                                        </tr>
+                                        <tr>
+                                            <th><h3> Loja:</h3></th>
+                                            <td><h2> {{ cartao.empresa}}</h2></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% empty %}
+                            <p>Nenhum cartão encontrado para a sua agência.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                
+
+                <!-- Coluna 6: Cartões finalizados -->
+                <div class="col">
+                    <div class="cabecalho cabecalho-finalizado">Finalizados: {{total_finalizado}}</div>
+                    <div class="coluna-finalizado">
+                        {% for cartao in cartoes %}
+                        {% if cartao.status == 'finalizado' %}
+                            <div class="cartao" id="cartao-{{ cartao.username }}">
+                                <div class="statusfront6">{{ cartao.status }}</div>
+                                <div class="status">
+                                    <table>
+                                        <tr>
+                                            <th><h3> Cliente:</h3></th>
+                                            <td><h2> {{ cartao.nome}}</h2></td>
+                                        </tr>
+                                        <tr>
+                                            <th><h3> Loja:</h3></th>
+                                            <td><h2> {{ cartao.empresa}}</h2></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <button class="detalhes-button" onclick="openModal('{{ cartao.section_id }}', 'finalizados')">Ver</button>
+                            </div>
+                            {% endif %}
+                        {% empty %}
+                            <p>Nenhum cartão encontrado para a sua agência.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Coluna 7: Cartões com erro -->
+                <div class="col">
+                    <div class="cabecalho cabecalho-erro">ERRO: {{total_erro}}</div>
+                    <div class="coluna-erro">
+                        {% for cartao in cartoes %}
+                        {% if cartao.status == 'erro' %}
+                        <div class="cartao" id="cartao-{{ cartao.username }}">
+                                <div class="statusfront7">{{ cartao.status }}</div>
+                                <div class="status">
+                                    <table>
+                                        <tr>
+                                            <th><h3> Cliente:</h3></th>
+                                            <td><h2> {{ cartao.nome}}</h2></td>
+                                        </tr>
+                                        <tr>
+                                            <th><h3> Loja:</h3></th>
+                                            <td><h2> {{ cartao.empresa}}</h2></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                                <button class="detalhes-button" onclick="openModal('{{ cartao.section_id }}', 'erro')">Ver Erro</button>
+                            </div>
+                            {% endif %}
+                        {% empty %}
+                            <p>Nenhum cartão encontrado para a sua agência.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="detalhesModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
+                    <iframe id="modal-iframe" src="" width="100%" height="400px" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        var detalhesUrl = "{% url 'detalhes' 0 %}".replace("/0/", "/");  // Remove o '0' no final
+        var detalhesCartaoUrl = "{% url 'detalhes_cartao' 0 %}".replace("/0/", "/");  // Remove o '0' no final
+        var criarAppUrl = "{% url 'acesapp' 0 %}".replace("/0/", "/");  // Adiciona a base URL com o section_id
+        var criarApperroUrl = "{% url 'acesapperro' 0 %}".replace("/0/", "/");  // Adiciona a base URL com o section_id
+        var finalizadosUrl = "{% url 'finalizados' 0 %}".replace("/0/", "/");  // Remove o '0' no final
+        var pendenciasUrl = "{% url 'pendencias' 0 %}".replace("/0/", "/");  // Remove o '0' no final
+        // Função para abrir o modal e carregar a página dentro de um iframe
+        function openModal(cartaoId, action) {
+            var modal = document.getElementById("detalhesModal");
+            var iframe = document.getElementById("modal-iframe");
+            
+            var url;
+            if (action === 'cartao') {
+                url = detalhesCartaoUrl + cartaoId;
+            } else if (action === 'detalhes') {
+                url = detalhesUrl + cartaoId;
+            } else if (action === 'acesapp') {
+                url = criarAppUrl + cartaoId;
+            } else if (action === 'finalizados') {
+                url = finalizadosUrl + cartaoId;
+            } else if (action === 'pendencias') {
+                url = pendenciasUrl + cartaoId;
+            } else if (action === 'erro') {
+                url = criarApperroUrl + cartaoId;
+            }
+            
+            // Aguardar até que o iframe esteja carregado antes de exibir o modal
+            iframe.onload = function() {
+                modal.style.display = "block";
+            };
+            
+            // Definir a URL do iframe
+            iframe.src = url;
+        }
+    
+        // Função para fechar o modal
+        function closeModal() {
+            var modal = document.getElementById("detalhesModal");
+            modal.style.display = "none";
+        }
+    
+        // Fecha o modal quando o usuário clicar fora dele
+        window.onclick = function(event) {
+            var modal = document.getElementById("detalhesModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+   
+    <script>
+        const board = document.querySelector('.board');
+
+            let isDown = false;  // Flag para saber se o botão do mouse está pressionado
+            let startX;          // Posição inicial do cursor do mouse no eixo X
+            let scrollLeft;      // Posição inicial do scroll no eixo X
+
+            board.addEventListener('mousedown', (e) => {
+                isDown = true;                          // Ativa o flag de "mouse pressionado"
+                board.classList.add('active');           // Opcional: pode adicionar uma classe quando pressionar
+                startX = e.pageX - board.offsetLeft;     // Calcula a posição inicial X
+                scrollLeft = board.scrollLeft;           // Pega a posição atual do scroll
+            });
+
+            board.addEventListener('mouseleave', () => {
+                isDown = false;                          // Se o mouse sair da área, desativa o flag
+                board.classList.remove('active');        // Remove a classe ativa
+            });
+
+            board.addEventListener('mouseup', () => {
+                isDown = false;                          // Quando soltar o botão do mouse, desativa o flag
+                board.classList.remove('active');
+            });
+
+            board.addEventListener('mousemove', (e) => {
+                if (!isDown) return;                     // Se não estiver pressionado, não faz nada
+                e.preventDefault();                      // Evita seleção de texto ou comportamento padrão
+                const x = e.pageX - board.offsetLeft;    // Calcula a posição X atual
+                const walk = (x - startX) * 2;           // Calcula a distância de deslocamento
+                board.scrollLeft = scrollLeft - walk;    // Aplica o scroll na posição horizontal
+            });
+
+    </script>
+
+
+
+
+
+
+
+    
+    
+    
+</body>
+</html>
